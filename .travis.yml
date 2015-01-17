@@ -13,5 +13,5 @@ env:
     - TEST_SDK=iphonesimulator8.1 SIMULATOR='iPhone 6'
     - TEST_SDK=iphonesimulator8.1 SIMULATOR='iPhone 6 Plus'
 script:
- - xctool test -test-sdk $TEST_SDK -destination "platform=iOS Simulator,name=$SIMULATOR" -project StudentProjectInfotel.xcodeproj/ -scheme StudentProjectInfotel
+ - xctool test -test-sdk $TEST_SDK -destination "platform=iOS Simulator,name=$SIMULATOR" -workspace EmptyApp.xcworkspace -scheme EmptyApp
 
