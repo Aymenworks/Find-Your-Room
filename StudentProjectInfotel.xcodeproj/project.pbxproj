@@ -10,8 +10,16 @@
 		A525DAF51A6A88600024580A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A525DAF41A6A88600024580A /* AppDelegate.swift */; };
 		A525DAF71A6A88600024580A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A525DAF61A6A88600024580A /* ViewController.swift */; };
 		A525DAFA1A6A88600024580A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A525DAF81A6A88600024580A /* Main.storyboard */; };
-		A525DAFC1A6A88600024580A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A525DAFB1A6A88600024580A /* Images.xcassets */; };
 		A525DB0B1A6A88600024580A /* StudentProjectInfotelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A525DB0A1A6A88600024580A /* StudentProjectInfotelTests.swift */; };
+		A5294AD71A6C963000AD51FA /* JSSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5294AD61A6C963000AD51FA /* JSSAlertView.swift */; };
+		A5C7B5A41A6D24F3001E302C /* RAMBounceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C7B5991A6D24F3001E302C /* RAMBounceAnimation.swift */; };
+		A5C7B5A51A6D24F3001E302C /* RAMFrameItemAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C7B59B1A6D24F3001E302C /* RAMFrameItemAnimation.swift */; };
+		A5C7B5A61A6D24F3001E302C /* RAMFumeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C7B59D1A6D24F3001E302C /* RAMFumeAnimation.swift */; };
+		A5C7B5A71A6D24F3001E302C /* RAMRotationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C7B59F1A6D24F3001E302C /* RAMRotationAnimation.swift */; };
+		A5C7B5A81A6D24F3001E302C /* RAMTransitionItemAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C7B5A11A6D24F3001E302C /* RAMTransitionItemAnimation.swift */; };
+		A5C7B5A91A6D24F3001E302C /* RAMAnimatedTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C7B5A21A6D24F3001E302C /* RAMAnimatedTabBarController.swift */; };
+		A5C7B5AA1A6D24F3001E302C /* RAMItemAnimationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C7B5A31A6D24F3001E302C /* RAMItemAnimationProtocol.swift */; };
+		A5C7B5AC1A6D2818001E302C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5C7B5AB1A6D2818001E302C /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,10 +38,21 @@
 		A525DAF41A6A88600024580A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A525DAF61A6A88600024580A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ViewsControllers/ViewController.swift; sourceTree = "<group>"; };
 		A525DAF91A6A88600024580A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		A525DAFB1A6A88600024580A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A525DB041A6A88600024580A /* StudentProjectInfotelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StudentProjectInfotelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A525DB091A6A88600024580A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A525DB0A1A6A88600024580A /* StudentProjectInfotelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentProjectInfotelTests.swift; sourceTree = "<group>"; };
+		A5294AD31A6C954800AD51FA /* ClearSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ClearSans-Bold.ttf"; path = "Assets/Fonts/ClearSans-Bold.ttf"; sourceTree = "<group>"; };
+		A5294AD41A6C954800AD51FA /* ClearSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ClearSans-Light.ttf"; path = "Assets/Fonts/ClearSans-Light.ttf"; sourceTree = "<group>"; };
+		A5294AD51A6C954800AD51FA /* ClearSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ClearSans-Regular.ttf"; path = "Assets/Fonts/ClearSans-Regular.ttf"; sourceTree = "<group>"; };
+		A5294AD61A6C963000AD51FA /* JSSAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSSAlertView.swift; sourceTree = "<group>"; };
+		A5C7B5991A6D24F3001E302C /* RAMBounceAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMBounceAnimation.swift; sourceTree = "<group>"; };
+		A5C7B59B1A6D24F3001E302C /* RAMFrameItemAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMFrameItemAnimation.swift; sourceTree = "<group>"; };
+		A5C7B59D1A6D24F3001E302C /* RAMFumeAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMFumeAnimation.swift; sourceTree = "<group>"; };
+		A5C7B59F1A6D24F3001E302C /* RAMRotationAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMRotationAnimation.swift; sourceTree = "<group>"; };
+		A5C7B5A11A6D24F3001E302C /* RAMTransitionItemAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMTransitionItemAnimation.swift; sourceTree = "<group>"; };
+		A5C7B5A21A6D24F3001E302C /* RAMAnimatedTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMAnimatedTabBarController.swift; sourceTree = "<group>"; };
+		A5C7B5A31A6D24F3001E302C /* RAMItemAnimationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMItemAnimationProtocol.swift; sourceTree = "<group>"; };
+		A5C7B5AB1A6D2818001E302C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +133,79 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		A5294AD21A6C94FF00AD51FA /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A5C7B5AB1A6D2818001E302C /* Images.xcassets */,
+				A5294AD31A6C954800AD51FA /* ClearSans-Bold.ttf */,
+				A5294AD41A6C954800AD51FA /* ClearSans-Light.ttf */,
+				A5294AD51A6C954800AD51FA /* ClearSans-Regular.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
+		A5C7B5961A6D24F3001E302C /* RAMAnimatedTabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				A5C7B5971A6D24F3001E302C /* Animations */,
+				A5C7B5A21A6D24F3001E302C /* RAMAnimatedTabBarController.swift */,
+				A5C7B5A31A6D24F3001E302C /* RAMItemAnimationProtocol.swift */,
+			);
+			path = RAMAnimatedTabBarController;
+			sourceTree = "<group>";
+		};
+		A5C7B5971A6D24F3001E302C /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				A5C7B5981A6D24F3001E302C /* BounceAnimation */,
+				A5C7B59A1A6D24F3001E302C /* FrameAnimation */,
+				A5C7B59C1A6D24F3001E302C /* FumeAnimation */,
+				A5C7B59E1A6D24F3001E302C /* RotationAnimation */,
+				A5C7B5A01A6D24F3001E302C /* TransitionAniamtions */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
+		A5C7B5981A6D24F3001E302C /* BounceAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				A5C7B5991A6D24F3001E302C /* RAMBounceAnimation.swift */,
+			);
+			path = BounceAnimation;
+			sourceTree = "<group>";
+		};
+		A5C7B59A1A6D24F3001E302C /* FrameAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				A5C7B59B1A6D24F3001E302C /* RAMFrameItemAnimation.swift */,
+			);
+			path = FrameAnimation;
+			sourceTree = "<group>";
+		};
+		A5C7B59C1A6D24F3001E302C /* FumeAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				A5C7B59D1A6D24F3001E302C /* RAMFumeAnimation.swift */,
+			);
+			path = FumeAnimation;
+			sourceTree = "<group>";
+		};
+		A5C7B59E1A6D24F3001E302C /* RotationAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				A5C7B59F1A6D24F3001E302C /* RAMRotationAnimation.swift */,
+			);
+			path = RotationAnimation;
+			sourceTree = "<group>";
+		};
+		A5C7B5A01A6D24F3001E302C /* TransitionAniamtions */ = {
+			isa = PBXGroup;
+			children = (
+				A5C7B5A11A6D24F3001E302C /* RAMTransitionItemAnimation.swift */,
+			);
+			path = TransitionAniamtions;
+			sourceTree = "<group>";
+		};
 		A5FF89C71A6A9D0A00564555 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +245,8 @@
 		A5FF89CC1A6A9D4300564555 /* Librairies */ = {
 			isa = PBXGroup;
 			children = (
+				A5C7B5961A6D24F3001E302C /* RAMAnimatedTabBarController */,
+				A5294AD61A6C963000AD51FA /* JSSAlertView.swift */,
 			);
 			name = Librairies;
 			sourceTree = "<group>";
@@ -160,7 +254,7 @@
 		A5FF89CD1A6A9D5500564555 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				A525DAFB1A6A88600024580A /* Images.xcassets */,
+				A5294AD21A6C94FF00AD51FA /* Fonts */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -227,7 +321,6 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
 			);
 			mainGroup = A525DAE61A6A88600024580A;
@@ -247,7 +340,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A525DAFA1A6A88600024580A /* Main.storyboard in Resources */,
-				A525DAFC1A6A88600024580A /* Images.xcassets in Resources */,
+				A5C7B5AC1A6D2818001E302C /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,8 +358,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5294AD71A6C963000AD51FA /* JSSAlertView.swift in Sources */,
+				A5C7B5A91A6D24F3001E302C /* RAMAnimatedTabBarController.swift in Sources */,
 				A525DAF71A6A88600024580A /* ViewController.swift in Sources */,
+				A5C7B5A81A6D24F3001E302C /* RAMTransitionItemAnimation.swift in Sources */,
+				A5C7B5AA1A6D24F3001E302C /* RAMItemAnimationProtocol.swift in Sources */,
 				A525DAF51A6A88600024580A /* AppDelegate.swift in Sources */,
+				A5C7B5A71A6D24F3001E302C /* RAMRotationAnimation.swift in Sources */,
+				A5C7B5A51A6D24F3001E302C /* RAMFrameItemAnimation.swift in Sources */,
+				A5C7B5A61A6D24F3001E302C /* RAMFumeAnimation.swift in Sources */,
+				A5C7B5A41A6D24F3001E302C /* RAMBounceAnimation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
