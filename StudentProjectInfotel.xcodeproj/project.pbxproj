@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A525DAF51A6A88600024580A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A525DAF41A6A88600024580A /* AppDelegate.swift */; };
-		A525DAF71A6A88600024580A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A525DAF61A6A88600024580A /* ViewController.swift */; };
 		A525DAFA1A6A88600024580A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A525DAF81A6A88600024580A /* Main.storyboard */; };
 		A525DB0B1A6A88600024580A /* StudentProjectInfotelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A525DB0A1A6A88600024580A /* StudentProjectInfotelTests.swift */; };
 		A5294AD71A6C963000AD51FA /* JSSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5294AD61A6C963000AD51FA /* JSSAlertView.swift */; };
@@ -20,6 +19,8 @@
 		A5C7B5A91A6D24F3001E302C /* RAMAnimatedTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C7B5A21A6D24F3001E302C /* RAMAnimatedTabBarController.swift */; };
 		A5C7B5AA1A6D24F3001E302C /* RAMItemAnimationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C7B5A31A6D24F3001E302C /* RAMItemAnimationProtocol.swift */; };
 		A5C7B5AC1A6D2818001E302C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5C7B5AB1A6D2818001E302C /* Images.xcassets */; };
+		A5F336A51A6DD00A00DDF59B /* Beacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F336A41A6DD00A00DDF59B /* Beacon.swift */; };
+		A5F336A71A6DD1CF00DDF59B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F336A61A6DD1CF00DDF59B /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +37,6 @@
 		A525DAEF1A6A88600024580A /* StudentProjectInfotel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudentProjectInfotel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A525DAF31A6A88600024580A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A525DAF41A6A88600024580A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A525DAF61A6A88600024580A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ViewsControllers/ViewController.swift; sourceTree = "<group>"; };
 		A525DAF91A6A88600024580A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A525DB041A6A88600024580A /* StudentProjectInfotelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StudentProjectInfotelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A525DB091A6A88600024580A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,6 +53,8 @@
 		A5C7B5A21A6D24F3001E302C /* RAMAnimatedTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMAnimatedTabBarController.swift; sourceTree = "<group>"; };
 		A5C7B5A31A6D24F3001E302C /* RAMItemAnimationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMItemAnimationProtocol.swift; sourceTree = "<group>"; };
 		A5C7B5AB1A6D2818001E302C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A5F336A41A6DD00A00DDF59B /* Beacon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Beacon.swift; path = Models/Beacon.swift; sourceTree = "<group>"; };
+		A5F336A61A6DD1CF00DDF59B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5F336A71A6DD1CF00DDF59B /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +106,7 @@
 				A5FF89C91A6A9D1700564555 /* Models */,
 				A5FF89C81A6A9D1100564555 /* ViewsModels */,
 				A5FF89C71A6A9D0A00564555 /* Managers */,
+				A5F336A81A6DD1D800DDF59B /* Frameworks */,
 				A525DAF21A6A88600024580A /* Supporting Files */,
 			);
 			path = StudentProjectInfotel;
@@ -136,7 +140,6 @@
 		A5294AD21A6C94FF00AD51FA /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				A5C7B5AB1A6D2818001E302C /* Images.xcassets */,
 				A5294AD31A6C954800AD51FA /* ClearSans-Bold.ttf */,
 				A5294AD41A6C954800AD51FA /* ClearSans-Light.ttf */,
 				A5294AD51A6C954800AD51FA /* ClearSans-Regular.ttf */,
@@ -206,6 +209,14 @@
 			path = TransitionAniamtions;
 			sourceTree = "<group>";
 		};
+		A5F336A81A6DD1D800DDF59B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A5F336A61A6DD1CF00DDF59B /* CoreLocation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A5FF89C71A6A9D0A00564555 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +234,7 @@
 		A5FF89C91A6A9D1700564555 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A5F336A41A6DD00A00DDF59B /* Beacon.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -230,7 +242,6 @@
 		A5FF89CA1A6A9D1C00564555 /* ViewsControllers */ = {
 			isa = PBXGroup;
 			children = (
-				A525DAF61A6A88600024580A /* ViewController.swift */,
 			);
 			name = ViewsControllers;
 			sourceTree = "<group>";
@@ -254,6 +265,7 @@
 		A5FF89CD1A6A9D5500564555 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				A5C7B5AB1A6D2818001E302C /* Images.xcassets */,
 				A5294AD21A6C94FF00AD51FA /* Fonts */,
 			);
 			name = Assets;
@@ -360,12 +372,12 @@
 			files = (
 				A5294AD71A6C963000AD51FA /* JSSAlertView.swift in Sources */,
 				A5C7B5A91A6D24F3001E302C /* RAMAnimatedTabBarController.swift in Sources */,
-				A525DAF71A6A88600024580A /* ViewController.swift in Sources */,
 				A5C7B5A81A6D24F3001E302C /* RAMTransitionItemAnimation.swift in Sources */,
 				A5C7B5AA1A6D24F3001E302C /* RAMItemAnimationProtocol.swift in Sources */,
 				A525DAF51A6A88600024580A /* AppDelegate.swift in Sources */,
 				A5C7B5A71A6D24F3001E302C /* RAMRotationAnimation.swift in Sources */,
 				A5C7B5A51A6D24F3001E302C /* RAMFrameItemAnimation.swift in Sources */,
+				A5F336A51A6DD00A00DDF59B /* Beacon.swift in Sources */,
 				A5C7B5A61A6D24F3001E302C /* RAMFumeAnimation.swift in Sources */,
 				A5C7B5A41A6D24F3001E302C /* RAMBounceAnimation.swift in Sources */,
 			);
