@@ -13,15 +13,18 @@ import CoreLocation
 */
 public class Beacon : NSObject {
     
-    private(set) var name: String
-    private(set) var uuid: NSUUID
-    private(set) var major: CLBeaconMajorValue
-    private(set) var minor: CLBeaconMinorValue
-    private(set) var region: CLBeaconRegion
+    var name: String
+    var uuid: NSUUID
+    var major: CLBeaconMajorValue
+    var minor: CLBeaconMinorValue
+    var region: CLBeaconRegion
+    
+    /// dynamic: Needed to create observer on it.
     dynamic var lastSeenBeacon: CLBeacon?
     
+    // MARK: - Initialization
+    
     init(name: String, uuid: NSUUID, major: CLBeaconMajorValue, minor: CLBeaconMinorValue) {
-        
         self.name = name
         self.uuid = uuid
         self.major = major
@@ -31,6 +34,8 @@ public class Beacon : NSObject {
     }
     
 }
+
+// MARK: - Overloading Operator
 
 func == (left: Beacon, right: CLBeacon) -> Bool {
     

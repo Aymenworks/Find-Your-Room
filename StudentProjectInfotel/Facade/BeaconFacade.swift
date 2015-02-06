@@ -15,6 +15,7 @@ public class BeaconFacade : NSObject {
     
     private var beaconLocationManager: BeaconLocationManager?
     lazy private var beaconPersistencyManager = BeaconPersistencyManager()
+    lazy private var authenticationManager = AuthenticationManager()
     
     /// A singleton object as the entry point to manage the beacons
     class var sharedInstance: BeaconFacade {
@@ -34,6 +35,9 @@ public class BeaconFacade : NSObject {
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
+    
+    // MARK: - Authentication methods
+    
     
     // MARK: - Beacon Persistency methods
     

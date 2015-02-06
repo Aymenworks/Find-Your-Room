@@ -9,19 +9,21 @@
 import Foundation
 
 /**
-*  Memento pattern
+*  Memento pattern. It'll save/load the data.
 */
 class BeaconPersistencyManager {
     
     /// The list of beacons we will use. See `Beacon`.
     var beacons: [Beacon]
     
-    init() {
-        self.beacons = [Beacon]()
-    }
-    
     func addBeacon(beacon: Beacon) {
         self.beacons += [beacon]
+    }
+    
+    // MARK: - Life Cycle
+    
+    init() {
+        self.beacons = [Beacon]()
     }
 }
 
