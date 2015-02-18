@@ -6,25 +6,24 @@
 //  Copyright (c) 2015 Rebouh Aymen. All rights reserved.
 //
 
-import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
         
         // Init the location manager ( also ask location permission )
         BeaconFacade.sharedInstance
+        UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Medium", size: 18)! ]
+
         return true
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-            return GPPURLHandler.handleURL(url, sourceApplication: sourceApplication, annotation: annotation)
-                    || FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication)
+            return FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication)
+                ||  GPPURLHandler.handleURL(url, sourceApplication: sourceApplication, annotation: annotation)
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -47,8 +46,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        
     }
-
-
 }
 
+func doInMainQueueAfter(#seconds: Float, completionHandler: () -> Void) {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64((seconds * Float(NSEC_PER_SEC)))), dispatch_get_main_queue()) {
+        completionHandler()
+    }
+}

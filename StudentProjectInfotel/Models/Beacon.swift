@@ -6,23 +6,19 @@
 //  Copyright (c) 2015 Rebouh Aymen. All rights reserved.
 //
 
-import CoreLocation
-
 /**
 *  The beacon model class.
 */
-public class Beacon : NSObject {
+public class Beacon {
     
-    var name: String
-    var uuid: NSUUID
-    var major: CLBeaconMajorValue
-    var minor: CLBeaconMinorValue
-    var region: CLBeaconRegion
+    private(set) var name: String
+    private var uuid: NSUUID
+    private var major: CLBeaconMajorValue
+    private var minor: CLBeaconMinorValue
+    private(set) var region: CLBeaconRegion
+    var lastSeenBeacon: CLBeacon?
     
-    /// dynamic: Needed to create observer on it.
-    dynamic var lastSeenBeacon: CLBeacon?
-    
-    // MARK: - Initialization
+    // MARK: - Initialization -
     
     init(name: String, uuid: NSUUID, major: CLBeaconMajorValue, minor: CLBeaconMinorValue) {
         self.name = name
@@ -32,10 +28,9 @@ public class Beacon : NSObject {
         region = CLBeaconRegion(proximityUUID: self.uuid, major: self.major, minor: self.minor, identifier: self.name)
         region.notifyEntryStateOnDisplay = true
     }
-    
 }
 
-// MARK: - Overloading Operator
+// MARK: - Overloading Operator -
 
 func == (left: Beacon, right: CLBeacon) -> Bool {
     

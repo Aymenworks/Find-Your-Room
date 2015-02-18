@@ -6,31 +6,28 @@
 //  Copyright (c) 2015 Rebouh Aymen. All rights reserved.
 //
 
-import CoreLocation
-
 /**
 *  The core location manager. It take care of the beacon/user location like starting ranging/monitoring
 */
-class BeaconLocationManager: NSObject, CLLocationManagerDelegate {
+class LocationManager: NSObject, CLLocationManagerDelegate {
     
     private let locationManager: CLLocationManager!
     
-    // MARK: - Life Cycle
+    // MARK: - Lifecycle -
     
     override init() {
         
         super.init()
-        
+        println("init location")
         locationManager = CLLocationManager()
         locationManager.delegate = self
         
         if locationManager.respondsToSelector("requestAlwaysAuthorization") {
             self.locationManager.requestAlwaysAuthorization()
-            println("requestAlwaysAuthorization ok")
         }
     }
     
-    // MARK: - Beacon Location
+    // MARK: - Beacon Location -
     
     func startMonitoringBeacon(beacon: Beacon) {
         self.locationManager.startMonitoringForRegion(beacon.region)
@@ -62,7 +59,7 @@ class BeaconLocationManager: NSObject, CLLocationManagerDelegate {
                 
                 if beacon == clBeacon {
                     
-                    // If the beacon already appeared
+                    // If the beacon has already appeared
                     if let lastProximity = beacon.lastSeenBeacon?.proximity {
                         // If its proximity havn't changed, we don't update anything
                         if clBeacon.proximity == lastProximity || clBeacon.proximity == .Unknown {
@@ -80,7 +77,7 @@ class BeaconLocationManager: NSObject, CLLocationManagerDelegate {
         println("Beacon message = \(message)")
     }
 
-    // MARK: - User Location
+    // MARK: - User Location -
 
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
         println("locationManager didFailWithError = \(error)")
@@ -116,33 +113,12 @@ class BeaconLocationManager: NSObject, CLLocationManagerDelegate {
         println("You exited the region")
     }
     
-    // MARK: Location Authorization
+    // MARK: - Location Authorization -
     
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         
         if status == .Denied {
             println("denied")
         }
-    }
-}
-
-extension CLProximity {
-    
-    func toString() -> String {
-        
-        var name = ""
-        
-        switch self {
-            case .Immediate:
-                name = "Close to me"
-            case .Near:
-                name = "Near"
-            case .Far:
-                name = "Far"
-            default:
-                name = "Unkown"
-        }
-        
-        return name
     }
 }

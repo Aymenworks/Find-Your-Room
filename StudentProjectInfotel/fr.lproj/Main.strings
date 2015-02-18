@@ -1,6 +1,75 @@
 
-/* Class = "IBUILabel"; text = "English"; ObjectID = "S5p-Sz-phb"; */
-"S5p-Sz-phb.text" = "English";
+/* Class = "IBUINavigationItem"; title = "Authentication"; ObjectID = "0Nb-li-Q0V"; */
+"0Nb-li-Q0V.title" = "Connexion";
 
-/* Class = "IBUILabel"; text = "Hello"; ObjectID = "hVv-OI-A6K"; */
-"hVv-OI-A6K.text" = "Hello";
+/* Class = "IBUILabel"; text = "Bienvenue!"; ObjectID = "1hE-ae-tPg"; */
+"1hE-ae-tPg.text" = "Bienvenue!";
+
+/* Class = "IBUIButton"; normalTitle = "Get started"; ObjectID = "Cpj-xd-NpE"; */
+"Cpj-xd-NpE.normalTitle" = "Commencer";
+
+/* Class = "IBUILabel"; text = "Bienvenue!"; ObjectID = "GNW-Tj-qLj"; */
+"GNW-Tj-qLj.text" = "Bienvenue!";
+
+/* Class = "IBUILabel"; text = "Ipsam vero urbem Byzantiorum fuisse refertisimam atzeque soksig urbemo."; ObjectID = "JJy-L4-thS"; */
+"JJy-L4-thS.text" = "Ipsam vero urbem Byzantiorum fuisse refertisimam atzeque soksig urbemo.";
+
+/* Class = "IBUILabel"; text = "Ipsam vero urbem Byzantiorum fuisse refertisimam atzeque soksig urbemo."; ObjectID = "JRt-5N-uWU"; */
+"JRt-5N-uWU.text" = "Ipsam vero urbem Byzantiorum fuisse refertisimam atzeque soksig urbemo.";
+
+/* Class = "IBUILabel"; text = "Ipsam vero urbem Byzantiorum fuisse refertisimam atzeque soksig urbemo."; ObjectID = "L4j-Z6-sZ2"; */
+"L4j-Z6-sZ2.text" = "Ipsam vero urbem Byzantiorum fuisse refertisimam atzeque soksig urbemo.";
+
+/* Class = "IBUITextField"; placeholder = "Your email address"; ObjectID = "LAe-Ad-B7B"; */
+"LAe-Ad-B7B.placeholder" = "Votre adresse e-mail";
+
+/* Class = "IBUIButton"; normalTitle = "Need an account ? Sign up"; ObjectID = "M7g-U3-aHE"; */
+"M7g-U3-aHE.normalTitle" = "Je m'inscris";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "O6c-jP-gtg"; */
+"O6c-jP-gtg.text" = "Title";
+
+/* Class = "IBUITextField"; placeholder = "Last name"; ObjectID = "Qb6-mN-QHp"; */
+"Qb6-mN-QHp.placeholder" = "Nom";
+
+/* Class = "IBUILabel"; text = "Bienvenue!"; ObjectID = "WHx-xb-fsW"; */
+"WHx-xb-fsW.text" = "Bienvenue!";
+
+/* Class = "IBUILabel"; text = "Label2"; ObjectID = "Wdk-hQ-jBl"; */
+"Wdk-hQ-jBl.text" = "Label2";
+
+/* Class = "IBUITextField"; placeholder = "Your password"; ObjectID = "XgM-sQ-oXf"; */
+"XgM-sQ-oXf.placeholder" = "Votre mot de passe";
+
+/* Class = "IBUITabBarItem"; title = "Liste des beacons"; ObjectID = "Yye-xz-lAn"; */
+"Yye-xz-lAn.title" = "Liste des beacons";
+
+/* Class = "IBUILabel"; text = "Ipsam vero urbem Byzantiorum fuisse refertisimam atzeque soksig urbemo."; ObjectID = "bLp-oz-1Si"; */
+"bLp-oz-1Si.text" = "Ipsam vero urbem Byzantiorum fuisse refertisimam atzeque soksig urbemo.";
+
+/* Class = "IBUILabel"; text = "Home"; ObjectID = "eiS-Nx-YII"; */
+"eiS-Nx-YII.text" = "Accueil";
+
+/* Class = "IBUITextField"; placeholder = "First name"; ObjectID = "hc9-xV-SJP"; */
+"hc9-xV-SJP.placeholder" = "Prénom";
+
+/* Class = "IBUILabel"; text = "Detail"; ObjectID = "hhP-AI-ZAD"; */
+"hhP-AI-ZAD.text" = "Detail";
+
+/* Class = "IBUILabel"; text = "Bienvenue!"; ObjectID = "nYX-tx-AQG"; */
+"nYX-tx-AQG.text" = "Bienvenue!";
+
+/* Class = "IBUILabel"; text = "or"; ObjectID = "onX-Uq-aMh"; */
+"onX-Uq-aMh.text" = "ou";
+
+/* Class = "IBUITextField"; placeholder = "Your password"; ObjectID = "p3E-ZX-HdE"; */
+"p3E-ZX-HdE.placeholder" = "Votre mot de passe";
+
+/* Class = "IBUITextField"; placeholder = "Your email address"; ObjectID = "tce-EI-cZB"; */
+"tce-EI-cZB.placeholder" = "Votre adresse e-mail";
+
+/* Class = "IBUILabel"; text = "Tap to change"; ObjectID = "w2S-Pg-RZz"; */
+"w2S-Pg-RZz.text" = "Tap pour choisir une image";
+
+"Zpb-M5-GVB.title" = "Inscription";
+

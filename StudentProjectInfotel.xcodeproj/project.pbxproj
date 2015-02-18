@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A502A00D1A86DF2D00376149 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A502A00C1A86DF2D00376149 /* StringExtension.swift */; };
+		A512DCA01A8774D000BA361E /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A570190A1A82BFF000C8F516 /* FacebookSDK.framework */; };
+		A512DCA11A8774DB00BA361E /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A59B85F11A83F63400468096 /* GooglePlus.framework */; };
 		A525DAF51A6A88600024580A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A525DAF41A6A88600024580A /* AppDelegate.swift */; };
-		A525DB0B1A6A88600024580A /* StudentProjectInfotelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A525DB0A1A6A88600024580A /* StudentProjectInfotelTests.swift */; };
+		A525DB0B1A6A88600024580A /* AuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A525DB0A1A6A88600024580A /* AuthenticationTests.swift */; };
 		A5294AD71A6C963000AD51FA /* JSSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5294AD61A6C963000AD51FA /* JSSAlertView.swift */; };
-		A52F0F0D1A70531600206DE7 /* BeaconPersistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52F0F0C1A70531600206DE7 /* BeaconPersistencyManager.swift */; };
-		A52F0F0F1A70532C00206DE7 /* BeaconLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52F0F0E1A70532C00206DE7 /* BeaconLocationManager.swift */; };
+		A52F0F0D1A70531600206DE7 /* PersistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52F0F0C1A70531600206DE7 /* PersistencyManager.swift */; };
+		A52F0F0F1A70532C00206DE7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52F0F0E1A70532C00206DE7 /* LocationManager.swift */; };
 		A52F0F1D1A70BC7A00206DE7 /* RAMBounceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52F0F141A70BC7A00206DE7 /* RAMBounceAnimation.swift */; };
 		A52F0F1E1A70BC7A00206DE7 /* RAMFrameItemAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52F0F161A70BC7A00206DE7 /* RAMFrameItemAnimation.swift */; };
 		A52F0F1F1A70BC7A00206DE7 /* RAMFumeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52F0F181A70BC7A00206DE7 /* RAMFumeAnimation.swift */; };
@@ -20,11 +23,18 @@
 		A52F0F231A70BD1E00206DE7 /* BeaconFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52F0F221A70BD1E00206DE7 /* BeaconFacade.swift */; };
 		A52F0F261A70BEE400206DE7 /* RAMAnimatedTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52F0F241A70BEE400206DE7 /* RAMAnimatedTabBarController.swift */; };
 		A52F0F271A70BEE400206DE7 /* RAMItemAnimationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52F0F251A70BEE400206DE7 /* RAMItemAnimationProtocol.swift */; };
-		A57019091A81884800C8F516 /* WalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57019081A81884800C8F516 /* WalkthroughViewController.swift */; };
+		A56B05DF1A8ABD3300BD8383 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56B05DE1A8ABD3300BD8383 /* User.swift */; };
 		A570190B1A82BFF000C8F516 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A570190A1A82BFF000C8F516 /* FacebookSDK.framework */; };
 		A594F8C01A84185500C1B583 /* SwiftSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A594F8BF1A84185500C1B583 /* SwiftSpinner.swift */; };
 		A594F8C51A84246E00C1B583 /* school.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A594F8C41A84246E00C1B583 /* school.jpg */; };
-		A594F8C71A8425B200C1B583 /* news.png in Resources */ = {isa = PBXBuildFile; fileRef = A594F8C61A8425B200C1B583 /* news.png */; };
+		A594F8CB1A856A2700C1B583 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A594F8CA1A856A2700C1B583 /* SignUpViewController.swift */; };
+		A594F8CE1A85745F00C1B583 /* digital.png in Resources */ = {isa = PBXBuildFile; fileRef = A594F8CD1A85745F00C1B583 /* digital.png */; };
+		A594F8D11A8574F800C1B583 /* beacon2.png in Resources */ = {isa = PBXBuildFile; fileRef = A594F8CF1A8574F800C1B583 /* beacon2.png */; };
+		A594F8DD1A861C8500C1B583 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A594F8DF1A861C8500C1B583 /* Main.storyboard */; };
+		A594F8E41A862C3700C1B583 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A594F8E31A862C3700C1B583 /* SwiftyJSON.swift */; };
+		A5951A241A93F80000E6DB3B /* CLProximityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5951A231A93F80000E6DB3B /* CLProximityExtension.swift */; };
+		A5951A261A93FA2800E6DB3B /* WalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5951A251A93FA2800E6DB3B /* WalkthroughViewController.swift */; };
+		A59B84C91A8702BF0086D2FB /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59B84C81A8702BF0086D2FB /* Alamofire.swift */; };
 		A59B85EB1A82D39500468096 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59B85EA1A82D39500468096 /* AuthenticationManager.swift */; };
 		A59B85EE1A839DF100468096 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59B85ED1A839DF100468096 /* AuthenticationViewController.swift */; };
 		A59B85F21A83F63400468096 /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A59B85EF1A83F63400468096 /* GoogleOpenSource.framework */; };
@@ -40,11 +50,12 @@
 		A59B86051A83FD5700468096 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A59B86041A83FD5700468096 /* Security.framework */; };
 		A59B86071A83FD6000468096 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A59B86061A83FD6000468096 /* SystemConfiguration.framework */; };
 		A59B86091A83FD6500468096 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A59B86081A83FD6500468096 /* UIKit.framework */; };
-		A5C1E4691A8164A7006FECB1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5C1E4681A8164A7006FECB1 /* Main.storyboard */; };
 		A5C1E47A1A816815006FECB1 /* IoT.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5C1E4791A816815006FECB1 /* IoT.jpg */; };
 		A5C7B5AC1A6D2818001E302C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5C7B5AB1A6D2818001E302C /* Images.xcassets */; };
+		A5C914021A8AA5B9009B74FD /* ProfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C914011A8AA5B9009B74FD /* ProfilViewController.swift */; };
 		A5F336A51A6DD00A00DDF59B /* Beacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F336A41A6DD00A00DDF59B /* Beacon.swift */; };
 		A5F336A71A6DD1CF00DDF59B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F336A61A6DD1CF00DDF59B /* CoreLocation.framework */; };
+		A5FE76291A86A48D00BBE51B /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FE76281A86A48D00BBE51B /* UIViewExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,18 +69,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A502A00C1A86DF2D00376149 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringExtension.swift; path = Extensions/StringExtension.swift; sourceTree = "<group>"; };
 		A525DAEF1A6A88600024580A /* StudentProjectInfotel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudentProjectInfotel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A525DAF31A6A88600024580A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A525DAF41A6A88600024580A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A525DB041A6A88600024580A /* StudentProjectInfotelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StudentProjectInfotelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A525DB091A6A88600024580A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A525DB0A1A6A88600024580A /* StudentProjectInfotelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentProjectInfotelTests.swift; sourceTree = "<group>"; };
+		A525DB0A1A6A88600024580A /* AuthenticationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationTests.swift; sourceTree = "<group>"; };
 		A5294AD31A6C954800AD51FA /* ClearSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ClearSans-Bold.ttf"; path = "Assets/Fonts/ClearSans-Bold.ttf"; sourceTree = "<group>"; };
 		A5294AD41A6C954800AD51FA /* ClearSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ClearSans-Light.ttf"; path = "Assets/Fonts/ClearSans-Light.ttf"; sourceTree = "<group>"; };
 		A5294AD51A6C954800AD51FA /* ClearSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ClearSans-Regular.ttf"; path = "Assets/Fonts/ClearSans-Regular.ttf"; sourceTree = "<group>"; };
 		A5294AD61A6C963000AD51FA /* JSSAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSSAlertView.swift; path = Librairies/JSSAlertView/JSSAlertView.swift; sourceTree = "<group>"; };
-		A52F0F0C1A70531600206DE7 /* BeaconPersistencyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BeaconPersistencyManager.swift; path = Managers/BeaconPersistencyManager.swift; sourceTree = "<group>"; };
-		A52F0F0E1A70532C00206DE7 /* BeaconLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BeaconLocationManager.swift; path = Managers/BeaconLocationManager.swift; sourceTree = "<group>"; };
+		A52F0F0C1A70531600206DE7 /* PersistencyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersistencyManager.swift; path = Managers/PersistencyManager.swift; sourceTree = "<group>"; };
+		A52F0F0E1A70532C00206DE7 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = Managers/LocationManager.swift; sourceTree = "<group>"; };
 		A52F0F141A70BC7A00206DE7 /* RAMBounceAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMBounceAnimation.swift; sourceTree = "<group>"; };
 		A52F0F161A70BC7A00206DE7 /* RAMFrameItemAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMFrameItemAnimation.swift; sourceTree = "<group>"; };
 		A52F0F181A70BC7A00206DE7 /* RAMFumeAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMFumeAnimation.swift; sourceTree = "<group>"; };
@@ -78,14 +90,21 @@
 		A52F0F221A70BD1E00206DE7 /* BeaconFacade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BeaconFacade.swift; path = Facade/BeaconFacade.swift; sourceTree = "<group>"; };
 		A52F0F241A70BEE400206DE7 /* RAMAnimatedTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMAnimatedTabBarController.swift; sourceTree = "<group>"; };
 		A52F0F251A70BEE400206DE7 /* RAMItemAnimationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMItemAnimationProtocol.swift; sourceTree = "<group>"; };
-		A57019081A81884800C8F516 /* WalkthroughViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkthroughViewController.swift; sourceTree = "<group>"; };
+		A56B05DE1A8ABD3300BD8383 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
 		A570190A1A82BFF000C8F516 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
-		A570190D1A82C30200C8F516 /* StudentProjectInfotel-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StudentProjectInfotel-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
-		A594F8BF1A84185500C1B583 /* SwiftSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftSpinner.swift; sourceTree = "<group>"; };
-		A594F8C41A84246E00C1B583 /* school.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = school.jpg; sourceTree = "<group>"; };
-		A594F8C61A8425B200C1B583 /* news.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = news.png; sourceTree = "<group>"; };
+		A570190D1A82C30200C8F516 /* StudentProjectInfotel-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "StudentProjectInfotel-Bridging-Header.h"; path = "StudentProjectInfotel/StudentProjectInfotel-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		A594F8BF1A84185500C1B583 /* SwiftSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftSpinner.swift; path = Librairies/SwiftSpinner/SwiftSpinner.swift; sourceTree = "<group>"; };
+		A594F8C41A84246E00C1B583 /* school.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = school.jpg; path = Assets/Walkthrough/school.jpg; sourceTree = "<group>"; };
+		A594F8CA1A856A2700C1B583 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpViewController.swift; path = Controllers/SignUp/SignUpViewController.swift; sourceTree = "<group>"; };
+		A594F8CD1A85745F00C1B583 /* digital.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = digital.png; path = Assets/Walkthrough/digital.png; sourceTree = "<group>"; };
+		A594F8CF1A8574F800C1B583 /* beacon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = beacon2.png; path = Assets/Walkthrough/beacon2.png; sourceTree = "<group>"; };
+		A594F8DE1A861C8500C1B583 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A594F8E31A862C3700C1B583 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = "Librairies/Alamofire-SwiftyJSON/SwiftyJSON.swift"; sourceTree = "<group>"; };
+		A5951A231A93F80000E6DB3B /* CLProximityExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLProximityExtension.swift; path = Extensions/CLProximityExtension.swift; sourceTree = "<group>"; };
+		A5951A251A93FA2800E6DB3B /* WalkthroughViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WalkthroughViewController.swift; path = Controllers/Walkthrough/WalkthroughViewController.swift; sourceTree = "<group>"; };
+		A59B84C81A8702BF0086D2FB /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = "Librairies/Alamofire-SwiftyJSON/Alamofire.swift"; sourceTree = "<group>"; };
 		A59B85EA1A82D39500468096 /* AuthenticationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationManager.swift; path = Managers/AuthenticationManager.swift; sourceTree = "<group>"; };
-		A59B85ED1A839DF100468096 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationViewController.swift; path = ViewsControllers/AuthenticationViewController.swift; sourceTree = "<group>"; };
+		A59B85ED1A839DF100468096 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationViewController.swift; path = Controllers/SignIn/AuthenticationViewController.swift; sourceTree = "<group>"; };
 		A59B85EF1A83F63400468096 /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleOpenSource.framework; path = "../../../../Downloads/google-plus-ios-sdk-1.7.1/GoogleOpenSource.framework"; sourceTree = "<group>"; };
 		A59B85F01A83F63400468096 /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GooglePlus.bundle; path = "../../../../Downloads/google-plus-ios-sdk-1.7.1/GooglePlus.bundle"; sourceTree = "<group>"; };
 		A59B85F11A83F63400468096 /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlus.framework; path = "../../../../Downloads/google-plus-ios-sdk-1.7.1/GooglePlus.framework"; sourceTree = "<group>"; };
@@ -99,11 +118,12 @@
 		A59B86041A83FD5700468096 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A59B86061A83FD6000468096 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A59B86081A83FD6500468096 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		A5C1E4681A8164A7006FECB1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		A5C1E4791A816815006FECB1 /* IoT.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IoT.jpg; sourceTree = "<group>"; };
+		A5C1E4791A816815006FECB1 /* IoT.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = IoT.jpg; path = Assets/Walkthrough/IoT.jpg; sourceTree = "<group>"; };
 		A5C7B5AB1A6D2818001E302C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A5C914011A8AA5B9009B74FD /* ProfilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfilViewController.swift; path = Controllers/Profil/ProfilViewController.swift; sourceTree = "<group>"; };
 		A5F336A41A6DD00A00DDF59B /* Beacon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Beacon.swift; path = Models/Beacon.swift; sourceTree = "<group>"; };
 		A5F336A61A6DD1CF00DDF59B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		A5FE76281A86A48D00BBE51B /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewExtensions.swift; path = Extensions/UIViewExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +152,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A512DCA01A8774D000BA361E /* FacebookSDK.framework in Frameworks */,
+				A512DCA11A8774DB00BA361E /* GooglePlus.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,13 +183,13 @@
 			children = (
 				A570190D1A82C30200C8F516 /* StudentProjectInfotel-Bridging-Header.h */,
 				A525DAF41A6A88600024580A /* AppDelegate.swift */,
-				A5C1E4681A8164A7006FECB1 /* Main.storyboard */,
 				A5FF89CB1A6A9D3E00564555 /* Facade */,
-				A5FF89CA1A6A9D1C00564555 /* ViewsControllers */,
+				A5FF89CA1A6A9D1C00564555 /* Controllers */,
 				A5FF89C91A6A9D1700564555 /* Models */,
-				A5FF89C81A6A9D1100564555 /* ViewsModels */,
+				A5FF89C81A6A9D1100564555 /* Views */,
 				A5FF89C71A6A9D0A00564555 /* Managers */,
 				A5FF89CD1A6A9D5500564555 /* Assets */,
+				A5FE76271A86A44200BBE51B /* Extensions */,
 				A5FF89CC1A6A9D4300564555 /* Librairies */,
 				A5F336A81A6DD1D800DDF59B /* Frameworks */,
 				A525DAF21A6A88600024580A /* Supporting Files */,
@@ -186,7 +208,7 @@
 		A525DB071A6A88600024580A /* StudentProjectInfotelTests */ = {
 			isa = PBXGroup;
 			children = (
-				A525DB0A1A6A88600024580A /* StudentProjectInfotelTests.swift */,
+				A525DB0A1A6A88600024580A /* AuthenticationTests.swift */,
 				A525DB081A6A88600024580A /* Supporting Files */,
 			);
 			path = StudentProjectInfotelTests;
@@ -289,12 +311,29 @@
 			name = SwiftSpinner;
 			sourceTree = "<group>";
 		};
-		A59B85EC1A839D6400468096 /* AuthenticationViewController */ = {
+		A594F8CC1A856A5B00C1B583 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				A594F8CA1A856A2700C1B583 /* SignUpViewController.swift */,
+			);
+			name = SignUp;
+			sourceTree = "<group>";
+		};
+		A594F8E21A862BF700C1B583 /* Alamofire-SwiftyJSON */ = {
+			isa = PBXGroup;
+			children = (
+				A59B84C81A8702BF0086D2FB /* Alamofire.swift */,
+				A594F8E31A862C3700C1B583 /* SwiftyJSON.swift */,
+			);
+			name = "Alamofire-SwiftyJSON";
+			sourceTree = "<group>";
+		};
+		A59B85EC1A839D6400468096 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
 				A59B85ED1A839DF100468096 /* AuthenticationViewController.swift */,
 			);
-			name = AuthenticationViewController;
+			name = Authentication;
 			sourceTree = "<group>";
 		};
 		A59B85F51A83F63800468096 /* Google+ */ = {
@@ -310,9 +349,10 @@
 		A5C1E46A1A81650D006FECB1 /* Walkthrough */ = {
 			isa = PBXGroup;
 			children = (
+				A594F8CD1A85745F00C1B583 /* digital.png */,
 				A594F8C41A84246E00C1B583 /* school.jpg */,
+				A594F8CF1A8574F800C1B583 /* beacon2.png */,
 				A5C1E4791A816815006FECB1 /* IoT.jpg */,
-				A594F8C61A8425B200C1B583 /* news.png */,
 			);
 			name = Walkthrough;
 			sourceTree = "<group>";
@@ -320,9 +360,17 @@
 		A5C1E47B1A81700D006FECB1 /* Walkthrough */ = {
 			isa = PBXGroup;
 			children = (
-				A57019081A81884800C8F516 /* WalkthroughViewController.swift */,
+				A5951A251A93FA2800E6DB3B /* WalkthroughViewController.swift */,
 			);
 			name = Walkthrough;
+			sourceTree = "<group>";
+		};
+		A5C914001A8AA529009B74FD /* Profil */ = {
+			isa = PBXGroup;
+			children = (
+				A5C914011A8AA5B9009B74FD /* ProfilViewController.swift */,
+			);
+			name = Profil;
 			sourceTree = "<group>";
 		};
 		A5F336A81A6DD1D800DDF59B /* Frameworks */ = {
@@ -338,45 +386,58 @@
 				A59B85FA1A83FD3300468096 /* Foundation.framework */,
 				A59B85F81A83FD2E00468096 /* AssetsLibrary.framework */,
 				A59B85F61A83FD2800468096 /* AddressBook.framework */,
-				A59B85F51A83F63800468096 /* Google+ */,
 				A570190A1A82BFF000C8F516 /* FacebookSDK.framework */,
 				A5F336A61A6DD1CF00DDF59B /* CoreLocation.framework */,
+				A59B85F51A83F63800468096 /* Google+ */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A5FE76271A86A44200BBE51B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A5FE76281A86A48D00BBE51B /* UIViewExtensions.swift */,
+				A502A00C1A86DF2D00376149 /* StringExtension.swift */,
+				A5951A231A93F80000E6DB3B /* CLProximityExtension.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		A5FF89C71A6A9D0A00564555 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				A52F0F0C1A70531600206DE7 /* BeaconPersistencyManager.swift */,
-				A52F0F0E1A70532C00206DE7 /* BeaconLocationManager.swift */,
+				A52F0F0C1A70531600206DE7 /* PersistencyManager.swift */,
+				A52F0F0E1A70532C00206DE7 /* LocationManager.swift */,
 				A59B85EA1A82D39500468096 /* AuthenticationManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
 		};
-		A5FF89C81A6A9D1100564555 /* ViewsModels */ = {
+		A5FF89C81A6A9D1100564555 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = ViewsModels;
+			name = Views;
 			sourceTree = "<group>";
 		};
 		A5FF89C91A6A9D1700564555 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				A5F336A41A6DD00A00DDF59B /* Beacon.swift */,
+				A56B05DE1A8ABD3300BD8383 /* User.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
 		};
-		A5FF89CA1A6A9D1C00564555 /* ViewsControllers */ = {
+		A5FF89CA1A6A9D1C00564555 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A59B85EC1A839D6400468096 /* AuthenticationViewController */,
+				A5C914001A8AA529009B74FD /* Profil */,
+				A594F8CC1A856A5B00C1B583 /* SignUp */,
+				A59B85EC1A839D6400468096 /* Authentication */,
 				A5C1E47B1A81700D006FECB1 /* Walkthrough */,
 			);
-			name = ViewsControllers;
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		A5FF89CB1A6A9D3E00564555 /* Facade */ = {
@@ -390,6 +451,7 @@
 		A5FF89CC1A6A9D4300564555 /* Librairies */ = {
 			isa = PBXGroup;
 			children = (
+				A594F8E21A862BF700C1B583 /* Alamofire-SwiftyJSON */,
 				A594F8C11A84185E00C1B583 /* SwiftSpinner */,
 				A52F0F111A70BC7A00206DE7 /* RAMAnimatedTabBarController */,
 				A52F0F101A70B5C800206DE7 /* JSSAlertView */,
@@ -400,8 +462,9 @@
 		A5FF89CD1A6A9D5500564555 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				A5C1E46A1A81650D006FECB1 /* Walkthrough */,
+				A594F8DF1A861C8500C1B583 /* Main.storyboard */,
 				A5C7B5AB1A6D2818001E302C /* Images.xcassets */,
+				A5C1E46A1A81650D006FECB1 /* Walkthrough */,
 				A5294AD21A6C94FF00AD51FA /* Fonts */,
 			);
 			name = Assets;
@@ -417,6 +480,7 @@
 				A525DAEB1A6A88600024580A /* Sources */,
 				A525DAEC1A6A88600024580A /* Frameworks */,
 				A525DAED1A6A88600024580A /* Resources */,
+				A56B05DD1A8ABBAF00BD8383 /* TODO/FIXME Warnings */,
 			);
 			buildRules = (
 			);
@@ -488,9 +552,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5C1E47A1A816815006FECB1 /* IoT.jpg in Resources */,
-				A5C1E4691A8164A7006FECB1 /* Main.storyboard in Resources */,
-				A594F8C71A8425B200C1B583 /* news.png in Resources */,
+				A594F8DD1A861C8500C1B583 /* Main.storyboard in Resources */,
+				A594F8D11A8574F800C1B583 /* beacon2.png in Resources */,
 				A594F8C51A84246E00C1B583 /* school.jpg in Resources */,
+				A594F8CE1A85745F00C1B583 /* digital.png in Resources */,
 				A59B85F31A83F63400468096 /* GooglePlus.bundle in Resources */,
 				A5C7B5AC1A6D2818001E302C /* Images.xcassets in Resources */,
 			);
@@ -505,27 +570,52 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		A56B05DD1A8ABBAF00BD8383 /* TODO/FIXME Warnings */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "TODO/FIXME Warnings";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "TAGS=\"TODO:|FIXME:\"\necho \"searching ${SRCROOT} for ${TAGS}\"\nfind \"${SRCROOT}\" \\( -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A525DAEB1A6A88600024580A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				A5294AD71A6C963000AD51FA /* JSSAlertView.swift in Sources */,
+				A5FE76291A86A48D00BBE51B /* UIViewExtensions.swift in Sources */,
 				A52F0F271A70BEE400206DE7 /* RAMItemAnimationProtocol.swift in Sources */,
-				A57019091A81884800C8F516 /* WalkthroughViewController.swift in Sources */,
+				A59B84C91A8702BF0086D2FB /* Alamofire.swift in Sources */,
+				A5951A261A93FA2800E6DB3B /* WalkthroughViewController.swift in Sources */,
 				A59B85EB1A82D39500468096 /* AuthenticationManager.swift in Sources */,
 				A52F0F261A70BEE400206DE7 /* RAMAnimatedTabBarController.swift in Sources */,
 				A525DAF51A6A88600024580A /* AppDelegate.swift in Sources */,
+				A594F8CB1A856A2700C1B583 /* SignUpViewController.swift in Sources */,
 				A594F8C01A84185500C1B583 /* SwiftSpinner.swift in Sources */,
-				A52F0F0D1A70531600206DE7 /* BeaconPersistencyManager.swift in Sources */,
+				A594F8E41A862C3700C1B583 /* SwiftyJSON.swift in Sources */,
+				A52F0F0D1A70531600206DE7 /* PersistencyManager.swift in Sources */,
 				A52F0F1D1A70BC7A00206DE7 /* RAMBounceAnimation.swift in Sources */,
 				A52F0F1E1A70BC7A00206DE7 /* RAMFrameItemAnimation.swift in Sources */,
-				A52F0F0F1A70532C00206DE7 /* BeaconLocationManager.swift in Sources */,
+				A52F0F0F1A70532C00206DE7 /* LocationManager.swift in Sources */,
 				A52F0F1F1A70BC7A00206DE7 /* RAMFumeAnimation.swift in Sources */,
 				A52F0F231A70BD1E00206DE7 /* BeaconFacade.swift in Sources */,
 				A59B85EE1A839DF100468096 /* AuthenticationViewController.swift in Sources */,
+				A5951A241A93F80000E6DB3B /* CLProximityExtension.swift in Sources */,
 				A5F336A51A6DD00A00DDF59B /* Beacon.swift in Sources */,
+				A5C914021A8AA5B9009B74FD /* ProfilViewController.swift in Sources */,
+				A56B05DF1A8ABD3300BD8383 /* User.swift in Sources */,
 				A52F0F211A70BC7A00206DE7 /* RAMTransitionItemAnimation.swift in Sources */,
+				A502A00D1A86DF2D00376149 /* StringExtension.swift in Sources */,
 				A52F0F201A70BC7A00206DE7 /* RAMRotationAnimation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -534,7 +624,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A525DB0B1A6A88600024580A /* StudentProjectInfotelTests.swift in Sources */,
+				A525DB0B1A6A88600024580A /* AuthenticationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +637,17 @@
 			targetProxy = A525DB051A6A88600024580A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A594F8DF1A861C8500C1B583 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A594F8DE1A861C8500C1B583 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		A525DB0C1A6A88600024580A /* Debug */ = {
@@ -586,6 +687,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -622,6 +724,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -632,6 +735,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -639,11 +743,24 @@
 					/Users/rebouhaymen/Documents/FacebookSDK,
 					"/Users/rebouhaymen/Downloads/google-plus-ios-sdk-1.7.1",
 				);
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = StudentProjectInfotel/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-ObjC",
+					"-Wpedantic",
+					"-Weverything",
+					"-Wnewline-eof",
+					"-Wempty-body",
+					"-Wshadow",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "StudentProjectInfotel-Bridging-Header.h";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "StudentProjectInfotel/StudentProjectInfotel-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -652,6 +769,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -659,11 +777,24 @@
 					/Users/rebouhaymen/Documents/FacebookSDK,
 					"/Users/rebouhaymen/Downloads/google-plus-ios-sdk-1.7.1",
 				);
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = StudentProjectInfotel/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-ObjC",
+					"-Wpedantic",
+					"-Weverything",
+					"-Wnewline-eof",
+					"-Wempty-body",
+					"-Wshadow",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "StudentProjectInfotel-Bridging-Header.h";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "StudentProjectInfotel/StudentProjectInfotel-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -674,6 +805,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					/Users/rebouhaymen/Documents/FacebookSDK,
+					"/Users/rebouhaymen/Downloads/google-plus-ios-sdk-1.7.1",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -693,6 +826,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					/Users/rebouhaymen/Documents/FacebookSDK,
+					"/Users/rebouhaymen/Downloads/google-plus-ios-sdk-1.7.1",
 				);
 				INFOPLIST_FILE = StudentProjectInfotelTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
