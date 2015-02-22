@@ -7,3 +7,4 @@
 #import <GooglePlus/GooglePlus.h>
 #import <GoogleOpenSource/GoogleOpenSource.h>
 #import <CommonCrypto/CommonCrypto.h> // for MD5 hash
+#import "YALSunnyRefreshControl.h"
