@@ -22,11 +22,17 @@ class SignUpViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet var signUpBarButtonItem: UIBarButtonItem!
     @IBOutlet var errorLabel: UILabel!
     
+    lazy var imagePickerController: UIImagePickerController = {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        return imagePicker
+    }()
+
     // MARK: - Lifecycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.passwordTextField.clearsOnBeginEditing = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -42,14 +48,11 @@ class SignUpViewController: UIViewController, UINavigationControllerDelegate {
     :param: sender not used
     */
     @IBAction func chooseProfilPicture() {
-        var imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.allowsEditing = true
-        self.presentViewController(imagePickerController, animated: true, nil)
+        self.presentViewController(self.imagePickerController, animated: true, nil)
     }
     
-    @IBAction func popViewController() {
-        self.navigationController?.popViewControllerAnimated(true)
+    @IBAction func didClickOnBackButton() {
+        self.navigationController!.popViewControllerAnimated(true)
     }
     
     /**
@@ -67,15 +70,13 @@ class SignUpViewController: UIViewController, UINavigationControllerDelegate {
         self.firstNameTextField.resignFirstResponder() || self.lastNameTextField.resignFirstResponder()
         
         // Let's do some filters by removing all the whitespaces and hash the password
-        var email     = self.emailTextField.text.stringByReplacingOccurrencesOfString(" ", withString: "")
-        var firstName = self.firstNameTextField.text.stringByReplacingOccurrencesOfString(" ", withString: "")
-        var lastName  = self.lastNameTextField.text.stringByReplacingOccurrencesOfString(" ", withString: "")
-        let password  = self.passwordTextField.text.stringByReplacingOccurrencesOfString(" ", withString: "").md5()
+        var email     = self.emailTextField.text.encodeBase64()
+        var firstName = self.firstNameTextField.text.encodeBase64()
+        var lastName  = self.lastNameTextField.text.encodeBase64()
+        let password  = self.passwordTextField.text.md5()
         
-        BeaconFacade.sharedInstance.signUpUserWithPassword( email.encodeBase64(),
-                                                            password: password,
-                                                            lastName: lastName.encodeBase64(),
-                                                            firstName: firstName.encodeBase64()) { (jsonResponse, error) -> Void in
+        BeaconFacade.sharedInstance().signUpUserWithPassword( email, password: password, lastName: lastName, firstName: firstName)
+            { (jsonResponse, error) -> Void in
                                                                 
             // If everything is fine..
             if error == nil && jsonResponse? != nil && jsonResponse!.isOk() {
@@ -83,12 +84,13 @@ class SignUpViewController: UIViewController, UINavigationControllerDelegate {
             // If the user has been registered
                 if jsonResponse!.userHasBeenRegistered() {
         
-                    User.sharedInstance.fillUserProfil(email: email, firstName: firstName, lastName: lastName)
+                    let userProfil = jsonResponse!["response"]["profil"]
+                    Member.sharedInstance().fillMemberProfilWithJSON(userProfil)
                     
                     if let imageUserProfil = self.profilPictureButton.backgroundImageForState(.Normal) {
-                            BeaconFacade.sharedInstance.uploadUserProfilPicture(imageUserProfil, withEmail: email.encodeBase64(),
+                            BeaconFacade.sharedInstance().uploadUserProfilPicture(imageUserProfil, withEmail: email.encodeBase64(),
                                 completionHandler: { () -> Void in
-                                    User.sharedInstance.profilPicture = imageUserProfil
+                                    Member.sharedInstance().profilPicture = imageUserProfil
                                     self.userHasSignedUp()
                             })
                         
@@ -102,7 +104,7 @@ class SignUpViewController: UIViewController, UINavigationControllerDelegate {
                     SwiftSpinner.hide()
                     JSSAlertView().info(self,
                         title: "Sign Up",
-                        text: "An account with the same email already exists. Please login to your existing account.", buttonText: "Login", cancelButtonText: "Cancel").addAction({ self.popViewController()})
+                        text: "An account with the same email already exists. Please login to your existing account.", buttonText: "Login", cancelButtonText: "Cancel").addAction({ self.didClickOnBackButton()})
                     
                 // Else if the user hasn't been registered and doesn't exist on the database..
                 } else {
@@ -125,7 +127,7 @@ class SignUpViewController: UIViewController, UINavigationControllerDelegate {
     
     func userHasSignedUp() {
         SwiftSpinner.show("👏 Signed up !", animated: false)
-        BeaconFacade.sharedInstance.saveUserProfil()
+        BeaconFacade.sharedInstance().saveMemberProfil()
         
         // And we redirect him on the home view ( x second for sample user experience after the signed up loading )
         doInMainQueueAfter(seconds: 1.2) {
@@ -192,8 +194,10 @@ extension SignUpViewController: UITextFieldDelegate {
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
 
-        textField.text = (textField.text as NSString).stringByReplacingCharactersInRange(range, withString: string)
-        self.signUpBarButtonItem.enabled = self.canSignUpButtonBeEnabled()
+        if string != " " {
+            textField.text = (textField.text as NSString).stringByReplacingCharactersInRange(range, withString: string)
+            self.signUpBarButtonItem.enabled = self.canSignUpButtonBeEnabled()
+        }
         
         return false
     }

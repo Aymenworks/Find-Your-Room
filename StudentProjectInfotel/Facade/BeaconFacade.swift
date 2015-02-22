@@ -7,8 +7,8 @@
 //
 
 /**
-*  The Beacon facade pattern. So we can use more easly the
-*  complex submodules that are Location, Network, Data persistency.
+  The Beacon facade pattern. So we can use more easly the
+  complex submodules that are Location, Network, Data persistency.
 */
 public class BeaconFacade {
     
@@ -19,7 +19,7 @@ public class BeaconFacade {
     lazy private var persistencyManager = PersistencyManager()
 
     /// A singleton object as the entry point to manage the beacons
-    public class var sharedInstance: BeaconFacade {
+    public class func sharedInstance() -> BeaconFacade {
         struct Singleton {
             static let instance = BeaconFacade()
         }
@@ -42,10 +42,24 @@ public class BeaconFacade {
         self.persistencyManager.addBeacon(beacon)
     }
     
+    // MARK: Rooms Persistency
+    
+    public func rooms() -> [Room] {
+        return self.persistencyManager.rooms
+    }
+    
+    public func addRoom(room: Room) {
+        self.persistencyManager.addRoom(room)
+    }
+    
     // MARK: User Persistency
     
-    public func saveUserProfil() {
-        self.persistencyManager.saveUserProfilOnSession()
+    public func saveMemberProfil() {
+        self.persistencyManager.saveMemberProfilOnSession()
+    }
+    
+    public func isUserLoggedIn() -> Bool {
+        return self.persistencyManager.isUserLoggedIn()
     }
     
     // MARK: - Beacon Location -

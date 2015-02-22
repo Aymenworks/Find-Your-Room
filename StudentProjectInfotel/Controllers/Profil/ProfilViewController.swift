@@ -14,8 +14,8 @@ class ProfilViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        println("userInfo = \(User.sharedInstance)")
-        self.profil.image = User.sharedInstance.profilPicture
+        println("userInfo = \(Member.sharedInstance())")
+        self.profil.image = Member.sharedInstance().profilPicture
     }
     
     override func didReceiveMemoryWarning() {
