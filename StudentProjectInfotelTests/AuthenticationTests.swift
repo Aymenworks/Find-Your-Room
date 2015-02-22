@@ -29,7 +29,7 @@ class AuthenticationTests: XCTestCase {
         var email = "test@gmail.com"
         let password = "test"
                 
-        BeaconFacade.sharedInstance.authenticateUserWithEmail(email.encodeBase64(), password: password.md5()) { (jsonResponse, error) -> Void in
+        BeaconFacade.sharedInstance().authenticateUserWithEmail(email.encodeBase64(), password: password.md5()) { (jsonResponse, error) -> Void in
             
             // fulfill the exceptation
             expectation.fulfill()
@@ -54,7 +54,7 @@ class AuthenticationTests: XCTestCase {
         
         email = (email as NSString).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!.base64EncodedStringWithOptions(nil)
         
-        BeaconFacade.sharedInstance.authenticateUserWithEmail(email, password: password) { (jsonResponse, error) -> Void in
+        BeaconFacade.sharedInstance().authenticateUserWithEmail(email, password: password) { (jsonResponse, error) -> Void in
             
             // fulfill the exceptation
             expectation.fulfill()
