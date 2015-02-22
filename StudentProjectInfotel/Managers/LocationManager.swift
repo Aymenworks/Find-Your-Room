@@ -7,7 +7,7 @@
 //
 
 /**
-*  The core location manager. It take care of the beacon/user location like starting ranging/monitoring
+  The core location manager. It take care of the beacon/user location like starting ranging/monitoring
 */
 class LocationManager: NSObject, CLLocationManagerDelegate {
     
@@ -55,7 +55,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         
         for clBeacon in beacons as [CLBeacon] {
             
-            for beacon in BeaconFacade.sharedInstance.beacons() {
+            for beacon in BeaconFacade.sharedInstance().beacons() {
                 
                 if beacon == clBeacon {
                     

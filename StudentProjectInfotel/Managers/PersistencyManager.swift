@@ -7,13 +7,18 @@
 //
 
 
+let session = NSUserDefaults.standardUserDefaults()
+
 /**
-*  Memento pattern. It'll save/load the data.
+  Memento pattern. It'll save/load the data.
 */
 class PersistencyManager {
     
     /// The list of beacons we will use. See `Beacon`.
     lazy var beacons = [Beacon]()
+    
+    /// The list of the school rooms.
+    lazy var rooms = [Room]()
     
     // MARK: - Beacon persistency -
 
@@ -21,18 +26,25 @@ class PersistencyManager {
         self.beacons += [beacon]
     }
     
+    // MARK: - Room persistency -
+    
+    func addRoom(room: Room) {
+        self.rooms += [room]
+    }
+    
     // MARK: - User Persistency -
     
     /**
     Save the current user profil on session
     */
-    func saveUserProfilOnSession() {
-        NSUserDefaults.standardUserDefaults().setObject(User.sharedInstance.lastName, forKey: "lastName")
-        NSUserDefaults.standardUserDefaults().setObject(User.sharedInstance.firstName, forKey: "firstName")
-        NSUserDefaults.standardUserDefaults().setObject(User.sharedInstance.email, forKey: "email")
-        
-        if let image = User.sharedInstance.profilPicture {
-            NSUserDefaults.standardUserDefaults().setObject(UIImageJPEGRepresentation(image, 80.0), forKey: "profilPicture")
+    func saveMemberProfilOnSession() {
+        session.setObject(Member.sharedInstance().lastName, forKey: "lastName")
+        session.setObject(Member.sharedInstance().firstName, forKey: "firstName")
+        session.setObject(Member.sharedInstance().email, forKey: "email")
+        session.setObject(Member.sharedInstance().formation, forKey: "formation")
+
+        if let image = Member.sharedInstance().profilPicture {
+            session.setObject(UIImageJPEGRepresentation(image, 80.0), forKey: "profilPicture")
         }
     }
     
@@ -40,10 +52,17 @@ class PersistencyManager {
     Delete the current user profil from session
     */
     func deleteUserProfilFromSession() {
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("lastName")
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("firstName")
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("email")
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("profilPicture")
+        session.removeObjectForKey("lastName")
+        session.removeObjectForKey("firstName")
+        session.removeObjectForKey("email")
+        session.removeObjectForKey("formation")
+        session.removeObjectForKey("profilPicture")
+
+    }
+    
+    func isUserLoggedIn() -> Bool {
+        return (session.objectForKey("lastName") != nil)
+
     }
 
     

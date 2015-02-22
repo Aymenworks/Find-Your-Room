@@ -7,7 +7,7 @@
 //
 
 /**
-*  The beacon model class.
+  The beacon model class.
 */
 public class Beacon {
     
