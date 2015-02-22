@@ -12,14 +12,14 @@ extension UIView {
     /**
     UIView shake animation
     
-    From http://stackoverflow.com/questions/10294451/animating-uitextfield-to-indicate-a-wrong-password
+    Inspired from http://stackoverflow.com/questions/10294451/animating-uitextfield-to-indicate-a-wrong-password
     
     :param: direction Shake orientation
     :param: shakes    The numbers of shakes
     */
-    func shake(var direction : Int = 1, var shakes : Int = 0)
+    func shake(var direction : Float = 1.0, var shakes : Int = 0, duration: NSTimeInterval = 0.05)
     {
-        UIView.animateWithDuration(0.05,
+        UIView.animateWithDuration(duration,
             animations: { self.transform =  CGAffineTransformMakeTranslation(CGFloat(8*direction),0) },
             completion: { (value: Bool) in
                 
@@ -30,7 +30,7 @@ extension UIView {
                 
                 shakes++; direction*=(-1);
                 
-                self.shake(direction: direction, shakes: shakes)
+                self.shake(direction: direction, shakes: shakes, duration: duration)
             }
         )
     }
