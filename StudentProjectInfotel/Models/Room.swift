@@ -6,8 +6,9 @@
 //  Copyright (c) 2015 Rebouh Aymen. All rights reserved.
 //
 
-import Foundation
-
+/**
+  The Room model
+*/
 public class Room {
     
     let identifier: String
