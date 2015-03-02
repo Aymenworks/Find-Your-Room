@@ -2,7 +2,7 @@
 //  WalkthroughViewController.swift
 //  StudentProjectInfotel
 //
-//  Created by Rebouh Aymen on 22/08/2014.
+//  Created by Rebouh Aymen on 06/02/2015.
 //  Copyright (c) 2014 Rebouh Aymen. All rights reserved.
 //
 
@@ -30,6 +30,10 @@ class WalkthroughViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController!.navigationBarHidden = true
         self.pageControl.numberOfPages = self.listPages.count
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         self.prepareWalkthroughViews()
     }
 
@@ -43,7 +47,7 @@ class WalkthroughViewController: UIViewController {
     Prepare dynamicly the walkthrough views ( app presentation ), like the final content size of `myScrollView, the origin of the views, etc..
     So if we want to add another view on our walkthrough, we just add it to `listPages` and on the storyboard.
     
-    Copied from an old personal project (
+    Copied from an old personal project
     */
     func prepareWalkthroughViews() {
         
@@ -58,10 +62,10 @@ class WalkthroughViewController: UIViewController {
             currentController.view.frame = currentFrame
         }
         
-        self.myScrollView.addSubview(contentView)
+        self.myScrollView.addSubview(self.contentView)
         let scrollWidth  = CGFloat(self.listPages.count) * self.view.frame.width
         let scrollHeight = self.myScrollView.frame.height
-        self.myScrollView.contentSize = CGSizeMake(scrollWidth, contentView.frame.height)
+        self.myScrollView.contentSize = CGSizeMake(scrollWidth, self.contentView.frame.height)
     }
 }
 

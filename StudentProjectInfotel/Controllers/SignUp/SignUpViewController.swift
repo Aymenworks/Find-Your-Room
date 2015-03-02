@@ -10,19 +10,19 @@
   SignUpViewController controller. Loaded when the user click on the sign up button. It'll send some user data (photo,
     name, email and password ) to the server and redirect the user to the home view controller.
 */
-class SignUpViewController: UIViewController, UINavigationControllerDelegate {
+class SignUpViewController: UIViewController {
     
-    /// On tap, It'll present a view controller with the user albums photos.
+    
     @IBOutlet private var profilPictureButton: UIButton!
+    @IBOutlet private var firstNameTextField: UITextField!
+    @IBOutlet private var lastNameTextField: UITextField!
+    @IBOutlet private var emailTextField: UITextField!
+    @IBOutlet private var passwordTextField: UITextField!
+    @IBOutlet private var signUpBarButtonItem: UIBarButtonItem!
+    @IBOutlet private var errorLabel: UILabel!
     
-    @IBOutlet var firstNameTextField: UITextField!
-    @IBOutlet var lastNameTextField: UITextField!
-    @IBOutlet var emailTextField: UITextField!
-    @IBOutlet var passwordTextField: UITextField!
-    @IBOutlet var signUpBarButtonItem: UIBarButtonItem!
-    @IBOutlet var errorLabel: UILabel!
-    
-    lazy var imagePickerController: UIImagePickerController = {
+    /// Setted lazy because the user can't choose to not send a picture
+    lazy private var imagePickerController: UIImagePickerController = {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
@@ -51,6 +51,9 @@ class SignUpViewController: UIViewController, UINavigationControllerDelegate {
         self.presentViewController(self.imagePickerController, animated: true, nil)
     }
     
+    /**
+    Called when the user tap on the back bar button item. What's done is clear
+    */
     @IBAction func didClickOnBackButton() {
         self.navigationController!.popViewControllerAnimated(true)
     }
@@ -62,14 +65,14 @@ class SignUpViewController: UIViewController, UINavigationControllerDelegate {
     */
     @IBAction func signUp() {
         
-        SwiftSpinner.show("Signin Up..", animated: true)
+        BFRadialWaveHUD.showInView(self.view, withMessage: "Signing up...")
         self.errorLabel.text = ""
         
         // We hide the keyboard
         self.passwordTextField.resignFirstResponder()  || self.emailTextField.resignFirstResponder() ||
         self.firstNameTextField.resignFirstResponder() || self.lastNameTextField.resignFirstResponder()
         
-        // Let's do some filters by removing all the whitespaces and hash the password
+        // Let's do encode inputs and hash the password
         var email     = self.emailTextField.text.encodeBase64()
         var firstName = self.firstNameTextField.text.encodeBase64()
         var lastName  = self.lastNameTextField.text.encodeBase64()
@@ -79,7 +82,7 @@ class SignUpViewController: UIViewController, UINavigationControllerDelegate {
             { (jsonResponse, error) -> Void in
                                                                 
             // If everything is fine..
-            if error == nil && jsonResponse? != nil && jsonResponse!.isOk() {
+            if error? == nil && jsonResponse? != nil && jsonResponse!.isOk() {
         
             // If the user has been registered
                 if jsonResponse!.userHasBeenRegistered() {
@@ -101,7 +104,7 @@ class SignUpViewController: UIViewController, UINavigationControllerDelegate {
                 // Else if he's already registered..
                 } else if jsonResponse!.userExist() {
                     
-                    SwiftSpinner.hide()
+                    BFRadialWaveHUD.sharedInstance().dismiss()
                     JSSAlertView().info(self,
                         title: "Sign Up",
                         text: "An account with the same email already exists. Please login to your existing account.", buttonText: "Login", cancelButtonText: "Cancel").addAction({ self.didClickOnBackButton()})
@@ -121,17 +124,17 @@ class SignUpViewController: UIViewController, UINavigationControllerDelegate {
     // MARK: - User Interface -
 
     func showPopupSomethingWrong() {
-        SwiftSpinner.hide()
+        BFRadialWaveHUD.sharedInstance().dismiss()
         JSSAlertView().danger(self, title: "Sign Up", text: "Something went wrong. Please try again later.")
     }
     
     func userHasSignedUp() {
-        SwiftSpinner.show("👏 Signed up !", animated: false)
+        BFRadialWaveHUD.sharedInstance().showSuccessWithMessage("👏 Signed up !")
         BeaconFacade.sharedInstance().saveMemberProfil()
         
         // And we redirect him on the home view ( x second for sample user experience after the signed up loading )
         doInMainQueueAfter(seconds: 1.2) {
-            SwiftSpinner.hide()
+            BFRadialWaveHUD.sharedInstance().dismiss()
             self.performSegueWithIdentifier("segueGoToHomeViewFromSignUpView", sender: self)
         }
     }
@@ -180,7 +183,7 @@ class SignUpViewController: UIViewController, UINavigationControllerDelegate {
 
 // MARK: - UIImagePicker Delegate -
 
-extension SignUpViewController: UIImagePickerControllerDelegate  {
+extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
     
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         self.dismissViewControllerAnimated(true, completion: nil)

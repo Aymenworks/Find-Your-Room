@@ -8,33 +8,41 @@
 
 import UIKit
 
+/**
+*  <#Description#>
+*/
 class SplashViewController: UIViewController {
 
-    @IBOutlet var estimoteImage: UIImageView!
-    @IBOutlet var estimoteReverseImage: UIImageView!
-    @IBOutlet var universityImage: UIImageView!
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet var beaconImage: UIImageView!
-    @IBOutlet var userName: UILabel!
-    @IBOutlet var userProfilPicture: UIImageView!
+    @IBOutlet private var estimoteImage: UIImageView!
+    @IBOutlet private var estimoteReverseImage: UIImageView!
+    @IBOutlet private var universityImage: UIImageView!
+    @IBOutlet private var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private var beaconImage: UIImageView!
+    @IBOutlet private var userName: UILabel!
+    @IBOutlet private var userProfilPicture: UIImageView!
     
     // MARK: - Lifeycle -
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController!.navigationBarHidden = true
-        self.estimoteImage.shake(direction: 1.3, shakes: -20, duration: 2.8)
-        self.estimoteReverseImage.shake(direction: 1.3, shakes: -20, duration: 2.8)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.estimoteImage.shake(direction: 1.3, shakes: -20, duration: 2.8)
+        self.estimoteReverseImage.shake(direction: 1.3, shakes: -20, duration: 2.8)
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        doInMainQueueAfter(seconds: 0.7) {
+        doInMainQueueAfter(seconds: 0.6) {
             self.beaconImage.shake()
         }
     
@@ -53,12 +61,12 @@ class SplashViewController: UIViewController {
                 
                 doInMainQueueAfter(seconds: 2) {
                     self.activityIndicator.stopAnimating()
-                    self.performSegueWithIdentifier("goToRoomsHomeViewFromSplashView", sender: self)
+                    self.performSegueWithIdentifier("goToRoomsListViewFromSplashView", sender: self)
                 }
                     
             } else {
                 self.performSegueWithIdentifier("goToWalkthroughViewFromSplashView", sender: self)
-                println("performed segue")
+                println("goToWalkthroughViewFromSplashView segue performed")
             }
         }
     }

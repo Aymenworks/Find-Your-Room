@@ -67,45 +67,45 @@ class AuthenticationViewController: UIViewController {
     */
     @IBAction func signIn() {
         
-        SwiftSpinner.show("Authentication..", animated: true)
+        BFRadialWaveHUD.showInView(self.view, withMessage: "Authentication...")
         self.errorLabel.text = ""
         self.passwordTextField.resignFirstResponder() || emailTextField.resignFirstResponder() // hide the keyboard
         
-        let email = self.emailTextField.text.encodeBase64()
-        let password = self.passwordTextField.text.md5()
+        let email = self.emailTextField.text
+        let password = self.passwordTextField.text
         
         // Let's authenticate the user
-        BeaconFacade.sharedInstance().authenticateUserWithEmail(email, password: password) { (jsonResponse, error) -> Void in
+        BeaconFacade.sharedInstance().authenticateUserWithEmail(email.encodeBase64(), password: password.md5()) { (jsonResponse, error) -> Void in
             
             // If everything is fine..
             if error == nil && jsonResponse? != nil && jsonResponse!.isOk() {
                 
                 // If the user exist
                 if jsonResponse!.userExist() {
-                    
-                    let userProfil = jsonResponse!["response"]["profil"]
-                    let pictureUrl = userProfil["PICTURE"].string!
 
+                    let userProfil = jsonResponse!["response"]["profil"]
                     Member.sharedInstance().fillMemberProfilWithJSON(userProfil)
-                    SwiftSpinner.show("Fetching your profil picture", animated: true)
+                    BFRadialWaveHUD.sharedInstance().updateMessage("Download your profil picture...")
+                    
+                    let pictureUrl = "http://www.aymenworks.fr/assets/beacon/\(email.md5())/picture.jpg"
 
                     BeaconFacade.sharedInstance().serverProfilPictureWithURL(pictureUrl) { (image) -> Void in
                         
-                        SwiftSpinner.show("👍 Logged in !", animated: false)
+                        BFRadialWaveHUD.sharedInstance().showSuccessWithMessage("👍 Logged in !") { _ in }
 
                         // Error or not, the property is optional, so check if the image/error is nil or not is not necessary
                         Member.sharedInstance().profilPicture = image
                         BeaconFacade.sharedInstance().saveMemberProfil()
                         
-                        doInMainQueueAfter(seconds: 1.2) {
-                            SwiftSpinner.hide()
+                        doInMainQueueAfter(seconds: 1.6) {
+                            BFRadialWaveHUD.sharedInstance().dismiss()
                             self.performSegueWithIdentifier("segueGoToHomeViewFromAuthenticationView", sender: self)
                         }
                     }
                     
                 // Else, if he's not registred in the database..
                 } else {
-                    SwiftSpinner.hide()
+                    BFRadialWaveHUD.sharedInstance().dismiss()
                     self.errorLabel.text = "Invalid email or password. Please try again."
                     self.shakeForm()
                 }
@@ -114,7 +114,7 @@ class AuthenticationViewController: UIViewController {
             }  else {
                 
                 self.signInBarButtonItem.enabled = false
-                SwiftSpinner.hide()
+                BFRadialWaveHUD.sharedInstance().dismiss()
 
                 let alertView = JSSAlertView().danger(self, title: "Authentication", text: "Something went wrong. Please try again later.")
                 alertView.addAction({ () -> Void in
@@ -123,6 +123,7 @@ class AuthenticationViewController: UIViewController {
             }
         }
     }
+    
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         self.view.endEditing(true) // Hide the keyboard when touching outside the textfields
@@ -133,6 +134,11 @@ class AuthenticationViewController: UIViewController {
     }
     
     // MARK: - User Interface -
+    
+    func showActivityIndicatorWithMessage(message: String) {
+
+        
+    }
     
     /**
     Simple shake animations
@@ -220,37 +226,33 @@ extension AuthenticationViewController: FBLoginViewDelegate {
     func loginViewFetchedUserInfo(loginView: FBLoginView!, user: FBGraphUser!) {
         
         if BeaconFacade.sharedInstance().isUserLoggedIn() {
-            println("userIsLoggedIn redirect home view")
             self.performSegueWithIdentifier("segueGoToHomeViewFromAuthenticationView", sender: self)
             
         } else {
             
-            SwiftSpinner.show("Authentication", animated: true)
+            BFRadialWaveHUD.showInView(self.view, withMessage: "Authentication...")
             let email = user.objectForKey("email") as String
             
             BeaconFacade.sharedInstance().authenticateUserWithFacebookOrGooglePlus(email.encodeBase64(), lastName: user.last_name.encodeBase64(), firstName: user.first_name.encodeBase64(), completionHandler: { (jsonResponse, error) -> Void in
-              
-                println("facebook json = \(jsonResponse), error = \(error)")
                 
                 if error == nil && jsonResponse? != nil && jsonResponse!.isOk()
                     && (jsonResponse!.userExist() || jsonResponse!.userHasBeenRegistered()) {
                     
-                    SwiftSpinner.show("Fetching your profil picture", animated: true)
+                    BFRadialWaveHUD.sharedInstance().updateMessage("Download your profil picture...")
                         
                     BeaconFacade.sharedInstance().facebookProfilePicture(user.objectID, completionHandler: { (image) -> Void in
                     
                         BeaconFacade.sharedInstance().uploadUserProfilPicture(image!, withEmail: email.encodeBase64(),
                             completionHandler: { () -> Void in
                                     
-                                    SwiftSpinner.show("👍 Logged in !", animated: false)
+                                BFRadialWaveHUD.sharedInstance().showSuccessWithMessage("👍 Logged in !")
                                     let userProfil = jsonResponse!["response"]["profil"]
                                     Member.sharedInstance().fillMemberProfilWithJSON(userProfil)
                                     Member.sharedInstance().profilPicture = image
                                     BeaconFacade.sharedInstance().saveMemberProfil()
                                 
                                     doInMainQueueAfter(seconds: 1.2) {
-                                        SwiftSpinner.hide()
-                                        println("redirect home view")
+                                        BFRadialWaveHUD.sharedInstance().dismiss()
                                         self.performSegueWithIdentifier("segueGoToHomeViewFromAuthenticationView", sender: self)
                                     }
                             }
@@ -259,7 +261,7 @@ extension AuthenticationViewController: FBLoginViewDelegate {
 
                 } else {
                     FBSession.activeSession().closeAndClearTokenInformation()
-                    SwiftSpinner.hide()
+                    BFRadialWaveHUD.sharedInstance().dismiss()
                     JSSAlertView().danger(self, title: "Authentication", text: "Something went wrong. Please try again later.")
                 }
             })
@@ -295,7 +297,7 @@ extension AuthenticationViewController: GPPSignInDelegate {
     
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
         
-        SwiftSpinner.show("Authentication", animated: true)
+        BFRadialWaveHUD.showInView(self.view, withMessage: "Authentication...")
 
         if error == nil {
             
@@ -311,40 +313,39 @@ extension AuthenticationViewController: GPPSignInDelegate {
                         let email = self.signInGooglePlus.authentication.userEmail as String
                         
                         BeaconFacade.sharedInstance().authenticateUserWithFacebookOrGooglePlus(email.encodeBase64(), lastName: lastName!.encodeBase64(), firstName: firstName!.encodeBase64(), completionHandler: { (jsonResponse, error) -> Void in
-                            
-                            println("googleplus json = \(jsonResponse), error = \(error)")
-                            
+                                                        
                             if error == nil && jsonResponse? != nil && jsonResponse!.isOk()
                                 && (jsonResponse!.userExist() || jsonResponse!.userHasBeenRegistered()) {
                                     
-                                    SwiftSpinner.show("Fetching your profil picture", animated: true)
+                                    BFRadialWaveHUD.sharedInstance().updateMessage("Download your profil picture...")
                                     
-                                        BeaconFacade.sharedInstance().uploadUserProfilPicture(profilPicture!, withEmail: email.encodeBase64(),
-                                            completionHandler: { () -> Void in
-                                                
-                                                SwiftSpinner.show("👍 Logged in !", animated: false)
-                                                let userProfil = jsonResponse!["response"]["profil"]
-                                                Member.sharedInstance().fillMemberProfilWithJSON(userProfil)
-                                                Member.sharedInstance().profilPicture = profilPicture
-                                                BeaconFacade.sharedInstance().saveMemberProfil()
-                                                
-                                                doInMainQueueAfter(seconds: 1.2) {
-                                                    SwiftSpinner.hide()
-                                                    self.performSegueWithIdentifier("segueGoToHomeViewFromAuthenticationView", sender: self)
-                                                }
-                                        })
-                                    }
+                                    BeaconFacade.sharedInstance().uploadUserProfilPicture(profilPicture!, withEmail: email.encodeBase64(),
+                                        completionHandler: { () -> Void in
+                                            
+                                            BFRadialWaveHUD.sharedInstance().showSuccessWithMessage("👍 Logged in !")
+
+                                            let userProfil = jsonResponse!["response"]["profil"]
+                                            Member.sharedInstance().fillMemberProfilWithJSON(userProfil)
+                                            Member.sharedInstance().profilPicture = profilPicture
+                                            BeaconFacade.sharedInstance().saveMemberProfil()
+                                            
+                                            doInMainQueueAfter(seconds: 1.2) {
+                                                BFRadialWaveHUD.sharedInstance().dismiss()
+                                                self.performSegueWithIdentifier("segueGoToHomeViewFromAuthenticationView", sender: self)
+                                            }
+                                    })
+                                }
                         })
                     }
                     
                 } else {
-                    SwiftSpinner.hide()
+                    BFRadialWaveHUD.sharedInstance().dismiss()
                     JSSAlertView().danger(self, title: "Google+ Authentication", text: "Something went wrong. Please try again later.")
                 }
             })
         
         } else {
-            SwiftSpinner.hide()
+            BFRadialWaveHUD.sharedInstance().dismiss()
             JSSAlertView().danger(self, title: "Google+ Authentication", text: "Something went wrong. Please try again later.")
         }
     }
