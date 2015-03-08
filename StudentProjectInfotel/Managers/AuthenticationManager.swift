@@ -47,10 +47,10 @@ class AuthenticationManager {
     :param: firstName         The user first name
     :param: completionHandler The callback containing the json server/error response that'll be executed after the request has finished
     */
-    func signUpUserWithPassword(email: String, password: String, lastName: String, firstName: String, completionHandler: (JSON?, NSError?) -> Void) {
-        request(.POST, "http://www.aymenworks.fr/beacon/signUpUserWithPassword", parameters:["email": email, "lastName": lastName, "firstName": firstName, "password": password])
+    func signUpUserWithPassword(email: String, password: String, lastName: String, firstName: String, formation: String, schoolId: String, completionHandler: (JSON?, NSError?) -> Void) {
+        request(.POST, "http://www.aymenworks.fr/beacon/signUpUserWithPassword", parameters:["email": email, "lastName": lastName, "firstName": firstName, "password": password, "formation" : formation, "schoolId" : schoolId])
             .validate()
-            .responseSwiftyJSON { (_, _, jsonResponse, error) in
+            .responseSwiftyJSON { (request, httpResponse, jsonResponse, error) in
                 completionHandler(jsonResponse, error)
         }
     }
@@ -203,7 +203,7 @@ class AuthenticationManager {
         upload(urlRequest.newUrl, urlRequest.data)
             .validate()
             .responseSwiftyJSON { (request, response, JSON, error) in
-                println("REQUEST = \(request), RESPONSE = \(response) ######### JSON == \(JSON), error = \(error)")
+                println("upload picture response = \(response), json = \(JSON)")
                 completionHandler()
         }
     }

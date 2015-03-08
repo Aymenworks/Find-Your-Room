@@ -12,12 +12,13 @@
 */
 class SignUpViewController: UIViewController {
     
-    
     @IBOutlet private var profilPictureButton: UIButton!
     @IBOutlet private var firstNameTextField: UITextField!
     @IBOutlet private var lastNameTextField: UITextField!
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
+    @IBOutlet private var formationTextField: UITextField!
+    @IBOutlet private var schoolIdTextField: UITextField!
     @IBOutlet private var signUpBarButtonItem: UIBarButtonItem!
     @IBOutlet private var errorLabel: UILabel!
     
@@ -65,33 +66,33 @@ class SignUpViewController: UIViewController {
     */
     @IBAction func signUp() {
         
-        BFRadialWaveHUD.showInView(self.view, withMessage: "Signing up...")
+        BFRadialWaveHUD.showInView(self.navigationController!.view, withMessage: "Signing up...")
         self.errorLabel.text = ""
-        
-        // We hide the keyboard
-        self.passwordTextField.resignFirstResponder()  || self.emailTextField.resignFirstResponder() ||
-        self.firstNameTextField.resignFirstResponder() || self.lastNameTextField.resignFirstResponder()
+        self.view.endEditing(true)
         
         // Let's do encode inputs and hash the password
         var email     = self.emailTextField.text.encodeBase64()
         var firstName = self.firstNameTextField.text.encodeBase64()
         var lastName  = self.lastNameTextField.text.encodeBase64()
+        let formation  = self.formationTextField.text.encodeBase64()
+        let schoolId  = self.schoolIdTextField.text.encodeBase64()
         let password  = self.passwordTextField.text.md5()
-        
-        BeaconFacade.sharedInstance().signUpUserWithPassword( email, password: password, lastName: lastName, firstName: firstName)
+
+        Facade.sharedInstance().signUpUserWithPassword( email, password: password, lastName: lastName, firstName: firstName, formation:formation, schoolId: schoolId)
             { (jsonResponse, error) -> Void in
-                                                                
+                
+            println("response = \(jsonResponse)")
             // If everything is fine..
             if error? == nil && jsonResponse? != nil && jsonResponse!.isOk() {
         
             // If the user has been registered
                 if jsonResponse!.userHasBeenRegistered() {
         
-                    let userProfil = jsonResponse!["response"]["profil"]
+                let userProfil = jsonResponse!["response"]["profil"]
                     Member.sharedInstance().fillMemberProfilWithJSON(userProfil)
                     
                     if let imageUserProfil = self.profilPictureButton.backgroundImageForState(.Normal) {
-                            BeaconFacade.sharedInstance().uploadUserProfilPicture(imageUserProfil, withEmail: email.encodeBase64(),
+                            Facade.sharedInstance().uploadUserProfilPicture(imageUserProfil, withEmail: email,
                                 completionHandler: { () -> Void in
                                     Member.sharedInstance().profilPicture = imageUserProfil
                                     self.userHasSignedUp()
@@ -110,6 +111,10 @@ class SignUpViewController: UIViewController {
                         text: "An account with the same email already exists. Please login to your existing account.", buttonText: "Login", cancelButtonText: "Cancel").addAction({ self.didClickOnBackButton()})
                     
                 // Else if the user hasn't been registered and doesn't exist on the database..
+                } else  if !jsonResponse!.schoolExist() {
+                    BFRadialWaveHUD.sharedInstance().dismiss()
+                    JSSAlertView().danger(self, title: "Sign Up", text: "The School ID doesn't exist. Please try again.")
+                
                 } else {
                     self.showPopupSomethingWrong()
                 }
@@ -130,7 +135,7 @@ class SignUpViewController: UIViewController {
     
     func userHasSignedUp() {
         BFRadialWaveHUD.sharedInstance().showSuccessWithMessage("👏 Signed up !")
-        BeaconFacade.sharedInstance().saveMemberProfil()
+        Facade.sharedInstance().saveMemberProfil()
         
         // And we redirect him on the home view ( x second for sample user experience after the signed up loading )
         doInMainQueueAfter(seconds: 1.2) {
@@ -153,10 +158,29 @@ class SignUpViewController: UIViewController {
     /**
     Check if the user entered an email address
     
-    :returns: true if the email textfield aren't empty, false if not
+    :returns: true if the email textfield isn't empty, false if not
     */
-    func hasEmail() -> Bool {
+    func hasValidEmail() -> Bool {
+        // TODO: - Regex or something like that to check email
         return (!self.emailTextField.text.isEmpty)
+    }
+    
+    /**
+    Check if the user entered a school Id
+    
+    :returns: true if the email school Id textfield isn't empty, false if not
+    */
+    func hasSchoolId() -> Bool {
+        return (!self.schoolIdTextField.text.isEmpty)
+    }
+    
+    /**
+    Check if the user entered a formation
+    
+    :returns: true if the formation textfield isn't empty, false if not
+    */
+    func hasFormation() -> Bool {
+        return (!self.formationTextField.text.isEmpty)
     }
     
     /**
@@ -167,7 +191,6 @@ class SignUpViewController: UIViewController {
     func hasValidPassword() -> Bool {
         let password = self.passwordTextField.text.stringByReplacingOccurrencesOfString(" ", withString: "")
         return (countElements(password) >= 4)
-
     }
     
     /**
@@ -177,7 +200,8 @@ class SignUpViewController: UIViewController {
     :returns: True  if an input is empty or contains less than four characters, false if not.
     */
     func canSignUpButtonBeEnabled() -> Bool {
-        return self.hasName() && self.hasEmail() && self.hasValidPassword()
+        return self.hasName() && self.hasValidEmail() && self.hasSchoolId() && self.hasValidPassword()
+            && self.hasFormation()
     }
 }
 
@@ -197,10 +221,12 @@ extension SignUpViewController: UITextFieldDelegate {
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
 
-        if string != " " {
-            textField.text = (textField.text as NSString).stringByReplacingCharactersInRange(range, withString: string)
-            self.signUpBarButtonItem.enabled = self.canSignUpButtonBeEnabled()
+        if textField == self.passwordTextField && string == " "  {
+            return false
         }
+        
+        textField.text = (textField.text as NSString).stringByReplacingCharactersInRange(range, withString: string)
+        self.signUpBarButtonItem.enabled = self.canSignUpButtonBeEnabled()
         
         return false
     }
@@ -225,19 +251,21 @@ extension SignUpViewController: UITextFieldDelegate {
             case self.firstNameTextField:   self.lastNameTextField.becomeFirstResponder()
             case self.lastNameTextField:    self.emailTextField.becomeFirstResponder()
             case self.emailTextField:       self.passwordTextField.becomeFirstResponder()
-                
-            case self.passwordTextField:
+            case self.passwordTextField:    self.formationTextField.becomeFirstResponder()
+            case self.formationTextField:    self.schoolIdTextField.becomeFirstResponder()
+
+            case self.schoolIdTextField:
                 if self.canSignUpButtonBeEnabled() {
                     self.signUp()
-                    
-                } else {
-                    self.passwordTextField.resignFirstResponder()
-                    JSSAlertView().show(self, title: "Sign Up", text: "Please fill in all fields. The password must contains at least four characters.").setTextTheme(.Dark)
                 }
             
             default: break
         }
         
         return true
+    }
+    
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        self.view.endEditing(true)
     }
 }

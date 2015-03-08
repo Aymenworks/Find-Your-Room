@@ -55,7 +55,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         
         for clBeacon in beacons as [CLBeacon] {
             
-            for beacon in BeaconFacade.sharedInstance().beacons() {
+            for beacon in Facade.sharedInstance().beacons() {
                 
                 if beacon == clBeacon {
                     

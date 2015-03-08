@@ -67,15 +67,15 @@ class AuthenticationViewController: UIViewController {
     */
     @IBAction func signIn() {
         
-        BFRadialWaveHUD.showInView(self.view, withMessage: "Authentication...")
+        BFRadialWaveHUD.showInView(self.navigationController!.view, withMessage: "Authentication...")
         self.errorLabel.text = ""
-        self.passwordTextField.resignFirstResponder() || emailTextField.resignFirstResponder() // hide the keyboard
+        self.view.endEditing(true)
         
         let email = self.emailTextField.text
         let password = self.passwordTextField.text
         
         // Let's authenticate the user
-        BeaconFacade.sharedInstance().authenticateUserWithEmail(email.encodeBase64(), password: password.md5()) { (jsonResponse, error) -> Void in
+        Facade.sharedInstance().authenticateUserWithEmail(email.encodeBase64(), password: password.md5()) { (jsonResponse, error) -> Void in
             
             // If everything is fine..
             if error == nil && jsonResponse? != nil && jsonResponse!.isOk() {
@@ -84,18 +84,26 @@ class AuthenticationViewController: UIViewController {
                 if jsonResponse!.userExist() {
 
                     let userProfil = jsonResponse!["response"]["profil"]
+                    let schoolRooms = jsonResponse!["response"]["rooms"]
+                    
+                    for (_, jsonRoom) in schoolRooms {
+                        let room = Room(jsonRoom: jsonRoom)
+                        Facade.sharedInstance().addRoom(room)
+                    }
+                    
+                    Facade.sharedInstance().saveRooms()
                     Member.sharedInstance().fillMemberProfilWithJSON(userProfil)
                     BFRadialWaveHUD.sharedInstance().updateMessage("Download your profil picture...")
                     
                     let pictureUrl = "http://www.aymenworks.fr/assets/beacon/\(email.md5())/picture.jpg"
 
-                    BeaconFacade.sharedInstance().serverProfilPictureWithURL(pictureUrl) { (image) -> Void in
+                    Facade.sharedInstance().serverProfilPictureWithURL(pictureUrl) { (image) -> Void in
                         
                         BFRadialWaveHUD.sharedInstance().showSuccessWithMessage("👍 Logged in !") { _ in }
 
                         // Error or not, the property is optional, so check if the image/error is nil or not is not necessary
                         Member.sharedInstance().profilPicture = image
-                        BeaconFacade.sharedInstance().saveMemberProfil()
+                        Facade.sharedInstance().saveMemberProfil()
                         
                         doInMainQueueAfter(seconds: 1.6) {
                             BFRadialWaveHUD.sharedInstance().dismiss()
@@ -207,8 +215,8 @@ extension AuthenticationViewController: UITextFieldDelegate {
 
                 textField.resignFirstResponder()
                 
-                var alertview = JSSAlertView().show(self, title: "Authentication", text: "You forgot to enter your email address !")
-                alertview.addAction({ () -> Void in
+                JSSAlertView().show(self, title: "Authentication", text: "You forgot to enter your email address !")
+                .addAction({ () -> Void in
                     self.emailTextField.becomeFirstResponder()
                     return
                 })
@@ -225,31 +233,32 @@ extension AuthenticationViewController: FBLoginViewDelegate {
     
     func loginViewFetchedUserInfo(loginView: FBLoginView!, user: FBGraphUser!) {
         
-        if BeaconFacade.sharedInstance().isUserLoggedIn() {
+        if Facade.sharedInstance().isUserLoggedIn() {
             self.performSegueWithIdentifier("segueGoToHomeViewFromAuthenticationView", sender: self)
             
         } else {
             
-            BFRadialWaveHUD.showInView(self.view, withMessage: "Authentication...")
+            BFRadialWaveHUD.showInView(self.navigationController!.view, withMessage: "Authentication...")
             let email = user.objectForKey("email") as String
             
-            BeaconFacade.sharedInstance().authenticateUserWithFacebookOrGooglePlus(email.encodeBase64(), lastName: user.last_name.encodeBase64(), firstName: user.first_name.encodeBase64(), completionHandler: { (jsonResponse, error) -> Void in
+            Facade.sharedInstance().authenticateUserWithFacebookOrGooglePlus(email.encodeBase64(), lastName: user.last_name.encodeBase64(), firstName: user.first_name.encodeBase64(), completionHandler: { (jsonResponse, error) -> Void in
                 
+                println("jsonresponse = \(jsonResponse), error = \(error)")
                 if error == nil && jsonResponse? != nil && jsonResponse!.isOk()
                     && (jsonResponse!.userExist() || jsonResponse!.userHasBeenRegistered()) {
                     
                     BFRadialWaveHUD.sharedInstance().updateMessage("Download your profil picture...")
                         
-                    BeaconFacade.sharedInstance().facebookProfilePicture(user.objectID, completionHandler: { (image) -> Void in
+                    Facade.sharedInstance().facebookProfilePicture(user.objectID, completionHandler: { (image) -> Void in
                     
-                        BeaconFacade.sharedInstance().uploadUserProfilPicture(image!, withEmail: email.encodeBase64(),
+                        Facade.sharedInstance().uploadUserProfilPicture(image!, withEmail: email.encodeBase64(),
                             completionHandler: { () -> Void in
                                     
                                 BFRadialWaveHUD.sharedInstance().showSuccessWithMessage("👍 Logged in !")
                                     let userProfil = jsonResponse!["response"]["profil"]
                                     Member.sharedInstance().fillMemberProfilWithJSON(userProfil)
                                     Member.sharedInstance().profilPicture = image
-                                    BeaconFacade.sharedInstance().saveMemberProfil()
+                                    Facade.sharedInstance().saveMemberProfil()
                                 
                                     doInMainQueueAfter(seconds: 1.2) {
                                         BFRadialWaveHUD.sharedInstance().dismiss()
@@ -297,29 +306,29 @@ extension AuthenticationViewController: GPPSignInDelegate {
     
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
         
-        BFRadialWaveHUD.showInView(self.view, withMessage: "Authentication...")
+        BFRadialWaveHUD.showInView(self.navigationController!.view, withMessage: "Authentication...")
 
         if error == nil {
             
-            BeaconFacade.sharedInstance().googlePlusProfile(self.signInGooglePlus.userID, completionHandler: { (firstName, lastName, profilPicture, error) -> Void in
+            Facade.sharedInstance().googlePlusProfile(self.signInGooglePlus.userID, completionHandler: { (firstName, lastName, profilPicture, error) -> Void in
                 
                 if error == nil {
                 
-                    if BeaconFacade.sharedInstance().isUserLoggedIn() {
+                    if Facade.sharedInstance().isUserLoggedIn() {
                         self.performSegueWithIdentifier("segueGoToHomeViewFromAuthenticationView", sender: self)
                         
                     } else {
                         
                         let email = self.signInGooglePlus.authentication.userEmail as String
                         
-                        BeaconFacade.sharedInstance().authenticateUserWithFacebookOrGooglePlus(email.encodeBase64(), lastName: lastName!.encodeBase64(), firstName: firstName!.encodeBase64(), completionHandler: { (jsonResponse, error) -> Void in
+                        Facade.sharedInstance().authenticateUserWithFacebookOrGooglePlus(email.encodeBase64(), lastName: lastName!.encodeBase64(), firstName: firstName!.encodeBase64(), completionHandler: { (jsonResponse, error) -> Void in
                                                         
                             if error == nil && jsonResponse? != nil && jsonResponse!.isOk()
                                 && (jsonResponse!.userExist() || jsonResponse!.userHasBeenRegistered()) {
                                     
                                     BFRadialWaveHUD.sharedInstance().updateMessage("Download your profil picture...")
                                     
-                                    BeaconFacade.sharedInstance().uploadUserProfilPicture(profilPicture!, withEmail: email.encodeBase64(),
+                                    Facade.sharedInstance().uploadUserProfilPicture(profilPicture!, withEmail: email.encodeBase64(),
                                         completionHandler: { () -> Void in
                                             
                                             BFRadialWaveHUD.sharedInstance().showSuccessWithMessage("👍 Logged in !")
@@ -327,7 +336,7 @@ extension AuthenticationViewController: GPPSignInDelegate {
                                             let userProfil = jsonResponse!["response"]["profil"]
                                             Member.sharedInstance().fillMemberProfilWithJSON(userProfil)
                                             Member.sharedInstance().profilPicture = profilPicture
-                                            BeaconFacade.sharedInstance().saveMemberProfil()
+                                            Facade.sharedInstance().saveMemberProfil()
                                             
                                             doInMainQueueAfter(seconds: 1.2) {
                                                 BFRadialWaveHUD.sharedInstance().dismiss()

@@ -13,7 +13,11 @@ class WalkthroughViewController: UIViewController {
     
     @IBOutlet private weak var myScrollView: UIScrollView!
     @IBOutlet private weak var pageControl: UIPageControl!
-    private var previousPage: Int = 0
+    private var previousPage: Int = 0 {
+        didSet {
+            self.pageControl.currentPage = previousPage
+        }
+    }
     private let contentView = UIView()
 
     private lazy var listPages: [UIViewController] =
@@ -30,10 +34,6 @@ class WalkthroughViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController!.navigationBarHidden = true
         self.pageControl.numberOfPages = self.listPages.count
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         self.prepareWalkthroughViews()
     }
 
@@ -54,9 +54,9 @@ class WalkthroughViewController: UIViewController {
         // I use a contentView with the scroll view because of the auto layout.
         var i = CGFloat(self.listPages.count-1)
 
-        // We iterate each view controller. We add the views on the inverse order, like a stack
-        for currentController in reverse(self.listPages) {
-            contentView.addSubview(currentController.view)
+        // We add the views on the inverse order, like a stack
+        self.listPages.reverse().map { currentController -> Void in
+            self.contentView.addSubview(currentController.view)
             var currentFrame       = currentController.view.frame
             currentFrame.origin.x  = i-- * currentFrame.width // ex : 6 * 320
             currentController.view.frame = currentFrame
@@ -79,14 +79,12 @@ extension WalkthroughViewController: UIScrollViewDelegate {
     :param: scrollView The walkthrough scroll view. See `myScrollView`
     */
     func scrollViewDidEndDecelerating(scrollView: UIScrollView!) {
-
         let pageWidth      = self.myScrollView.frame.size.width
         let fractionalPage = Float(self.myScrollView.contentOffset.x / pageWidth)
         let page           = lroundf(fractionalPage) // the closest int
 
-        if previousPage != page && previousPage != NSNotFound {
-            previousPage = page;
-            self.pageControl.currentPage = previousPage
+        if self.previousPage != page && self.previousPage != NSNotFound {
+            self.previousPage = page;
         }
     }
 }
