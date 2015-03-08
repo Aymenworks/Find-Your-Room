@@ -377,6 +377,10 @@ extension JSON {
     public func userHasBeenRegistered() -> Bool {
         return (self["response"]["signUpSuccess"].boolValue)
     }
+    
+    public func schoolExist() -> Bool {
+        return (self["response"]["schoolExist"].boolValue)
+    }
 }
 
 
