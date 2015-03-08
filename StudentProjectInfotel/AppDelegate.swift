@@ -9,15 +9,15 @@
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
-
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         // Init the location manager ( also ask location permission )
-        BeaconFacade.sharedInstance()
+        Facade.sharedInstance()
         UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Medium", size: 18)! ]
-        
+
         return true
     }
     

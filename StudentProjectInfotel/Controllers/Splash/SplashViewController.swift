@@ -35,8 +35,8 @@ class SplashViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.estimoteImage.shake(direction: 1.3, shakes: -20, duration: 2.8)
-        self.estimoteReverseImage.shake(direction: 1.3, shakes: -20, duration: 2.8)
+        self.estimoteImage.shake(direction: 2.3, shakes: -20, duration: 2.8)
+        self.estimoteReverseImage.shake(direction: 2.3, shakes: -20, duration: 2.8)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -48,26 +48,35 @@ class SplashViewController: UIViewController {
     
         doInMainQueueAfter(seconds: 2) {
             
-            if BeaconFacade.sharedInstance().isUserLoggedIn() {
-            
-                self.beaconImage.hidden = true
-                self.universityImage.hidden = true
-                self.userProfilPicture.image = Member.sharedInstance().profilPicture
-                self.userProfilPicture.hidden = false
-                self.userName.text = Member.sharedInstance().fullName()
-                self.userName.hidden = false
-                self.activityIndicator.hidden = false
-                self.activityIndicator.startAnimating()
+            if Facade.sharedInstance().isUserLoggedIn() {
+                self.showUserLoggedInView()
                 
-                doInMainQueueAfter(seconds: 2) {
-                    self.activityIndicator.stopAnimating()
-                    self.performSegueWithIdentifier("goToRoomsListViewFromSplashView", sender: self)
-                }
-                    
             } else {
                 self.performSegueWithIdentifier("goToWalkthroughViewFromSplashView", sender: self)
-                println("goToWalkthroughViewFromSplashView segue performed")
             }
         }
     }
+    
+    // MARK: - User Interface -
+    
+    func showUserLoggedInView() {
+        self.beaconImage.hidden = true
+        self.universityImage.hidden = true
+        self.activityIndicator.hidden = false
+        self.activityIndicator.startAnimating()
+        
+        self.userProfilPicture.image = Member.sharedInstance().profilPicture
+        self.userProfilPicture.hidden = false
+        self.userName.text = Member.sharedInstance().fullName()
+        self.userName.hidden = false
+        
+        doInMainQueueAfter(seconds: 2) {
+            self.activityIndicator.stopAnimating()
+            self.performSegueWithIdentifier("goToRoomsListViewFromSplashView", sender: self)
+        }
+
+    }
+    
+    
+
 }

@@ -8,9 +8,9 @@
 
 /**
   The Beacon facade pattern. So we can use more easly the
-  complex submodules that are Location, Network, Data persistency.
+  complex submodules that are Location, Network, Data persistency with a sample and reusable API.
 */
-public class BeaconFacade {
+public class Facade {
     
     /// To manage the user, beacon, and rooms location
     private var locationManager: LocationManager? = LocationManager()
@@ -20,15 +20,15 @@ public class BeaconFacade {
     lazy private var persistencyManager = PersistencyManager()
 
     /// A singleton object as the entry point to manage the beacons
-    public class func sharedInstance() -> BeaconFacade {
+    public class func sharedInstance() -> Facade {
         struct Singleton {
-            static let instance = BeaconFacade()
+            static let instance = Facade()
         }
         return Singleton.instance
     }
     
     // MARK: - Lifecycle -
-    
+
     private init() {}
 
     // MARK: - Networks -
@@ -41,14 +41,16 @@ public class BeaconFacade {
     :param: email    The encoded base64 user email.
     :param: password The hashed (MD5) user password.
     
-    There, base 64 is used to encode non-http compatible characters that may be in the email or password
+    Base 64 is used for the email input to encode non-http compatible characters.
     */
     public func authenticateUserWithEmail(email: String, password: String, completionHandler: (JSON?, NSError?) -> Void) {
         self.authenticationManager.authenticateUserWithEmail(email, password: password, completionHandler: completionHandler)
     }
     
+    // MARK: Sigining Up
+
     /**
-    Will register the user on the database
+    Will register the user on the database.
     
     :param: email             The email user
     :param: password          The password user
@@ -56,14 +58,18 @@ public class BeaconFacade {
     :param: firstName         The user first name
     :param: completionHandler The callback containing the json server/error response that'll be executed after the request has finished
     */
-    public func signUpUserWithPassword(email: String, password: String, lastName: String, firstName: String, completionHandler: (JSON?, NSError?) -> Void) {
-        self.authenticationManager.signUpUserWithPassword(email, password: password, lastName: lastName, firstName: firstName, completionHandler: completionHandler)
+    public func signUpUserWithPassword(email: String, password: String, lastName: String,
+                                       firstName: String, formation:String, schoolId: String,
+                                       completionHandler: (JSON?, NSError?) -> Void) {
+                                        
+        self.authenticationManager.signUpUserWithPassword(email, password: password, lastName: lastName, firstName: firstName,
+            formation:formation, schoolId: schoolId, completionHandler: completionHandler)
     }
     
     // MARK: Facebook & Google Plus Sign In/Up
 
     /**
-    Will authenticate the user with email/password combinaison using Facebook or Google Plus fetched data.
+    Will authenticate the user with email/password combinaison using Facebook or Google Plus fetched data ( user profil ).
     If the user is not on the database, he'll be automatically registered
     
     :param: email             The encoded base64 user email.
@@ -71,7 +77,8 @@ public class BeaconFacade {
     :param: firstName         The encoded base64 user first name.
     :param: completionHandler The callback that'll be executed after the request has finished.
     */
-    public func authenticateUserWithFacebookOrGooglePlus(email: String, lastName: String, firstName: String, completionHandler: (JSON?, NSError?) -> Void) {
+    public func authenticateUserWithFacebookOrGooglePlus(email: String, lastName: String, firstName: String,
+                                                         completionHandler: (JSON?, NSError?) -> Void) {
         self.authenticationManager.authenticateUserWithFacebookOrGooglePlus(email, lastName: lastName, firstName: firstName, completionHandler: completionHandler)
     }
     
@@ -91,7 +98,8 @@ public class BeaconFacade {
     :param: userId            The google user id
     :param: completionHandler The callback containing the user first name, last name, profile picture, that'll be executed after the request has finished.
     */
-    public func googlePlusProfile(userId: String, completionHandler: (firstName: String?, lastName: String?, profilPicture: UIImage?, error: NSError?) -> Void) {
+    public func googlePlusProfile(userId: String, completionHandler: (firstName: String?, lastName: String?,
+                                                                        profilPicture: UIImage?, error: NSError?) -> Void) {
        self.authenticationManager.googlePlusProfile(userId, completionHandler: completionHandler)
     }
     
@@ -109,6 +117,7 @@ public class BeaconFacade {
     
     /**
     Upload the user profil picture picture on its md5 hashed email directory on the server
+    
     From http://stackoverflow.com/questions/26121827/uploading-file-with-parameters-using-alamofire
     
     :param: image             The user profil picture
@@ -141,6 +150,11 @@ public class BeaconFacade {
         self.persistencyManager.addRoom(room)
     }
     
+    public func saveRooms() {
+        self.persistencyManager.saveRooms()
+    }
+
+    
     // MARK: User Persistency
     
     /**
@@ -156,19 +170,15 @@ public class BeaconFacade {
     :returns: true if he's logged, false if not
     */
     public func isUserLoggedIn() -> Bool {
-        return self.persistencyManager.isUserLoggedIn()
+        println("Member.sharedInstance().email = \(Member.sharedInstance().email)")
+        return (Member.sharedInstance().email != nil)
     }
     
     // MARK: - Beacon Location -
     
     public func startMonitoringBeacon(beacon: Beacon) {
-        
         if locationManager != nil {
             locationManager!.startMonitoringBeacon(beacon)
-            println("startMonitoringBeacon")
-            
-        } else {
-            println("beaconLocationManager is nil")
         }
     }
 }
