@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>HomeMenu</key>
+	<array/>
+	<key>MemberMenu</key>
+	<array>
+		<dict>
+			<key>title</key>
+			<string>Profile</string>
+			<key>thumbnail</key>
+			<data></data>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>Logout</string>
+			<key>thumbnail</key>
+			<data></data>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>Blablo</string>
+			<key>thumbnail</key>
+			<data></data>
+		</dict>
+	</array>
+</dict>
+</plist>
