@@ -7,8 +7,8 @@
 //
 
 /**
-  The Beacon facade pattern. So we can use more easly the
-  complex submodules that are Location, Network, Data persistency with a sample and reusable API.
+  The Facade pattern. So we can use more easily the complex submodules 
+  that are Location, Network, Data persistency with a sample and reusable API.
 */
 public class Facade {
     
@@ -16,10 +16,16 @@ public class Facade {
     private var locationManager: LocationManager? = LocationManager()
     
     // I set them lazy to avoid the instance of these big class that are not used at the beggining of the app.
-    lazy private var authenticationManager = AuthenticationManager()
+    
+    /// To manage the network authentication request
+    lazy private var authenticationNetworkManager = AuthenticationNetworkManager()
+    
+    lazy private var roomsNetworkManager = RoomsNetworkManager();
+    
+    /// To manage persistency ( session, plist, file.. )
     lazy private var persistencyManager = PersistencyManager()
 
-    /// A singleton object as the entry point to manage the beacons
+    /// A singleton object as the entry point to manage the application
     public class func sharedInstance() -> Facade {
         struct Singleton {
             static let instance = Facade()
@@ -44,7 +50,66 @@ public class Facade {
     Base 64 is used for the email input to encode non-http compatible characters.
     */
     public func authenticateUserWithEmail(email: String, password: String, completionHandler: (JSON?, NSError?) -> Void) {
-        self.authenticationManager.authenticateUserWithEmail(email, password: password, completionHandler: completionHandler)
+        self.authenticationNetworkManager.authenticateUserWithEmail(email, password: password, completionHandler: completionHandler)
+    }
+    
+    /**
+    <#Description#>
+    
+    :param: email             <#email description#>
+    :param: completionHandler <#completionHandler description#>
+    */
+    func fetchUserProfile(email: String, completionHandler: (JSON?, NSError?) -> Void) {
+        self.authenticationNetworkManager.fetchUserProfile(email, completionHandler: completionHandler)
+    }
+    
+    // MARK: Rooms list and details
+    
+    /**
+    Get all rooms by a school and also the students present in the rooms
+    
+    :param: schoolId          The school ID
+    :param: completionHandler The callback containing the json server/error response that'll be executed
+                                after the request has finished
+    */
+    func roomsBySchoolId(schoolId: String, completionHandler: (JSON?, NSError?) -> Void) {
+        self.roomsNetworkManager.roomsBySchoolId(schoolId, completionHandler: completionHandler)
+    }
+    
+    func addRoomsFromJSON(schoolRooms: JSON) {
+        
+        self.persistencyManager.rooms = []
+
+        for (_, jsonRoom) in schoolRooms {
+            self.addRoom(Room(jsonRoom: jsonRoom))
+        }
+        
+        self.saveRooms()
+    }
+
+    func fetchStudentsInsideRoom() {
+        
+        var numberOfImagesToDownload = 0
+        var numberOfImagesDownloaded = 0
+            
+        self.rooms().map({ numberOfImagesToDownload += $0.students.count })
+        var pictureUrl: String
+        for room in self.rooms() {
+            for student in room.students {
+                pictureUrl = "http://www.aymenworks.fr/assets/beacon/\(student.email!.md5())/picture.jpg"
+                self.serverProfilPictureWithURL(pictureUrl) { image -> Void in
+                    println("je mets l'image \(image) à l'étudiant \(student.fullName())")
+                    NSNotificationCenter.defaultCenter().postNotificationName("DownloadImageNotification", object: nil)
+                    student.profilPicture = image
+                    numberOfImagesDownloaded++
+                    
+                    // If we have downloaded all the pictures, we save it.
+                    if numberOfImagesDownloaded == numberOfImagesToDownload {
+                        self.saveRooms()
+                    }
+                }
+            }
+        }
     }
     
     // MARK: Sigining Up
@@ -56,13 +121,14 @@ public class Facade {
     :param: password          The password user
     :param: lastName          The user last name
     :param: firstName         The user first name
-    :param: completionHandler The callback containing the json server/error response that'll be executed after the request has finished
+    :param: completionHandler The callback containing the json server/error response that'll be executed 
+                                after the request has finished
     */
     public func signUpUserWithPassword(email: String, password: String, lastName: String,
                                        firstName: String, formation:String, schoolId: String,
                                        completionHandler: (JSON?, NSError?) -> Void) {
                                         
-        self.authenticationManager.signUpUserWithPassword(email, password: password, lastName: lastName, firstName: firstName,
+        self.authenticationNetworkManager.signUpUserWithPassword(email, password: password, lastName: lastName, firstName: firstName,
             formation:formation, schoolId: schoolId, completionHandler: completionHandler)
     }
     
@@ -79,7 +145,7 @@ public class Facade {
     */
     public func authenticateUserWithFacebookOrGooglePlus(email: String, lastName: String, firstName: String,
                                                          completionHandler: (JSON?, NSError?) -> Void) {
-        self.authenticationManager.authenticateUserWithFacebookOrGooglePlus(email, lastName: lastName, firstName: firstName, completionHandler: completionHandler)
+        self.authenticationNetworkManager.authenticateUserWithFacebookOrGooglePlus(email, lastName: lastName, firstName: firstName, completionHandler: completionHandler)
     }
     
     /**
@@ -89,18 +155,19 @@ public class Facade {
     :param: completionHandler The callback that'll be executed after the request has finished.
     */
     public func facebookProfilePicture(userId: String, completionHandler: (UIImage?) -> Void) {
-        self.authenticationManager.facebookProfilePicture(userId, completionHandler)
+        self.authenticationNetworkManager.facebookProfilePicture(userId, completionHandler)
     }
     
     /**
     Will fetch the google user profile thanks to its google user id
     
     :param: userId            The google user id
-    :param: completionHandler The callback containing the user first name, last name, profile picture, that'll be executed after the request has finished.
+    :param: completionHandler The callback containing the user first name, last name, 
+                                profile picture, that'll be executed after the request has finished.
     */
     public func googlePlusProfile(userId: String, completionHandler: (firstName: String?, lastName: String?,
                                                                         profilPicture: UIImage?, error: NSError?) -> Void) {
-       self.authenticationManager.googlePlusProfile(userId, completionHandler: completionHandler)
+       self.authenticationNetworkManager.googlePlusProfile(userId, completionHandler: completionHandler)
     }
     
     // MARK: Download/Upload Server Image
@@ -109,10 +176,11 @@ public class Facade {
     Will fetch the user profile picture from the server.
     
     :param: urlImage          The url of the user hashed directory on the server
-    :param: completionHandler The callback containing the user profile picture that'll be executed after the request has finished
+    :param: completionHandler The callback containing the user profile picture that'll be 
+                                executed after the request has finished
     */
     public func serverProfilPictureWithURL(urlImage: String, completionHandler: UIImage? -> Void) {
-        self.authenticationManager.serverProfilPictureWithURL(urlImage, completionHandler: completionHandler)
+        self.authenticationNetworkManager.serverProfilPictureWithURL(urlImage, completionHandler: completionHandler)
     }
     
     /**
@@ -121,11 +189,12 @@ public class Facade {
     From http://stackoverflow.com/questions/26121827/uploading-file-with-parameters-using-alamofire
     
     :param: image             The user profil picture
-    :param: email             The user email address. We use it to move the user profil picture picture on its md5 hashed email directory on the server
+    :param: email             The user email address. We use it to move the user profil picture picture 
+                                on its md5 hashed email directory on the server
     :param: completionHandler The callback that'll be executed after the request has finished
     */
     public func uploadUserProfilPicture(image: UIImage, withEmail email: String, completionHandler: () -> Void) {
-        self.authenticationManager.uploadUserProfilPicture(image, withEmail: email, completionHandler: completionHandler)
+        self.authenticationNetworkManager.uploadUserProfilPicture(image, withEmail: email, completionHandler: completionHandler)
     }
     
     // MARK: - Persistency -
@@ -136,24 +205,42 @@ public class Facade {
         return self.persistencyManager.beacons
     }
     
+    /**
+    <#Description#>
+    
+    :param: beacon <#beacon description#>
+    */
     public func addBeacon(beacon: Beacon) {
         self.persistencyManager.addBeacon(beacon)
     }
     
     // MARK: Rooms Persistency
     
+    /**
+    Return the list of rooms of the current school.
+    
+    :returns: The list of rooms of the current school
+    */
     public func rooms() -> [Room] {
         return self.persistencyManager.rooms
     }
     
+    /**
+    Add a room on the list of rooms of the current school.
+    
+    :param: room -
+    */
     public func addRoom(room: Room) {
         self.persistencyManager.addRoom(room)
     }
     
+    /**
+    Save the list of rooms using the Archiving pattern to presevent class encapsuation concept
+    and retrieving data from disk with all rooms with theirs properties alredy setted.
+    */
     public func saveRooms() {
         self.persistencyManager.saveRooms()
     }
-
     
     // MARK: User Persistency
     
@@ -181,4 +268,15 @@ public class Facade {
             locationManager!.startMonitoringBeacon(beacon)
         }
     }
+    
+    // MARK: - Plist Persistency -
+    
+    public func memberMenu() -> [NSDictionary] {
+        return self.persistencyManager.memberMenu()
+    }
+    
+    public func homeMenu() -> [NSDictionary] {
+        return self.persistencyManager.homeMenu()
+    }
+
 }

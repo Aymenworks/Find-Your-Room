@@ -21,8 +21,8 @@ class RoomCell: UITableViewCell {
     var room: Room! {
         didSet {
             self.textLabel!.text = room.title
-            self.detailTextLabel?.text = room.roomDescription
-            let numberOfStudents = (room.numberOfStudents == nil) ? "?" : String(room.numberOfStudents!)
+            self.detailTextLabel!.text = room.roomDescription
+            let numberOfStudents = String(self.room.students.count)
             let capacity = (room.capacity == nil) ? "" : "/\(room.capacity!)"
             self.numberOfStudents.text = numberOfStudents + capacity
         }

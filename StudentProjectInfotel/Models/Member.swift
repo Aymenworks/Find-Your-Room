@@ -6,31 +6,16 @@
 //  Copyright (c) 2015 Rebouh Aymen. All rights reserved.
 //
 
-class Member {
+class Member: Student {
     
-    var firstName: String?
-    var lastName: String?
-    var email: String?
-    var formation: String?
-    var schoolId: String?
-    var schoolName: String?
-
-    var profilPicture: UIImage? {
-        didSet {
-            if self.profilPicture == nil {
-                self.profilPicture = UIImage(named: "portrait")
-            }
-        }
+    required init(firstName: String?, lastName: String?, email: String?,  formation: String?,
+        schoolId: String?, schoolName: String?, profilPicture: UIImage?) {
+            super.init(firstName: firstName, lastName: lastName, email: email,  formation: formation,
+            schoolId: schoolId, schoolName: schoolName, profilPicture: profilPicture)
     }
-    
-    private init(firstName: String?, lastName: String?, email: String?,  formation: String?, schoolId: String?, schoolName: String?, profilPicture: UIImage?) {
-        self.firstName = firstName
-        self.lastName = lastName
-        self.email = email
-        self.formation = formation
-        self.schoolId = schoolId
-        self.schoolName = schoolName
-        self.profilPicture = profilPicture
+
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
     class func sharedInstance() -> Member {
@@ -55,17 +40,5 @@ class Member {
         self.formation = userProfil["FORMATION"].string
         self.schoolId = userProfil["SCHOOL_ID"].string
         self.schoolName = userProfil["SCHOOL_NAME"].string
-    }
-}
-
-extension Member: Printable {
-    
-    /// What will be printed when printing the member object.
-    var description: String {
-            return "FirstName = \(self.firstName), LastName = \(self.lastName), email = \(self.email)"
-    }
-    
-    func fullName() -> String {
-        return "\(self.firstName!) \(self.lastName!)"
     }
 }

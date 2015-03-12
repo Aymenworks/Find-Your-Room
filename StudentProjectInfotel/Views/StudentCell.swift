@@ -6,17 +6,23 @@
 //  Copyright (c) 2015 Rebouh Aymen. All rights reserved.
 //
 
-class MemberCell: UITableViewCell {
+class StudentCell: UITableViewCell {
     
     @IBOutlet private var profilPicture: UIImageView!
     @IBOutlet private var name: UILabel!
     @IBOutlet private var formation: UILabel!
     
-    var member: Member! {
+    var student: Student! {
         didSet {
-            self.name.text = "\(member.firstName) \(member.lastName)"
-            self.formation.text = member.formation
-            self.profilPicture.image = member.profilPicture
+            self.name.text = "\(student.firstName!) \(student.lastName!)"
+            self.formation.text = student.formation!
+            self.profilPicture.image = student.profilPicture
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "downloadImage:", name: "DownloadImageNotification", object: nil)
         }
+    }
+
+    func downloadImage(notification: NSNotification) {
+        println("downloadImage l'image de \(self.student.fullName()) = \(self.student.profilPicture)")
+        self.profilPicture.image = self.student.profilPicture
     }
 }
