@@ -13,7 +13,7 @@
 
 @interface ContextMenuCell : UITableViewCell <YALContextMenuCell>
 
-@property (strong, nonatomic) IBOutlet UIButton *menuImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *menuImageView;
 @property (strong, nonatomic) IBOutlet UILabel *menuTitleLabel;
 
 @end

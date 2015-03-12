@@ -48,10 +48,19 @@ class PersistencyManager: NSCoding {
     
     // MARK: - Room persistency -
     
+    /**
+    Add a room on the list of rooms of the current school.
+    
+    :param: room -
+    */
     func addRoom(room: Room) {
         self.rooms += [room]
     }
     
+    /**
+    Save the list of rooms using the Archiving pattern to preserve class encapsuation concept
+    and retrieving data from disk with all rooms with theirs properties alredy setted.
+    */
     func saveRooms() {
         let fileManager = NSFileManager.defaultManager()
         let documentDirectory = fileManager.URLForDirectory(.DocumentDirectory, inDomain:.UserDomainMask
@@ -61,11 +70,13 @@ class PersistencyManager: NSCoding {
         
         if roomsData.writeToURL(saveFileUrl, options:.AtomicWrite, error: nil) {
             println("rooms save succed")
+        } else {
+            println("error saving rooms")
         }
     }
     
     // MARK: - User Persistency -
-    
+
     /**
     Save the current user profil on session
     */
@@ -74,8 +85,8 @@ class PersistencyManager: NSCoding {
         session.setObject(Member.sharedInstance().firstName, forKey: "firstName")
         session.setObject(Member.sharedInstance().email, forKey: "email")
         session.setObject(Member.sharedInstance().formation, forKey: "formation")
-        session.setObject(Member.sharedInstance().schoolId, forKey: "schoolId")
-        session.setObject(Member.sharedInstance().schoolName, forKey: "schoolName")
+        session.setObject(Member.sharedInstance().schoolId!, forKey: "schoolId")
+        session.setObject(Member.sharedInstance().schoolName!, forKey: "schoolName")
         
         if let image = Member.sharedInstance().profilPicture {
             session.setObject(UIImageJPEGRepresentation(image, 80.0), forKey: "profilPicture")
@@ -96,9 +107,42 @@ class PersistencyManager: NSCoding {
         session.removeObjectForKey("schoolId")
         session.removeObjectForKey("schoolName")
     }
-    
-    // MARK: - Rooms Persistency -
 
+    // MARK: - Rooms Persistency -
+    
+    // MARK: - Plist Persistency -
+
+    /**
+    *  A singleton to get once the menu ( profil, home ) from the menu plist file.
+    */
+    struct SingletonPlistMenu {
+        static var menuPlist: NSDictionary = {
+            let menuPlistPath = NSBundle.mainBundle().pathForResource("Menu", ofType: "plist")
+            let menuPlistData = NSFileManager.defaultManager().contentsAtPath(menuPlistPath!)
+            let listOfMenus = NSPropertyListSerialization.propertyListWithData(menuPlistData!,
+                options:0, format:nil,error: nil) as NSDictionary
+            
+            return listOfMenus
+            }()
+    }
+    
+    /**
+    <#Description#>
+    
+    :returns: <#return value description#>
+    */
+    func memberMenu() -> [NSDictionary] {
+        return SingletonPlistMenu.menuPlist.objectForKey("MemberMenu") as [NSDictionary]
+    }
+    
+    /**
+    <#Description#>
+    
+    :returns: <#return value description#>
+    */
+    func homeMenu() -> [NSDictionary] {
+        return SingletonPlistMenu.menuPlist.objectForKey("HomeMenu") as [NSDictionary]
+    }
 }
 
 

@@ -26,7 +26,7 @@ class AuthenticationTests: XCTestCase {
         
         let expectation = self.expectationWithDescription("Except authentication success")
         
-        var email = "aymenmse@gmail.com"
+        let email = "aymenmse@gmail.com"
         let password = "000000"
                 
         Facade.sharedInstance().authenticateUserWithEmail(email.encodeBase64(), password: password.md5()) { (jsonResponse, error) -> Void in
@@ -49,12 +49,11 @@ class AuthenticationTests: XCTestCase {
         
         let expectation = self.expectationWithDescription("Except authentication user not registred")
         
-        var email = "aymenmse@gmail.com"
-        let password = "wrongPassword".md5()
+        let email = "aymenmse@gmail.com"
+        let password = "wrongPassword"
         
-        email = (email as NSString).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!.base64EncodedStringWithOptions(nil)
         
-        Facade.sharedInstance().authenticateUserWithEmail(email, password: password) { (jsonResponse, error) -> Void in
+        Facade.sharedInstance().authenticateUserWithEmail(email.encodeBase64(), password: password.md5()) { (jsonResponse, error) -> Void in
             
             // fulfill the exceptation
             expectation.fulfill()
