@@ -15,7 +15,8 @@ public class Room: NSObject {
     let title: String!
     let roomDescription: String?
     let capacity: Int?
-    lazy var students: [Student] = [Student]()
+    let beacon: Beacon!
+    lazy var persons: [Person] = [Person]()
     
     init(jsonRoom: JSON) {
         super.init()
@@ -23,9 +24,14 @@ public class Room: NSObject {
         self.title = jsonRoom["TITLE"].string
         self.roomDescription = jsonRoom["DESCRIPTION"].string
         self.capacity = jsonRoom["CAPACITY"].string?.toInt()
+        self.beacon = Beacon(name: self.title, uuid: NSUUID(UUIDString: jsonRoom["IBEACON_UUID"].string!)!,
+                             major: jsonRoom["IBEACON_MAJOR"].uInt16Value, minor: jsonRoom["IBEACON_MINOR"].uInt16Value)
         
-        for student in jsonRoom["STUDENTS"].arrayValue {
-            self.students.append(Student(jsonStudent: student))
+        println("room init je moniroting le beacon \(self.beacon)")
+        Facade.sharedInstance().startMonitoringBeacon(self.beacon)
+        
+        for person in jsonRoom["PERSONS"].arrayValue {
+            self.persons.append(Person(jsonPerson: person))
         }
     }
     
@@ -35,7 +41,8 @@ public class Room: NSObject {
         self.title = aDecoder.decodeObjectForKey("roomTitle") as? String
         self.roomDescription = aDecoder.decodeObjectForKey("roomDescription") as? String
         self.capacity = aDecoder.decodeIntegerForKey("roomCapacity")
-        self.students = aDecoder.decodeObjectForKey("studentsInsideRoom") as [Student]
+        self.beacon = aDecoder.decodeObjectForKey("beacon") as Beacon
+        self.persons = aDecoder.decodeObjectForKey("personsInsideRoom") as [Person]
     }
 }
 
@@ -44,7 +51,8 @@ extension Room: NSCoding {
     public func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeInteger(self.identifier, forKey: "roomIdentifier")
         aCoder.encodeObject(self.title, forKey: "roomTitle")
-        aCoder.encodeObject(self.students, forKey: "studentsInsideRoom")
+        aCoder.encodeObject(self.persons, forKey: "personsInsideRoom")
+        aCoder.encodeObject(self.beacon, forKey: "beacon")
 
         if let roomDescription = self.roomDescription? {
             aCoder.encodeObject(roomDescription, forKey: "roomDescription")
@@ -61,6 +69,6 @@ extension Room: Printable {
     
     /// What will be printed when printing the room object.
     override public var description: String {
-        return "title = \(self.title), description = \(self.roomDescription?), capacity = \(self.capacity?), students inside = \(self.students)"
+        return "title = \(self.title), description = \(self.roomDescription?), capacity = \(self.capacity?), persons inside = \(self.persons)"
     }
 }

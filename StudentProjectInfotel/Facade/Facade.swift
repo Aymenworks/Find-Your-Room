@@ -12,15 +12,11 @@
 */
 public class Facade {
     
-    /// To manage the user, beacon, and rooms location
+    /// The location manager that'll manage the user, beacon, and rooms location ( geolocalisation )
     private var locationManager: LocationManager? = LocationManager()
     
-    // I set them lazy to avoid the instance of these big class that are not used at the beggining of the app.
-    
-    /// To manage the network authentication request
-    lazy private var authenticationNetworkManager = AuthenticationNetworkManager()
-    
-    lazy private var roomsNetworkManager = RoomsNetworkManager();
+    /// Manager 
+    lazy private var networkManager = NetworkManager()
     
     /// To manage persistency ( session, plist, file.. )
     lazy private var persistencyManager = PersistencyManager()
@@ -50,20 +46,24 @@ public class Facade {
     Base 64 is used for the email input to encode non-http compatible characters.
     */
     public func authenticateUserWithEmail(email: String, password: String, completionHandler: (JSON?, NSError?) -> Void) {
-        self.authenticationNetworkManager.authenticateUserWithEmail(email, password: password, completionHandler: completionHandler)
+        self.networkManager.authenticateUserWithEmail(email, password: password, completionHandler: completionHandler)
     }
     
     /**
-    <#Description#>
+    Will authenticate the user with email/password combinaison using Facebook or Google Plus fetched data ( user profil ).
+    If the user is not on the database, he'll be automatically registered
     
-    :param: email             <#email description#>
-    :param: completionHandler <#completionHandler description#>
+    :param: email             The encoded base64 user email.
+    :param: lastName          The encoded base64 user last name.
+    :param: firstName         The encoded base64 user first name.
+    :param: completionHandler The callback that'll be executed after the request has finished.
     */
-    func fetchUserProfile(email: String, completionHandler: (JSON?, NSError?) -> Void) {
-        self.authenticationNetworkManager.fetchUserProfile(email, completionHandler: completionHandler)
+    public func authenticateUserWithFacebookOrGooglePlus(email: String, lastName: String, firstName: String,
+        completionHandler: (JSON?, NSError?) -> Void) {
+            self.networkManager.authenticateUserWithFacebookOrGooglePlus(email, lastName: lastName, firstName: firstName, completionHandler: completionHandler)
     }
     
-    // MARK: Rooms list and details
+    // MARK: Rooms
     
     /**
     Get all rooms by a school and also the students present in the rooms
@@ -73,43 +73,54 @@ public class Facade {
                                 after the request has finished
     */
     func roomsBySchoolId(schoolId: String, completionHandler: (JSON?, NSError?) -> Void) {
-        self.roomsNetworkManager.roomsBySchoolId(schoolId, completionHandler: completionHandler)
+        self.networkManager.roomsBySchoolId(schoolId, completionHandler: completionHandler)
     }
     
-    func addRoomsFromJSON(schoolRooms: JSON) {
-        
-        self.persistencyManager.rooms = []
-
-        for (_, jsonRoom) in schoolRooms {
-            self.addRoom(Room(jsonRoom: jsonRoom))
-        }
-        
-        self.saveRooms()
+    /**
+    Will download all the user profile pictures containted on our array of room ( that contains array of students )
+    */
+    func fetchPersonsProfilPictureInsideRoom() {
+        self.networkManager.fetchPersonsProfilPictureInsideRoom()
     }
-
-    func fetchStudentsInsideRoom() {
-        
-        var numberOfImagesToDownload = 0
-        var numberOfImagesDownloaded = 0
-            
-        self.rooms().map({ numberOfImagesToDownload += $0.students.count })
-        var pictureUrl: String
-        for room in self.rooms() {
-            for student in room.students {
-                pictureUrl = "http://www.aymenworks.fr/assets/beacon/\(student.email!.md5())/picture.jpg"
-                self.serverProfilPictureWithURL(pictureUrl) { image -> Void in
-                    println("je mets l'image \(image) à l'étudiant \(student.fullName())")
-                    NSNotificationCenter.defaultCenter().postNotificationName("DownloadImageNotification", object: nil)
-                    student.profilPicture = image
-                    numberOfImagesDownloaded++
-                    
-                    // If we have downloaded all the pictures, we save it.
-                    if numberOfImagesDownloaded == numberOfImagesToDownload {
-                        self.saveRooms()
-                    }
-                }
-            }
-        }
+    
+    /**
+    Add a room in the database with the beacon.
+    
+    :param: schoolId          The school ID
+    :param: roomTitle         The title of the room ( ex : Hall II - Computer Science Room )
+    :param: roomDescription   The description of the room ( ex : in front of .. )
+    :param: roomCapacity      The room capacity ( max number of persons inside )
+    :param: beaconUUID        The beacon UUID identifier
+    :param: beaconMajor       The beacon major value
+    :param: beaconMinor       The beacon minor value
+    :param: completionHandler The callback containing the json server/error response that'll be executed
+                                after the request has finished
+    */
+    func addRoom(schoolId: String, roomTitle: String, roomDescription: String,
+        roomCapacity: Int, beaconUUID: String, beaconMajor: Int, beaconMinor: Int, completionHandler: (JSON?, NSError?) -> Void) {
+            self.networkManager.addRoom(schoolId, roomTitle: roomTitle, roomDescription: roomDescription,
+                roomCapacity: roomCapacity, beaconUUID: beaconUUID, beaconMajor: beaconMajor, beaconMinor: beaconMinor, completionHandler)
+    }
+    
+    /**
+    <#Description#>
+    
+    :param: roomId            <#roomId description#>
+    :param: userEmail         <#userEmail description#>
+    :param: completionHandler <#completionHandler description#>
+    */
+    func addMyPresenceToRoom(roomId: Int, userEmail: String, completionHandler: (JSON?, NSError?) -> Void) {
+        self.networkManager.addMyPresenceInRoom(roomId, userEmail: userEmail, completionHandler: completionHandler)
+    }
+    
+    /**
+    <#Description#>
+    
+    :param: userEmail         <#userEmail description#>
+    :param: completionHandler <#completionHandler description#>
+    */
+    func deleteMyPresenceFromRoom(userEmail: String, completionHandler: (JSON?, NSError?) -> Void) {
+        self.networkManager.deleteMyPresenceFromRoom(userEmail, completionHandler: completionHandler)
     }
     
     // MARK: Sigining Up
@@ -128,24 +139,39 @@ public class Facade {
                                        firstName: String, formation:String, schoolId: String,
                                        completionHandler: (JSON?, NSError?) -> Void) {
                                         
-        self.authenticationNetworkManager.signUpUserWithPassword(email, password: password, lastName: lastName, firstName: firstName,
+        self.networkManager.signUpUserWithPassword(email, password: password, lastName: lastName, firstName: firstName,
             formation:formation, schoolId: schoolId, completionHandler: completionHandler)
     }
     
-    // MARK: Facebook & Google Plus Sign In/Up
-
-    /**
-    Will authenticate the user with email/password combinaison using Facebook or Google Plus fetched data ( user profil ).
-    If the user is not on the database, he'll be automatically registered
+    // MARK: User
     
-    :param: email             The encoded base64 user email.
-    :param: lastName          The encoded base64 user last name.
-    :param: firstName         The encoded base64 user first name.
-    :param: completionHandler The callback that'll be executed after the request has finished.
+    /**
+    Will update the user profil on the database and then in session.
+    
+    :param: email             The new user email
+    :param: password          The new user password
+    :param: lastName          The new user last name
+    :param: firstName         The new user first name
+    :param: completionHandler The callback containing the json server/error response that'll be executed
+    after the request has finished
     */
-    public func authenticateUserWithFacebookOrGooglePlus(email: String, lastName: String, firstName: String,
-                                                         completionHandler: (JSON?, NSError?) -> Void) {
-        self.authenticationNetworkManager.authenticateUserWithFacebookOrGooglePlus(email, lastName: lastName, firstName: firstName, completionHandler: completionHandler)
+    public func updateUserAccount(email: String, password: String, lastName: String,
+        firstName: String, formation:String, schoolId: String,
+        completionHandler: (JSON?, NSError?) -> Void) {
+            
+            self.networkManager.updateUserAccount(email, password: password, lastName: lastName, firstName: firstName,
+                formation:formation, schoolId: schoolId, completionHandler: completionHandler)
+    }
+    
+    /**
+    Will fetch the user profile ( name, school, formation, .. )
+    
+    :param: email             The user email
+    :param: completionHandler The callback containing the json server/error response that'll be executed
+    after the request has finished
+    */
+    func fetchUserProfile(email: String, completionHandler: (JSON?, NSError?) -> Void) {
+        self.networkManager.fetchUserProfile(email, completionHandler: completionHandler)
     }
     
     /**
@@ -155,32 +181,30 @@ public class Facade {
     :param: completionHandler The callback that'll be executed after the request has finished.
     */
     public func facebookProfilePicture(userId: String, completionHandler: (UIImage?) -> Void) {
-        self.authenticationNetworkManager.facebookProfilePicture(userId, completionHandler)
+        self.networkManager.facebookProfilePicture(userId, completionHandler)
     }
     
     /**
     Will fetch the google user profile thanks to its google user id
     
     :param: userId            The google user id
-    :param: completionHandler The callback containing the user first name, last name, 
-                                profile picture, that'll be executed after the request has finished.
+    :param: completionHandler The callback containing the user first name, last name,
+    profile picture, that'll be executed after the request has finished.
     */
     public func googlePlusProfile(userId: String, completionHandler: (firstName: String?, lastName: String?,
-                                                                        profilPicture: UIImage?, error: NSError?) -> Void) {
-       self.authenticationNetworkManager.googlePlusProfile(userId, completionHandler: completionHandler)
+        profilPicture: UIImage?, error: NSError?) -> Void) {
+            self.networkManager.googlePlusProfile(userId, completionHandler: completionHandler)
     }
-    
-    // MARK: Download/Upload Server Image
     
     /**
     Will fetch the user profile picture from the server.
     
     :param: urlImage          The url of the user hashed directory on the server
-    :param: completionHandler The callback containing the user profile picture that'll be 
-                                executed after the request has finished
+    :param: completionHandler The callback containing the user profile picture that'll be
+    executed after the request has finished
     */
     public func serverProfilPictureWithURL(urlImage: String, completionHandler: UIImage? -> Void) {
-        self.authenticationNetworkManager.serverProfilPictureWithURL(urlImage, completionHandler: completionHandler)
+        self.networkManager.serverProfilPictureWithURL(urlImage, completionHandler: completionHandler)
     }
     
     /**
@@ -189,30 +213,15 @@ public class Facade {
     From http://stackoverflow.com/questions/26121827/uploading-file-with-parameters-using-alamofire
     
     :param: image             The user profil picture
-    :param: email             The user email address. We use it to move the user profil picture picture 
-                                on its md5 hashed email directory on the server
+    :param: email             The encoded base64 user email address. We use it to move the user profil picture picture
+    on its md5 hashed email directory on the server
     :param: completionHandler The callback that'll be executed after the request has finished
     */
     public func uploadUserProfilPicture(image: UIImage, withEmail email: String, completionHandler: () -> Void) {
-        self.authenticationNetworkManager.uploadUserProfilPicture(image, withEmail: email, completionHandler: completionHandler)
+        self.networkManager.uploadUserProfilPicture(image, withEmail: email, completionHandler: completionHandler)
     }
     
     // MARK: - Persistency -
-    
-    // MARK: Beacons Persistency
-    
-    public func beacons() -> [Beacon] {
-        return self.persistencyManager.beacons
-    }
-    
-    /**
-    <#Description#>
-    
-    :param: beacon <#beacon description#>
-    */
-    public func addBeacon(beacon: Beacon) {
-        self.persistencyManager.addBeacon(beacon)
-    }
     
     // MARK: Rooms Persistency
     
@@ -242,6 +251,15 @@ public class Facade {
         self.persistencyManager.saveRooms()
     }
     
+    /**
+    <#Description#>
+    
+    :param: schoolRooms <#schoolRooms description#>
+    */
+    func addRoomsFromJSON(schoolRooms: JSON) {
+       self.persistencyManager.addRoomsFromJSON(schoolRooms)
+    }
+
     // MARK: User Persistency
     
     /**
@@ -252,31 +270,62 @@ public class Facade {
     }
     
     /**
+    Delete the current user profil from session
+    */
+    func logOut() {
+        self.persistencyManager.logOut()
+    }
+    
+    /**
     Check if the user is logged in
     
     :returns: true if he's logged, false if not
     */
     public func isUserLoggedIn() -> Bool {
         println("Member.sharedInstance().email = \(Member.sharedInstance().email)")
-        return (Member.sharedInstance().email != nil)
+        println("Member.sharedInstance().isAdmin = \(Member.sharedInstance().isAdmin)")
+
+        return Member.sharedInstance().email != nil
     }
+    
+    public func isUserAdmin() -> Bool {
+        return Member.sharedInstance().isAdmin!
+    }
+
     
     // MARK: - Beacon Location -
     
+    /**
+    <#Description#>
+    
+    :param: beacon <#beacon description#>
+    */
     public func startMonitoringBeacon(beacon: Beacon) {
         if locationManager != nil {
             locationManager!.startMonitoringBeacon(beacon)
         }
     }
     
-    // MARK: - Plist Persistency -
+    /**
+    <#Description#>
     
-    public func memberMenu() -> [NSDictionary] {
-        return self.persistencyManager.memberMenu()
+    :param: beacon <#beacon description#>
+    */
+    public func stopMonitoringBeacon(beacon: Beacon) {
+        if locationManager != nil {
+            locationManager!.stopMonitoringBeacon(beacon)
+        }
     }
     
-    public func homeMenu() -> [NSDictionary] {
-        return self.persistencyManager.homeMenu()
+    // MARK: - Plist Persistency -
+    
+    /**
+    <#Description#>
+    
+    :returns: <#return value description#>
+    */
+    public func memberMenu() -> [NSDictionary] {
+        return self.persistencyManager.memberMenu()
     }
 
 }
