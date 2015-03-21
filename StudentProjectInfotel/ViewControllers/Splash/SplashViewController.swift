@@ -25,7 +25,6 @@ class SplashViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController!.navigationBarHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,6 +33,7 @@ class SplashViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController!.navigationBarHidden = true
         self.estimoteImage.shake(direction: 2.3, shakes: -20, duration: 2.8)
         self.estimoteReverseImage.shake(direction: 2.3, shakes: -20, duration: 2.8)
     }
@@ -41,12 +41,11 @@ class SplashViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        println("bounds splash = \(self.view.bounds)")
         doInMainQueueAfter(seconds: 0.6) {
             self.beaconImage.shake()
         }
     
-        doInMainQueueAfter(seconds: 1.5) {
+        doInMainQueueAfter(seconds: 2.5) {
             
             if Facade.sharedInstance().isUserLoggedIn() {
                 self.showUserLoggedInView()
@@ -70,47 +69,55 @@ class SplashViewController: UIViewController {
         self.userName.text = Member.sharedInstance().fullName()
         self.userName.hidden = !self.userName.hidden
     }
+    
     func showUserLoggedInView() {
 
         self.toggleView()
-            
-        // TODO: - MANAGE ERRORS
-
+        
         Facade.sharedInstance().fetchUserProfile(Member.sharedInstance().email!.encodeBase64(), completionHandler: { (jsonProfil, error) -> Void in
             
-            if error == nil {
-                
+            if error == nil && jsonProfil != nil && jsonProfil!.isOk() {
                 let userProfil = jsonProfil!["response"]["profil"]
                 Member.sharedInstance().fillMemberProfilWithJSON(userProfil)
 
-                Facade.sharedInstance().roomsBySchoolId(Member.sharedInstance().schoolId!.encodeBase64(),
-                    completionHandler: { (jsonSchoolRooms, error) -> Void in
-                        
-                        println("json response = \(jsonSchoolRooms)")
-                        
-                        if error == nil {
-                            let schoolRooms = jsonSchoolRooms!["response"]["rooms"]
-                            Facade.sharedInstance().addRoomsFromJSON(schoolRooms)
-                            Facade.sharedInstance().fetchStudentsInsideRoom()
-                            self.activityIndicator.stopAnimating()
-                        } else {
-                            println("error rooms")
-                        }
-                        
-                        self.performSegueWithIdentifier("goToRoomsListViewFromSplashView", sender: self)
-                })
-            } else {
+                let pictureUrl = "http://www.aymenworks.fr/assets/beacon/\(Member.sharedInstance().email!.md5())/picture.jpg"
+                println("picture url = \(pictureUrl)")
+                Facade.sharedInstance().serverProfilPictureWithURL(pictureUrl) { (image) -> Void in
+                    
+                    Member.sharedInstance().profilPicture = image
+                    Facade.sharedInstance().saveMemberProfil()
 
-                JSSAlertView().warning(self, title: "Oups", text: "Something went wrong. Please try again later.")
+                    Facade.sharedInstance().roomsBySchoolId(Member.sharedInstance().schoolId!.encodeBase64(),
+                        completionHandler: { (jsonSchoolRooms, error) -> Void in
+                            
+                        println("json response = \(jsonSchoolRooms)")
+                            
+                        if error == nil && jsonSchoolRooms != nil && jsonSchoolRooms!.isOk() {
+                            let schoolRooms = jsonSchoolRooms!["response"]["rooms"]
+                            let beaconsSchool = jsonSchoolRooms!["response"]["beacons"]
+
+                            Facade.sharedInstance().addRoomsFromJSON(schoolRooms)
+                            Facade.sharedInstance().fetchPersonsProfilPictureInsideRoom()
+                            self.activityIndicator.stopAnimating()
+                        }
+                            
+                        self.performSegueWithIdentifier("goToRoomsListViewFromSplashView", sender: self)
+                    })
+                }
+            } else {
+                JSSAlertView().warning(self, title: NSLocalizedString("oops", comment: ""),
+                    text: NSLocalizedString("genericError", comment: ""))
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64((2 * NSEC_PER_SEC))), dispatch_get_main_queue()) {
                     self.toggleView()
                 }
-
-               
             }
         })
-       
-
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "goToRoomsListViewFromSplashView" {
+            self.toggleView()
+        }
     }
 }
     

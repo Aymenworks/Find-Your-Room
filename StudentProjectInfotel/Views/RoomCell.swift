@@ -3,13 +3,15 @@
 //  iBeaconForgotMeNot
 //
 //  Created by Rebouh Aymen on 20/12/2014.
-//  Copyright (c) 2014 Rebouh Aymen. All rights reserved.
+//  Copyright (c) 2014 Rebouh Aymen. All rights reserved.      
 //
 
 class RoomCell: UITableViewCell {
     
-    @IBOutlet var numberOfStudents: UILabel!
-    @IBOutlet var leftColorView: UIView!
+    @IBOutlet private var numberOfPersons: UILabel!
+    @IBOutlet private var leftColorView: UIView!
+    @IBOutlet private var title: UILabel!
+    @IBOutlet var roomDescription: UILabel!
     
     var themeColor: UIColor!  {
         didSet {
@@ -20,11 +22,12 @@ class RoomCell: UITableViewCell {
     
     var room: Room! {
         didSet {
-            self.textLabel!.text = room.title
-            self.detailTextLabel!.text = room.roomDescription
-            let numberOfStudents = String(self.room.students.count)
+            self.title!.text = room.title
+            self.roomDescription!.text = room.roomDescription
+            let numberOfPersons = String(self.room.persons.count)
             let capacity = (room.capacity == nil) ? "" : "/\(room.capacity!)"
-            self.numberOfStudents.text = numberOfStudents + capacity
+            self.numberOfPersons.text = numberOfPersons + capacity
         }
     }
+
 }

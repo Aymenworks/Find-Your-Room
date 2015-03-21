@@ -13,9 +13,6 @@ let session = NSUserDefaults.standardUserDefaults()
 */
 class PersistencyManager: NSCoding {
     
-    /// The list of beacons we will use. See `Beacon`.
-    lazy var beacons = [Beacon]()
-    
     /// The list of the school rooms.
     lazy var rooms = [Room]()
     
@@ -27,9 +24,9 @@ class PersistencyManager: NSCoding {
         let fileManager = NSFileManager.defaultManager()
         let documentDirectory = fileManager.URLForDirectory(.DocumentDirectory, inDomain:.UserDomainMask
             , appropriateForURL: nil, create: false, error: nil)
-        let saveFileUrl = documentDirectory!.URLByAppendingPathComponent("rooms.bin")
-        
-        if let roomsData = NSData(contentsOfURL: saveFileUrl, options:.DataReadingMappedIfSafe, error: nil) {
+        let saveRoomFileUrl = documentDirectory!.URLByAppendingPathComponent("rooms.bin")
+
+        if let roomsData = NSData(contentsOfURL: saveRoomFileUrl, options:.DataReadingMappedIfSafe, error: nil) {
             if let unarchivedRooms = NSKeyedUnarchiver.unarchiveObjectWithData(roomsData) as? [Room] {
                 self.rooms = unarchivedRooms
             }
@@ -39,13 +36,7 @@ class PersistencyManager: NSCoding {
     required init(coder aDecoder: NSCoder) {
         self.rooms = aDecoder.decodeObjectForKey("rooms") as [Room]
     }
-    
-    // MARK: - Beacon persistency -
 
-    func addBeacon(beacon: Beacon) {
-        self.beacons += [beacon]
-    }
-    
     // MARK: - Room persistency -
     
     /**
@@ -75,6 +66,21 @@ class PersistencyManager: NSCoding {
         }
     }
     
+    func addRoomsFromJSON(schoolRooms: JSON) {
+
+        for room in self.rooms {
+            Facade.sharedInstance().stopMonitoringBeacon(room.beacon)
+        }
+    
+        self.rooms = []
+    
+        for (_, jsonRoom) in schoolRooms {
+            self.addRoom(Room(jsonRoom: jsonRoom))
+        }
+    
+        self.saveRooms()
+    }
+    
     // MARK: - User Persistency -
 
     /**
@@ -87,7 +93,8 @@ class PersistencyManager: NSCoding {
         session.setObject(Member.sharedInstance().formation, forKey: "formation")
         session.setObject(Member.sharedInstance().schoolId!, forKey: "schoolId")
         session.setObject(Member.sharedInstance().schoolName!, forKey: "schoolName")
-        
+        session.setBool(Member.sharedInstance().isAdmin!, forKey: "isAdmin")
+
         if let image = Member.sharedInstance().profilPicture {
             session.setObject(UIImageJPEGRepresentation(image, 80.0), forKey: "profilPicture")
         }
@@ -98,7 +105,7 @@ class PersistencyManager: NSCoding {
     /**
     Delete the current user profil from session
     */
-    func deleteUserProfilFromSession() {
+    func logOut() {
         session.removeObjectForKey("lastName")
         session.removeObjectForKey("firstName")
         session.removeObjectForKey("email")
@@ -106,9 +113,15 @@ class PersistencyManager: NSCoding {
         session.removeObjectForKey("profilPicture")
         session.removeObjectForKey("schoolId")
         session.removeObjectForKey("schoolName")
-    }
 
-    // MARK: - Rooms Persistency -
+        Member.sharedInstance().lastName = nil
+        Member.sharedInstance().firstName = nil
+        Member.sharedInstance().email = nil
+        Member.sharedInstance().formation = nil
+        Member.sharedInstance().profilPicture = nil
+        Member.sharedInstance().schoolId = nil
+        Member.sharedInstance().schoolName = nil
+    }
     
     // MARK: - Plist Persistency -
 
@@ -132,17 +145,10 @@ class PersistencyManager: NSCoding {
     :returns: <#return value description#>
     */
     func memberMenu() -> [NSDictionary] {
-        return SingletonPlistMenu.menuPlist.objectForKey("MemberMenu") as [NSDictionary]
+        var dict = SingletonPlistMenu.menuPlist.objectForKey("MemberMenu") as [NSDictionary]
+        return dict
     }
-    
-    /**
-    <#Description#>
-    
-    :returns: <#return value description#>
-    */
-    func homeMenu() -> [NSDictionary] {
-        return SingletonPlistMenu.menuPlist.objectForKey("HomeMenu") as [NSDictionary]
-    }
+
 }
 
 

@@ -11,8 +11,9 @@
 */
 class WalkthroughViewController: UIViewController {
     
-    @IBOutlet private weak var myScrollView: UIScrollView!
-    @IBOutlet private weak var pageControl: UIPageControl!
+    @IBOutlet private var myScrollView: UIScrollView!
+    @IBOutlet private var pageControl: UIPageControl!
+    
     private var previousPage: Int = 0 {
         didSet {
             self.pageControl.currentPage = previousPage

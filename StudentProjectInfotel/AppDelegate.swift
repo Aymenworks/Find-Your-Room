@@ -18,8 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Facade.sharedInstance()
         UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Medium", size: 18)! ]
 
-        let image = UIImage(named: "logout")
-      //  println("profil = \(UIImageJPEGRepresentation(image, 100.0))")
         return true
     }
     

@@ -22,7 +22,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet private var signUpBarButtonItem: UIBarButtonItem!
     @IBOutlet private var errorLabel: UILabel!
     
-    /// Setted lazy because the user can't choose to not send a picture
+    /// Setted lazy because the user can choose to not send a picture
     lazy private var imagePickerController: UIImagePickerController = {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -66,7 +66,7 @@ class SignUpViewController: UIViewController {
     */
     @IBAction func signUp() {
         
-        BFRadialWaveHUD.showInView(self.navigationController!.view, withMessage: "Signing up...")
+        BFRadialWaveHUD.showInView(self.navigationController!.view, withMessage: NSLocalizedString("signingUp", comment: ""))
         self.errorLabel.text = ""
         self.view.endEditing(true)
         
@@ -84,41 +84,45 @@ class SignUpViewController: UIViewController {
                 
             println("response = \(jsonResponse)")
             // If everything is fine..
-            if error? == nil && jsonResponse? != nil && jsonResponse!.isOk() {
+            if error? == nil && jsonResponse != nil && jsonResponse!.isOk() {
         
             // If the user has been registered
                 if jsonResponse!.userHasBeenRegistered() {
         
-                let userProfil = jsonResponse!["response"]["profil"]
-                let schoolRooms = jsonResponse!["response"]["rooms"]
-            
-                    
-                Member.sharedInstance().fillMemberProfilWithJSON(userProfil)
-                
-                if let imageUserProfil = self.profilPictureButton.backgroundImageForState(.Normal) {
+                    let userProfil = jsonResponse!["response"]["profil"]
+                    let schoolRooms = jsonResponse!["response"]["rooms"]
+
+                    Member.sharedInstance().fillMemberProfilWithJSON(userProfil)
+                    Facade.sharedInstance().addRoomsFromJSON(schoolRooms)
+                    Facade.sharedInstance().fetchPersonsProfilPictureInsideRoom()
+                        
+                    if let imageUserProfil = self.profilPictureButton.backgroundImageForState(.Normal) {
+                        
                         Facade.sharedInstance().uploadUserProfilPicture(imageUserProfil, withEmail: email,
                             completionHandler: { () -> Void in
                                 Member.sharedInstance().profilPicture = imageUserProfil
+                                Facade.sharedInstance().saveMemberProfil()
+
                                 self.userHasSignedUp()
-                        })
-                    
-                } else {
-                    self.userHasSignedUp()
-                }
+                            })
+                        
+                    } else {
+                        self.userHasSignedUp()
+                    }
                    
                 // Else if he's already registered..
                 } else if jsonResponse!.userExist() {
                     
                     BFRadialWaveHUD.sharedInstance().dismiss()
                     JSSAlertView().info(self,
-                        title: "Sign Up",
-                        text: "An account with the same email already exists. Please login to your existing account.",
-                        buttonText: "Login", cancelButtonText: "Cancel").addAction({ self.didClickOnBackButton()})
+                        title: self.navigationItem.title!,
+                        text: NSLocalizedString("emailExistError", comment: ""),
+                        buttonText: NSLocalizedString("login", comment: ""), cancelButtonText: NSLocalizedString("cancel", comment: "")).addAction({ self.didClickOnBackButton()})
                     
                 // Else if the user hasn't been registered and doesn't exist on the database..
                 } else  if !jsonResponse!.schoolExist() {
                     BFRadialWaveHUD.sharedInstance().dismiss()
-                    JSSAlertView().danger(self, title: "Sign Up", text: "The School ID doesn't exist. Please try again.")
+                    JSSAlertView().danger(self, title: self.navigationItem.title!, text: NSLocalizedString("schoolIdError", comment: ""))
                 
                 } else {
                     self.showPopupSomethingWrong()
@@ -135,11 +139,12 @@ class SignUpViewController: UIViewController {
 
     func showPopupSomethingWrong() {
         BFRadialWaveHUD.sharedInstance().dismiss()
-        JSSAlertView().danger(self, title: "Sign Up", text: "Something went wrong. Please try again later.")
+
+        JSSAlertView().danger(self, title: self.navigationItem.title!, text: NSLocalizedString("genericError", comment: ""))
     }
     
     func userHasSignedUp() {
-        BFRadialWaveHUD.sharedInstance().showSuccessWithMessage("👏 Signed up !")
+        BFRadialWaveHUD.sharedInstance().showSuccessWithMessage(NSLocalizedString("signedUp", comment: ""))
         Facade.sharedInstance().saveMemberProfil()
         
         // And we redirect him on the home view ( x second for sample user experience after the signed up loading )
@@ -166,8 +171,9 @@ class SignUpViewController: UIViewController {
     :returns: true if the email textfield isn't empty, false if not
     */
     func hasValidEmail() -> Bool {
-        // TODO: - Regex or something like that to check email
-        return (!self.emailTextField.text.isEmpty)
+        // REGEX FROM http://stackoverflow.com/questions/3139619/check-that-an-email-address-is-valid-on-ios
+        let regex = ".+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*"
+        return NSPredicate(format: "SELF MATCHES[c] %@", regex)!.evaluateWithObject(self.emailTextField.text)
     }
     
     /**
@@ -267,13 +273,11 @@ extension SignUpViewController: UITextFieldDelegate {
                     self.signUp()
                 } else {
                     textField.resignFirstResponder()
-                    let alertView = JSSAlertView().show(self, title: "Sign up", text: "Please fill in all the fields.")
+                    let alertView = JSSAlertView().show(self, title: self.navigationItem.title!, text: NSLocalizedString("signUp.fillAllFields", comment: ""))
                     alertView.setTextTheme(.Dark)
             }
-            
             default: break
         }
-        
         return true
     }
     
