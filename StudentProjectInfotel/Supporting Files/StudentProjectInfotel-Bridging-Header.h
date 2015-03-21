@@ -9,6 +9,7 @@
 #import <GooglePlus/GooglePlus.h>
 #import <GoogleOpenSource/GoogleOpenSource.h>
 #import <CommonCrypto/CommonCrypto.h> // for MD5 hash
+
+// for well designed activity indicator
 #import "BFRadialWaveHUD.h"
-#import "YALContextMenuTableView.h"
-#import "ContextMenuCell.h"
+
