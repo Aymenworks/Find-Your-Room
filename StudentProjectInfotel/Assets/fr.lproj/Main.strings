@@ -1,0 +1,156 @@
+
+/* Class = "UINavigationItem"; title = "Authentication"; ObjectID = "0Nb-li-Q0V"; */
+"0Nb-li-Q0V.title" = "Connexion";
+
+/* Class = "UILabel"; text = "Bienvenue!"; ObjectID = "1hE-ae-tPg"; */
+"1hE-ae-tPg.text" = "Bienvenue!";
+
+/* Class = "UILabel"; text = "Infres 7"; ObjectID = "2cJ-Ay-hQx"; */
+"2cJ-Ay-hQx.text" = "Infres 7";
+
+/* Class = "UILabel"; text = "5th floor, next to the library"; ObjectID = "2hL-JU-YyF"; */
+"2hL-JU-YyF.text" = "5eme étage, près de l'amphi IV.";
+
+/* Class = "UITextField"; placeholder = "Minor"; ObjectID = "3JQ-LN-C6C"; */
+"3JQ-LN-C6C.placeholder" = "Mineur";
+
+/* Class = "UITextField"; placeholder = "Formation"; ObjectID = "5U2-dU-XU5"; */
+"5U2-dU-XU5.placeholder" = "Formation";
+
+/* Class = "UIButton"; normalTitle = "Add the room"; ObjectID = "6NH-kc-bKi"; */
+"6NH-kc-bKi.normalTitle" = "Ajouter une salle";
+
+/* Class = "UITextField"; placeholder = "School ID"; ObjectID = "Alo-w3-PFV"; */
+"Alo-w3-PFV.placeholder" = "ID de l'école";
+
+/* Class = "UILabel"; text = "Tap to change"; ObjectID = "Bx2-Dh-P3q"; */
+"Bx2-Dh-P3q.text" = "Taper pour changer";
+
+/* Class = "UIButton"; normalTitle = "Get started"; ObjectID = "Cpj-xd-NpE"; */
+"Cpj-xd-NpE.normalTitle" = "Commencer";
+
+/* Class = "UINavigationItem"; title = "Profile"; ObjectID = "Dcd-3Y-M3j"; */
+"Dcd-3Y-M3j.title" = "Profil";
+
+/* Class = "UILabel"; text = "Bienvenue!"; ObjectID = "GNW-Tj-qLj"; */
+"GNW-Tj-qLj.text" = "Bienvenue!";
+
+/* Class = "UILabel"; text = "No persons found for this room."; ObjectID = "HhD-DA-kg4"; */
+"HhD-DA-kg4.text" = "Personne n'est présent dans cette salle.";
+
+/* Class = "UITextField"; placeholder = "Major"; ObjectID = "Iho-pW-n4a"; */
+"Iho-pW-n4a.placeholder" = "Majeur";
+
+/* Class = "UILabel"; text = "Ipsam vero urbem Byzantiorum fuisse refertisimam atzeque soksig urbemo."; ObjectID = "JJy-L4-thS"; */
+"JJy-L4-thS.text" = "Ipsam vero urbem Byzantiorum fuisse refertisimam atzeque soksig urbemo.";
+
+/* Class = "UILabel"; text = "Ipsam vero urbem Byzantiorum fuisse refertisimam atzeque soksig urbemo."; ObjectID = "JRt-5N-uWU"; */
+"JRt-5N-uWU.text" = "Ipsam vero urbem Byzantiorum fuisse refertisimam atzeque soksig urbemo.";
+
+/* Class = "UITextField"; placeholder = "Capacity"; ObjectID = "KbK-Ry-3ra"; */
+"KbK-Ry-3ra.placeholder" = "Capacité";
+
+/* Class = "UILabel"; text = "Ipsam vero urbem Byzantiorum fuisse refertisimam atzeque soksig urbemo."; ObjectID = "L4j-Z6-sZ2"; */
+"L4j-Z6-sZ2.text" = "Ipsam vero urbem Byzantiorum fuisse refertisimam atzeque soksig urbemo.";
+
+/* Class = "UITextField"; placeholder = "Your email address"; ObjectID = "LAe-Ad-B7B"; */
+"LAe-Ad-B7B.placeholder" = "Votre adresse email";
+
+/* Class = "UIButton"; normalTitle = "Need an account ? Sign up"; ObjectID = "M7g-U3-aHE"; */
+"M7g-U3-aHE.normalTitle" = "Je m'inscris !";
+
+/* Class = "UILabel"; text = "Lecture Hall II"; ObjectID = "Nsx-Eo-e9T"; */
+"Nsx-Eo-e9T.text" = "Lecture Hall II";
+
+/* Class = "UILabel"; text = "No rooms found for your school."; ObjectID = "PvK-bK-bB9"; */
+"PvK-bK-bB9.text" = "Aucune salle attaché à un beacon valide n'a été trouvé.";
+
+/* Class = "UILabel"; text = "1600"; ObjectID = "QIf-oz-as7"; */
+"QIf-oz-as7.text" = "1600";
+
+/* Class = "UITextField"; placeholder = "Nom"; ObjectID = "Qb6-mN-QHp"; */
+"Qb6-mN-QHp.placeholder" = "Nom";
+
+/* Class = "UIButton"; normalTitle = "Update account "; ObjectID = "SLI-sz-edx"; */
+"SLI-sz-edx.normalTitle" = "Mettre à jour";
+
+/* Class = "UITextField"; placeholder = "Your password ( or a new )"; ObjectID = "TeF-il-beb"; */
+"TeF-il-beb.placeholder" = "Votre mot de passe ( ou un nouveau )";
+
+/* Class = "UILabel"; text = "Lecture Hall II"; ObjectID = "UK8-3F-hjk"; */
+"UK8-3F-hjk.text" = "Lecture Hall II";
+
+/* Class = "UINavigationItem"; title = "Add a room "; ObjectID = "Vi2-XS-Fr9"; */
+"Vi2-XS-Fr9.title" = "Ajouter une salle";
+
+/* Class = "UILabel"; text = "Bienvenue!"; ObjectID = "WHx-xb-fsW"; */
+"WHx-xb-fsW.text" = "Bienvenue!";
+
+/* Class = "UITextField"; placeholder = "Your password"; ObjectID = "XgM-sQ-oXf"; */
+"XgM-sQ-oXf.placeholder" = "Votre mot de passe";
+
+/* Class = "UILabel"; text = "v1.0"; ObjectID = "ZhP-j0-4CQ"; */
+"ZhP-j0-4CQ.text" = "v1.0";
+
+/* Class = "UILabel"; text = "Room description"; ObjectID = "Zj3-ws-R8k"; */
+"Zj3-ws-R8k.text" = "Description de la salle";
+
+/* Class = "UINavigationItem"; title = "Sign Up"; ObjectID = "Zpb-M5-GVB"; */
+"Zpb-M5-GVB.title" = "Inscription";
+
+/* Class = "UINavigationItem"; title = "Details"; ObjectID = "aTB-cu-KYk"; */
+"aTB-cu-KYk.title" = "Détail";
+
+/* Class = "UILabel"; text = "Aymen Rebouh"; ObjectID = "bCW-jA-r5D"; */
+"bCW-jA-r5D.text" = "Aymen Rebouh";
+
+/* Class = "UILabel"; text = "Ipsam vero urbem Byzantiorum fuisse refertisimam atzeque soksig urbemo."; ObjectID = "bLp-oz-1Si"; */
+"bLp-oz-1Si.text" = "Ipsam vero urbem Byzantiorum fuisse refertisimam atzeque soksig urbemo.";
+
+/* Class = "UITextField"; placeholder = "Formation"; ObjectID = "dW2-zO-WLL"; */
+"dW2-zO-WLL.placeholder" = "Formation";
+
+/* Class = "UINavigationItem"; title = "Let's find a room"; ObjectID = "efE-FE-jhp"; */
+"efE-FE-jhp.title" = "Cherchons une salle";
+
+/* Class = "UITextField"; placeholder = "Nom"; ObjectID = "enk-Y8-5dl"; */
+"enk-Y8-5dl.placeholder" = "Nom";
+
+/* Class = "UITextField"; placeholder = "Prénom"; ObjectID = "hc9-xV-SJP"; */
+"hc9-xV-SJP.placeholder" = "Prénom";
+
+/* Class = "UITextField"; placeholder = "Prénom"; ObjectID = "hrj-lD-xRm"; */
+"hrj-lD-xRm.placeholder" = "Prénom";
+
+/* Class = "UILabel"; text = "5th floor, next to the library"; ObjectID = "hxf-tF-VJo"; */
+"hxf-tF-VJo.text" = "5eme étage, près de la bibliothèque";
+
+/* Class = "UITextField"; placeholder = "Room title"; ObjectID = "iKc-Nt-mYf"; */
+"iKc-Nt-mYf.placeholder" = "Nom de la salle";
+
+/* Class = "UILabel"; text = "Bienvenue!"; ObjectID = "nYX-tx-AQG"; */
+"nYX-tx-AQG.text" = "Bienvenue!";
+
+/* Class = "UILabel"; text = "or"; ObjectID = "onX-Uq-aMh"; */
+"onX-Uq-aMh.text" = "ou";
+
+/* Class = "UITextField"; placeholder = "Your password"; ObjectID = "p3E-ZX-HdE"; */
+"p3E-ZX-HdE.placeholder" = "Votre mot de passe";
+
+/* Class = "UITextField"; placeholder = "School ID"; ObjectID = "t0u-2A-gu8"; */
+"t0u-2A-gu8.placeholder" = "ID de votre école";
+
+/* Class = "UITextField"; placeholder = "Your email address"; ObjectID = "tce-EI-cZB"; */
+"tce-EI-cZB.placeholder" = "Votre adresse email";
+
+/* Class = "UILabel"; text = "Tap to change"; ObjectID = "w2S-Pg-RZz"; */
+"w2S-Pg-RZz.text" = "Taper pour changer";
+
+/* Class = "UILabel"; text = "16"; ObjectID = "xun-QA-DBO"; */
+"xun-QA-DBO.text" = "16";
+
+/* Class = "UITextField"; placeholder = "Beacon UUID"; ObjectID = "xyP-SS-w37"; */
+"xyP-SS-w37.placeholder" = "UUID du beacon";
+
+/* Class = "UITextField"; text = "1148EB03-BC2F-4815-A54D-3A329881FA0B"; ObjectID = "xyP-SS-w37"; */
+"xyP-SS-w37.text" = "1148EB03-BC2F-4815-A54D-3A329881FA0B";
