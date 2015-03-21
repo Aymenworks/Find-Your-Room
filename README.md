@@ -12,7 +12,7 @@ Student project realizing an iOS app and using beacons technologies.
 
 - After some activity indicators, it seems it's displaying the wrong informations
 
-- Layout not adapted to iPhone 4/4S ( need scrollView )
+- Layout not adapted for iPhone 4/4S ( need scrollView )
 
 
 ## Credits
