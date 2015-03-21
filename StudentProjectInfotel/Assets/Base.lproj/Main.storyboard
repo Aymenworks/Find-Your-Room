@@ -150,7 +150,7 @@
                                 <color key="currentPageIndicatorTintColor" red="0.59370754079999999" green="0.0069990140469999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XrS-Fb-rNz">
-                                <rect key="frame" x="0.0" y="20" width="320" height="430"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="437"/>
                                 <connections>
                                     <outlet property="delegate" destination="Jec-cx-hOz" id="ity-T1-5jI"/>
                                 </connections>
@@ -190,7 +190,7 @@
                             <constraint firstItem="RDN-eZ-s7l" firstAttribute="leading" secondItem="MAD-d8-I7n" secondAttribute="leading" constant="16" id="lUs-GP-w7M"/>
                             <constraint firstItem="Cpj-xd-NpE" firstAttribute="leading" secondItem="MAD-d8-I7n" secondAttribute="leading" id="nuk-P2-58h"/>
                             <constraint firstItem="AV4-K2-AEt" firstAttribute="top" secondItem="Cpj-xd-NpE" secondAttribute="bottom" constant="4" id="r5F-kz-KfG"/>
-                            <constraint firstItem="mtl-UM-qlv" firstAttribute="top" secondItem="XrS-Fb-rNz" secondAttribute="bottom" constant="8" id="red-yd-R0l"/>
+                            <constraint firstItem="mtl-UM-qlv" firstAttribute="top" secondItem="XrS-Fb-rNz" secondAttribute="bottom" constant="1" id="red-yd-R0l"/>
                             <constraint firstItem="Cpj-xd-NpE" firstAttribute="top" secondItem="RDN-eZ-s7l" secondAttribute="bottom" constant="1" id="yXN-Ny-t5W"/>
                         </constraints>
                     </view>
@@ -210,7 +210,7 @@
         <!--View Controller-->
         <scene sceneID="lXk-L3-RWS">
             <objects>
-                <viewController storyboardIdentifier="PagePresentationZero" id="p5V-6w-VwV" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PageThree" id="p5V-6w-VwV" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hZ4-cC-djV"/>
                         <viewControllerLayoutGuide type="bottom" id="nSO-dg-9dC"/>
@@ -219,41 +219,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IoT.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="PX9-Ya-IoQ">
-                                <rect key="frame" x="32" y="67" width="256" height="202"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a room" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lnx-XB-HyZ">
+                                <rect key="frame" x="16" y="366" width="288" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="202" id="Xyq-Je-WLj"/>
-                                    <constraint firstAttribute="width" constant="256" id="zi0-tC-q5t"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ipsam vero urbem Byzantiorum fuisse refertisimam atzeque soksig urbemo." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="288" translatesAutoresizingMaskIntoConstraints="NO" id="JJy-L4-thS">
-                                <rect key="frame" x="16" y="322" width="288" height="48"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="Xam-PV-Vk3"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="16"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bienvenue!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GNW-Tj-qLj">
-                                <rect key="frame" x="93" y="293" width="135" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="Xj4-BY-NHC"/>
+                                    <constraint firstAttribute="height" constant="21" id="tLE-0c-l31"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a new room so you'll have an idea of who are in this room." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="267" translatesAutoresizingMaskIntoConstraints="NO" id="VR7-D7-Afc">
+                                <rect key="frame" x="27" y="395" width="267" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="o8q-jm-dFL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="16"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="walkthroughAddRoom" translatesAutoresizingMaskIntoConstraints="NO" id="SZ4-fP-7TQ">
+                                <rect key="frame" x="67" y="31" width="187" height="320"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="320" id="H5t-hi-Q2o"/>
+                                    <constraint firstAttribute="width" constant="187" id="UDJ-NT-ugz"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="JJy-L4-thS" secondAttribute="trailing" constant="16" id="060-XR-orE"/>
-                            <constraint firstItem="PX9-Ya-IoQ" firstAttribute="top" secondItem="hZ4-cC-djV" secondAttribute="bottom" constant="47" id="I8L-SE-8gR"/>
-                            <constraint firstItem="JJy-L4-thS" firstAttribute="top" secondItem="GNW-Tj-qLj" secondAttribute="bottom" constant="8" id="Ism-j9-vyZ"/>
-                            <constraint firstItem="GNW-Tj-qLj" firstAttribute="leading" secondItem="pUC-uG-3xM" secondAttribute="leadingMargin" constant="77" id="MSo-gU-i6g"/>
-                            <constraint firstAttribute="centerX" secondItem="PX9-Ya-IoQ" secondAttribute="centerX" id="Qoy-if-fNT"/>
-                            <constraint firstAttribute="trailing" secondItem="GNW-Tj-qLj" secondAttribute="trailing" constant="92" id="azc-AD-Rze"/>
-                            <constraint firstItem="GNW-Tj-qLj" firstAttribute="top" secondItem="PX9-Ya-IoQ" secondAttribute="bottom" constant="24" id="iiU-FB-uxB"/>
-                            <constraint firstItem="JJy-L4-thS" firstAttribute="leading" secondItem="pUC-uG-3xM" secondAttribute="leadingMargin" id="jtN-pn-gvs"/>
+                            <constraint firstItem="VR7-D7-Afc" firstAttribute="top" secondItem="Lnx-XB-HyZ" secondAttribute="bottom" constant="8" id="2Bl-fN-Ojr"/>
+                            <constraint firstItem="SZ4-fP-7TQ" firstAttribute="top" secondItem="hZ4-cC-djV" secondAttribute="bottom" constant="11" id="E5a-Qr-mli"/>
+                            <constraint firstAttribute="trailing" secondItem="Lnx-XB-HyZ" secondAttribute="trailing" constant="16" id="PLV-Zi-8AM"/>
+                            <constraint firstAttribute="trailing" secondItem="VR7-D7-Afc" secondAttribute="trailing" constant="26" id="S9L-TM-Mba"/>
+                            <constraint firstItem="Lnx-XB-HyZ" firstAttribute="top" secondItem="SZ4-fP-7TQ" secondAttribute="bottom" constant="15" id="TEf-M0-KcR"/>
+                            <constraint firstItem="VR7-D7-Afc" firstAttribute="leading" secondItem="pUC-uG-3xM" secondAttribute="leading" constant="27" id="U0T-hb-14e"/>
+                            <constraint firstItem="Lnx-XB-HyZ" firstAttribute="top" secondItem="SZ4-fP-7TQ" secondAttribute="bottom" constant="15" id="ddP-fB-u5m"/>
+                            <constraint firstAttribute="centerX" secondItem="SZ4-fP-7TQ" secondAttribute="centerX" constant="-0.5" id="fTT-mr-bzL"/>
+                            <constraint firstItem="Lnx-XB-HyZ" firstAttribute="leading" secondItem="pUC-uG-3xM" secondAttribute="leading" constant="16" id="oen-N5-fV6"/>
                         </constraints>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
@@ -261,7 +262,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WHn-cg-YRF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2587" y="-1651"/>
+            <point key="canvasLocation" x="-1882" y="-1651"/>
         </scene>
         <!--Authentication-->
         <scene sceneID="bjF-QB-BdD">
@@ -465,65 +466,9 @@
             <point key="canvasLocation" x="-2935" y="-939"/>
         </scene>
         <!--View Controller-->
-        <scene sceneID="VLG-1L-OQi">
-            <objects>
-                <viewController storyboardIdentifier="PageOne" id="Gd5-F8-5MU" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Hwf-fa-gNX"/>
-                        <viewControllerLayoutGuide type="bottom" id="FEX-AZ-bfd"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="dr0-tf-4Bp">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bienvenue!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYX-tx-AQG">
-                                <rect key="frame" x="101" y="293" width="119" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="qfZ-Do-8s4"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ipsam vero urbem Byzantiorum fuisse refertisimam atzeque soksig urbemo." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="267" translatesAutoresizingMaskIntoConstraints="NO" id="bLp-oz-1Si">
-                                <rect key="frame" x="27" y="322" width="267" height="48"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="ijs-WI-Cl5"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="16"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="beaconSchool.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="DKy-Bf-XPD">
-                                <rect key="frame" x="16" y="57" width="288" height="202"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="288" id="Gn9-KD-OTG"/>
-                                    <constraint firstAttribute="height" constant="202" id="Nql-vV-DS1"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="bLp-oz-1Si" firstAttribute="top" secondItem="nYX-tx-AQG" secondAttribute="bottom" constant="8" id="4h1-fO-gPJ"/>
-                            <constraint firstItem="DKy-Bf-XPD" firstAttribute="top" secondItem="Hwf-fa-gNX" secondAttribute="bottom" constant="37" id="5tB-kL-Gez"/>
-                            <constraint firstItem="nYX-tx-AQG" firstAttribute="leading" secondItem="dr0-tf-4Bp" secondAttribute="leading" constant="101" id="LAF-9u-1P9"/>
-                            <constraint firstAttribute="centerX" secondItem="DKy-Bf-XPD" secondAttribute="centerX" id="QXG-0B-hIe"/>
-                            <constraint firstAttribute="trailing" secondItem="nYX-tx-AQG" secondAttribute="trailing" constant="100" id="erK-OG-ws0"/>
-                            <constraint firstItem="bLp-oz-1Si" firstAttribute="leading" secondItem="dr0-tf-4Bp" secondAttribute="leading" constant="27" id="frI-U7-kLE"/>
-                            <constraint firstAttribute="trailing" secondItem="bLp-oz-1Si" secondAttribute="trailing" constant="26" id="raj-Td-K11"/>
-                            <constraint firstItem="nYX-tx-AQG" firstAttribute="top" secondItem="DKy-Bf-XPD" secondAttribute="bottom" constant="34" id="tJ1-ZP-YU5"/>
-                        </constraints>
-                    </view>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="t6I-iQ-Uby" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2245" y="-1655"/>
-        </scene>
-        <!--View Controller-->
         <scene sceneID="Vg3-po-Qoy">
             <objects>
-                <viewController storyboardIdentifier="PageTwo" id="ttQ-xZ-bbM" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PageOne" id="ttQ-xZ-bbM" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="whK-Kx-qmB"/>
                         <viewControllerLayoutGuide type="bottom" id="7BJ-Sr-o7A"/>
@@ -532,8 +477,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bienvenue!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WHx-xb-fsW">
-                                <rect key="frame" x="101" y="293" width="119" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find your room" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WHx-xb-fsW">
+                                <rect key="frame" x="16" y="369" width="288" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="4ZI-jJ-mCp"/>
                                 </constraints>
@@ -541,8 +486,8 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ipsam vero urbem Byzantiorum fuisse refertisimam atzeque soksig urbemo." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="267" translatesAutoresizingMaskIntoConstraints="NO" id="JRt-5N-uWU">
-                                <rect key="frame" x="27" y="322" width="267" height="48"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find the room you want with students inside or no one to revise calmly." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="267" translatesAutoresizingMaskIntoConstraints="NO" id="JRt-5N-uWU">
+                                <rect key="frame" x="27" y="398" width="267" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="q2K-Ew-d4C"/>
                                 </constraints>
@@ -550,23 +495,23 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="digital" translatesAutoresizingMaskIntoConstraints="NO" id="2Rq-Qq-nh5">
-                                <rect key="frame" x="32" y="48" width="256" height="202"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="walkthroughListRooms" translatesAutoresizingMaskIntoConstraints="NO" id="2Rq-Qq-nh5">
+                                <rect key="frame" x="67" y="31" width="187" height="320"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="256" id="ShP-Ye-D4e"/>
-                                    <constraint firstAttribute="height" constant="202" id="X5B-dv-kqV"/>
+                                    <constraint firstAttribute="width" constant="187" id="ShP-Ye-D4e"/>
+                                    <constraint firstAttribute="height" constant="320" id="X5B-dv-kqV"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="JRt-5N-uWU" secondAttribute="trailing" constant="26" id="2y8-Ty-ZWp"/>
                             <constraint firstItem="JRt-5N-uWU" firstAttribute="leading" secondItem="nbo-AK-N8T" secondAttribute="leading" constant="27" id="DSx-ON-pef"/>
-                            <constraint firstItem="WHx-xb-fsW" firstAttribute="leading" secondItem="nbo-AK-N8T" secondAttribute="leading" constant="101" id="PzN-9h-Oln"/>
+                            <constraint firstItem="WHx-xb-fsW" firstAttribute="leading" secondItem="nbo-AK-N8T" secondAttribute="leading" constant="16" id="PzN-9h-Oln"/>
                             <constraint firstItem="JRt-5N-uWU" firstAttribute="top" secondItem="WHx-xb-fsW" secondAttribute="bottom" constant="8" id="XHC-ga-bwm"/>
-                            <constraint firstAttribute="trailing" secondItem="WHx-xb-fsW" secondAttribute="trailing" constant="100" id="aY1-tu-t9D"/>
-                            <constraint firstItem="2Rq-Qq-nh5" firstAttribute="top" secondItem="whK-Kx-qmB" secondAttribute="bottom" constant="28" id="cb5-Jm-5Zo"/>
-                            <constraint firstItem="WHx-xb-fsW" firstAttribute="top" secondItem="2Rq-Qq-nh5" secondAttribute="bottom" constant="43" id="phR-3B-Bqc"/>
-                            <constraint firstAttribute="centerX" secondItem="2Rq-Qq-nh5" secondAttribute="centerX" id="tzU-5A-V1e"/>
+                            <constraint firstAttribute="trailing" secondItem="WHx-xb-fsW" secondAttribute="trailing" constant="16" id="aY1-tu-t9D"/>
+                            <constraint firstItem="2Rq-Qq-nh5" firstAttribute="top" secondItem="whK-Kx-qmB" secondAttribute="bottom" constant="11" id="cb5-Jm-5Zo"/>
+                            <constraint firstItem="WHx-xb-fsW" firstAttribute="top" secondItem="2Rq-Qq-nh5" secondAttribute="bottom" constant="18" id="phR-3B-Bqc"/>
+                            <constraint firstAttribute="centerX" secondItem="2Rq-Qq-nh5" secondAttribute="centerX" constant="-0.5" id="tzU-5A-V1e"/>
                         </constraints>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
@@ -574,7 +519,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EDt-Io-FeK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1885" y="-1651"/>
+            <point key="canvasLocation" x="-2583" y="-1651"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zBX-Zy-366">
@@ -944,7 +889,7 @@
         <!--View Controller-->
         <scene sceneID="SkT-Eb-lLF">
             <objects>
-                <viewController storyboardIdentifier="PageThree" id="w7o-rz-Vfl" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PageTwo" id="w7o-rz-Vfl" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4d8-1p-fl8"/>
                         <viewControllerLayoutGuide type="bottom" id="pvi-b7-Yfu"/>
@@ -953,41 +898,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bienvenue!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1hE-ae-tPg">
-                                <rect key="frame" x="101" y="293" width="119" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="See who is inside " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BoO-Tt-Qbs">
+                                <rect key="frame" x="16" y="366" width="288" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="xte-a4-4Lc"/>
+                                    <constraint firstAttribute="height" constant="21" id="Xlr-rl-XnQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ipsam vero urbem Byzantiorum fuisse refertisimam atzeque soksig urbemo." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="267" translatesAutoresizingMaskIntoConstraints="NO" id="L4j-Z6-sZ2">
-                                <rect key="frame" x="27" y="322" width="267" height="48"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="walkthroughRoomDetail" translatesAutoresizingMaskIntoConstraints="NO" id="Ws4-HN-mSA">
+                                <rect key="frame" x="67" y="31" width="187" height="320"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="SZl-Pm-tU9"/>
+                                    <constraint firstAttribute="height" constant="320" id="mJ6-d9-n9W"/>
+                                    <constraint firstAttribute="width" constant="187" id="uhW-ud-yGr"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="See if the room is occuped and if your classmate are inside. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="267" translatesAutoresizingMaskIntoConstraints="NO" id="GDy-bH-Xb5">
+                                <rect key="frame" x="27" y="395" width="267" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="88R-33-M7s"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="16"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="beacon2" translatesAutoresizingMaskIntoConstraints="NO" id="JAC-Rg-kLX">
-                                <rect key="frame" x="96" y="49" width="129" height="210"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="129" id="5ji-IN-Owb"/>
-                                    <constraint firstAttribute="height" constant="210" id="7FE-M1-eHk"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="JAC-Rg-kLX" secondAttribute="centerX" constant="-1" id="BIS-gh-hfL"/>
-                            <constraint firstAttribute="trailing" secondItem="L4j-Z6-sZ2" secondAttribute="trailing" constant="26" id="D3i-0W-KQf"/>
-                            <constraint firstAttribute="trailing" secondItem="1hE-ae-tPg" secondAttribute="trailing" constant="100" id="XL0-pI-6Kp"/>
-                            <constraint firstItem="L4j-Z6-sZ2" firstAttribute="top" secondItem="1hE-ae-tPg" secondAttribute="bottom" constant="8" id="Zx1-ha-td9"/>
-                            <constraint firstItem="1hE-ae-tPg" firstAttribute="top" secondItem="JAC-Rg-kLX" secondAttribute="bottom" constant="34" id="jce-Ze-syZ"/>
-                            <constraint firstItem="JAC-Rg-kLX" firstAttribute="top" secondItem="4d8-1p-fl8" secondAttribute="bottom" constant="29" id="tWk-mi-dI2"/>
-                            <constraint firstItem="L4j-Z6-sZ2" firstAttribute="leading" secondItem="rIG-s7-hde" secondAttribute="leading" constant="27" id="uBQ-Qh-KNa"/>
-                            <constraint firstItem="1hE-ae-tPg" firstAttribute="leading" secondItem="rIG-s7-hde" secondAttribute="leading" constant="101" id="wRC-39-a3P"/>
+                            <constraint firstItem="BoO-Tt-Qbs" firstAttribute="top" secondItem="Ws4-HN-mSA" secondAttribute="bottom" constant="15" id="0ho-yL-OE5"/>
+                            <constraint firstAttribute="centerX" secondItem="Ws4-HN-mSA" secondAttribute="centerX" constant="-0.5" id="6nY-7e-soJ"/>
+                            <constraint firstItem="GDy-bH-Xb5" firstAttribute="top" secondItem="BoO-Tt-Qbs" secondAttribute="bottom" constant="8" id="HS4-9Y-Q9W"/>
+                            <constraint firstItem="Ws4-HN-mSA" firstAttribute="top" secondItem="4d8-1p-fl8" secondAttribute="bottom" constant="11" id="WEQ-8D-KtV"/>
+                            <constraint firstItem="BoO-Tt-Qbs" firstAttribute="leading" secondItem="rIG-s7-hde" secondAttribute="leading" constant="16" id="cZM-bw-yl9"/>
+                            <constraint firstItem="GDy-bH-Xb5" firstAttribute="leading" secondItem="rIG-s7-hde" secondAttribute="leading" constant="27" id="lE7-eX-wre"/>
+                            <constraint firstAttribute="trailing" secondItem="GDy-bH-Xb5" secondAttribute="trailing" constant="26" id="pg1-t8-lwY"/>
+                            <constraint firstAttribute="trailing" secondItem="BoO-Tt-Qbs" secondAttribute="trailing" constant="16" id="r9U-mc-qu1"/>
                         </constraints>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
@@ -995,7 +940,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ym-dW-PAu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1539" y="-1651"/>
+            <point key="canvasLocation" x="-2237" y="-1651"/>
         </scene>
         <!--Let's find a room-->
         <scene sceneID="aNN-Zn-tMd">
@@ -1868,14 +1813,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="IoT.jpg" width="770" height="607"/>
         <image name="add" width="40" height="41"/>
         <image name="beacon" width="85" height="85"/>
-        <image name="beacon2" width="100" height="169"/>
-        <image name="beaconSchool.jpg" width="500" height="353"/>
         <image name="bluetooth" width="23" height="34"/>
         <image name="buildings" width="440" height="98"/>
-        <image name="digital" width="202" height="174"/>
         <image name="estimote" width="1542" height="990"/>
         <image name="estimoteReverse" width="1542" height="990"/>
         <image name="mail" width="32" height="41"/>
@@ -1887,6 +1828,9 @@
         <image name="profil" width="38" height="39"/>
         <image name="school" width="30" height="23"/>
         <image name="student" width="272" height="357"/>
+        <image name="walkthroughAddRoom" width="650" height="1092"/>
+        <image name="walkthroughListRooms" width="656" height="1090"/>
+        <image name="walkthroughRoomDetail" width="658" height="1096"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

@@ -107,9 +107,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     // If we exit the area, there's no need to continue monitoring/scaning
     func locationManager(manager: CLLocationManager!, didExitRegion region: CLRegion!) {
-      //  println("stop monitoring/scaning because entered the region")
-      //  self.locationManager.stopRangingBeaconsInRegion(region as CLBeaconRegion)
-        
         Facade.sharedInstance().deleteMyPresenceFromRoom(Member.sharedInstance().email!.encodeBase64(), completionHandler: { (json, error) -> Void in
             println("json = \(json), error = \(error)")
         })

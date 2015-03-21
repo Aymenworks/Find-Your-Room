@@ -20,7 +20,6 @@
 		A5282AB11ABCEEEB0094FAD3 /* mySky@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5282AAE1ABCEEEB0094FAD3 /* mySky@2x.jpg */; };
 		A5282AB21ABCEEEB0094FAD3 /* mySky@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5282AAF1ABCEEEB0094FAD3 /* mySky@3x.jpg */; };
 		A5294AD71A6C963000AD51FA /* JSSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5294AD61A6C963000AD51FA /* JSSAlertView.swift */; };
-		A52B623A1AB47563007987ED /* IoT.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A52B62391AB47563007987ED /* IoT.jpg */; };
 		A52F0F0D1A70531600206DE7 /* PersistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52F0F0C1A70531600206DE7 /* PersistencyManager.swift */; };
 		A52F0F0F1A70532C00206DE7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52F0F0E1A70532C00206DE7 /* LocationManager.swift */; };
 		A52F0F231A70BD1E00206DE7 /* Facade.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52F0F221A70BD1E00206DE7 /* Facade.swift */; };
@@ -108,7 +107,6 @@
 		A5294AD41A6C954800AD51FA /* ClearSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ClearSans-Light.ttf"; sourceTree = "<group>"; };
 		A5294AD51A6C954800AD51FA /* ClearSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ClearSans-Regular.ttf"; sourceTree = "<group>"; };
 		A5294AD61A6C963000AD51FA /* JSSAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSSAlertView.swift; sourceTree = "<group>"; };
-		A52B62391AB47563007987ED /* IoT.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IoT.jpg; sourceTree = "<group>"; };
 		A52F0F0C1A70531600206DE7 /* PersistencyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyManager.swift; sourceTree = "<group>"; };
 		A52F0F0E1A70532C00206DE7 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		A52F0F221A70BD1E00206DE7 /* Facade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Facade.swift; sourceTree = "<group>"; };
@@ -133,7 +131,7 @@
 		A56874FA1AA1BED0006FFD40 /* BFRadialWaveHUD.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BFRadialWaveHUD.xib; sourceTree = "<group>"; };
 		A570190A1A82BFF000C8F516 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		A570190D1A82C30200C8F516 /* StudentProjectInfotel-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StudentProjectInfotel-Bridging-Header.h"; sourceTree = "<group>"; };
-		A59017EC1ABB1689003A3A49 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		A5796C3A1ABDD4A200C63487 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		A59017F01ABB16AF003A3A49 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A59017F21ABB16B2003A3A49 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A594F8CA1A856A2700C1B583 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -534,7 +532,6 @@
 			isa = PBXGroup;
 			children = (
 				A594F8DF1A861C8500C1B583 /* Main.storyboard */,
-				A52B62391AB47563007987ED /* IoT.jpg */,
 				A5C4F3CE1A98D61800CBD853 /* Images.xcassets */,
 				A53C3D741ABCE77500ACCDF5 /* beaconSchool.jpg */,
 				A53C3D751ABCE77500ACCDF5 /* beaconSchool@2x.jpg */,
@@ -611,6 +608,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				Base,
+				fr,
 			);
 			mainGroup = A525DAE61A6A88600024580A;
 			productRefGroup = A525DAF01A6A88600024580A /* Products */;
@@ -629,7 +627,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A53C3D781ABCE77500ACCDF5 /* beaconSchool@2x.jpg in Resources */,
-				A52B623A1AB47563007987ED /* IoT.jpg in Resources */,
 				A550DD0C1AAB687300F87680 /* Menu.plist in Resources */,
 				A5282AB01ABCEEEB0094FAD3 /* mySky.jpg in Resources */,
 				A594F8DD1A861C8500C1B583 /* Main.storyboard in Resources */,
@@ -750,7 +747,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				A594F8DE1A861C8500C1B583 /* Base */,
-				A59017EC1ABB1689003A3A49 /* fr */,
+				A5796C3A1ABDD4A200C63487 /* fr */,
 			);
 			name = Main.storyboard;
 			path = .;

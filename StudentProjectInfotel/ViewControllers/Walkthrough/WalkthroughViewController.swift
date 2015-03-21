@@ -14,19 +14,19 @@ class WalkthroughViewController: UIViewController {
     @IBOutlet private var myScrollView: UIScrollView!
     @IBOutlet private var pageControl: UIPageControl!
     
-    private var previousPage: Int = 0 {
+    private var oldPage: Int = 0 {
         didSet {
-            self.pageControl.currentPage = previousPage
+            self.pageControl.currentPage = self.oldPage
         }
     }
+    
     private let contentView = UIView()
 
     private lazy var listPages: [UIViewController] =
         [
-            self.storyboard!.instantiateViewControllerWithIdentifier("PagePresentationZero") as UIViewController,
             self.storyboard!.instantiateViewControllerWithIdentifier("PageOne") as UIViewController,
             self.storyboard!.instantiateViewControllerWithIdentifier("PageTwo") as UIViewController,
-            self.storyboard!.instantiateViewControllerWithIdentifier("PageThree") as UIViewController
+            self.storyboard!.instantiateViewControllerWithIdentifier("PageThree") as UIViewController,
         ]
     
     // MARK: - Lifecycle -
@@ -82,11 +82,9 @@ extension WalkthroughViewController: UIScrollViewDelegate {
     */
     func scrollViewDidEndDecelerating(scrollView: UIScrollView!) {
         let pageWidth      = self.myScrollView.frame.size.width
-        let fractionalPage = Float(self.myScrollView.contentOffset.x / pageWidth)
-        let page           = lroundf(fractionalPage) // the closest int
-
-        if self.previousPage != page && self.previousPage != NSNotFound {
-            self.previousPage = page;
+        let currentPage = lroundf( Float(self.myScrollView.contentOffset.x / pageWidth) )
+        if self.oldPage != currentPage && self.oldPage != NSNotFound {
+            self.oldPage = currentPage;
         }
     }
 }
