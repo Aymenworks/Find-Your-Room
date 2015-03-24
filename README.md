@@ -6,6 +6,10 @@ Student project realizing an iOS app and using beacons technologies.
 [![Platform](https://img.shields.io/badge/iOS-7.0%2B-lightgrey.svg?style=flat)](https://developer.apple.com/iphone/index.action)
 [![Language](https://img.shields.io/badge/language-swift-orange.svg?style=flat)](https://developer.apple.com/swift)
 
+<img src="./Screenshots/roomsList.png" title="Room list view" height="380px" alt="Room list view">
+<img src="./Screenshots/addRoom.png" title="Add room view" height="380px" alt="Add room view">
+<img src="./Screenshots/roomDetail.png" title="Authentication view" height="380px" alt="Authentication view">
+
 ## Issues
 
 - Navigation menu doesn't work on iOS 7
