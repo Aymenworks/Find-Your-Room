@@ -71,7 +71,7 @@
 "SxE-jc-YpC.text" = "5th floor, next to the library";
 
 /* Class = "UITextField"; placeholder = "Your password ( or a new )"; ObjectID = "TeF-il-beb"; */
-"TeF-il-beb.placeholder" = "Votre nouveau mot de passe ( ou l'ancien )";
+"TeF-il-beb.placeholder" = "Ancien/Nouveau mot de passe";
 
 /* Class = "UILabel"; text = "Add a new room so you'll have an idea of who are in this room."; ObjectID = "VR7-D7-Afc"; */
 "VR7-D7-Afc.text" = "Ajouter une salle afin de savoir quels étudiants s'y trouvent.";

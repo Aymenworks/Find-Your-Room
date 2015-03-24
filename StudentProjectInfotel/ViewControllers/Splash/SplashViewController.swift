@@ -45,7 +45,7 @@ class SplashViewController: UIViewController {
             self.beaconImage.shake()
         }
     
-        doInMainQueueAfter(seconds: 2.5) {
+        doInMainQueueAfter(seconds: 2.0) {
             
             if Facade.sharedInstance().isUserLoggedIn() {
                 self.showUserLoggedInView()

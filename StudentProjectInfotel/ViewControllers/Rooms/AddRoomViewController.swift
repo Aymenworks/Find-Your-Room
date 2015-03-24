@@ -62,6 +62,7 @@ class AddRoomViewController: UIViewController {
                     Facade.sharedInstance().addRoomsFromJSON(schoolRooms)
                     BFRadialWaveHUD.sharedInstance().dismiss()
                     self.navigationController!.popViewControllerAnimated(true)
+                
                 } else {
                     JSSAlertView().warning(self, title: NSLocalizedString("oops", comment: ""),
                         text: NSLocalizedString("genericError", comment: ""))

@@ -25,7 +25,7 @@
 "schoolIdError" = "The School ID doesn't exist. Please try again.";
 "loggedIn" = "👍 Logged in !";
 "profileUpdated" = "👍 Profile updated !";
-"roomAdded" = "Adding room...";
+"addingRoom" = "Adding room...";
 "errorFacebookSession" = "Error - Facebook";
 "facebookAuthenticationCanceled" = "You cancelled the facebook authentication. Please log in again.";
 "signingUp" = "Signing up...";

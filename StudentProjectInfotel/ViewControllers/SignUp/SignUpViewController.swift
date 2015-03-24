@@ -21,6 +21,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet private var schoolIdTextField: UITextField!
     @IBOutlet private var signUpBarButtonItem: UIBarButtonItem!
     @IBOutlet private var errorLabel: UILabel!
+    @IBOutlet var formScrollView: UIScrollView!
     
     /// Setted lazy because the user can choose to not send a picture
     lazy private var imagePickerController: UIImagePickerController = {
@@ -245,8 +246,21 @@ extension SignUpViewController: UITextFieldDelegate {
         return false
     }
     
+   /* #define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+    #define IS_IPHONE_5 (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 568.0f*/
+    
     func textFieldDidBeginEditing(textField: UITextField) {
         self.errorLabel.text = ""
+
+        // If that's an iPhone 5/5s/5c
+        if UIScreen.mainScreen().bounds.size.height == 568 {
+            
+            if textField == self.passwordTextField {
+                self.formScrollView.setContentOffset(CGPointMake(0.0, 40.0), animated: true)
+            } else if textField == self.firstNameTextField || textField == self.lastNameTextField || textField == self.emailTextField {
+                self.formScrollView.setContentOffset(CGPointMake(0.0, 00.0), animated: true)
+            }
+        }
     }
     
     func textFieldShouldClear(textField: UITextField) -> Bool {
@@ -256,17 +270,20 @@ extension SignUpViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
+        
         /* If the user tap the Next keyboard button, we redirect him to the next text field.
            Else if he tap the Join keyboard button after entering its password, we call 
             the signUp method, if all the inputs are valid.
         */
         switch(textField) {
            
+            
             case self.firstNameTextField:   self.lastNameTextField.becomeFirstResponder()
             case self.lastNameTextField:    self.emailTextField.becomeFirstResponder()
             case self.emailTextField:       self.passwordTextField.becomeFirstResponder()
             case self.passwordTextField:    self.formationTextField.becomeFirstResponder()
             case self.formationTextField:    self.schoolIdTextField.becomeFirstResponder()
+
 
             case self.schoolIdTextField:
                 if self.canSignUpButtonBeEnabled() {
@@ -283,5 +300,6 @@ extension SignUpViewController: UITextFieldDelegate {
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         self.view.endEditing(true)
+        self.formScrollView.setContentOffset(CGPointMake(0.0, 0.0), animated: true)
     }
 }

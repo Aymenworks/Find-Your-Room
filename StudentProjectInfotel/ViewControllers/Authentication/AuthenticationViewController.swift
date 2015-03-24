@@ -74,6 +74,7 @@ class AuthenticationViewController: UIViewController {
         
         
         BFRadialWaveHUD.showInView(self.navigationController!.view, withMessage: self.navigationItem.title! + "...")
+        
         self.errorLabel.text = ""
         self.view.endEditing(true)
         

@@ -12,4 +12,3 @@
 
 // for well designed activity indicator
 #import "BFRadialWaveHUD.h"
-

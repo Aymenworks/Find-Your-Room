@@ -17,6 +17,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet private var formationTextField: UITextField!
     @IBOutlet private var schoolIdTextField: UITextField!
     @IBOutlet var updateProfilButton: UIButton!
+    @IBOutlet var formScrollView: UIScrollView!
     
     /// Setted lazy because the user can choose to not send a picture
     lazy private var imagePickerController: UIImagePickerController = {
@@ -248,8 +249,25 @@ extension ProfileViewController: UITextFieldDelegate {
         return true
     }
     
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        
+        // If that's an iPhone 5/5s/5c
+        if UIScreen.mainScreen().bounds.size.height == 568 {
+            
+            if textField == self.passwordTextField {
+                self.formScrollView.setContentOffset(CGPointMake(0.0, 40.0), animated: true)
+            
+            } else if textField == self.firstNameTextField || textField == self.lastNameTextField {
+                self.formScrollView.setContentOffset(CGPointZero, animated: true)
+            }
+        }
+        
+        return true
+    }
+    
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         self.view.endEditing(true)
+        self.formScrollView.setContentOffset(CGPointZero, animated: true)
     }
 }
 

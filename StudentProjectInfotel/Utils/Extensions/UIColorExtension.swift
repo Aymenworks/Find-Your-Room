@@ -10,8 +10,6 @@ import Foundation
 
 typealias ColorTuple = (red: CGFloat, green: CGFloat, blue: CGFloat)
 
-private var colorTupleIndex = 0
-
 extension UIColor {
     
     class func randomFlatColor() -> UIColor {
@@ -80,8 +78,7 @@ extension UIColor {
             ]
         }
         
-        let colorTuple = RandomColors.colors[colorTupleIndex % RandomColors.colors.count]
-        colorTupleIndex += 5
+        let colorTuple = RandomColors.colors[Int(arc4random_uniform(UInt32(RandomColors.colors.count)))]
         return UIColor(red: colorTuple.red, green: colorTuple.green, blue: colorTuple.blue, alpha: 1.0)
     }
 }

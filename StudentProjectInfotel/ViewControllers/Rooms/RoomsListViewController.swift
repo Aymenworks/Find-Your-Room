@@ -80,7 +80,7 @@ class RoomsListViewController: UIViewController {
                     Facade.sharedInstance().addRoomsFromJSON(schoolRooms)
                     Facade.sharedInstance().fetchPersonsProfilPictureInsideRoom()
                     self.roomsTableView.reloadData()
-                    BFRadialWaveHUD.dismiss()
+                    BFRadialWaveHUD.sharedInstance().dismiss()
 
                 } else {
                     println("error rooms error = \(error)")

@@ -170,7 +170,7 @@ class NetworkManager {
     }
     
     /**
-    Upload the user profil picture picture on its md5 hashed email directory on the server
+    Upload the user profil picture on its md5 hashed email directory on the server
     From http://stackoverflow.com/questions/26121827/uploading-file-with-parameters-using-alamofire
     
     :param: image             The user profil picture
@@ -194,12 +194,11 @@ class NetworkManager {
             uploadData.appendData("Content-Type: image/jpg\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
             uploadData.appendData(imageData)
             uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            
+            // Ajout des parametres
             uploadData.appendData("Content-Disposition: form-data; name=\"email\"\r\n\r\n\(email)".dataUsingEncoding(NSUTF8StringEncoding)!)
             uploadData.appendData("\r\n--\(boundaryConstant)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-            
-            // Ajout de l'email
-            uploadData.appendData("Content-Disposition: form-data; name=email\"\r\n\r\n\(email)".dataUsingEncoding(NSUTF8StringEncoding)!)
-            uploadData.appendData("\r\n--\(boundaryConstant)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        
             
             return (ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0, uploadData)
         }
@@ -210,7 +209,6 @@ class NetworkManager {
         upload(urlRequest.newUrl, urlRequest.data)
             .validate()
             .responseSwiftyJSON { (request, response, JSON, error) in
-                println("upload picture response = \(response), json = \(JSON)")
                 completionHandler()
         }
     }
