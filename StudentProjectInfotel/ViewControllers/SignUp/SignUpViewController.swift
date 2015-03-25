@@ -60,6 +60,11 @@ class SignUpViewController: UIViewController {
         self.navigationController!.popViewControllerAnimated(true)
     }
     
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        self.view.endEditing(true)
+        self.formScrollView.setContentOffset(CGPointZero, animated: true)
+    }
+    
     /**
     Called when the user tap on the Join keyboard button ( exposed when focus on password text field ) 
         or the Sign Up bar button item. It send an http request to try to sign up the user.
@@ -246,9 +251,6 @@ extension SignUpViewController: UITextFieldDelegate {
         return false
     }
     
-   /* #define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-    #define IS_IPHONE_5 (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 568.0f*/
-    
     func textFieldDidBeginEditing(textField: UITextField) {
         self.errorLabel.text = ""
 
@@ -257,8 +259,11 @@ extension SignUpViewController: UITextFieldDelegate {
             
             if textField == self.passwordTextField {
                 self.formScrollView.setContentOffset(CGPointMake(0.0, 40.0), animated: true)
-            } else if textField == self.firstNameTextField || textField == self.lastNameTextField || textField == self.emailTextField {
-                self.formScrollView.setContentOffset(CGPointMake(0.0, 00.0), animated: true)
+                
+            } else if textField == self.firstNameTextField || textField == self.lastNameTextField
+                || textField == self.emailTextField {
+                    
+                self.formScrollView.setContentOffset(CGPointZero, animated: true)
             }
         }
     }
@@ -296,10 +301,5 @@ extension SignUpViewController: UITextFieldDelegate {
             default: break
         }
         return true
-    }
-    
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        self.view.endEditing(true)
-        self.formScrollView.setContentOffset(CGPointMake(0.0, 0.0), animated: true)
     }
 }

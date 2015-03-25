@@ -124,9 +124,10 @@ class ProfileViewController: UIViewController {
 
     }
     
-    override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         self.view.endEditing(true)
         self.updateProfilButton.enabled = self.canUpdateButtonBeEnabled()
+        self.formScrollView.setContentOffset(CGPointZero, animated: true)
     }
     
     // MARK: - User Interface -
@@ -263,11 +264,6 @@ extension ProfileViewController: UITextFieldDelegate {
         }
         
         return true
-    }
-    
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        self.view.endEditing(true)
-        self.formScrollView.setContentOffset(CGPointZero, animated: true)
     }
 }
 

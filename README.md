@@ -8,9 +8,9 @@ Student project realizing an iOS app and using beacons technologies.
 [![Technology](https://img.shields.io/badge/technology-ibeacon-blue.svg?style=flat)](https://developer.apple.com/swift)
 
 
-<img src="./Screenshots/roomsList.png" title="Room list view" height="380px" alt="Room list view">
-<img src="./Screenshots/addRoom.png" title="Add room view" height="380px" alt="Add room view">
-<img src="./Screenshots/roomDetail.png" title="Authentication view" height="380px" alt="Authentication view">
+<img src="./StudentProjectInfotel/Assets/screenshots/roomsList.png" title="Room list view" height="380px" alt="Room list view">
+<img src="./StudentProjectInfotel/Assets/screenshots/addRoom.png" title="Add room view" height="380px" alt="Add room view">
+<img src="./StudentProjectInfotel/Assets/screenshots/roomDetail.png" title="Authentication view" height="380px" alt="Authentication view">
 
 ## Issues
 
