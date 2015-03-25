@@ -50,6 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+//  #############################################  To use everywhere #############################################
+
 func doInMainQueueAfter(#seconds: Float, completionHandler: () -> Void) {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64((seconds * Float(NSEC_PER_SEC)))), dispatch_get_main_queue()) {
         completionHandler()

@@ -11,13 +11,14 @@ import UIKit
 class AddRoomViewController: UIViewController {
 
     @IBOutlet private var roomTitleTextField: UITextField!
-    @IBOutlet private var roomDescriptionTextField: UITextView!
+    @IBOutlet private var roomDescriptionTextView: UITextView!
     @IBOutlet private var roomCapacityTextField: UITextField!
     @IBOutlet private var beaconUUIDTextField: UITextField!
     @IBOutlet private var beaconMajorTextField: UITextField!
     @IBOutlet private var beaconMinorValueTextField: UITextField!
     @IBOutlet var errorLabel: UILabel!
     @IBOutlet var addRoomButton: UIButton!
+    @IBOutlet var formScrollView: UIScrollView!
     
     // MARK: - Lifecycle -
 
@@ -47,7 +48,7 @@ class AddRoomViewController: UIViewController {
         
         var schoolId     =  Member.sharedInstance().schoolId!
         var roomTitle = self.roomTitleTextField.text
-        var roomDescription  = self.roomDescriptionTextField.text
+        var roomDescription  = self.roomDescriptionTextView.text
         let roomCapacity  = self.roomCapacityTextField.text.toInt()!
         let beaconUUID  = self.beaconUUIDTextField.text
         let beaconMajor = self.beaconMajorTextField.text.toInt()!
@@ -73,17 +74,21 @@ class AddRoomViewController: UIViewController {
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         self.addRoomButton.enabled = self.canAddRoomButtonBeEnabled()
         self.view.endEditing(true)
+        
+        if DeviceInformation.isIphone5() {
+            self.formScrollView.setContentOffset(CGPointZero, animated: true)
+        }
     }
     
     // MARK: - Inputs Validation -
 
     func hasRoomInformations() -> Bool {
-        return (!self.roomTitleTextField.text.isEmpty && !self.roomDescriptionTextField.text.isEmpty
+        return (!self.roomTitleTextField.text.isEmpty && !self.roomDescriptionTextView.text.isEmpty
             && !self.roomCapacityTextField.text.isEmpty)
     }
     
     /**
-    Check if the user entered a correct uuid
+    Check if the user entered a correct uuid ( in uppercase )
     
     :returns: true if the email school Id textfield isn't empty, false if not
     */
@@ -124,6 +129,20 @@ extension AddRoomViewController: UITextFieldDelegate {
         return true
     }
     
+    func textFieldDidBeginEditing(textField: UITextField) -> Bool {
+        
+        if DeviceInformation.isIphone5() {
+            if textField == self.roomCapacityTextField {
+                self.formScrollView.setContentOffset(CGPointMake(0.0, 90.0), animated: true)
+            
+            } else if textField == self.roomTitleTextField {
+                self.formScrollView.setContentOffset(CGPointZero, animated: true)
+            }
+        }
+        
+        return true
+    }
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
         /* If the user tap the Next keyboard button, we redirect him to the next text field.
@@ -132,8 +151,8 @@ extension AddRoomViewController: UITextFieldDelegate {
         */
         switch(textField) {
             
-            case self.roomTitleTextField:   self.roomDescriptionTextField.becomeFirstResponder()
-            case self.roomDescriptionTextField:    self.roomCapacityTextField.becomeFirstResponder()
+            case self.roomTitleTextField:   self.roomDescriptionTextView.becomeFirstResponder()
+            case self.roomDescriptionTextView:    self.roomCapacityTextField.becomeFirstResponder()
             case self.roomCapacityTextField:    self.beaconUUIDTextField.becomeFirstResponder()
             case self.beaconUUIDTextField:
                 self.errorLabel.text = self.hasCorrectBeaconUUID() ? "" : NSLocalizedString("checkBeaconUUID", comment: "")
@@ -154,5 +173,16 @@ extension AddRoomViewController: UITextFieldDelegate {
         }
         
         return true
+    }
+}
+
+// MARK: - UITextView Delegate -
+
+extension AddRoomViewController: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+        if DeviceInformation.isIphone5() {
+            self.formScrollView.setContentOffset(CGPointZero, animated: true)
+        }
     }
 }

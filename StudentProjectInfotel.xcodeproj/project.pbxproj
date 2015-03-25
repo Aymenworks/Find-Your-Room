@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A502A00D1A86DF2D00376149 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A502A00C1A86DF2D00376149 /* StringExtension.swift */; };
+		A506C56D1AC334110056BC4D /* DeviceInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A506C56C1AC334110056BC4D /* DeviceInformation.swift */; };
 		A508C08C1AB7052A00FAF9F3 /* AddRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A508C08B1AB7052A00FAF9F3 /* AddRoomViewController.swift */; };
 		A512DCA01A8774D000BA361E /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A570190A1A82BFF000C8F516 /* FacebookSDK.framework */; };
 		A512DCA11A8774DB00BA361E /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A59B85F11A83F63400468096 /* GooglePlus.framework */; };
@@ -90,6 +91,7 @@
 
 /* Begin PBXFileReference section */
 		A502A00C1A86DF2D00376149 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		A506C56C1AC334110056BC4D /* DeviceInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceInformation.swift; path = Utils/DeviceInformation.swift; sourceTree = "<group>"; };
 		A508C08B1AB7052A00FAF9F3 /* AddRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddRoomViewController.swift; path = StudentProjectInfotel/ViewControllers/Rooms/AddRoomViewController.swift; sourceTree = SOURCE_ROOT; };
 		A523B2331A96A19900D38277 /* RoomDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomDetailViewController.swift; sourceTree = "<group>"; };
 		A523B2351A96A31F00D38277 /* PersonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				A525DAF41A6A88600024580A /* AppDelegate.swift */,
+				A506C56C1AC334110056BC4D /* DeviceInformation.swift */,
 				A5FF89CB1A6A9D3E00564555 /* Facade */,
 				A5FF89CA1A6A9D1C00564555 /* ViewControllers */,
 				A5FF89C91A6A9D1700564555 /* Models */,
@@ -694,6 +697,7 @@
 				A594F8E41A862C3700C1B583 /* SwiftyJSON.swift in Sources */,
 				A52F0F0D1A70531600206DE7 /* PersistencyManager.swift in Sources */,
 				A5D652FF1AB20C1B005951D7 /* MenuCell.swift in Sources */,
+				A506C56D1AC334110056BC4D /* DeviceInformation.swift in Sources */,
 				A53174151AB264FC00A5AD80 /* ProfileViewController.swift in Sources */,
 				A52F0F0F1A70532C00206DE7 /* LocationManager.swift in Sources */,
 				A52F0F231A70BD1E00206DE7 /* Facade.swift in Sources */,

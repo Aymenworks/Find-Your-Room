@@ -127,7 +127,10 @@ class ProfileViewController: UIViewController {
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         self.view.endEditing(true)
         self.updateProfilButton.enabled = self.canUpdateButtonBeEnabled()
-        self.formScrollView.setContentOffset(CGPointZero, animated: true)
+        
+        if DeviceInformation.isIphone5() {
+            self.formScrollView.setContentOffset(CGPointZero, animated: true)
+        }
     }
     
     // MARK: - User Interface -
@@ -250,10 +253,10 @@ extension ProfileViewController: UITextFieldDelegate {
         return true
     }
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldDidBeginEditing(textField: UITextField) -> Bool {
         
         // If that's an iPhone 5/5s/5c
-        if UIScreen.mainScreen().bounds.size.height == 568 {
+        if DeviceInformation.isIphone5() {
             
             if textField == self.passwordTextField {
                 self.formScrollView.setContentOffset(CGPointMake(0.0, 40.0), animated: true)

@@ -62,7 +62,10 @@ class SignUpViewController: UIViewController {
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         self.view.endEditing(true)
-        self.formScrollView.setContentOffset(CGPointZero, animated: true)
+        
+        if DeviceInformation.isIphone5() {
+            self.formScrollView.setContentOffset(CGPointZero, animated: true)
+        }
     }
     
     /**
@@ -255,7 +258,7 @@ extension SignUpViewController: UITextFieldDelegate {
         self.errorLabel.text = ""
 
         // If that's an iPhone 5/5s/5c
-        if UIScreen.mainScreen().bounds.size.height == 568 {
+        if DeviceInformation.isIphone5() {
             
             if textField == self.passwordTextField {
                 self.formScrollView.setContentOffset(CGPointMake(0.0, 40.0), animated: true)
