@@ -10,8 +10,6 @@
 		A502A00D1A86DF2D00376149 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A502A00C1A86DF2D00376149 /* StringExtension.swift */; };
 		A506C56D1AC334110056BC4D /* DeviceInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A506C56C1AC334110056BC4D /* DeviceInformation.swift */; };
 		A508C08C1AB7052A00FAF9F3 /* AddRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A508C08B1AB7052A00FAF9F3 /* AddRoomViewController.swift */; };
-		A512DCA01A8774D000BA361E /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A570190A1A82BFF000C8F516 /* FacebookSDK.framework */; };
-		A512DCA11A8774DB00BA361E /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A59B85F11A83F63400468096 /* GooglePlus.framework */; };
 		A523B2341A96A19900D38277 /* RoomDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A523B2331A96A19900D38277 /* RoomDetailViewController.swift */; };
 		A523B2361A96A31F00D38277 /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A523B2351A96A31F00D38277 /* PersonCell.swift */; };
 		A523B2381A96A4A400D38277 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = A523B2371A96A4A400D38277 /* Member.swift */; };
@@ -37,7 +35,6 @@
 		A56874F61AA1BBB4006FFD40 /* BFRadialWaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = A56874F41AA1BBB4006FFD40 /* BFRadialWaveView.m */; };
 		A56874F91AA1BBE9006FFD40 /* UIColor+BFPaperColors.m in Sources */ = {isa = PBXBuildFile; fileRef = A56874F81AA1BBE9006FFD40 /* UIColor+BFPaperColors.m */; };
 		A56874FB1AA1BED0006FFD40 /* BFRadialWaveHUD.xib in Resources */ = {isa = PBXBuildFile; fileRef = A56874FA1AA1BED0006FFD40 /* BFRadialWaveHUD.xib */; };
-		A570190B1A82BFF000C8F516 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A570190A1A82BFF000C8F516 /* FacebookSDK.framework */; };
 		A59017EF1ABB16AF003A3A49 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A59017F11ABB16AF003A3A49 /* Localizable.strings */; };
 		A594F8CB1A856A2700C1B583 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A594F8CA1A856A2700C1B583 /* SignUpViewController.swift */; };
 		A594F8DD1A861C8500C1B583 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A594F8DF1A861C8500C1B583 /* Main.storyboard */; };
@@ -49,9 +46,6 @@
 		A59B84C91A8702BF0086D2FB /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59B84C81A8702BF0086D2FB /* Alamofire.swift */; };
 		A59B85EB1A82D39500468096 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59B85EA1A82D39500468096 /* NetworkManager.swift */; };
 		A59B85EE1A839DF100468096 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59B85ED1A839DF100468096 /* AuthenticationViewController.swift */; };
-		A59B85F21A83F63400468096 /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A59B85EF1A83F63400468096 /* GoogleOpenSource.framework */; };
-		A59B85F31A83F63400468096 /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A59B85F01A83F63400468096 /* GooglePlus.bundle */; };
-		A59B85F41A83F63400468096 /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A59B85F11A83F63400468096 /* GooglePlus.framework */; };
 		A59B85F91A83FD2E00468096 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A59B85F81A83FD2E00468096 /* AssetsLibrary.framework */; };
 		A59B85FB1A83FD3300468096 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A59B85FA1A83FD3300468096 /* Foundation.framework */; };
 		A59B85FD1A83FD3D00468096 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A59B85FC1A83FD3D00468096 /* CoreMotion.framework */; };
@@ -63,6 +57,10 @@
 		A59B86091A83FD6500468096 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A59B86081A83FD6500468096 /* UIKit.framework */; };
 		A5BFFF261AAF8658000AD1AC /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A59B85F61A83FD2800468096 /* AddressBook.framework */; };
 		A5C4F3CF1A98D61800CBD853 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5C4F3CE1A98D61800CBD853 /* Images.xcassets */; };
+		A5C54BF61AC342E0006F7686 /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C54BF51AC342E0006F7686 /* GoogleOpenSource.framework */; };
+		A5C54BF81AC342ED006F7686 /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C54BF71AC342ED006F7686 /* GooglePlus.framework */; };
+		A5C54BFA1AC34332006F7686 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C54BF91AC34332006F7686 /* FacebookSDK.framework */; };
+		A5C54BFC1AC3456D006F7686 /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A5C54BFB1AC3456D006F7686 /* GooglePlus.bundle */; };
 		A5CB85991A954D480091B52F /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CB85981A954D480091B52F /* UIColorExtension.swift */; };
 		A5D652FB1AB20C1B005951D7 /* HeaderShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D652F01AB20C1B005951D7 /* HeaderShadowView.swift */; };
 		A5D652FC1AB20C1B005951D7 /* StickyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D652F11AB20C1B005951D7 /* StickyHeaderView.swift */; };
@@ -91,8 +89,8 @@
 
 /* Begin PBXFileReference section */
 		A502A00C1A86DF2D00376149 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
-		A506C56C1AC334110056BC4D /* DeviceInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceInformation.swift; path = Utils/DeviceInformation.swift; sourceTree = "<group>"; };
-		A508C08B1AB7052A00FAF9F3 /* AddRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddRoomViewController.swift; path = StudentProjectInfotel/ViewControllers/Rooms/AddRoomViewController.swift; sourceTree = SOURCE_ROOT; };
+		A506C56C1AC334110056BC4D /* DeviceInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInformation.swift; sourceTree = "<group>"; };
+		A508C08B1AB7052A00FAF9F3 /* AddRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRoomViewController.swift; sourceTree = "<group>"; };
 		A523B2331A96A19900D38277 /* RoomDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomDetailViewController.swift; sourceTree = "<group>"; };
 		A523B2351A96A31F00D38277 /* PersonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
 		A523B2371A96A4A400D38277 /* Member.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
@@ -112,7 +110,7 @@
 		A52F0F0C1A70531600206DE7 /* PersistencyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyManager.swift; sourceTree = "<group>"; };
 		A52F0F0E1A70532C00206DE7 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		A52F0F221A70BD1E00206DE7 /* Facade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Facade.swift; sourceTree = "<group>"; };
-		A53174141AB264FC00A5AD80 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = StudentProjectInfotel/ViewControllers/ProfileViewController.swift; sourceTree = SOURCE_ROOT; };
+		A53174141AB264FC00A5AD80 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A53C3D741ABCE77500ACCDF5 /* beaconSchool.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = beaconSchool.jpg; sourceTree = "<group>"; };
 		A53C3D751ABCE77500ACCDF5 /* beaconSchool@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "beaconSchool@2x.jpg"; sourceTree = "<group>"; };
 		A53C3D761ABCE77500ACCDF5 /* beaconSchool@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "beaconSchool@3x.jpg"; sourceTree = "<group>"; };
@@ -131,9 +129,8 @@
 		A56874F71AA1BBE9006FFD40 /* UIColor+BFPaperColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+BFPaperColors.h"; sourceTree = "<group>"; };
 		A56874F81AA1BBE9006FFD40 /* UIColor+BFPaperColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BFPaperColors.m"; sourceTree = "<group>"; };
 		A56874FA1AA1BED0006FFD40 /* BFRadialWaveHUD.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BFRadialWaveHUD.xib; sourceTree = "<group>"; };
-		A570190A1A82BFF000C8F516 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		A570190D1A82C30200C8F516 /* StudentProjectInfotel-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StudentProjectInfotel-Bridging-Header.h"; sourceTree = "<group>"; };
-		A5796C3A1ABDD4A200C63487 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		A5796C3A1ABDD4A200C63487 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A59017F01ABB16AF003A3A49 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A59017F21ABB16B2003A3A49 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A594F8CA1A856A2700C1B583 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -144,11 +141,8 @@
 		A5951A281A95202F00E6DB3B /* RoomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomCell.swift; sourceTree = "<group>"; };
 		A5951A2A1A95206F00E6DB3B /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		A59B84C81A8702BF0086D2FB /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
-		A59B85EA1A82D39500468096 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkManager.swift; path = Network/NetworkManager.swift; sourceTree = "<group>"; };
+		A59B85EA1A82D39500468096 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A59B85ED1A839DF100468096 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
-		A59B85EF1A83F63400468096 /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleOpenSource.framework; path = "../../../../../../Downloads/google-plus-ios-sdk-1.7.1/GoogleOpenSource.framework"; sourceTree = "<group>"; };
-		A59B85F01A83F63400468096 /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GooglePlus.bundle; path = "../../../../../../Downloads/google-plus-ios-sdk-1.7.1/GooglePlus.bundle"; sourceTree = "<group>"; };
-		A59B85F11A83F63400468096 /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlus.framework; path = "../../../../../../Downloads/google-plus-ios-sdk-1.7.1/GooglePlus.framework"; sourceTree = "<group>"; };
 		A59B85F61A83FD2800468096 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		A59B85F81A83FD2E00468096 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		A59B85FA1A83FD3300468096 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -160,6 +154,10 @@
 		A59B86061A83FD6000468096 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A59B86081A83FD6500468096 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A5C4F3CE1A98D61800CBD853 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A5C54BF51AC342E0006F7686 /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleOpenSource.framework; sourceTree = "<group>"; };
+		A5C54BF71AC342ED006F7686 /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
+		A5C54BF91AC34332006F7686 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		A5C54BFB1AC3456D006F7686 /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
 		A5CB85981A954D480091B52F /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		A5D652F01AB20C1B005951D7 /* HeaderShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderShadowView.swift; sourceTree = "<group>"; };
 		A5D652F11AB20C1B005951D7 /* StickyHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickyHeaderView.swift; sourceTree = "<group>"; };
@@ -186,15 +184,15 @@
 				A59B86071A83FD6000468096 /* SystemConfiguration.framework in Frameworks */,
 				A59B86051A83FD5700468096 /* Security.framework in Frameworks */,
 				A59B86031A83FD5100468096 /* CoreText.framework in Frameworks */,
+				A5C54BF81AC342ED006F7686 /* GooglePlus.framework in Frameworks */,
 				A59B86011A83FD4A00468096 /* MediaPlayer.framework in Frameworks */,
 				A59B85FF1A83FD4300468096 /* CoreGraphics.framework in Frameworks */,
 				A59B85FD1A83FD3D00468096 /* CoreMotion.framework in Frameworks */,
 				A59B85FB1A83FD3300468096 /* Foundation.framework in Frameworks */,
 				A59B85F91A83FD2E00468096 /* AssetsLibrary.framework in Frameworks */,
+				A5C54BF61AC342E0006F7686 /* GoogleOpenSource.framework in Frameworks */,
 				A5F336A71A6DD1CF00DDF59B /* CoreLocation.framework in Frameworks */,
-				A59B85F41A83F63400468096 /* GooglePlus.framework in Frameworks */,
-				A59B85F21A83F63400468096 /* GoogleOpenSource.framework in Frameworks */,
-				A570190B1A82BFF000C8F516 /* FacebookSDK.framework in Frameworks */,
+				A5C54BFA1AC34332006F7686 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,8 +200,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A512DCA01A8774D000BA361E /* FacebookSDK.framework in Frameworks */,
-				A512DCA11A8774DB00BA361E /* GooglePlus.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +228,6 @@
 			isa = PBXGroup;
 			children = (
 				A525DAF41A6A88600024580A /* AppDelegate.swift */,
-				A506C56C1AC334110056BC4D /* DeviceInformation.swift */,
 				A5FF89CB1A6A9D3E00564555 /* Facade */,
 				A5FF89CA1A6A9D1C00564555 /* ViewControllers */,
 				A5FF89C91A6A9D1700564555 /* Models */,
@@ -296,6 +291,7 @@
 		A552A9EC1AAB7120001F69D5 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A506C56C1AC334110056BC4D /* DeviceInformation.swift */,
 				A5FE76271A86A44200BBE51B /* Extensions */,
 			);
 			path = Utils;
@@ -346,16 +342,6 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
-		A59B85F51A83F63800468096 /* Google+ */ = {
-			isa = PBXGroup;
-			children = (
-				A59B85EF1A83F63400468096 /* GoogleOpenSource.framework */,
-				A59B85F01A83F63400468096 /* GooglePlus.bundle */,
-				A59B85F11A83F63400468096 /* GooglePlus.framework */,
-			);
-			path = "Google+";
-			sourceTree = "<group>";
-		};
 		A5C1E47B1A81700D006FECB1 /* Walkthrough */ = {
 			isa = PBXGroup;
 			children = (
@@ -369,8 +355,7 @@
 			children = (
 				A53174141AB264FC00A5AD80 /* ProfileViewController.swift */,
 			);
-			name = Profile;
-			path = Profil;
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		A5D652EB1AB20C1B005951D7 /* Persei */ = {
@@ -441,6 +426,10 @@
 		A5F336A81A6DD1D800DDF59B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A5C54BFB1AC3456D006F7686 /* GooglePlus.bundle */,
+				A5C54BF91AC34332006F7686 /* FacebookSDK.framework */,
+				A5C54BF51AC342E0006F7686 /* GoogleOpenSource.framework */,
+				A5C54BF71AC342ED006F7686 /* GooglePlus.framework */,
 				A59B86081A83FD6500468096 /* UIKit.framework */,
 				A59B86061A83FD6000468096 /* SystemConfiguration.framework */,
 				A59B86041A83FD5700468096 /* Security.framework */,
@@ -451,9 +440,7 @@
 				A59B85FA1A83FD3300468096 /* Foundation.framework */,
 				A59B85F81A83FD2E00468096 /* AssetsLibrary.framework */,
 				A59B85F61A83FD2800468096 /* AddressBook.framework */,
-				A570190A1A82BFF000C8F516 /* FacebookSDK.framework */,
 				A5F336A61A6DD1CF00DDF59B /* CoreLocation.framework */,
-				A59B85F51A83F63800468096 /* Google+ */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -637,9 +624,9 @@
 				A5282AB11ABCEEEB0094FAD3 /* mySky@2x.jpg in Resources */,
 				A56874FB1AA1BED0006FFD40 /* BFRadialWaveHUD.xib in Resources */,
 				A5C4F3CF1A98D61800CBD853 /* Images.xcassets in Resources */,
-				A59B85F31A83F63400468096 /* GooglePlus.bundle in Resources */,
 				A53C3D771ABCE77500ACCDF5 /* beaconSchool.jpg in Resources */,
 				A5282AB21ABCEEEB0094FAD3 /* mySky@3x.jpg in Resources */,
+				A5C54BFC1AC3456D006F7686 /* GooglePlus.bundle in Resources */,
 				A53C3D791ABCE77500ACCDF5 /* beaconSchool@3x.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -745,6 +732,7 @@
 				A59017F21ABB16B2003A3A49 /* Base */,
 			);
 			name = Localizable.strings;
+			path = .;
 			sourceTree = "<group>";
 		};
 		A594F8DF1A861C8500C1B583 /* Main.storyboard */ = {
@@ -851,8 +839,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rebouh Aymen (XDGP34APB9)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/rebouhaymen/Documents/FacebookSDK,
-					"/Users/rebouhaymen/Downloads/google-plus-ios-sdk-1.7.1",
+					"$(PROJECT_DIR)/StudentProjectInfotel/Librairies/FacebookSDK",
+					"$(PROJECT_DIR)/StudentProjectInfotel/Librairies/GoogleSDK",
+					"$(PROJECT_DIR)/StudentProjectInfotel",
+					"$(PROJECT_DIR)/StudentProjectInfotel/Librairies",
 				);
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
@@ -888,8 +878,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rebouh Aymen (XDGP34APB9)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/rebouhaymen/Documents/FacebookSDK,
-					"/Users/rebouhaymen/Downloads/google-plus-ios-sdk-1.7.1",
+					"$(PROJECT_DIR)/StudentProjectInfotel/Librairies/FacebookSDK",
+					"$(PROJECT_DIR)/StudentProjectInfotel/Librairies/GoogleSDK",
+					"$(PROJECT_DIR)/StudentProjectInfotel",
+					"$(PROJECT_DIR)/StudentProjectInfotel/Librairies",
 				);
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
@@ -920,9 +912,9 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(PROJECT_DIR)/StudentProjectInfotel/Librairies/GoogleSDK",
+					"$(PROJECT_DIR)/StudentProjectInfotel/Librairies/FacebookSDK",
 					"$(inherited)",
-					/Users/rebouhaymen/Documents/FacebookSDK,
-					"/Users/rebouhaymen/Downloads/google-plus-ios-sdk-1.7.1",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -941,9 +933,9 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(PROJECT_DIR)/StudentProjectInfotel/Librairies/GoogleSDK",
+					"$(PROJECT_DIR)/StudentProjectInfotel/Librairies/FacebookSDK",
 					"$(inherited)",
-					/Users/rebouhaymen/Documents/FacebookSDK,
-					"/Users/rebouhaymen/Downloads/google-plus-ios-sdk-1.7.1",
 				);
 				INFOPLIST_FILE = "StudentProjectInfotelTests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
