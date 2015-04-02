@@ -6,6 +6,9 @@
 //  Copyright (c) 2015 Rebouh Aymen. All rights reserved.
 //
 
+import CoreLocation
+import UIKit.UIImage
+
 /**
   The Facade pattern. So we can use more easily the complex submodules 
   that are Location, Network, Data persistency with a sample and reusable API.
@@ -72,14 +75,14 @@ public class Facade {
     :param: completionHandler The callback containing the json server/error response that'll be executed
                                 after the request has finished
     */
-    func roomsBySchoolId(schoolId: String, completionHandler: (JSON?, NSError?) -> Void) {
+    public func roomsBySchoolId(schoolId: String, completionHandler: (JSON?, NSError?) -> Void) {
         self.networkManager.roomsBySchoolId(schoolId, completionHandler: completionHandler)
     }
     
     /**
     Will download all the user profile pictures containted on our array of room ( that contains array of students )
     */
-    func fetchPersonsProfilPictureInsideRoom() {
+    public func fetchPersonsProfilPictureInsideRoom() {
         self.networkManager.fetchPersonsProfilPictureInsideRoom()
     }
     
@@ -96,7 +99,7 @@ public class Facade {
     :param: completionHandler The callback containing the json server/error response that'll be executed
                                 after the request has finished
     */
-    func addRoom(schoolId: String, roomTitle: String, roomDescription: String,
+    public func addRoom(schoolId: String, roomTitle: String, roomDescription: String,
         roomCapacity: Int, beaconUUID: String, beaconMajor: Int, beaconMinor: Int, completionHandler: (JSON?, NSError?) -> Void) {
             self.networkManager.addRoom(schoolId, roomTitle: roomTitle, roomDescription: roomDescription,
                 roomCapacity: roomCapacity, beaconUUID: beaconUUID, beaconMajor: beaconMajor, beaconMinor: beaconMinor, completionHandler)
@@ -109,7 +112,7 @@ public class Facade {
     :param: userEmail         <#userEmail description#>
     :param: completionHandler <#completionHandler description#>
     */
-    func addMyPresenceToRoom(roomId: Int, userEmail: String, completionHandler: (JSON?, NSError?) -> Void) {
+    public func addMyPresenceToRoom(roomId: Int, userEmail: String, completionHandler: (JSON?, NSError?) -> Void) {
         self.networkManager.addMyPresenceInRoom(roomId, userEmail: userEmail, completionHandler: completionHandler)
     }
     
@@ -119,7 +122,7 @@ public class Facade {
     :param: userEmail         <#userEmail description#>
     :param: completionHandler <#completionHandler description#>
     */
-    func deleteMyPresenceFromRoom(userEmail: String, completionHandler: (JSON?, NSError?) -> Void) {
+    public func deleteMyPresenceFromRoom(userEmail: String, completionHandler: (JSON?, NSError?) -> Void) {
         self.networkManager.deleteMyPresenceFromRoom(userEmail, completionHandler: completionHandler)
     }
     
@@ -170,7 +173,7 @@ public class Facade {
     :param: completionHandler The callback containing the json server/error response that'll be executed
     after the request has finished
     */
-    func fetchUserProfile(email: String, completionHandler: (JSON?, NSError?) -> Void) {
+    public func fetchUserProfile(email: String, completionHandler: (JSON?, NSError?) -> Void) {
         self.networkManager.fetchUserProfile(email, completionHandler: completionHandler)
     }
     
@@ -256,7 +259,7 @@ public class Facade {
     
     :param: schoolRooms <#schoolRooms description#>
     */
-    func addRoomsFromJSON(schoolRooms: JSON) {
+    public func addRoomsFromJSON(schoolRooms: JSON) {
        self.persistencyManager.addRoomsFromJSON(schoolRooms)
     }
 
@@ -272,7 +275,7 @@ public class Facade {
     /**
     Delete the current user profil from session
     */
-    func logOut() {
+    public func logOut() {
         self.persistencyManager.logOut()
     }
     

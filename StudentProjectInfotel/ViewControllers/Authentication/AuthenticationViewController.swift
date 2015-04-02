@@ -6,37 +6,40 @@
 //  Copyright (c) 2015 Rebouh Aymen. All rights reserved.
 //
 
+import UIKit
+
 /**
   AuthenticationViewController controller. It take care to authenticate the user,
 */
 class AuthenticationViewController: UIViewController {
     
     /// The Facebook login view given by Facebook SDK.
-    @IBOutlet private var facebookLoginView: FBLoginView!
+    @IBOutlet private weak var facebookLoginView: FBLoginView!
     
     /// The Google Plus login view given by Google Plus SDK.
-    @IBOutlet private var googlePlusLoginButton: GPPSignInButton!
+    @IBOutlet private weak var googlePlusLoginButton: GPPSignInButton!
     
     /// The bar button item that'll send a sign up request on click. Disabled by default. 
     /// Enabled when the email/password are filtered and OK.
-    @IBOutlet private var signInBarButtonItem: UIBarButtonItem!
+    @IBOutlet private weak var signInBarButtonItem: UIBarButtonItem!
     
-    @IBOutlet private var menuBarButtonItem: UIBarButtonItem!
+    @IBOutlet private weak var menuBarButtonItem: UIBarButtonItem!
     
     /// This class signs the user in with Google.
     private var signInGooglePlus: GPPSignIn!
     
-    @IBOutlet private var emailTextField: UITextField!
-    @IBOutlet private var passwordTextField: UITextField!
-    @IBOutlet private var errorLabel: UILabel!
-    @IBOutlet private var emailImageView: UIImageView!
-    @IBOutlet private var passwordImageView: UIImageView!
-    @IBOutlet private var separatorEmailView: UIView!
-    @IBOutlet private var separatorPasswordView: UIView!
+    @IBOutlet private weak var emailTextField: UITextField!
+    @IBOutlet private weak var passwordTextField: UITextField!
+    @IBOutlet private weak var errorLabel: UILabel!
+    @IBOutlet private weak var emailImageView: UIImageView!
+    @IBOutlet private weak var passwordImageView: UIImageView!
+    @IBOutlet private weak var separatorEmailView: UIView!
+    @IBOutlet private weak var separatorPasswordView: UIView!
     
     // MARK: - Lifecycle -
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         // Google+ settings
@@ -72,10 +75,9 @@ class AuthenticationViewController: UIViewController {
     */
     @IBAction func signIn() {
         
-        
         BFRadialWaveHUD.showInView(self.navigationController!.view, withMessage: self.navigationItem.title! + "...")
         
-        self.errorLabel.text = ""
+        self.errorLabel.text = " "
         self.view.endEditing(true)
         
         let email = self.emailTextField.text
@@ -152,7 +154,7 @@ class AuthenticationViewController: UIViewController {
     /**
     Simple shake animations
     */
-    func shakeForm() {
+    private func shakeForm() {
         doInMainQueueAfter(seconds: 0.4) {
             self.emailTextField.shake()
             self.passwordTextField.shake()
@@ -171,7 +173,7 @@ class AuthenticationViewController: UIViewController {
     
     :returns: True  if an input is empty or contains less than four characters, false if not.
     */
-    func canSignInButtonBeEnabled() -> Bool {
+    private func canSignInButtonBeEnabled() -> Bool {
         return (!self.emailTextField.text.isEmpty && !self.passwordTextField.text.isEmpty)
     }
 
@@ -193,7 +195,7 @@ extension AuthenticationViewController: UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        self.errorLabel.text = ""
+        self.errorLabel.text = " "
     }
     
     func textFieldShouldClear(textField: UITextField) -> Bool {
@@ -219,6 +221,7 @@ extension AuthenticationViewController: UITextFieldDelegate {
                 textField.resignFirstResponder()
                 
                 let alertView = JSSAlertView().show(self, title: self.navigationItem.title!, text: NSLocalizedString("emailForgotError", comment: ""))
+                
                 alertView.setTextTheme(.Dark)
                 alertView.addAction({ () -> Void in
                     self.emailTextField.becomeFirstResponder()

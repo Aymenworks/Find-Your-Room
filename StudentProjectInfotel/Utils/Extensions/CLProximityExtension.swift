@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Rebouh Aymen. All rights reserved.
 //
 
+import CoreLocation.CLLocation
+
 extension CLProximity {
     
     func toString() -> String {
@@ -13,14 +15,10 @@ extension CLProximity {
         var name = ""
         
         switch self {
-        case .Immediate:
-            name = "Close to me"
-        case .Near:
-            name = "Near"
-        case .Far:
-            name = "Far"
-        default:
-            name = "Unknown"
+            case .Immediate: name = "Close to me"
+            case .Near: name = "Near"
+            case .Far: name = "Far"
+            default: name = "Unknown"
         }
         
         return name

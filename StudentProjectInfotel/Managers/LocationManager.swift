@@ -6,27 +6,28 @@
 //  Copyright (c) 2015 Rebouh Aymen. All rights reserved.
 //
 
+import CoreLocation
+
 /**
   The core location manager. It take care of the beacon/user location like starting ranging/monitoring
 */
 class LocationManager: NSObject, CLLocationManagerDelegate {
     
-    private let locationManager: CLLocationManager!
+    private let locationManager = CLLocationManager()
     
     // MARK: - Lifecycle -
     
     override init() {
         
         super.init()
-        println("LocationManager init")
-        self.locationManager = CLLocationManager()
+        
         self.locationManager.delegate = self
+        self.locationManager.startUpdatingLocation()
         
         if self.locationManager.respondsToSelector("requestAlwaysAuthorization") {
             self.locationManager.requestAlwaysAuthorization()
         }
         
-        self.locationManager.startUpdatingLocation()
     }
     
     // MARK: - Beacon Location -
@@ -48,28 +49,27 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!,
         inRegion region: CLBeaconRegion!) {
             
-            
         // For each beacon around
-
         for clBeacon in beacons as [CLBeacon] {
-            for room in Facade.sharedInstance().rooms() {                   // For each beacon from our database
+            
+            // For each beacon from our database
+            for room in Facade.sharedInstance().rooms() {
+                
+                // If that's our
                 if room.beacon == clBeacon {
-                    println("J'ai trouvé des beacons dans les environs et qui m'appartient= \(room.beacon)")
 
-                    // If that's our
-                    if let lastProximity = room.beacon.lastSeenBeacon?.proximity {       // If the beacon has already apparead
-                        if clBeacon.proximity == lastProximity || clBeacon.proximity == .Unknown { // If the beacon proximity hasn't changed
+                    // If the beacon has already apparead
+                    if let lastProximity = room.beacon.lastSeenBeacon?.proximity {
+                        
+                        // If the beacon proximity hasn't changed
+                        if clBeacon.proximity == lastProximity || clBeacon.proximity == .Unknown {
                             return
-                        } else {
-                            println("\(room.beacon) changed proximity")
                         }
                     }
+                    
                     room.beacon.lastSeenBeacon = clBeacon
-                    println("J'envoie une requête au serveur pour indiquer ma présence avec ce beacon = \(room.beacon)")
                     Facade.sharedInstance().addMyPresenceToRoom(room.identifier,
-                        userEmail: Member.sharedInstance().email!.encodeBase64(), completionHandler: { (json, error) -> Void in
-                            println("add my presence json = \(json), error = \(error)")
-                    })
+                        userEmail: Member.sharedInstance().email!.encodeBase64(), completionHandler: { _ in })
                 }
             }
         }
@@ -99,7 +99,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     */
     func locationManager(manager: CLLocationManager!, didEnterRegion region: CLRegion!) {
         println("start monitoring/scaning because entered the region")
-
         self.locationManager.startRangingBeaconsInRegion(region as CLBeaconRegion)
         self.locationManager.startUpdatingLocation()
         
@@ -107,19 +106,18 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     // If we exit the area, there's no need to continue monitoring/scaning
     func locationManager(manager: CLLocationManager!, didExitRegion region: CLRegion!) {
-        Facade.sharedInstance().deleteMyPresenceFromRoom(Member.sharedInstance().email!.encodeBase64(), completionHandler: { (json, error) -> Void in
-            println("json = \(json), error = \(error)")
-        })
-
-        println("You exited the region")
+        Facade.sharedInstance().deleteMyPresenceFromRoom(Member.sharedInstance().email!.encodeBase64(),
+            completionHandler: { _ in })
     }
     
     // MARK: - Location Authorization -
     
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        
         switch(status) {
             case .Denied:
                 println("denied")
+            
             case .AuthorizedAlways:
                 println("AuthorizedAlways")
                 self.locationManager.startUpdatingLocation()

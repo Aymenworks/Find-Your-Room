@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Rebouh Aymen. All rights reserved.
 //
 
+import Foundation.NSObject
+
 /**
   The Room model
 */
@@ -19,15 +21,18 @@ public class Room: NSObject {
     lazy var persons: [Person] = [Person]()
     
     init(jsonRoom: JSON) {
-        super.init()
+        
         self.identifier = jsonRoom["ID"].string!.toInt()!
-        self.title = jsonRoom["TITLE"].string
+        self.title  = jsonRoom["TITLE"].string
         self.roomDescription = jsonRoom["DESCRIPTION"].string
         self.capacity = jsonRoom["CAPACITY"].string?.toInt()
+
         self.beacon = Beacon(name: self.title, uuid: NSUUID(UUIDString: jsonRoom["IBEACON_UUID"].string!)!,
-                             major: jsonRoom["IBEACON_MAJOR"].uInt16Value, minor: jsonRoom["IBEACON_MINOR"].uInt16Value)
+                                        major: jsonRoom["IBEACON_MAJOR"].uInt16Value,
+                                        minor: jsonRoom["IBEACON_MINOR"].uInt16Value)
         
-        println("room init je moniroting le beacon \(self.beacon)")
+        super.init()
+
         Facade.sharedInstance().startMonitoringBeacon(self.beacon)
         
         for person in jsonRoom["PERSONS"].arrayValue {
@@ -36,12 +41,14 @@ public class Room: NSObject {
     }
     
     required public init(coder aDecoder: NSCoder) {
-        super.init()
         self.identifier = aDecoder.decodeIntegerForKey("roomIdentifier")
         self.title = aDecoder.decodeObjectForKey("roomTitle") as? String
         self.roomDescription = aDecoder.decodeObjectForKey("roomDescription") as? String
         self.capacity = aDecoder.decodeIntegerForKey("roomCapacity")
         self.beacon = aDecoder.decodeObjectForKey("beacon") as Beacon
+        
+        super.init()
+
         self.persons = aDecoder.decodeObjectForKey("personsInsideRoom") as [Person]
     }
 }
@@ -49,6 +56,7 @@ public class Room: NSObject {
 extension Room: NSCoding {
     
     public func encodeWithCoder(aCoder: NSCoder) {
+        
         aCoder.encodeInteger(self.identifier, forKey: "roomIdentifier")
         aCoder.encodeObject(self.title, forKey: "roomTitle")
         aCoder.encodeObject(self.persons, forKey: "personsInsideRoom")
@@ -66,8 +74,6 @@ extension Room: NSCoding {
 }
 
 extension Room: Printable {
-    
-    /// What will be printed when printing the room object.
     override public var description: String {
         return "title = \(self.title), description = \(self.roomDescription?), capacity = \(self.capacity?), persons inside = \(self.persons)"
     }

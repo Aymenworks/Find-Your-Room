@@ -6,14 +6,19 @@
 //  Copyright (c) 2015 Rebouh Aymen. All rights reserved.
 //
 
+import Foundation.NSCoder
+import UIKit.UIImage
+
 // A member is a student who has signed up
 class Member: Person {
         
-    required init(firstName: String?, lastName: String?, email: String?,  formation: String?,
-        schoolId: String?, schoolName: String?, isAdmin: Bool?, profilPicture: UIImage?) {
+    required init(firstName: String?, lastName: String?, email: String?,
+        formation: String?, schoolId: String?, schoolName: String?,
+        isAdmin: Bool?, profilPicture: UIImage?) {
             
-            super.init(firstName: firstName, lastName: lastName, email: email,  formation: formation,
-            schoolId: schoolId, schoolName: schoolName,  isAdmin: isAdmin, profilPicture: profilPicture)
+        super.init(firstName: firstName, lastName: lastName, email: email,
+            formation: formation, schoolId: schoolId, schoolName: schoolName,
+            isAdmin: isAdmin, profilPicture: profilPicture)
     }
 
     required init(coder aDecoder: NSCoder) {

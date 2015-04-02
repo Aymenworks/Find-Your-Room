@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Rebouh Aymen. All rights reserved.
 //
 
+import UIKit.UIView
 
 extension UIView {
     

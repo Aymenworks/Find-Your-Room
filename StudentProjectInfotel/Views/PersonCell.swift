@@ -6,27 +6,32 @@
 //  Copyright (c) 2015 Rebouh Aymen. All rights reserved.
 //
 
+import UIKit
+
 class PersonCell: UITableViewCell {
     
-    @IBOutlet private var profilPicture: UIImageView!
-    @IBOutlet private var name: UILabel!
-    @IBOutlet private var formation: UILabel!
+    @IBOutlet private weak var profilPicture: UIImageView!
+    @IBOutlet private weak var name: UILabel!
+    @IBOutlet private weak var formation: UILabel!
     
     var person: Person! {
         didSet {
             self.name.text = "\(person.firstName!) \(person.lastName!)"
             self.formation.text = person.formation!
             self.profilPicture.image = person.profilPicture
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "downloadImage:", name: "DownloadImageNotification", object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "imageDownloaded:", name: "DownloadImageNotification", object: nil)
         }
     }
 
-    func downloadImage(notification: NSNotification) {
-        println("downloadImage l'image de \(self.person.fullName()) = \(self.person.profilPicture)")
-        self.profilPicture.image = self.person.profilPicture
-    }
+    // MARK: - Lifecycle -
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    // MARK: - NSNotification Image Downloaded -
+    
+    func imageDownloaded(notification: NSNotification) {
+        self.profilPicture.image = self.person.profilPicture
     }
 }

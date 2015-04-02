@@ -20,21 +20,21 @@ enum MenuAction: Int {
 */
 class RoomsListViewController: UIViewController {
     
-    @IBOutlet private var roomsTableView: UITableView!
-    @IBOutlet var addRoomButton: UIButton!
+    @IBOutlet private weak var roomsTableView: UITableView!
+    @IBOutlet private weak var addRoomButton: UIButton!
     
     lazy private var menu: MenuView = {
+        
         let menu = MenuView()
         menu.backgroundColor = UIColor(red: 25.0/255, green: 26.0/255, blue: 37.0/255, alpha: 1.0)
         menu.delegate = self
-        let items: [MenuItem] = {
-            var items = [MenuItem]()
-            for item in Facade.sharedInstance().memberMenu() {
-                items.append(MenuItem(image: UIImage(data: item["thumbnail"] as NSData)!))
-            }
-            return items
-        }()
+        
+        let items = Facade.sharedInstance().memberMenu().map() {
+            MenuItem(image: UIImage(data: $0["thumbnail"] as NSData)!)
+        }
+        
         menu.items = items
+        
         return menu
     }()
 
@@ -60,7 +60,6 @@ class RoomsListViewController: UIViewController {
     // MARK: - User Interaction -
     
     @IBAction func showMenu(sender: UIBarButtonItem) {
-        println("show menu")
         self.menu.setRevealed(!self.menu.revealed, animated: true)
     }
     
@@ -71,9 +70,6 @@ class RoomsListViewController: UIViewController {
         Facade.sharedInstance().roomsBySchoolId(Member.sharedInstance().schoolId!.encodeBase64(),
             completionHandler: { (jsonSchoolRooms, error) -> Void in
                 
-                
-                println("json response = \(jsonSchoolRooms)")
-                
                 if error == nil && jsonSchoolRooms != nil && jsonSchoolRooms!.isOk() {
                     
                     let schoolRooms = jsonSchoolRooms!["response"]["rooms"]
@@ -82,9 +78,9 @@ class RoomsListViewController: UIViewController {
                     self.roomsTableView.reloadData()
                     BFRadialWaveHUD.sharedInstance().dismiss()
 
-                } else {
-                    println("error rooms error = \(error)")
                 }
+                
+                // TODO: Manage errors
         })
     }
 
@@ -151,7 +147,6 @@ extension RoomsListViewController: UITableViewDelegate, UITableViewDataSource {
             return cell!
         }()
         
-    
         return customCell
     }
     

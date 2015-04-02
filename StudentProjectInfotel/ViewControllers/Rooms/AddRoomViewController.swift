@@ -10,15 +10,15 @@ import UIKit
 
 class AddRoomViewController: UIViewController {
 
-    @IBOutlet private var roomTitleTextField: UITextField!
-    @IBOutlet private var roomDescriptionTextView: UITextView!
-    @IBOutlet private var roomCapacityTextField: UITextField!
-    @IBOutlet private var beaconUUIDTextField: UITextField!
-    @IBOutlet private var beaconMajorTextField: UITextField!
-    @IBOutlet private var beaconMinorValueTextField: UITextField!
-    @IBOutlet var errorLabel: UILabel!
-    @IBOutlet var addRoomButton: UIButton!
-    @IBOutlet var formScrollView: UIScrollView!
+    @IBOutlet private weak var roomTitleTextField: UITextField!
+    @IBOutlet private weak var roomDescriptionTextView: UITextView!
+    @IBOutlet private weak var roomCapacityTextField: UITextField!
+    @IBOutlet private weak var beaconUUIDTextField: UITextField!
+    @IBOutlet private weak var beaconMajorTextField: UITextField!
+    @IBOutlet private weak var beaconMinorValueTextField: UITextField!
+    @IBOutlet private weak var errorLabel: UILabel!
+    @IBOutlet private weak var addRoomButton: UIButton!
+    @IBOutlet private weak var formScrollView: UIScrollView!
     
     // MARK: - Lifecycle -
 
@@ -29,7 +29,6 @@ class AddRoomViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - User Interaction -
@@ -54,24 +53,28 @@ class AddRoomViewController: UIViewController {
         let beaconMajor = self.beaconMajorTextField.text.toInt()!
         let beaconMinor = self.beaconMinorValueTextField.text.toInt()!
         
-        Facade.sharedInstance().addRoom(schoolId, roomTitle: roomTitle.encodeBase64(), roomDescription: roomDescription.encodeBase64(),
-            roomCapacity: roomCapacity, beaconUUID: beaconUUID, beaconMajor: beaconMajor, beaconMinor: beaconMinor) {
-                (jsonResponse, error) -> Void in
+        Facade.sharedInstance().addRoom(schoolId, roomTitle: roomTitle.encodeBase64(),
+            roomDescription: roomDescription.encodeBase64(),
+            roomCapacity: roomCapacity, beaconUUID: beaconUUID,
+            beaconMajor: beaconMajor, beaconMinor: beaconMinor) { (jsonResponse, error) -> Void in
                 
-                if error == nil && jsonResponse != nil && jsonResponse!.isOk() {
-                    let schoolRooms = jsonResponse!["response"]["rooms"]
-                    Facade.sharedInstance().addRoomsFromJSON(schoolRooms)
-                    BFRadialWaveHUD.sharedInstance().dismiss()
-                    self.navigationController!.popViewControllerAnimated(true)
+            if error == nil && jsonResponse != nil && jsonResponse!.isOk() {
                 
-                } else {
-                    JSSAlertView().warning(self, title: NSLocalizedString("oops", comment: ""),
-                        text: NSLocalizedString("genericError", comment: ""))
-                }
+                let schoolRooms = jsonResponse!["response"]["rooms"]
+                Facade.sharedInstance().addRoomsFromJSON(schoolRooms)
+                BFRadialWaveHUD.sharedInstance().dismiss()
+                self.navigationController!.popViewControllerAnimated(true)
+            
+            } else {
+                
+                JSSAlertView().warning(self, title: NSLocalizedString("oops", comment: ""),
+                    text: NSLocalizedString("genericError", comment: ""))
+            }
         }
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        
         self.addRoomButton.enabled = self.canAddRoomButtonBeEnabled()
         self.view.endEditing(true)
         
@@ -82,7 +85,7 @@ class AddRoomViewController: UIViewController {
     
     // MARK: - Inputs Validation -
 
-    func hasRoomInformations() -> Bool {
+    private func hasRoomInformations() -> Bool {
         return (!self.roomTitleTextField.text.isEmpty && !self.roomDescriptionTextView.text.isEmpty
             && !self.roomCapacityTextField.text.isEmpty)
     }
@@ -92,7 +95,7 @@ class AddRoomViewController: UIViewController {
     
     :returns: true if the email school Id textfield isn't empty, false if not
     */
-    func hasCorrectBeaconUUID() -> Bool {
+    private func hasCorrectBeaconUUID() -> Bool {
         let regex = "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
         return NSPredicate(format: "SELF MATCHES[c] %@", regex)!.evaluateWithObject(self.beaconUUIDTextField.text)
     }
@@ -102,11 +105,11 @@ class AddRoomViewController: UIViewController {
     
     :returns: true if the formation textfield isn't empty, false if not
     */
-    func hasMajorAndMinorValue() -> Bool {
+    private func hasMajorAndMinorValue() -> Bool {
         return (!self.beaconMajorTextField.text.isEmpty && !self.beaconMinorValueTextField.text.isEmpty)
     }
 
-    func canAddRoomButtonBeEnabled() -> Bool {
+    private func canAddRoomButtonBeEnabled() -> Bool {
         return self.hasRoomInformations() && self.hasCorrectBeaconUUID() && self.hasMajorAndMinorValue()
     }
 }
@@ -118,10 +121,10 @@ extension AddRoomViewController: UITextFieldDelegate {
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange,
         replacementString string: String) -> Bool {
             
-            textField.text = (textField.text as NSString).stringByReplacingCharactersInRange(range, withString: string)
-            self.addRoomButton.enabled = self.canAddRoomButtonBeEnabled()
+        textField.text = (textField.text as NSString).stringByReplacingCharactersInRange(range, withString: string)
+        self.addRoomButton.enabled = self.canAddRoomButtonBeEnabled()
             
-            return false
+        return false
     }
 
     func textFieldShouldClear(textField: UITextField) -> Bool {
@@ -132,6 +135,7 @@ extension AddRoomViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(textField: UITextField) -> Bool {
         
         if DeviceInformation.isIphone5() {
+            
             if textField == self.roomCapacityTextField {
                 self.formScrollView.setContentOffset(CGPointMake(0.0, 90.0), animated: true)
             
@@ -151,19 +155,29 @@ extension AddRoomViewController: UITextFieldDelegate {
         */
         switch(textField) {
             
-            case self.roomTitleTextField:   self.roomDescriptionTextView.becomeFirstResponder()
-            case self.roomDescriptionTextView:    self.roomCapacityTextField.becomeFirstResponder()
-            case self.roomCapacityTextField:    self.beaconUUIDTextField.becomeFirstResponder()
+            case self.roomTitleTextField:
+                self.roomDescriptionTextView.becomeFirstResponder()
+            
+            case self.roomDescriptionTextView:
+                self.roomCapacityTextField.becomeFirstResponder()
+            
+            case self.roomCapacityTextField:
+                self.beaconUUIDTextField.becomeFirstResponder()
+            
             case self.beaconUUIDTextField:
                 self.errorLabel.text = self.hasCorrectBeaconUUID() ? "" : NSLocalizedString("checkBeaconUUID", comment: "")
                 self.beaconMajorTextField.becomeFirstResponder()
             
-            case self.beaconMajorTextField:    self.beaconMinorValueTextField.becomeFirstResponder()
+            case self.beaconMajorTextField:
+                self.beaconMinorValueTextField.becomeFirstResponder()
                 
             case self.beaconMinorValueTextField:
+                
                 if self.canAddRoomButtonBeEnabled() {
                     self.addRoom()
+                    
                 } else {
+                    
                     textField.resignFirstResponder()
                     let alertView = JSSAlertView().show(self, title: NSLocalizedString("addRoom", comment: ""), text: NSLocalizedString("fillAllFields", comment: ""))
                     alertView.setTextTheme(.Dark)

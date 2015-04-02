@@ -6,12 +6,14 @@
 //  Copyright (c) 2014 Rebouh Aymen. All rights reserved.      
 //
 
+import UIKit
+
 class RoomCell: UITableViewCell {
     
-    @IBOutlet private var numberOfPersons: UILabel!
-    @IBOutlet private var leftColorView: UIView!
-    @IBOutlet private var title: UILabel!
-    @IBOutlet var roomDescription: UILabel!
+    @IBOutlet private weak var numberOfPersons: UILabel!
+    @IBOutlet private weak var leftColorView: UIView!
+    @IBOutlet private weak var title: UILabel!
+    @IBOutlet private weak var roomDescription: UILabel!
     
     var themeColor: UIColor!  {
         didSet {

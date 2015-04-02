@@ -6,21 +6,37 @@
 //  Copyright (c) 2014 Rebouh Aymen. All rights reserved.
 //
 
+import UIKit
+
 /**
   WalkthroughViewController controller. It take care to swipe the differents views during the walkthrough app.
 */
 class WalkthroughViewController: UIViewController {
     
-    @IBOutlet private var myScrollView: UIScrollView!
-    @IBOutlet private var pageControl: UIPageControl!
+    @IBOutlet private weak var myScrollView: UIScrollView!
+    @IBOutlet private weak var pageControl: UIPageControl!
+    private let contentView = UIView()
+
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        println("initWithcoder walkthrough")
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        println("awakefromnib walkthrough")
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
+        println("prepareForSegue walkthrough")
+    }
     
     private var oldPage: Int = 0 {
         didSet {
             self.pageControl.currentPage = self.oldPage
         }
     }
-    
-    private let contentView = UIView()
 
     private lazy var listPages: [UIViewController] =
         [
@@ -35,6 +51,10 @@ class WalkthroughViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController!.navigationBarHidden = true
         self.pageControl.numberOfPages = self.listPages.count
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         self.prepareWalkthroughViews()
     }
 
@@ -51,7 +71,7 @@ class WalkthroughViewController: UIViewController {
     
     Copied from an old personal project
     */
-    func prepareWalkthroughViews() {
+    private func prepareWalkthroughViews() {
         
         // I use a contentView with the scroll view because of the auto layout.
         var i = CGFloat(self.listPages.count-1)
@@ -67,7 +87,7 @@ class WalkthroughViewController: UIViewController {
         self.myScrollView.addSubview(self.contentView)
         let scrollWidth  = CGFloat(self.listPages.count) * self.view.frame.width
         let scrollHeight = self.myScrollView.frame.height
-        self.myScrollView.contentSize = CGSizeMake(scrollWidth, self.contentView.frame.height)
+        self.myScrollView.contentSize = CGSize(width: scrollWidth, height: self.contentView.frame.height)
     }
 }
 

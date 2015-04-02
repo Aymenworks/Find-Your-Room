@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Rebouh Aymen. All rights reserved.
 //
 
-class DeviceInformation {
+public class DeviceInformation {
     
-    class func isIphone5() -> Bool {
-        return UIScreen.mainScreen().bounds.size.height == 568
+    public class func isIphone5() -> Bool {
+        return UIScreen.mainScreen().bounds.size.height == 568.0
     }
 }

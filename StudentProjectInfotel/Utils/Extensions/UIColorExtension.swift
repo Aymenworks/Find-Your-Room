@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Rebouh Aymen. All rights reserved.
 //
 
-import Foundation
+import UIKit.UIColor
 
 typealias ColorTuple = (red: CGFloat, green: CGFloat, blue: CGFloat)
 

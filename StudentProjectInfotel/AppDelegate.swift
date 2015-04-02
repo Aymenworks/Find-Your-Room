@@ -16,7 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Init the location manager ( also ask location permission )
         Facade.sharedInstance()
-        UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Medium", size: 18)! ]
+        UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Medium",
+            size: 18)! ]
 
         return true
     }

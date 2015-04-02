@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Rebouh Aymen. All rights reserved.
 //
 
+import Foundation.NSObject
+import UIKit.UIImage
 
 class Person: NSObject {
 
@@ -25,11 +27,15 @@ class Person: NSObject {
         }
     }
     
+    // MARK: - Lifecycle -
+
     init (jsonPerson: JSON) {
         self.lastName = jsonPerson["LASTNAME"].string
         self.firstName = jsonPerson["FIRSTNAME"].string
         self.email = jsonPerson["USER_EMAIL"].string
         self.formation = jsonPerson["FORMATION"].string
+        
+        super.init()
     }
     
     required init(firstName: String?, lastName: String?, email: String?,  formation: String?,
@@ -42,7 +48,9 @@ class Person: NSObject {
             self.schoolName = schoolName
             self.isAdmin = isAdmin
             self.profilPicture = profilPicture
-    }
+            
+            super.init()
+        }
     
     required init(coder aDecoder: NSCoder) {
         self.firstName = aDecoder.decodeObjectForKey("firstName") as? String
@@ -56,13 +64,16 @@ class Person: NSObject {
         if let profilPictureData = aDecoder.decodeObjectForKey("profilPicture") as? NSData {
             self.profilPicture = UIImage(data: profilPictureData)
         }
-
     }
 }
+
+// MARK: - NSCoding Conformance Protocol -
 
 extension Person: NSCoding {
     
      func encodeWithCoder(aCoder: NSCoder) {
+        
+        // TODO: Not logical to check all properties ..
         
         if let firstName = self.firstName? {
             aCoder.encodeObject(firstName, forKey: "firstName")
@@ -97,6 +108,8 @@ extension Person: NSCoding {
         }
     }
 }
+
+// MARK: - Printable Conformance Protocol -
 
 extension Person: Printable {
     

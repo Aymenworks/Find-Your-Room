@@ -6,6 +6,9 @@
 //  Copyright (c) 2015 Rebouh Aymen. All rights reserved.
 //
 
+import Foundation.NSError
+import UIKit.UIImage
+
 // The google public key necesary to fetch the user url profile picture
 private let publicKey = "AIzaSyCO_HPYCsvBm2Qwvszsa6pW7qjiDZ5Cwho"
 
@@ -30,9 +33,9 @@ class NetworkManager {
     */
     func authenticateUserWithEmail(email: String, password: String, completionHandler: (JSON?, NSError?) -> Void) {
         request(.POST, "http://www.aymenworks.fr/beacon/authenticateUser", parameters:["email": email, "password": password])
-            .validate()
-            .responseSwiftyJSON { (_, _, jsonResponse, error) in
-                completionHandler(jsonResponse, error)
+        .validate()
+        .responseSwiftyJSON { (_, _, jsonResponse, error) in
+            completionHandler(jsonResponse, error)
         }
     }
     
@@ -51,9 +54,9 @@ class NetworkManager {
         formation: String, schoolId: String, completionHandler: (JSON?, NSError?) -> Void) {
             
         request(.POST, "http://www.aymenworks.fr/beacon/signUpUserWithPassword", parameters:["email": email, "lastName": lastName, "firstName": firstName, "password": password, "formation" : formation, "schoolId" : schoolId])
-            .validate()
-            .responseSwiftyJSON { (request, httpResponse, jsonResponse, error) in
-                completionHandler(jsonResponse, error)
+        .validate()
+        .responseSwiftyJSON { (request, httpResponse, jsonResponse, error) in
+            completionHandler(jsonResponse, error)
         }
     }
     
@@ -73,9 +76,9 @@ class NetworkManager {
             
         request(.POST, "http://www.aymenworks.fr/beacon/authenticateUserWithFacebookOrGooglePlus",
             parameters:["email": email, "lastName": lastName, "firstName": firstName])
-            .validate()
-            .responseSwiftyJSON { (_, _, jsonResponse, error) in
-                completionHandler(jsonResponse, error)
+        .validate()
+        .responseSwiftyJSON { (_, _, jsonResponse, error) in
+            completionHandler(jsonResponse, error)
         }
     }
     
@@ -89,10 +92,10 @@ class NetworkManager {
     */
     func facebookProfilePicture(userId: String, completionHandler: (UIImage?) -> Void) {
         request(.GET, "https://graph.facebook.com/\(userId)/picture?type=large")
-            .validate()
-            .responseImage { (_, _, image, _) -> Void in
-                completionHandler(image)
-            }
+        .validate()
+        .responseImage { (_, _, image, _) -> Void in
+            completionHandler(image)
+        }
     }
     
     // MARK:  Google Plus
@@ -117,11 +120,11 @@ class NetworkManager {
         func googlePlusProfilePictureWithURL(url: String, andFirstName firstName: String, #lastName: String,
             completionHandler: (String?, String?, UIImage?, NSError?) -> Void) {
                 
-                request(.GET, url)
-                    .validate()
-                    .responseImage { (_, _, image, error) -> Void in
-                        completionHandler(firstName, lastName, image, error)
-                    }
+            request(.GET, url)
+            .validate()
+            .responseImage { (_, _, image, error) -> Void in
+                completionHandler(firstName, lastName, image, error)
+            }
         }
         
         /**
@@ -135,19 +138,19 @@ class NetworkManager {
             
             // We get the url profile picture with the user id
             request(.GET, "https://www.googleapis.com/plus/v1/people/\(userId)?fields=image,name&key=\(publicKey)")
-                .validate()
-                .responseSwiftyJSON { (_, _, jsonResponse, error) in
+            .validate()
+            .responseSwiftyJSON { (_, _, jsonResponse, error) in
                     
-                    let lastName =  jsonResponse["name"]["familyName"].string
-                    let firstName =  jsonResponse["name"]["givenName"].string
+                let lastName =  jsonResponse["name"]["familyName"].string
+                let firstName =  jsonResponse["name"]["givenName"].string
                     
-                    if let url = jsonResponse["image"]["url"].string {
-                        googlePlusProfilePictureWithURL(url, andFirstName: firstName!, lastName: lastName!, completionHandler)
-                            
-                    } else {
-                        completionHandler(firstName: firstName, lastName: lastName, profilPicture: nil, error: error)
-                    }
+                if let url = jsonResponse["image"]["url"].string {
+                    googlePlusProfilePictureWithURL(url, andFirstName: firstName!, lastName: lastName!, completionHandler)
+                    
+                } else {
+                    completionHandler(firstName: firstName, lastName: lastName, profilPicture: nil, error: error)
                 }
+            }
         }
         
         googlePlusProfileWithUserId(userId, completionHandler)
@@ -163,9 +166,9 @@ class NetworkManager {
     */
     func serverProfilPictureWithURL(urlImage: String, completionHandler: (UIImage?) -> Void) {
         request(.GET, urlImage)
-            .validate()
-            .responseImage { (_, _, image, _) -> Void in
-                completionHandler(image)
+        .validate()
+        .responseImage { (_, _, image, _) -> Void in
+            completionHandler(image)
         }
     }
     
@@ -207,9 +210,9 @@ class NetworkManager {
         let urlRequest = urlFormating("http://www.aymenworks.fr/beacon/uploadPicture", withImageData: imageData)
         
         upload(urlRequest.newUrl, urlRequest.data)
-            .validate()
-            .responseSwiftyJSON { (request, response, JSON, error) in
-                completionHandler()
+        .validate()
+        .responseSwiftyJSON { (request, response, JSON, error) in
+            completionHandler()
         }
     }
     
@@ -224,9 +227,9 @@ class NetworkManager {
     func fetchUserProfile(email: String, completionHandler: (JSON?, NSError?) -> Void) {
         request(.POST, "http://www.aymenworks.fr/beacon/fetchUserProfile",
             parameters:["email": email])
-            .validate()
-            .responseSwiftyJSON { (_, _, jsonResponse, error) in
-                completionHandler(jsonResponse, error)
+        .validate()
+        .responseSwiftyJSON { (_, _, jsonResponse, error) in
+            completionHandler(jsonResponse, error)
         }
     }
     
@@ -244,9 +247,9 @@ class NetworkManager {
         formation: String, schoolId: String, completionHandler: (JSON?, NSError?) -> Void) {
             
             request(.POST, "http://www.aymenworks.fr/beacon/updateUserAccount", parameters:["email": email, "lastName": lastName, "firstName": firstName, "password": password, "formation" : formation, "schoolId" : schoolId])
-                .validate()
-                .responseSwiftyJSON { (request, httpResponse, jsonResponse, error) in
-                    completionHandler(jsonResponse, error)
+            .validate()
+            .responseSwiftyJSON { (request, httpResponse, jsonResponse, error) in
+                completionHandler(jsonResponse, error)
             }
     }
 
@@ -259,9 +262,9 @@ class NetworkManager {
     */
     func roomsBySchoolId(schoolId: String, completionHandler: (JSON?, NSError?) -> Void) {
         request(.POST, "http://www.aymenworks.fr/beacon/schoolDataByID", parameters:["schoolId": schoolId])
-            .validate()
-            .responseSwiftyJSON { (_, _, jsonResponse, error) in
-                completionHandler(jsonResponse, error)
+        .validate()
+        .responseSwiftyJSON { (_, _, jsonResponse, error) in
+            completionHandler(jsonResponse, error)
         }
     }
     
@@ -274,10 +277,12 @@ class NetworkManager {
         var numberOfImagesDownloaded = 0
         
         Facade.sharedInstance().rooms().map({ numberOfImagesToDownload += $0.persons.count })
-        var pictureUrl: String
+        
         for room in Facade.sharedInstance().rooms() {
             for person in room.persons {
-                pictureUrl = "http://www.aymenworks.fr/assets/beacon/\(person.email!.md5())/picture.jpg"
+                
+                let pictureUrl = "http://www.aymenworks.fr/assets/beacon/\(person.email!.md5())/picture.jpg"
+                
                 Facade.sharedInstance().serverProfilPictureWithURL(pictureUrl) { image -> Void in
                     NSNotificationCenter.defaultCenter().postNotificationName("DownloadImageNotification", object: nil)
                     person.profilPicture = image
@@ -309,9 +314,9 @@ class NetworkManager {
             request(.POST, "http://www.aymenworks.fr/beacon/addRoom", parameters:["schoolId": schoolId, "roomTitle": roomTitle,
                 "roomDescription": roomDescription, "roomCapacity": roomCapacity, "beaconUUID": beaconUUID, "beaconMajor": beaconMajor,
                 "beaconMinor": beaconMinor])
-                .validate()
-                .responseSwiftyJSON { (_, _, jsonResponse, error) in
-                    completionHandler(jsonResponse, error)
+            .validate()
+            .responseSwiftyJSON { (_, _, jsonResponse, error) in
+                completionHandler(jsonResponse, error)
             }
     }
     
@@ -326,9 +331,9 @@ class NetworkManager {
         println("j'envoie room = \(roomId) et email = \(userEmail)")
         request(.POST, "http://www.aymenworks.fr/beacon/addMyPresenceInRoom", parameters:["roomId": roomId,
             "userEmail": userEmail])
-            .validate()
-            .responseSwiftyJSON { (_, _, jsonResponse, error) in
-                completionHandler(jsonResponse, error)
+        .validate()
+        .responseSwiftyJSON { (_, _, jsonResponse, error) in
+            completionHandler(jsonResponse, error)
         }
     }
     
@@ -341,9 +346,9 @@ class NetworkManager {
     */
     func deleteMyPresenceFromRoom(userEmail: String, completionHandler: (JSON?, NSError?) -> Void) {
         request(.POST, "http://www.aymenworks.fr/beacon/deleteMyPresenceFromRoom", parameters:["userEmail": userEmail])
-            .validate()
-            .responseSwiftyJSON { (_, _, jsonResponse, error) in
-                completionHandler(jsonResponse, error)
+        .validate()
+        .responseSwiftyJSON { (_, _, jsonResponse, error) in
+            completionHandler(jsonResponse, error)
         }
     }
     

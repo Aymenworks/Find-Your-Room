@@ -6,21 +6,23 @@
 //  Copyright (c) 2015 Rebouh Aymen. All rights reserved.
 //
 
+import CoreLocation
+
 /**
   The beacon model.
 */
 public class Beacon: NSObject {
     
-    private(set) var name: String! = ""
-    private var uuid: NSUUID!
-    private var major: CLBeaconMajorValue!
-    private var minor: CLBeaconMinorValue!
-    private(set) var region: CLBeaconRegion!
+    let name: String! = " "
+    let uuid: NSUUID!
+    let major: CLBeaconMajorValue!
+    let minor: CLBeaconMinorValue!
+    let region: CLBeaconRegion!
     
     /// This property stores the last CLBeacon instance seen for the current beacon. This is used to display the proximity information.
     var lastSeenBeacon: CLBeacon?
     
-    // MARK: - Initialization -
+    // MARK: - Lyfecicle -
     
     init(name: String, uuid: NSUUID, major: CLBeaconMajorValue, minor: CLBeaconMinorValue) {
         self.name = name
@@ -29,7 +31,12 @@ public class Beacon: NSObject {
         self.minor = minor
         region = CLBeaconRegion(proximityUUID: self.uuid, major: self.major, minor: self.minor, identifier: self.name)
         region.notifyEntryStateOnDisplay = true
+        
+        super.init()
     }
+    
+    // MARK: - NSCoding Protocol Conformance -
+    
     
     required public init(coder aDecoder: NSCoder) {
         super.init()
@@ -40,6 +47,8 @@ public class Beacon: NSObject {
         self.region = aDecoder.decodeObjectForKey("region") as CLBeaconRegion
     }
 }
+
+// MARK: - NSCoding Protocol Conformance -
 
 extension Beacon: NSCoding {
     

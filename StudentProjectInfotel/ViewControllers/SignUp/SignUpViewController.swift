@@ -6,22 +6,24 @@
 //  Copyright (c) 2015 Rebouh Aymen. All rights reserved.
 //
 
+import UIKit
+
 /**
   SignUpViewController controller. Loaded when the user click on the sign up button. It'll send some user data (photo,
     name, email and password ) to the server and redirect the user to the home view controller.
 */
 class SignUpViewController: UIViewController {
     
-    @IBOutlet private var profilPictureButton: UIButton!
-    @IBOutlet private var firstNameTextField: UITextField!
-    @IBOutlet private var lastNameTextField: UITextField!
-    @IBOutlet private var emailTextField: UITextField!
-    @IBOutlet private var passwordTextField: UITextField!
-    @IBOutlet private var formationTextField: UITextField!
-    @IBOutlet private var schoolIdTextField: UITextField!
-    @IBOutlet private var signUpBarButtonItem: UIBarButtonItem!
-    @IBOutlet private var errorLabel: UILabel!
-    @IBOutlet var formScrollView: UIScrollView!
+    @IBOutlet private weak var profilPictureButton: UIButton!
+    @IBOutlet private weak var firstNameTextField: UITextField!
+    @IBOutlet private weak var lastNameTextField: UITextField!
+    @IBOutlet private weak var emailTextField: UITextField!
+    @IBOutlet private weak var passwordTextField: UITextField!
+    @IBOutlet private weak var formationTextField: UITextField!
+    @IBOutlet private weak var schoolIdTextField: UITextField!
+    @IBOutlet private weak var signUpBarButtonItem: UIBarButtonItem!
+    @IBOutlet private weak var errorLabel: UILabel!
+    @IBOutlet private weak var formScrollView: UIScrollView!
     
     /// Setted lazy because the user can choose to not send a picture
     lazy private var imagePickerController: UIImagePickerController = {
@@ -76,7 +78,7 @@ class SignUpViewController: UIViewController {
     @IBAction func signUp() {
         
         BFRadialWaveHUD.showInView(self.navigationController!.view, withMessage: NSLocalizedString("signingUp", comment: ""))
-        self.errorLabel.text = ""
+        self.errorLabel.text = " "
         self.view.endEditing(true)
         
         // Let's do encode inputs and hash the password
@@ -146,13 +148,13 @@ class SignUpViewController: UIViewController {
     
     // MARK: - User Interface -
 
-    func showPopupSomethingWrong() {
+    private func showPopupSomethingWrong() {
         BFRadialWaveHUD.sharedInstance().dismiss()
 
         JSSAlertView().danger(self, title: self.navigationItem.title!, text: NSLocalizedString("genericError", comment: ""))
     }
     
-    func userHasSignedUp() {
+    private func userHasSignedUp() {
         BFRadialWaveHUD.sharedInstance().showSuccessWithMessage(NSLocalizedString("signedUp", comment: ""))
         Facade.sharedInstance().saveMemberProfil()
         
@@ -170,7 +172,7 @@ class SignUpViewController: UIViewController {
     
     :returns: true if the name/lastname textfield aren't empty, false if not
     */
-    func hasName() -> Bool {
+    private func hasName() -> Bool {
         return (!self.firstNameTextField.text.isEmpty && !self.lastNameTextField.text.isEmpty)
     }
     
@@ -179,7 +181,7 @@ class SignUpViewController: UIViewController {
     
     :returns: true if the email textfield isn't empty, false if not
     */
-    func hasValidEmail() -> Bool {
+    private func hasValidEmail() -> Bool {
         // REGEX FROM http://stackoverflow.com/questions/3139619/check-that-an-email-address-is-valid-on-ios
         let regex = ".+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*"
         return NSPredicate(format: "SELF MATCHES[c] %@", regex)!.evaluateWithObject(self.emailTextField.text)
@@ -190,7 +192,7 @@ class SignUpViewController: UIViewController {
     
     :returns: true if the email school Id textfield isn't empty, false if not
     */
-    func hasSchoolId() -> Bool {
+    private func hasSchoolId() -> Bool {
         return (!self.schoolIdTextField.text.isEmpty)
     }
     
@@ -199,7 +201,7 @@ class SignUpViewController: UIViewController {
     
     :returns: true if the formation textfield isn't empty, false if not
     */
-    func hasFormation() -> Bool {
+    private func hasFormation() -> Bool {
         return (!self.formationTextField.text.isEmpty)
     }
     
@@ -208,7 +210,7 @@ class SignUpViewController: UIViewController {
     
     :returns: true if the previous condition is valid, false if not
     */
-    func hasValidPassword() -> Bool {
+    private func hasValidPassword() -> Bool {
         let password = self.passwordTextField.text.stringByReplacingOccurrencesOfString(" ", withString: "")
         return (countElements(password) >= 4)
     }
@@ -219,7 +221,7 @@ class SignUpViewController: UIViewController {
 
     :returns: True  if an input is empty or contains less than four characters, false if not.
     */
-    func canSignUpButtonBeEnabled() -> Bool {
+    private func canSignUpButtonBeEnabled() -> Bool {
         return self.hasName() && self.hasValidEmail() && self.hasSchoolId() && self.hasValidPassword()
             && self.hasFormation()
     }
@@ -255,7 +257,7 @@ extension SignUpViewController: UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        self.errorLabel.text = ""
+        self.errorLabel.text = " "
 
         // If that's an iPhone 5/5s/5c
         if DeviceInformation.isIphone5() {

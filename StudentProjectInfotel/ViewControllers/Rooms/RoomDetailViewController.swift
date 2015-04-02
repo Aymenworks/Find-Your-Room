@@ -15,31 +15,30 @@ import UIKit
 */
 class RoomDetailViewController: UIViewController {
     
+    @IBOutlet private weak var personsTableView: UITableView!
+    @IBOutlet private weak var roomTitleLabel: UILabel!
+    @IBOutlet private weak var roomDescriptionLabel: UILabel!
+    @IBOutlet private weak var numberOfPersonsLabel: UILabel!
+    @IBOutlet private weak var noPersonsFoundView: UIView!
+    
     // Not setted private because used in the RoomsListViewController at the prepare for segue event
     // See `RoomsListViewController`
     var room: Room!
-    
-    @IBOutlet private var personsTableView: UITableView!
-    @IBOutlet private var roomTitleLabel: UILabel!
-    @IBOutlet private var roomDescriptionLabel: UILabel!
-    @IBOutlet private var numberOfPersonsLabel: UILabel!
-    @IBOutlet var noPersonsFoundView: UIView!
-    private var personsFound: Bool  {
-        return !self.room.persons.isEmpty
-    }
 
     // MARK: - Lifecycle -
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        self.personsTableView.tableFooterView = UIView() // remove the empty lines at the end of the table view
+        
         self.title = self.room.title
-        // The room propertu has been setted on the prepare for segue. See `RoomsListViewController`
+        
+        // The room property has been setted on the prepare for segue. See `RoomsListViewController`
         self.roomTitleLabel.text = self.room.title
         self.roomDescriptionLabel.text = self.room.roomDescription
         self.numberOfPersonsLabel.text = String(self.room.persons.count)
         
-        if !self.personsFound {
+        if !self.room.persons.isEmpty {
             self.personsTableView.hidden = true
             self.noPersonsFoundView.hidden = false
         }
