@@ -10,17 +10,17 @@ import Foundation.NSCoder
 import UIKit.UIImage
 
 // A member is a student who has signed up
-class Member: Person {
-        
+final class Member: Person {
+    
     required init(firstName: String?, lastName: String?, email: String?,
         formation: String?, schoolId: String?, schoolName: String?,
         isAdmin: Bool?, profilPicture: UIImage?) {
             
-        super.init(firstName: firstName, lastName: lastName, email: email,
-            formation: formation, schoolId: schoolId, schoolName: schoolName,
-            isAdmin: isAdmin, profilPicture: profilPicture)
+            super.init(firstName: firstName, lastName: lastName, email: email,
+                formation: formation, schoolId: schoolId, schoolName: schoolName,
+                isAdmin: isAdmin, profilPicture: profilPicture)
     }
-
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -28,14 +28,14 @@ class Member: Person {
     class func sharedInstance() -> Member {
         struct Singleton {
             static var instance = Member(   firstName: session.objectForKey("firstName") as? String,
-                                            lastName: session.objectForKey("lastName") as? String,
-                                            email: session.objectForKey("email") as? String,
-                                            formation: session.objectForKey("formation") as? String,
-                                            schoolId: session.objectForKey("schoolId") as? String,
-                                            schoolName: session.objectForKey("schoolName") as? String,
-                                            isAdmin: session.boolForKey("isAdmin"),
-                                            profilPicture: session.objectForKey("profilPicture") == nil ?
-                                                nil : UIImage(data: session.objectForKey("profilPicture") as NSData))
+                lastName: session.objectForKey("lastName") as? String,
+                email: session.objectForKey("email") as? String,
+                formation: session.objectForKey("formation") as? String,
+                schoolId: session.objectForKey("schoolId") as? String,
+                schoolName: session.objectForKey("schoolName") as? String,
+                isAdmin: session.boolForKey("isAdmin"),
+                profilPicture: session.objectForKey("profilPicture") == nil ?
+                    nil : UIImage(data: session.objectForKey("profilPicture") as! NSData))
         }
         
         return Singleton.instance

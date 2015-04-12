@@ -9,11 +9,11 @@
 import UIKit
 
 /**
-  The detail home view controller where more information about a room can be find.
-  It take care of displaying the list of students presents on this room and some others informations
-  like the number of students present on theses rooms, room descrption, etc ..
+The detail home view controller where more information about a room can be find.
+It take care of displaying the list of students presents on this room and some others informations
+like the number of students present on theses rooms, room descrption, etc ..
 */
-class RoomDetailViewController: UIViewController {
+final class RoomDetailViewController: UIViewController {
     
     @IBOutlet private weak var personsTableView: UITableView!
     @IBOutlet private weak var roomTitleLabel: UILabel!
@@ -24,7 +24,7 @@ class RoomDetailViewController: UIViewController {
     // Not setted private because used in the RoomsListViewController at the prepare for segue event
     // See `RoomsListViewController`
     var room: Room!
-
+    
     // MARK: - Lifecycle -
     
     override func viewDidLoad() {
@@ -49,7 +49,7 @@ class RoomDetailViewController: UIViewController {
     }
     
     // MARK: - User Interaction -
-
+    
     @IBAction func didClickOnBackButton(sender: UIBarButtonItem) {
         self.navigationController!.popViewControllerAnimated(true)
     }
@@ -62,26 +62,19 @@ extension RoomDetailViewController: UITableViewDataSource,UITableViewDelegate {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-
+    
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return NSLocalizedString("studentPresent", comment: "")
     }
     
+    private struct Storyboard {
+        static let cellReuseIdenifier = "PersonCell"
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let customCell: PersonCell = {
-            
-           var cell = tableView.dequeueReusableCellWithIdentifier("PersonCell") as? PersonCell
-            if cell == nil {
-                cell = UITableViewCell(style: .Subtitle, reuseIdentifier: "PersonCell") as? PersonCell
-            }
-                
-            cell!.person = self.room.persons[indexPath.row]
-            
-            return cell!
-        }()
-        
-        return customCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.cellReuseIdenifier, forIndexPath: indexPath) as! PersonCell
+        cell.person = self.room.persons[indexPath.row]
+        return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

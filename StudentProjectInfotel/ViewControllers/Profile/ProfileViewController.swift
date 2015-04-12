@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
     
     @IBOutlet private weak var profilPictureButton: UIButton!
     @IBOutlet private weak var firstNameTextField: UITextField!
@@ -25,7 +25,7 @@ class ProfileViewController: UIViewController {
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
         return imagePicker
-    }()
+        }()
     
     // MARK: - Lifecycle
     
@@ -52,7 +52,7 @@ class ProfileViewController: UIViewController {
     :param: sender not used
     */
     @IBAction func chooseProfilPicture() {
-        self.presentViewController(self.imagePickerController, animated: true, nil)
+        self.presentViewController(self.imagePickerController, animated: true, completion: nil)
     }
     
     @IBAction func didClickOnBackButton(sender: UIBarButtonItem) {
@@ -76,54 +76,53 @@ class ProfileViewController: UIViewController {
             lastName: lastName.encodeBase64(), firstName: firstName.encodeBase64(),
             formation:formation.encodeBase64(), schoolId: schoolId.encodeBase64()) { (jsonResponse, error) -> Void in
                 
-            // If everything is fine..
-            if error == nil && jsonResponse != nil && jsonResponse!.isOk() {
-                
-                // If the user profile has been updated
-                if jsonResponse!["response"]["profilUpdateSuccess"].boolValue {
+                // If everything is fine..
+                if error == nil, let jsonResponse = jsonResponse where jsonResponse.isOk() {
                     
-                    Member.sharedInstance().firstName = firstName
-                    Member.sharedInstance().lastName = lastName
-                    Member.sharedInstance().email = email
-                    Member.sharedInstance().formation = formation
-                    Member.sharedInstance().schoolId = schoolId
-                    Facade.sharedInstance().saveMemberProfil()
-
-                    let schoolRooms = jsonResponse!["response"]["rooms"]
-                    Facade.sharedInstance().addRoomsFromJSON(schoolRooms)
-                    Facade.sharedInstance().fetchPersonsProfilPictureInsideRoom()
-                    
-                    if let imageUserProfil = self.profilPictureButton.backgroundImageForState(.Normal) {
-                        Facade.sharedInstance().uploadUserProfilPicture(imageUserProfil, withEmail: Member.sharedInstance().email!.encodeBase64(),
-                            completionHandler: { () -> Void in
-                                Member.sharedInstance().profilPicture = imageUserProfil
-                                Facade.sharedInstance().saveMemberProfil()
-                                self.userHasUpdatedProfil()
-                        })
+                    // If the user profile has been updated
+                    if jsonResponse["response"]["profilUpdateSuccess"].boolValue {
+                        
+                        Member.sharedInstance().firstName = firstName
+                        Member.sharedInstance().lastName = lastName
+                        Member.sharedInstance().email = email
+                        Member.sharedInstance().formation = formation
+                        Member.sharedInstance().schoolId = schoolId
+                        Facade.sharedInstance().saveMemberProfil()
+                        
+                        let schoolRooms = jsonResponse["response"]["rooms"]
+                        Facade.sharedInstance().addRoomsFromJSON(schoolRooms)
+                        Facade.sharedInstance().fetchPersonsProfilPictureInsideRoom()
+                        
+                        if let imageUserProfil = self.profilPictureButton.backgroundImageForState(.Normal) {
+                            Facade.sharedInstance().uploadUserProfilPicture(imageUserProfil, withEmail: Member.sharedInstance().email!.encodeBase64(),
+                                completionHandler: { () -> Void in
+                                    Member.sharedInstance().profilPicture = imageUserProfil
+                                    Facade.sharedInstance().saveMemberProfil()
+                                    self.userHasUpdatedProfil()
+                            })
+                            
+                        } else {
+                            self.userHasUpdatedProfil()
+                        }
+                        
+                    } else if !jsonResponse.schoolExist() {
+                        
+                        BFRadialWaveHUD.sharedInstance().dismiss()
+                        JSSAlertView().danger(self, title: NSLocalizedString("profile", comment: ""), text: NSLocalizedString("schoolIdError", comment: ""))
                         
                     } else {
-                        self.userHasUpdatedProfil()
+                        self.showPopupSomethingWrong()
                     }
                     
-               } else if !jsonResponse!.schoolExist() {
-                    
-                    BFRadialWaveHUD.sharedInstance().dismiss()
-                    JSSAlertView().danger(self, title: NSLocalizedString("profile", comment: ""), text: NSLocalizedString("schoolIdError", comment: ""))
-                    
+                    // If a problem occured ( the serveur not received the parameters even crash )
                 } else {
                     self.showPopupSomethingWrong()
                 }
-                
-                // If a problem occured ( the serveur not received the parameters even crash )
-            } else {
-                self.showPopupSomethingWrong()
-            }
         }
-
+        
     }
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.view.endEditing(true)
         self.updateProfilButton.enabled = self.canUpdateButtonBeEnabled()
         
@@ -157,7 +156,7 @@ class ProfileViewController: UIViewController {
     :returns: true if the name/lastname textfield aren't empty, false if not
     */
     private func hasName() -> Bool {
-        return (!self.firstNameTextField.text.isEmpty && !self.lastNameTextField.text.isEmpty)
+        return !self.firstNameTextField.text.isEmpty && !self.lastNameTextField.text.isEmpty
     }
     
     /**
@@ -166,7 +165,7 @@ class ProfileViewController: UIViewController {
     :returns: true if the email school Id textfield isn't empty, false if not
     */
     private func hasSchoolId() -> Bool {
-        return (!self.schoolIdTextField.text.isEmpty)
+        return !self.schoolIdTextField.text.isEmpty
     }
     
     /**
@@ -175,7 +174,7 @@ class ProfileViewController: UIViewController {
     :returns: true if the formation textfield isn't empty, false if not
     */
     private func hasFormation() -> Bool {
-        return (!self.formationTextField.text.isEmpty)
+        return !self.formationTextField.text.isEmpty
     }
     
     /**
@@ -185,7 +184,7 @@ class ProfileViewController: UIViewController {
     */
     private func hasValidPassword() -> Bool {
         let password = self.passwordTextField.text.stringByReplacingOccurrencesOfString(" ", withString: "")
-        return (countElements(password) >= 4)
+        return count(password) >= 4
     }
     
     /**
@@ -198,7 +197,7 @@ class ProfileViewController: UIViewController {
         return self.hasName() && self.hasSchoolId() && self.hasValidPassword()
             && self.hasFormation()
     }
-
+    
 }
 
 // MARK: - UITextField Delegate -
@@ -208,14 +207,14 @@ extension ProfileViewController: UITextFieldDelegate {
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange,
         replacementString string: String) -> Bool {
             
-        if textField == self.passwordTextField && string == " "  {
+            if textField == self.passwordTextField && string == " "  {
+                return false
+            }
+            
+            textField.text = (textField.text as NSString).stringByReplacingCharactersInRange(range, withString: string)
+            self.updateProfilButton.enabled = self.canUpdateButtonBeEnabled()
+            
             return false
-        }
-            
-        textField.text = (textField.text as NSString).stringByReplacingCharactersInRange(range, withString: string)
-        self.updateProfilButton.enabled = self.canUpdateButtonBeEnabled()
-            
-        return false
     }
     
     func textFieldShouldClear(textField: UITextField) -> Bool {
@@ -252,20 +251,18 @@ extension ProfileViewController: UITextFieldDelegate {
         return true
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) -> Bool {
+    func textFieldDidBeginEditing(textField: UITextField) {
         
         // If that's an iPhone 5/5s/5c
         if DeviceInformation.isIphone5() {
             
             if textField == self.passwordTextField {
                 self.formScrollView.setContentOffset(CGPointMake(0.0, 40.0), animated: true)
-            
+                
             } else if textField == self.firstNameTextField || textField == self.lastNameTextField {
                 self.formScrollView.setContentOffset(CGPointZero, animated: true)
             }
         }
-        
-        return true
     }
 }
 
@@ -273,7 +270,7 @@ extension ProfileViewController: UITextFieldDelegate {
 
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
     
-    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!,
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!,
         editingInfo: [NSObject : AnyObject]!) {
             
             self.dismissViewControllerAnimated(true, completion: nil)

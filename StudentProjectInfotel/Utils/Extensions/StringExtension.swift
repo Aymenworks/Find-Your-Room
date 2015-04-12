@@ -9,7 +9,7 @@
 import Security
 
 extension String {
-
+    
     /**
     From http://stackoverflow.com/questions/24123518/how-to-use-cc-md5-method-in-swift-language
     
@@ -30,7 +30,7 @@ extension String {
         
         result.destroy()
         
-        return String(format: hash)
+        return String(format: hash as String)
     }
     
     

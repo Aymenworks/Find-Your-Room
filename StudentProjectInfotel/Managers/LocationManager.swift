@@ -11,7 +11,7 @@ import CoreLocation
 /**
   The core location manager. It take care of the beacon/user location like starting ranging/monitoring
 */
-class LocationManager: NSObject, CLLocationManagerDelegate {
+final class LocationManager: NSObject, CLLocationManagerDelegate {
     
     private let locationManager = CLLocationManager()
     
@@ -50,7 +50,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         inRegion region: CLBeaconRegion!) {
             
         // For each beacon around
-        for clBeacon in beacons as [CLBeacon] {
+        for clBeacon in beacons as! [CLBeacon] {
             
             // For each beacon from our database
             for room in Facade.sharedInstance().rooms() {
@@ -99,7 +99,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     */
     func locationManager(manager: CLLocationManager!, didEnterRegion region: CLRegion!) {
         println("start monitoring/scaning because entered the region")
-        self.locationManager.startRangingBeaconsInRegion(region as CLBeaconRegion)
+        self.locationManager.startRangingBeaconsInRegion(region as! CLBeaconRegion)
         self.locationManager.startUpdatingLocation()
         
     }

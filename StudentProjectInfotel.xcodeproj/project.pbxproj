@@ -14,7 +14,6 @@
 		A523B2361A96A31F00D38277 /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A523B2351A96A31F00D38277 /* PersonCell.swift */; };
 		A523B2381A96A4A400D38277 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = A523B2371A96A4A400D38277 /* Member.swift */; };
 		A525DAF51A6A88600024580A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A525DAF41A6A88600024580A /* AppDelegate.swift */; };
-		A525DB0B1A6A88600024580A /* AuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A525DB0A1A6A88600024580A /* AuthenticationTests.swift */; };
 		A5282AB01ABCEEEB0094FAD3 /* mySky.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5282AAD1ABCEEEB0094FAD3 /* mySky.jpg */; };
 		A5282AB11ABCEEEB0094FAD3 /* mySky@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5282AAE1ABCEEEB0094FAD3 /* mySky@2x.jpg */; };
 		A5282AB21ABCEEEB0094FAD3 /* mySky@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5282AAF1ABCEEEB0094FAD3 /* mySky@3x.jpg */; };
@@ -23,6 +22,7 @@
 		A52F0F0F1A70532C00206DE7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52F0F0E1A70532C00206DE7 /* LocationManager.swift */; };
 		A52F0F231A70BD1E00206DE7 /* Facade.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52F0F221A70BD1E00206DE7 /* Facade.swift */; };
 		A53174151AB264FC00A5AD80 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53174141AB264FC00A5AD80 /* ProfileViewController.swift */; };
+		A5391FAF1ADA5F6100870FE8 /* AuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5391FAE1ADA5F6100870FE8 /* AuthenticationTests.swift */; };
 		A53C3D771ABCE77500ACCDF5 /* beaconSchool.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A53C3D741ABCE77500ACCDF5 /* beaconSchool.jpg */; };
 		A53C3D781ABCE77500ACCDF5 /* beaconSchool@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A53C3D751ABCE77500ACCDF5 /* beaconSchool@2x.jpg */; };
 		A53C3D791ABCE77500ACCDF5 /* beaconSchool@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A53C3D761ABCE77500ACCDF5 /* beaconSchool@3x.jpg */; };
@@ -99,7 +99,6 @@
 		A525DAF41A6A88600024580A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A525DB041A6A88600024580A /* StudentProjectInfotelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StudentProjectInfotelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A525DB091A6A88600024580A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A525DB0A1A6A88600024580A /* AuthenticationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationTests.swift; sourceTree = "<group>"; };
 		A5282AAD1ABCEEEB0094FAD3 /* mySky.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mySky.jpg; sourceTree = "<group>"; };
 		A5282AAE1ABCEEEB0094FAD3 /* mySky@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "mySky@2x.jpg"; sourceTree = "<group>"; };
 		A5282AAF1ABCEEEB0094FAD3 /* mySky@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "mySky@3x.jpg"; sourceTree = "<group>"; };
@@ -111,6 +110,7 @@
 		A52F0F0E1A70532C00206DE7 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		A52F0F221A70BD1E00206DE7 /* Facade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Facade.swift; sourceTree = "<group>"; };
 		A53174141AB264FC00A5AD80 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		A5391FAE1ADA5F6100870FE8 /* AuthenticationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationTests.swift; sourceTree = "<group>"; };
 		A53C3D741ABCE77500ACCDF5 /* beaconSchool.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = beaconSchool.jpg; sourceTree = "<group>"; };
 		A53C3D751ABCE77500ACCDF5 /* beaconSchool@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "beaconSchool@2x.jpg"; sourceTree = "<group>"; };
 		A53C3D761ABCE77500ACCDF5 /* beaconSchool@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "beaconSchool@3x.jpg"; sourceTree = "<group>"; };
@@ -256,7 +256,7 @@
 		A525DB071A6A88600024580A /* StudentProjectInfotelTests */ = {
 			isa = PBXGroup;
 			children = (
-				A525DB0A1A6A88600024580A /* AuthenticationTests.swift */,
+				A5391FAE1ADA5F6100870FE8 /* AuthenticationTests.swift */,
 				A525DB081A6A88600024580A /* Supporting Files */,
 			);
 			path = StudentProjectInfotelTests;
@@ -710,7 +710,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A525DB0B1A6A88600024580A /* AuthenticationTests.swift in Sources */,
+				A5391FAF1ADA5F6100870FE8 /* AuthenticationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -788,6 +788,7 @@
 				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -824,6 +825,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
+				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -864,6 +866,7 @@
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "StudentProjectInfotel/Supporting Files/StudentProjectInfotel-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -902,6 +905,7 @@
 				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "StudentProjectInfotel/Supporting Files/StudentProjectInfotel-Bridging-Header.h";
+				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -910,6 +914,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(PROJECT_DIR)/StudentProjectInfotel/Librairies/GoogleSDK",
@@ -923,6 +928,7 @@
 				INFOPLIST_FILE = "StudentProjectInfotelTests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StudentProjectInfotel.app/StudentProjectInfotel";
 			};
 			name = Debug;
@@ -931,6 +937,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(PROJECT_DIR)/StudentProjectInfotel/Librairies/GoogleSDK",

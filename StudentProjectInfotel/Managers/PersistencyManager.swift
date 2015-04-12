@@ -11,15 +11,15 @@ import Foundation.NSCoder
 let session = NSUserDefaults.standardUserDefaults()
 
 /**
-  Memento pattern. It'll save/load the data.
+Memento pattern. It'll save/load the data.
 */
-class PersistencyManager: NSCoding {
+final class PersistencyManager: NSCoding {
     
     /// The list of the school rooms.
     lazy var rooms = [Room]()
-
+    
     // MARK: - Lifecycle -
-
+    
     init() {
         
         let fileManager = NSFileManager.defaultManager()
@@ -28,9 +28,9 @@ class PersistencyManager: NSCoding {
             appropriateForURL: nil, create: false, error: nil)
         
         let saveRoomFileUrl = documentDirectory!.URLByAppendingPathComponent("rooms.bin")
-
+        
         // TODO: - Make it on the background thread because NSData contentsOfURL blocks the main thread
-
+        
         if let roomsData = NSData(contentsOfURL: saveRoomFileUrl, options:.DataReadingMappedIfSafe, error: nil) {
             if let unarchivedRooms = NSKeyedUnarchiver.unarchiveObjectWithData(roomsData) as? [Room] {
                 self.rooms = unarchivedRooms
@@ -40,14 +40,14 @@ class PersistencyManager: NSCoding {
     
     // MARK: - NSCoding Protocol Conformance -
     
-    required init(coder aDecoder: NSCoder) {
-        self.rooms = aDecoder.decodeObjectForKey("rooms") as [Room]
+    @objc required init(coder aDecoder: NSCoder) {
+        self.rooms = aDecoder.decodeObjectForKey("rooms") as! [Room]
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
+    @objc func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(self.rooms, forKey: "rooms")
     }
-
+    
     // MARK: - Room persistency -
     
     /**
@@ -77,22 +77,22 @@ class PersistencyManager: NSCoding {
     }
     
     func addRoomsFromJSON(schoolRooms: JSON) {
-
+        
         for room in self.rooms {
             Facade.sharedInstance().stopMonitoringBeacon(room.beacon)
         }
-    
+        
         self.rooms = []
-    
+        
         for (_, jsonRoom) in schoolRooms {
             self.addRoom(Room(jsonRoom: jsonRoom))
         }
-
+        
         self.saveRooms()
     }
     
     // MARK: - User Persistency -
-
+    
     /**
     Save the current user profil on session
     */
@@ -105,7 +105,7 @@ class PersistencyManager: NSCoding {
         session.setObject(Member.sharedInstance().schoolId!, forKey: "schoolId")
         session.setObject(Member.sharedInstance().schoolName!, forKey: "schoolName")
         session.setBool(Member.sharedInstance().isAdmin!, forKey: "isAdmin")
-
+        
         if let image = Member.sharedInstance().profilPicture {
             session.setObject(UIImageJPEGRepresentation(image, 80.0), forKey: "profilPicture")
         }
@@ -125,7 +125,7 @@ class PersistencyManager: NSCoding {
         session.removeObjectForKey("profilPicture")
         session.removeObjectForKey("schoolId")
         session.removeObjectForKey("schoolName")
-
+        
         Member.sharedInstance().lastName = nil
         Member.sharedInstance().firstName = nil
         Member.sharedInstance().email = nil
@@ -136,7 +136,7 @@ class PersistencyManager: NSCoding {
     }
     
     // MARK: - Plist Persistency -
-
+    
     /**
     *  A singleton to get once the menu ( profil, home ) from the menu plist file.
     */
@@ -145,10 +145,10 @@ class PersistencyManager: NSCoding {
             let menuPlistPath = NSBundle.mainBundle().pathForResource("Menu", ofType: "plist")
             let menuPlistData = NSFileManager.defaultManager().contentsAtPath(menuPlistPath!)
             let listOfMenus = NSPropertyListSerialization.propertyListWithData(menuPlistData!,
-                options:0, format:nil,error: nil) as NSDictionary
+                options:0, format:nil,error: nil) as! NSDictionary
             
             return listOfMenus
-        }()
+            }()
     }
     
     /**
@@ -157,10 +157,10 @@ class PersistencyManager: NSCoding {
     :returns: <#return value description#>
     */
     func memberMenu() -> [NSDictionary] {
-        let dict = SingletonPlistMenu.menuPlist.objectForKey("MemberMenu") as [NSDictionary]
+        let dict = SingletonPlistMenu.menuPlist.objectForKey("MemberMenu") as! [NSDictionary]
         return dict
     }
-
+    
 }
 
 

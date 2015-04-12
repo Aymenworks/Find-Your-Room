@@ -9,15 +9,15 @@
 import CoreLocation
 
 /**
-  The beacon model.
+The beacon model.
 */
-public class Beacon: NSObject {
+final public class Beacon: NSObject {
     
-    let name: String! = " "
-    let uuid: NSUUID!
-    let major: CLBeaconMajorValue!
-    let minor: CLBeaconMinorValue!
-    let region: CLBeaconRegion!
+    let name: String
+    let uuid: NSUUID
+    let major: CLBeaconMajorValue
+    let minor: CLBeaconMinorValue
+    let region: CLBeaconRegion
     
     /// This property stores the last CLBeacon instance seen for the current beacon. This is used to display the proximity information.
     var lastSeenBeacon: CLBeacon?
@@ -39,12 +39,12 @@ public class Beacon: NSObject {
     
     
     required public init(coder aDecoder: NSCoder) {
+        self.uuid = aDecoder.decodeObjectForKey("uuid") as! NSUUID
+        self.major = (aDecoder.decodeObjectForKey("major") as! NSNumber).unsignedShortValue
+        self.minor = (aDecoder.decodeObjectForKey("minor") as! NSNumber).unsignedShortValue
+        self.name = aDecoder.decodeObjectForKey("name") as! String
+        self.region = aDecoder.decodeObjectForKey("region") as! CLBeaconRegion
         super.init()
-        self.uuid = aDecoder.decodeObjectForKey("uuid") as NSUUID
-        self.major = (aDecoder.decodeObjectForKey("major") as NSNumber).unsignedShortValue
-        self.minor = (aDecoder.decodeObjectForKey("minor") as NSNumber).unsignedShortValue
-        self.name = aDecoder.decodeObjectForKey("name") as String
-        self.region = aDecoder.decodeObjectForKey("region") as CLBeaconRegion
     }
 }
 

@@ -10,20 +10,20 @@ import CoreLocation
 import UIKit.UIImage
 
 /**
-  The Facade pattern. So we can use more easily the complex submodules 
-  that are Location, Network, Data persistency with a sample and reusable API.
+The Facade pattern. So we can use more easily the complex submodules
+that are Location, Network, Data persistency with a sample and reusable API.
 */
-public class Facade {
+final public class Facade {
     
     /// The location manager that'll manage the user, beacon, and rooms location ( geolocalisation )
     private var locationManager: LocationManager? = LocationManager()
     
-    /// Manager 
+    /// Manager
     lazy private var networkManager = NetworkManager()
     
     /// To manage persistency ( session, plist, file.. )
     lazy private var persistencyManager = PersistencyManager()
-
+    
     /// A singleton object as the entry point to manage the application
     public class func sharedInstance() -> Facade {
         struct Singleton {
@@ -33,9 +33,9 @@ public class Facade {
     }
     
     // MARK: - Lifecycle -
-
+    
     private init() {}
-
+    
     // MARK: - Networks -
     
     // MARK: Authentication
@@ -73,7 +73,7 @@ public class Facade {
     
     :param: schoolId          The school ID
     :param: completionHandler The callback containing the json server/error response that'll be executed
-                                after the request has finished
+    after the request has finished
     */
     public func roomsBySchoolId(schoolId: String, completionHandler: (JSON?, NSError?) -> Void) {
         self.networkManager.roomsBySchoolId(schoolId, completionHandler: completionHandler)
@@ -97,12 +97,12 @@ public class Facade {
     :param: beaconMajor       The beacon major value
     :param: beaconMinor       The beacon minor value
     :param: completionHandler The callback containing the json server/error response that'll be executed
-                                after the request has finished
+    after the request has finished
     */
     public func addRoom(schoolId: String, roomTitle: String, roomDescription: String,
         roomCapacity: Int, beaconUUID: String, beaconMajor: Int, beaconMinor: Int, completionHandler: (JSON?, NSError?) -> Void) {
             self.networkManager.addRoom(schoolId, roomTitle: roomTitle, roomDescription: roomDescription,
-                roomCapacity: roomCapacity, beaconUUID: beaconUUID, beaconMajor: beaconMajor, beaconMinor: beaconMinor, completionHandler)
+                roomCapacity: roomCapacity, beaconUUID: beaconUUID, beaconMajor: beaconMajor, beaconMinor: beaconMinor, completionHandler: completionHandler)
     }
     
     /**
@@ -127,7 +127,7 @@ public class Facade {
     }
     
     // MARK: Sigining Up
-
+    
     /**
     Will register the user on the database.
     
@@ -135,15 +135,15 @@ public class Facade {
     :param: password          The password user
     :param: lastName          The user last name
     :param: firstName         The user first name
-    :param: completionHandler The callback containing the json server/error response that'll be executed 
-                                after the request has finished
+    :param: completionHandler The callback containing the json server/error response that'll be executed
+    after the request has finished
     */
     public func signUpUserWithPassword(email: String, password: String, lastName: String,
-                                       firstName: String, formation:String, schoolId: String,
-                                       completionHandler: (JSON?, NSError?) -> Void) {
-                                        
-        self.networkManager.signUpUserWithPassword(email, password: password, lastName: lastName, firstName: firstName,
-            formation:formation, schoolId: schoolId, completionHandler: completionHandler)
+        firstName: String, formation:String, schoolId: String,
+        completionHandler: (JSON?, NSError?) -> Void) {
+            
+            self.networkManager.signUpUserWithPassword(email, password: password, lastName: lastName, firstName: firstName,
+                formation:formation, schoolId: schoolId, completionHandler: completionHandler)
     }
     
     // MARK: User
@@ -184,7 +184,7 @@ public class Facade {
     :param: completionHandler The callback that'll be executed after the request has finished.
     */
     public func facebookProfilePicture(userId: String, completionHandler: (UIImage?) -> Void) {
-        self.networkManager.facebookProfilePicture(userId, completionHandler)
+        self.networkManager.facebookProfilePicture(userId, completionHandler: completionHandler)
     }
     
     /**
@@ -260,9 +260,9 @@ public class Facade {
     :param: schoolRooms <#schoolRooms description#>
     */
     public func addRoomsFromJSON(schoolRooms: JSON) {
-       self.persistencyManager.addRoomsFromJSON(schoolRooms)
+        self.persistencyManager.addRoomsFromJSON(schoolRooms)
     }
-
+    
     // MARK: User Persistency
     
     /**
@@ -287,14 +287,14 @@ public class Facade {
     public func isUserLoggedIn() -> Bool {
         println("Member.sharedInstance().email = \(Member.sharedInstance().email)")
         println("Member.sharedInstance().isAdmin = \(Member.sharedInstance().isAdmin)")
-
+        
         return Member.sharedInstance().email != nil
     }
     
     public func isUserAdmin() -> Bool {
         return Member.sharedInstance().isAdmin!
     }
-
+    
     
     // MARK: - Beacon Location -
     
@@ -330,5 +330,5 @@ public class Facade {
     public func memberMenu() -> [NSDictionary] {
         return self.persistencyManager.memberMenu()
     }
-
+    
 }

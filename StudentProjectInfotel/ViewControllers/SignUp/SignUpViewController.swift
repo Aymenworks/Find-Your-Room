@@ -9,10 +9,10 @@
 import UIKit
 
 /**
-  SignUpViewController controller. Loaded when the user click on the sign up button. It'll send some user data (photo,
-    name, email and password ) to the server and redirect the user to the home view controller.
+SignUpViewController controller. Loaded when the user click on the sign up button. It'll send some user data (photo,
+name, email and password ) to the server and redirect the user to the home view controller.
 */
-class SignUpViewController: UIViewController {
+final class SignUpViewController: UIViewController {
     
     @IBOutlet private weak var profilPictureButton: UIButton!
     @IBOutlet private weak var firstNameTextField: UITextField!
@@ -31,8 +31,8 @@ class SignUpViewController: UIViewController {
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
         return imagePicker
-    }()
-
+        }()
+    
     // MARK: - Lifecycle -
     
     override func viewDidLoad() {
@@ -52,7 +52,7 @@ class SignUpViewController: UIViewController {
     :param: sender not used
     */
     @IBAction func chooseProfilPicture() {
-        self.presentViewController(self.imagePickerController, animated: true, nil)
+        self.presentViewController(self.imagePickerController, animated: true, completion: nil)
     }
     
     /**
@@ -62,7 +62,7 @@ class SignUpViewController: UIViewController {
         self.navigationController!.popViewControllerAnimated(true)
     }
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.view.endEditing(true)
         
         if DeviceInformation.isIphone5() {
@@ -71,8 +71,8 @@ class SignUpViewController: UIViewController {
     }
     
     /**
-    Called when the user tap on the Join keyboard button ( exposed when focus on password text field ) 
-        or the Sign Up bar button item. It send an http request to try to sign up the user.
+    Called when the user tap on the Join keyboard button ( exposed when focus on password text field )
+    or the Sign Up bar button item. It send an http request to try to sign up the user.
     :param: sender not used
     */
     @IBAction func signUp() {
@@ -88,69 +88,69 @@ class SignUpViewController: UIViewController {
         let formation  = self.formationTextField.text.encodeBase64()
         let schoolId  = self.schoolIdTextField.text.encodeBase64()
         let password  = self.passwordTextField.text.md5()
-
+        
         Facade.sharedInstance().signUpUserWithPassword( email, password: password, lastName: lastName,
-                                                        firstName: firstName, formation:formation, schoolId: schoolId)
+            firstName: firstName, formation:formation, schoolId: schoolId)
             { (jsonResponse, error) -> Void in
                 
-            println("response = \(jsonResponse)")
-            // If everything is fine..
-            if error? == nil && jsonResponse != nil && jsonResponse!.isOk() {
-        
-            // If the user has been registered
-                if jsonResponse!.userHasBeenRegistered() {
-        
-                    let userProfil = jsonResponse!["response"]["profil"]
-                    let schoolRooms = jsonResponse!["response"]["rooms"]
-
-                    Member.sharedInstance().fillMemberProfilWithJSON(userProfil)
-                    Facade.sharedInstance().addRoomsFromJSON(schoolRooms)
-                    Facade.sharedInstance().fetchPersonsProfilPictureInsideRoom()
+                println("response = \(jsonResponse)")
+                // If everything is fine..
+                if error == nil, let jsonResponse = jsonResponse where jsonResponse.isOk() {
+                    
+                    // If the user has been registered
+                    if jsonResponse.userHasBeenRegistered() {
                         
-                    if let imageUserProfil = self.profilPictureButton.backgroundImageForState(.Normal) {
+                        let userProfil = jsonResponse["response"]["profil"]
+                        let schoolRooms = jsonResponse["response"]["rooms"]
                         
-                        Facade.sharedInstance().uploadUserProfilPicture(imageUserProfil, withEmail: email,
-                            completionHandler: { () -> Void in
-                                Member.sharedInstance().profilPicture = imageUserProfil
-                                Facade.sharedInstance().saveMemberProfil()
-
-                                self.userHasSignedUp()
+                        Member.sharedInstance().fillMemberProfilWithJSON(userProfil)
+                        Facade.sharedInstance().addRoomsFromJSON(schoolRooms)
+                        Facade.sharedInstance().fetchPersonsProfilPictureInsideRoom()
+                        
+                        if let imageUserProfil = self.profilPictureButton.backgroundImageForState(.Normal) {
+                            
+                            Facade.sharedInstance().uploadUserProfilPicture(imageUserProfil, withEmail: email,
+                                completionHandler: { () -> Void in
+                                    Member.sharedInstance().profilPicture = imageUserProfil
+                                    Facade.sharedInstance().saveMemberProfil()
+                                    
+                                    self.userHasSignedUp()
                             })
+                            
+                        } else {
+                            self.userHasSignedUp()
+                        }
+                        
+                        // Else if he's already registered..
+                    } else if jsonResponse.userExist() {
+                        
+                        BFRadialWaveHUD.sharedInstance().dismiss()
+                        JSSAlertView().info(self,
+                            title: self.navigationItem.title!,
+                            text: NSLocalizedString("emailExistError", comment: ""),
+                            buttonText: NSLocalizedString("login", comment: ""), cancelButtonText: NSLocalizedString("cancel", comment: "")).addAction({ self.didClickOnBackButton()})
+                        
+                        // Else if the user hasn't been registered and doesn't exist on the database..
+                    } else  if !jsonResponse.schoolExist() {
+                        BFRadialWaveHUD.sharedInstance().dismiss()
+                        JSSAlertView().danger(self, title: self.navigationItem.title!, text: NSLocalizedString("schoolIdError", comment: ""))
                         
                     } else {
-                        self.userHasSignedUp()
+                        self.showPopupSomethingWrong()
                     }
-                   
-                // Else if he's already registered..
-                } else if jsonResponse!.userExist() {
                     
-                    BFRadialWaveHUD.sharedInstance().dismiss()
-                    JSSAlertView().info(self,
-                        title: self.navigationItem.title!,
-                        text: NSLocalizedString("emailExistError", comment: ""),
-                        buttonText: NSLocalizedString("login", comment: ""), cancelButtonText: NSLocalizedString("cancel", comment: "")).addAction({ self.didClickOnBackButton()})
-                    
-                // Else if the user hasn't been registered and doesn't exist on the database..
-                } else  if !jsonResponse!.schoolExist() {
-                    BFRadialWaveHUD.sharedInstance().dismiss()
-                    JSSAlertView().danger(self, title: self.navigationItem.title!, text: NSLocalizedString("schoolIdError", comment: ""))
-                
+                    // If a problem occured ( the serveur not received the parameters even crash )
                 } else {
                     self.showPopupSomethingWrong()
                 }
-        
-            // If a problem occured ( the serveur not received the parameters even crash )
-            } else {
-                self.showPopupSomethingWrong()
-            }
         }
     }
     
     // MARK: - User Interface -
-
+    
     private func showPopupSomethingWrong() {
         BFRadialWaveHUD.sharedInstance().dismiss()
-
+        
         JSSAlertView().danger(self, title: self.navigationItem.title!, text: NSLocalizedString("genericError", comment: ""))
     }
     
@@ -166,7 +166,7 @@ class SignUpViewController: UIViewController {
     }
     
     // MARK: - Inputs Validation -
-
+    
     /**
     Check if the user entered its first and last name
     
@@ -184,7 +184,7 @@ class SignUpViewController: UIViewController {
     private func hasValidEmail() -> Bool {
         // REGEX FROM http://stackoverflow.com/questions/3139619/check-that-an-email-address-is-valid-on-ios
         let regex = ".+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*"
-        return NSPredicate(format: "SELF MATCHES[c] %@", regex)!.evaluateWithObject(self.emailTextField.text)
+        return NSPredicate(format: "SELF MATCHES[c] %@", regex).evaluateWithObject(self.emailTextField.text)
     }
     
     /**
@@ -212,13 +212,13 @@ class SignUpViewController: UIViewController {
     */
     private func hasValidPassword() -> Bool {
         let password = self.passwordTextField.text.stringByReplacingOccurrencesOfString(" ", withString: "")
-        return (countElements(password) >= 4)
+        return (count(password) >= 4)
     }
     
     /**
-    Check if an email and password, last name and first name inputs aren't empty 
+    Check if an email and password, last name and first name inputs aren't empty
     and if the password contain at least four characters
-
+    
     :returns: True  if an input is empty or contains less than four characters, false if not.
     */
     private func canSignUpButtonBeEnabled() -> Bool {
@@ -231,11 +231,11 @@ class SignUpViewController: UIViewController {
 
 extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
     
-    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!,
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!,
         editingInfo: [NSObject : AnyObject]!) {
             
-        self.dismissViewControllerAnimated(true, completion: nil)
-        self.profilPictureButton.setBackgroundImage(image, forState: .Normal)
+            self.dismissViewControllerAnimated(true, completion: nil)
+            self.profilPictureButton.setBackgroundImage(image, forState: .Normal)
     }
 }
 
@@ -245,21 +245,20 @@ extension SignUpViewController: UITextFieldDelegate {
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange,
         replacementString string: String) -> Bool {
-
-        if textField == self.passwordTextField && string == " "  {
+            
+            if textField == self.passwordTextField && string == " "  {
+                return false
+            }
+            
+            textField.text = (textField.text as NSString).stringByReplacingCharactersInRange(range, withString: string)
+            self.signUpBarButtonItem.enabled = self.canSignUpButtonBeEnabled()
+            
             return false
-        }
-        
-        textField.text = (textField.text as NSString).stringByReplacingCharactersInRange(range, withString: string)
-        self.signUpBarButtonItem.enabled = self.canSignUpButtonBeEnabled()
-        
-        return false
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
         self.errorLabel.text = " "
-
-        // If that's an iPhone 5/5s/5c
+        
         if DeviceInformation.isIphone5() {
             
             if textField == self.passwordTextField {
@@ -268,7 +267,7 @@ extension SignUpViewController: UITextFieldDelegate {
             } else if textField == self.firstNameTextField || textField == self.lastNameTextField
                 || textField == self.emailTextField {
                     
-                self.formScrollView.setContentOffset(CGPointZero, animated: true)
+                    self.formScrollView.setContentOffset(CGPointZero, animated: true)
             }
         }
     }
@@ -282,28 +281,28 @@ extension SignUpViewController: UITextFieldDelegate {
         
         
         /* If the user tap the Next keyboard button, we redirect him to the next text field.
-           Else if he tap the Join keyboard button after entering its password, we call 
-            the signUp method, if all the inputs are valid.
+        Else if he tap the Join keyboard button after entering its password, we call
+        the signUp method, if all the inputs are valid.
         */
         switch(textField) {
-           
             
-            case self.firstNameTextField:   self.lastNameTextField.becomeFirstResponder()
-            case self.lastNameTextField:    self.emailTextField.becomeFirstResponder()
-            case self.emailTextField:       self.passwordTextField.becomeFirstResponder()
-            case self.passwordTextField:    self.formationTextField.becomeFirstResponder()
-            case self.formationTextField:    self.schoolIdTextField.becomeFirstResponder()
-
-
-            case self.schoolIdTextField:
-                if self.canSignUpButtonBeEnabled() {
-                    self.signUp()
-                } else {
-                    textField.resignFirstResponder()
-                    let alertView = JSSAlertView().show(self, title: self.navigationItem.title!, text: NSLocalizedString("signUp.fillAllFields", comment: ""))
-                    alertView.setTextTheme(.Dark)
+            
+        case self.firstNameTextField:   self.lastNameTextField.becomeFirstResponder()
+        case self.lastNameTextField:    self.emailTextField.becomeFirstResponder()
+        case self.emailTextField:       self.passwordTextField.becomeFirstResponder()
+        case self.passwordTextField:    self.formationTextField.becomeFirstResponder()
+        case self.formationTextField:    self.schoolIdTextField.becomeFirstResponder()
+            
+            
+        case self.schoolIdTextField:
+            if self.canSignUpButtonBeEnabled() {
+                self.signUp()
+            } else {
+                textField.resignFirstResponder()
+                let alertView = JSSAlertView().show(self, title: self.navigationItem.title!, text: NSLocalizedString("signUp.fillAllFields", comment: ""))
+                alertView.setTextTheme(.Dark)
             }
-            default: break
+        default: break
         }
         return true
     }

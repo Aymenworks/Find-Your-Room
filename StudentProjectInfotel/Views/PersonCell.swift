@@ -8,13 +8,13 @@
 
 import UIKit
 
-class PersonCell: UITableViewCell {
+final class PersonCell: UITableViewCell {
     
-    @IBOutlet private weak var profilPicture: UIImageView!
-    @IBOutlet private weak var name: UILabel!
-    @IBOutlet private weak var formation: UILabel!
+    @IBOutlet private final weak var profilPicture: UIImageView!
+    @IBOutlet private final weak var name: UILabel!
+    @IBOutlet private final weak var formation: UILabel!
     
-    var person: Person! {
+    final var person: Person! {
         didSet {
             self.name.text = "\(person.firstName!) \(person.lastName!)"
             self.formation.text = person.formation!
@@ -22,7 +22,7 @@ class PersonCell: UITableViewCell {
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "imageDownloaded:", name: "DownloadImageNotification", object: nil)
         }
     }
-
+    
     // MARK: - Lifecycle -
     
     deinit {
@@ -31,7 +31,7 @@ class PersonCell: UITableViewCell {
     
     // MARK: - NSNotification Image Downloaded -
     
-    func imageDownloaded(notification: NSNotification) {
+    final func imageDownloaded(notification: NSNotification) {
         self.profilPicture.image = self.person.profilPicture
     }
 }

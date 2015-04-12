@@ -8,17 +8,16 @@ private let DefaultContentHeight: CGFloat = 95.0
 
 public class MenuView: StickyHeaderView {
 
-    public override init(frame: CGRect = CGRect(x: 0, y: 0, width: 320, height: DefaultContentHeight)) {
-        super.init(frame: frame)
+    public override init(frame: CGRect? = CGRect(x: 0, y: 0, width: 320, height: DefaultContentHeight)) {
+        super.init(frame: frame!)
         
         commonInit()
     }
-    
+
     required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
-    
     
     // MARK: - Init
     override func commonInit() {

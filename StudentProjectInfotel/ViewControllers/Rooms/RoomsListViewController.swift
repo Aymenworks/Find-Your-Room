@@ -14,30 +14,30 @@ enum MenuAction: Int {
 }
 
 /**
-  The home view controller for the authenticated users.
-  It take care of displaying the list of revisions rooms availables and some others informations
-  like the number of students present on theses rooms, rooms descrption, etc ..
+The home view controller for the authenticated users.
+It take care of displaying the list of revisions rooms availables and some others informations
+like the number of students present on theses rooms, rooms descrption, etc ..
 */
-class RoomsListViewController: UIViewController {
+final class RoomsListViewController: UIViewController {
     
     @IBOutlet private weak var roomsTableView: UITableView!
     @IBOutlet private weak var addRoomButton: UIButton!
     
     lazy private var menu: MenuView = {
         
-        let menu = MenuView()
+        let menu = MenuView(frame: nil)
         menu.backgroundColor = UIColor(red: 25.0/255, green: 26.0/255, blue: 37.0/255, alpha: 1.0)
         menu.delegate = self
         
         let items = Facade.sharedInstance().memberMenu().map() {
-            MenuItem(image: UIImage(data: $0["thumbnail"] as NSData)!)
+            MenuItem(image: UIImage(data: $0["thumbnail"] as! NSData)!)
         }
         
         menu.items = items
         
         return menu
-    }()
-
+        }()
+    
     // MARK: - Lifecycle -
     
     override func viewDidLoad() {
@@ -52,7 +52,7 @@ class RoomsListViewController: UIViewController {
         self.roomsTableView.reloadData()
         self.addRoomButton.hidden = !Facade.sharedInstance().isUserAdmin()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -70,28 +70,28 @@ class RoomsListViewController: UIViewController {
         Facade.sharedInstance().roomsBySchoolId(Member.sharedInstance().schoolId!.encodeBase64(),
             completionHandler: { (jsonSchoolRooms, error) -> Void in
                 
-                if error == nil && jsonSchoolRooms != nil && jsonSchoolRooms!.isOk() {
+                if error == nil, let jsonSchoolRooms = jsonSchoolRooms where jsonSchoolRooms.isOk() {
                     
-                    let schoolRooms = jsonSchoolRooms!["response"]["rooms"]
+                    let schoolRooms = jsonSchoolRooms["response"]["rooms"]
                     Facade.sharedInstance().addRoomsFromJSON(schoolRooms)
                     Facade.sharedInstance().fetchPersonsProfilPictureInsideRoom()
                     self.roomsTableView.reloadData()
                     BFRadialWaveHUD.sharedInstance().dismiss()
-
+                    
                 }
                 
                 // TODO: Manage errors
         })
     }
-
+    
     // MARK: - Storyboard Segues -
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "goToRoomDetailViewFromRoomsListView" {
             
-            let detailViewController = segue.destinationViewController as RoomDetailViewController
-            let cellSelected = sender as RoomCell
+            let detailViewController = segue.destinationViewController as! RoomDetailViewController
+            let cellSelected = sender as! RoomCell
             detailViewController.room = cellSelected.room
         }
     }
@@ -107,21 +107,21 @@ extension RoomsListViewController: MenuViewDelegate {
         let menuAction = MenuAction(rawValue: index)
         
         switch(menuAction!) {
-            case .Profile:
-                self.performSegueWithIdentifier("goToProfileViewFromRoomListVew", sender: self)
-           
-            case .Logout:
-                let alertView = JSSAlertView().show(self,
-                    title: NSLocalizedString("logout.title", comment: ""),
-                    text: NSLocalizedString("logout.message", comment: ""),
-                    buttonText: NSLocalizedString("yes", comment: ""), cancelButtonText: NSLocalizedString("cancel", comment: ""))
-                
-                alertView.setTextTheme(.Dark)
-                alertView.addAction({
-                    Facade.sharedInstance().logOut()
-                    FBSession.activeSession().closeAndClearTokenInformation()
-                    self.navigationController!.popToRootViewControllerAnimated(true)
-                })
+        case .Profile:
+            self.performSegueWithIdentifier("goToProfileViewFromRoomListVew", sender: self)
+            
+        case .Logout:
+            let alertView = JSSAlertView().show(self,
+                title: NSLocalizedString("logout.title", comment: ""),
+                text: NSLocalizedString("logout.message", comment: ""),
+                buttonText: NSLocalizedString("yes", comment: ""), cancelButtonText: NSLocalizedString("cancel", comment: ""))
+            
+            alertView.setTextTheme(.Dark)
+            alertView.addAction({
+                Facade.sharedInstance().logOut()
+                FBSession.activeSession().closeAndClearTokenInformation()
+                self.navigationController!.popToRootViewControllerAnimated(true)
+            })
         }
     }
 }
@@ -134,20 +134,15 @@ extension RoomsListViewController: UITableViewDelegate, UITableViewDataSource {
         return 1
     }
     
+    private struct Storyboard {
+        static let cellReuseIdenifier = "RoomCell"
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let customCell: RoomCell = {
-            var cell: RoomCell?
-            cell = tableView.dequeueReusableCellWithIdentifier("RoomCell", forIndexPath: indexPath)  as? RoomCell
-            if cell == nil {
-                cell = UITableViewCell(style: .Default, reuseIdentifier: "RoomCell") as? RoomCell
-            }
-            cell!.room = Facade.sharedInstance().rooms()[indexPath.row]
-            cell!.themeColor = UIColor.randomFlatColor()
-            return cell!
-        }()
-        
-        return customCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.cellReuseIdenifier, forIndexPath: indexPath) as! RoomCell
+        cell.room = Facade.sharedInstance().rooms()[indexPath.row]
+        cell.themeColor = UIColor.randomFlatColor()
+        return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -157,5 +152,6 @@ extension RoomsListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return CGFloat(71.0)
     }
+    
 }
 

@@ -3,12 +3,12 @@
 //  iBeaconForgotMeNot
 //
 //  Created by Rebouh Aymen on 20/12/2014.
-//  Copyright (c) 2014 Rebouh Aymen. All rights reserved.      
+//  Copyright (c) 2014 Rebouh Aymen. All rights reserved.
 //
 
 import UIKit
 
-class RoomCell: UITableViewCell {
+final class RoomCell: UITableViewCell {
     
     @IBOutlet private weak var numberOfPersons: UILabel!
     @IBOutlet private weak var leftColorView: UIView!
@@ -31,5 +31,5 @@ class RoomCell: UITableViewCell {
             self.numberOfPersons.text = numberOfPersons + capacity
         }
     }
-
+    
 }

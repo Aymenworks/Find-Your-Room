@@ -9,9 +9,9 @@
 import UIKit
 
 /**
-  AuthenticationViewController controller. It take care to authenticate the user,
+AuthenticationViewController controller. It take care to authenticate the user,
 */
-class AuthenticationViewController: UIViewController {
+final class AuthenticationViewController: UIViewController {
     
     /// The Facebook login view given by Facebook SDK.
     @IBOutlet private weak var facebookLoginView: FBLoginView!
@@ -19,7 +19,7 @@ class AuthenticationViewController: UIViewController {
     /// The Google Plus login view given by Google Plus SDK.
     @IBOutlet private weak var googlePlusLoginButton: GPPSignInButton!
     
-    /// The bar button item that'll send a sign up request on click. Disabled by default. 
+    /// The bar button item that'll send a sign up request on click. Disabled by default.
     /// Enabled when the email/password are filtered and OK.
     @IBOutlet private weak var signInBarButtonItem: UIBarButtonItem!
     
@@ -55,7 +55,7 @@ class AuthenticationViewController: UIViewController {
         FBLoginView.self
         self.facebookLoginView.readPermissions = ["public_profile", "email"]
     }
-
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController!.navigationBarHidden = false
@@ -88,26 +88,26 @@ class AuthenticationViewController: UIViewController {
             (jsonResponse, error) -> Void in
             
             // If everything is fine..
-            if error == nil && jsonResponse? != nil && jsonResponse!.isOk() {
+            if error == nil, let jsonResponse = jsonResponse where jsonResponse.isOk() {
                 
                 println("json response = \(jsonResponse)")
                 // If the user exist
-                if jsonResponse!.userExist() {
-
-                    let userProfil = jsonResponse!["response"]["profil"]
+                if jsonResponse.userExist() {
+                    
+                    let userProfil = jsonResponse["response"]["profil"]
                     let pictureUrl = "http://www.aymenworks.fr/assets/beacon/\(email.md5())/picture.jpg"
-
+                    
                     Member.sharedInstance().fillMemberProfilWithJSON(userProfil)
-
+                    
                     Facade.sharedInstance().serverProfilPictureWithURL(pictureUrl) { (image) -> Void in
                         
                         BFRadialWaveHUD.sharedInstance().showSuccessWithMessage(NSLocalizedString("loggedIn", comment: "")) { _ in }
-
+                        
                         // Error or not, the property is optional, so check if the image/error is nil or not is not necessary
                         Member.sharedInstance().profilPicture = image
                         Facade.sharedInstance().saveMemberProfil()
-
-                        let schoolRooms = jsonResponse!["response"]["rooms"]
+                        
+                        let schoolRooms = jsonResponse["response"]["rooms"]
                         
                         Facade.sharedInstance().addRoomsFromJSON(schoolRooms)
                         Facade.sharedInstance().fetchPersonsProfilPictureInsideRoom()
@@ -118,19 +118,19 @@ class AuthenticationViewController: UIViewController {
                         }
                     }
                     
-                // Else, if he's not registred in the database..
+                    // Else, if he's not registred in the database..
                 } else {
                     BFRadialWaveHUD.sharedInstance().dismiss()
                     self.errorLabel.text = NSLocalizedString("wrongEmailOrPassword", comment: "")
                     self.shakeForm()
                 }
-
-            // If a problem occured ( the serveur not received the parameters even crash )
+                
+                // If a problem occured ( the serveur not received the parameters even crash )
             }  else {
                 
                 self.signInBarButtonItem.enabled = false
                 BFRadialWaveHUD.sharedInstance().dismiss()
-
+                
                 let alertView = JSSAlertView().danger(self, title: self.navigationItem.title!,
                     text: NSLocalizedString("genericError", comment: ""))
                 
@@ -141,7 +141,7 @@ class AuthenticationViewController: UIViewController {
         }
     }
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.view.endEditing(true) // Hide the keyboard when touching outside the textfields
     }
     
@@ -176,7 +176,7 @@ class AuthenticationViewController: UIViewController {
     private func canSignInButtonBeEnabled() -> Bool {
         return (!self.emailTextField.text.isEmpty && !self.passwordTextField.text.isEmpty)
     }
-
+    
 }
 
 // MARK: - UITextField Delegate -
@@ -185,13 +185,13 @@ extension AuthenticationViewController: UITextFieldDelegate {
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange,
         replacementString string: String) -> Bool {
-        
-        if string != " " {
-            textField.text = (textField.text as NSString).stringByReplacingCharactersInRange(range, withString: string)
-            self.signInBarButtonItem.enabled = self.canSignInButtonBeEnabled()
-        }
-        
-        return false
+            
+            if string != " " {
+                textField.text = (textField.text as NSString).stringByReplacingCharactersInRange(range, withString: string)
+                self.signInBarButtonItem.enabled = self.canSignInButtonBeEnabled()
+            }
+            
+            return false
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
@@ -209,15 +209,15 @@ extension AuthenticationViewController: UITextFieldDelegate {
         // If the user tap the Next keyboard button, we redirect him to the next text field.
         if textField == self.emailTextField {
             self.passwordTextField.becomeFirstResponder()
-        
-        // Else if he tap de 'Go' keyboard button, ..
+            
+            // Else if he tap de 'Go' keyboard button, ..
         } else if textField == self.passwordTextField {
             
             if self.canSignInButtonBeEnabled() {
                 self.signIn()
                 
             } else {
-
+                
                 textField.resignFirstResponder()
                 
                 let alertView = JSSAlertView().show(self, title: self.navigationItem.title!, text: NSLocalizedString("emailForgotError", comment: ""))
@@ -229,7 +229,7 @@ extension AuthenticationViewController: UITextFieldDelegate {
                 })
             }
         }
-
+        
         return true
     }
 }
@@ -247,60 +247,59 @@ extension AuthenticationViewController: FBLoginViewDelegate {
             
             self.view.endEditing(true)
             BFRadialWaveHUD.showInView(self.navigationController!.view, withMessage: self.navigationItem.title! + "...")
-            let email = user.objectForKey("email") as String
+            let email = user.objectForKey("email") as! String
             
             Facade.sharedInstance().authenticateUserWithFacebookOrGooglePlus(email.encodeBase64(),
                 lastName: user.last_name.encodeBase64(), firstName: user.first_name.encodeBase64(),
                 completionHandler: { (jsonResponse, error) -> Void in
-                
-                println("jsonresponse = \(jsonResponse), error = \(error)")
-                if error == nil && jsonResponse? != nil && jsonResponse!.isOk()
-                    && (jsonResponse!.userExist() || jsonResponse!.userHasBeenRegistered()) {
-                        
-                        let userProfil = jsonResponse!["response"]["profil"]
-                        let schoolRooms = jsonResponse!["response"]["rooms"]
-                        
-                        Member.sharedInstance().fillMemberProfilWithJSON(userProfil)
-                        Facade.sharedInstance().saveMemberProfil()
-                        Facade.sharedInstance().addRoomsFromJSON(schoolRooms)
-                        Facade.sharedInstance().fetchPersonsProfilPictureInsideRoom()
-                        
-                        if jsonResponse!.userExist() {
-                           
-                            let pictureUrl = "http://www.aymenworks.fr/assets/beacon/\(Member.sharedInstance().email!.md5())/picture.jpg"
+                    
+                    if error == nil, let jsonResponse = jsonResponse where jsonResponse.isOk()
+                        && (jsonResponse.userExist() || jsonResponse.userHasBeenRegistered()) {
                             
-                            Facade.sharedInstance().serverProfilPictureWithURL(pictureUrl) { (image) -> Void in
-                                BFRadialWaveHUD.sharedInstance().showSuccessWithMessage(NSLocalizedString("loggedIn", comment: ""))
-                                Member.sharedInstance().profilPicture = image
-                                Facade.sharedInstance().saveMemberProfil()
-                                doInMainQueueAfter(seconds: 1.2) {
-                                    BFRadialWaveHUD.sharedInstance().dismiss()
-                                    self.performSegueWithIdentifier("segueGoToHomeViewFromAuthenticationView", sender: self)
-                                }
-                            }
-                       
-                        } else {
-                            Facade.sharedInstance().facebookProfilePicture(user.objectID, completionHandler: { (image) -> Void in
+                            let userProfil = jsonResponse["response"]["profil"]
+                            let schoolRooms = jsonResponse["response"]["rooms"]
+                            
+                            Member.sharedInstance().fillMemberProfilWithJSON(userProfil)
+                            Facade.sharedInstance().saveMemberProfil()
+                            Facade.sharedInstance().addRoomsFromJSON(schoolRooms)
+                            Facade.sharedInstance().fetchPersonsProfilPictureInsideRoom()
+                            
+                            if jsonResponse.userExist() {
                                 
-                                Facade.sharedInstance().uploadUserProfilPicture(image!, withEmail: email.encodeBase64(),
-                                    completionHandler: { () -> Void in
-                                        BFRadialWaveHUD.sharedInstance().showSuccessWithMessage(NSLocalizedString("loggedIn", comment: ""))
-                                        Member.sharedInstance().profilPicture = image
-                                        Facade.sharedInstance().saveMemberProfil()
-                                        doInMainQueueAfter(seconds: 1.2) {
-                                            BFRadialWaveHUD.sharedInstance().dismiss()
-                                            self.performSegueWithIdentifier("segueGoToHomeViewFromAuthenticationView", sender: self)
-                                        }
+                                let pictureUrl = "http://www.aymenworks.fr/assets/beacon/\(Member.sharedInstance().email!.md5())/picture.jpg"
+                                
+                                Facade.sharedInstance().serverProfilPictureWithURL(pictureUrl) { (image) -> Void in
+                                    BFRadialWaveHUD.sharedInstance().showSuccessWithMessage(NSLocalizedString("loggedIn", comment: ""))
+                                    Member.sharedInstance().profilPicture = image
+                                    Facade.sharedInstance().saveMemberProfil()
+                                    doInMainQueueAfter(seconds: 1.2) {
+                                        BFRadialWaveHUD.sharedInstance().dismiss()
+                                        self.performSegueWithIdentifier("segueGoToHomeViewFromAuthenticationView", sender: self)
                                     }
-                                )
-                            })
-                        }
-
-                } else {
-                    FBSession.activeSession().closeAndClearTokenInformation()
-                    BFRadialWaveHUD.sharedInstance().dismiss()
-                    JSSAlertView().danger(self, title: self.navigationItem.title!, text: NSLocalizedString("genericError", comment: ""))
-                }
+                                }
+                                
+                            } else {
+                                Facade.sharedInstance().facebookProfilePicture(user.objectID, completionHandler: { (image) -> Void in
+                                    
+                                    Facade.sharedInstance().uploadUserProfilPicture(image!, withEmail: email.encodeBase64(),
+                                        completionHandler: { () -> Void in
+                                            BFRadialWaveHUD.sharedInstance().showSuccessWithMessage(NSLocalizedString("loggedIn", comment: ""))
+                                            Member.sharedInstance().profilPicture = image
+                                            Facade.sharedInstance().saveMemberProfil()
+                                            doInMainQueueAfter(seconds: 1.2) {
+                                                BFRadialWaveHUD.sharedInstance().dismiss()
+                                                self.performSegueWithIdentifier("segueGoToHomeViewFromAuthenticationView", sender: self)
+                                            }
+                                        }
+                                    )
+                                })
+                            }
+                            
+                    } else {
+                        FBSession.activeSession().closeAndClearTokenInformation()
+                        BFRadialWaveHUD.sharedInstance().dismiss()
+                        JSSAlertView().danger(self, title: self.navigationItem.title!, text: NSLocalizedString("genericError", comment: ""))
+                    }
             })
         }
     }
@@ -310,9 +309,9 @@ extension AuthenticationViewController: FBLoginViewDelegate {
         var errorAuthentication = (title: "",descriptionError: "")
         let errorCategory = FBErrorUtility.errorCategoryForError(error)
         errorAuthentication.title = NSLocalizedString(self.navigationItem.title!, comment: "")
-
+        
         if errorCategory == .UserCancelled {
-                errorAuthentication.descriptionError = NSLocalizedString("facebookAuthenticationCanceled", comment: "")
+            errorAuthentication.descriptionError = NSLocalizedString("facebookAuthenticationCanceled", comment: "")
         } else {
             errorAuthentication.descriptionError = NSLocalizedString("genericError", comment: "")
         }
@@ -329,13 +328,13 @@ extension AuthenticationViewController: GPPSignInDelegate {
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
         
         BFRadialWaveHUD.showInView(self.navigationController!.view, withMessage: self.navigationItem.title! + "...")
-
+        
         if error == nil {
             
             Facade.sharedInstance().googlePlusProfile(self.signInGooglePlus.userID, completionHandler: { (firstName, lastName, profilPicture, error) -> Void in
                 
                 if error == nil {
-                
+                    
                     if Facade.sharedInstance().isUserLoggedIn() {
                         self.performSegueWithIdentifier("segueGoToHomeViewFromAuthenticationView", sender: self)
                         
@@ -346,29 +345,29 @@ extension AuthenticationViewController: GPPSignInDelegate {
                         Facade.sharedInstance().authenticateUserWithFacebookOrGooglePlus(email.encodeBase64(),
                             lastName: lastName!.encodeBase64(), firstName: firstName!.encodeBase64(),
                             completionHandler: { (jsonResponse, error) -> Void in
-                                                        
-                            if error == nil && jsonResponse != nil && jsonResponse!.isOk()
-                                && (jsonResponse!.userExist() || jsonResponse!.userHasBeenRegistered()) {
-                                                                        
-                                    Facade.sharedInstance().uploadUserProfilPicture(profilPicture!, withEmail: email.encodeBase64(),
-                                        completionHandler: { () -> Void in
-                                            
-                                            BFRadialWaveHUD.sharedInstance().showSuccessWithMessage(NSLocalizedString("loggedIn", comment: ""))
-
-                                            let userProfil = jsonResponse!["response"]["profil"]
-                                            let schoolRooms = jsonResponse!["response"]["rooms"]
-                                            
-                                            Member.sharedInstance().fillMemberProfilWithJSON(userProfil)
-                                            Member.sharedInstance().profilPicture = profilPicture
-                                            Facade.sharedInstance().saveMemberProfil()
-                                            Facade.sharedInstance().addRoomsFromJSON(schoolRooms)
-                                            Facade.sharedInstance().fetchPersonsProfilPictureInsideRoom()
-
-                                            doInMainQueueAfter(seconds: 1.2) {
-                                                BFRadialWaveHUD.sharedInstance().dismiss()
-                                                self.performSegueWithIdentifier("segueGoToHomeViewFromAuthenticationView", sender: self)
-                                            }
-                                    })
+                                
+                                if error == nil && jsonResponse != nil && jsonResponse!.isOk()
+                                    && (jsonResponse!.userExist() || jsonResponse!.userHasBeenRegistered()) {
+                                        
+                                        Facade.sharedInstance().uploadUserProfilPicture(profilPicture!, withEmail: email.encodeBase64(),
+                                            completionHandler: { () -> Void in
+                                                
+                                                BFRadialWaveHUD.sharedInstance().showSuccessWithMessage(NSLocalizedString("loggedIn", comment: ""))
+                                                
+                                                let userProfil = jsonResponse!["response"]["profil"]
+                                                let schoolRooms = jsonResponse!["response"]["rooms"]
+                                                
+                                                Member.sharedInstance().fillMemberProfilWithJSON(userProfil)
+                                                Member.sharedInstance().profilPicture = profilPicture
+                                                Facade.sharedInstance().saveMemberProfil()
+                                                Facade.sharedInstance().addRoomsFromJSON(schoolRooms)
+                                                Facade.sharedInstance().fetchPersonsProfilPictureInsideRoom()
+                                                
+                                                doInMainQueueAfter(seconds: 1.2) {
+                                                    BFRadialWaveHUD.sharedInstance().dismiss()
+                                                    self.performSegueWithIdentifier("segueGoToHomeViewFromAuthenticationView", sender: self)
+                                                }
+                                        })
                                 }
                         })
                     }
@@ -378,7 +377,7 @@ extension AuthenticationViewController: GPPSignInDelegate {
                     JSSAlertView().danger(self, title: self.navigationItem.title!, text: NSLocalizedString("genericError", comment: ""))
                 }
             })
-        
+            
         } else {
             BFRadialWaveHUD.sharedInstance().dismiss()
             JSSAlertView().danger(self, title: self.navigationItem.title!, text:NSLocalizedString("genericError", comment: ""))

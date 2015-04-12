@@ -9,14 +9,14 @@
 import UIKit
 
 /**
-  WalkthroughViewController controller. It take care to swipe the differents views during the walkthrough app.
+WalkthroughViewController controller. It take care to swipe the differents views during the walkthrough app.
 */
-class WalkthroughViewController: UIViewController {
+final class WalkthroughViewController: UIViewController {
     
     @IBOutlet private weak var myScrollView: UIScrollView!
     @IBOutlet private weak var pageControl: UIPageControl!
     private let contentView = UIView()
-
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         println("initWithcoder walkthrough")
@@ -37,13 +37,13 @@ class WalkthroughViewController: UIViewController {
             self.pageControl.currentPage = self.oldPage
         }
     }
-
+    
     private lazy var listPages: [UIViewController] =
-        [
-            self.storyboard!.instantiateViewControllerWithIdentifier("PageOne") as UIViewController,
-            self.storyboard!.instantiateViewControllerWithIdentifier("PageTwo") as UIViewController,
-            self.storyboard!.instantiateViewControllerWithIdentifier("PageThree") as UIViewController,
-        ]
+    [
+        self.storyboard!.instantiateViewControllerWithIdentifier("PageOne") as! UIViewController,
+        self.storyboard!.instantiateViewControllerWithIdentifier("PageTwo") as! UIViewController,
+        self.storyboard!.instantiateViewControllerWithIdentifier("PageThree") as! UIViewController,
+    ]
     
     // MARK: - Lifecycle -
     
@@ -57,15 +57,15 @@ class WalkthroughViewController: UIViewController {
         super.viewWillAppear(animated)
         self.prepareWalkthroughViews()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    } 
+    }
     
     // MARK: - User Interface -
     
     /**
-    Prepare dynamicly the walkthrough views ( app presentation ), like the final content size 
+    Prepare dynamicly the walkthrough views ( app presentation ), like the final content size
     of `myScrollView, the origin of the views, etc..
     So if we want to add another view on our walkthrough, we just add it to `listPages` and on the storyboard.
     
@@ -75,7 +75,7 @@ class WalkthroughViewController: UIViewController {
         
         // I use a contentView with the scroll view because of the auto layout.
         var i = CGFloat(self.listPages.count-1)
-
+        
         // We add the views on the inverse order, like a stack
         self.listPages.reverse().map { currentController -> Void in
             self.contentView.addSubview(currentController.view)
@@ -100,7 +100,7 @@ extension WalkthroughViewController: UIScrollViewDelegate {
     
     :param: scrollView The walkthrough scroll view. See `myScrollView`
     */
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView!) {
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         let pageWidth      = self.myScrollView.frame.size.width
         let currentPage = lroundf( Float(self.myScrollView.contentOffset.x / pageWidth) )
         if self.oldPage != currentPage && self.oldPage != NSNotFound {
