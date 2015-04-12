@@ -1,4 +1,4 @@
-‹StudentBeaconProjectInfotel
+StudentBeaconProjectInfotel
 ========
 
 Student project realizing an iOS app and using beacons technologies.
