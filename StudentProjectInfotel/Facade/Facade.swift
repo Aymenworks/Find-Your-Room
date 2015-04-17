@@ -25,12 +25,7 @@ final public class Facade {
     lazy private var persistencyManager = PersistencyManager()
     
     /// A singleton object as the entry point to manage the application
-    public class func sharedInstance() -> Facade {
-        struct Singleton {
-            static let instance = Facade()
-        }
-        return Singleton.instance
-    }
+    public static let sharedInstance = Facade()
     
     // MARK: - Lifecycle -
     
@@ -122,8 +117,8 @@ final public class Facade {
     :param: userEmail         <#userEmail description#>
     :param: completionHandler <#completionHandler description#>
     */
-    public func deleteMyPresenceFromRoom(userEmail: String, completionHandler: (JSON?, NSError?) -> Void) {
-        self.networkManager.deleteMyPresenceFromRoom(userEmail, completionHandler: completionHandler)
+    public func deleteMyPresenceFromRoomWithEmail(userEmail: String, completionHandler: ((JSON?, NSError?) -> Void)? = nil) {
+        self.networkManager.deleteMyPresenceFromRoomWithEmail(userEmail, completionHandler: completionHandler)
     }
     
     // MARK: Sigining Up
@@ -284,15 +279,12 @@ final public class Facade {
     
     :returns: true if he's logged, false if not
     */
-    public func isUserLoggedIn() -> Bool {
-        println("Member.sharedInstance().email = \(Member.sharedInstance().email)")
-        println("Member.sharedInstance().isAdmin = \(Member.sharedInstance().isAdmin)")
-        
-        return Member.sharedInstance().email != nil
+    public func isUserLoggedIn() -> Bool {        
+        return session.objectForKey("email") != nil
     }
     
     public func isUserAdmin() -> Bool {
-        return Member.sharedInstance().isAdmin!
+        return Member.sharedInstance.isAdmin
     }
     
     

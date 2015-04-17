@@ -781,7 +781,6 @@ public class Request {
                 if challenge.previousFailureCount > 0 {
                     disposition = .CancelAuthenticationChallenge
                 } else {
-                    // TODO: Incorporate Trust Evaluation & TLS Chain Validation
                     
                     switch challenge.protectionSpace.authenticationMethod! {
                     case NSURLAuthenticationMethodServerTrust:

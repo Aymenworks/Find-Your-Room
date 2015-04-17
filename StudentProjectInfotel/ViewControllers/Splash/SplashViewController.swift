@@ -43,7 +43,7 @@ final class SplashViewController: UIViewController {
         doInMainQueueAfter(seconds: 0.6) { self.beaconImage.shake() }
         doInMainQueueAfter(seconds: 2.0) {
             
-            if Facade.sharedInstance().isUserLoggedIn() {
+            if Facade.sharedInstance.isUserLoggedIn() {
                 self.showUserLoggedInView()
                 
             } else {
@@ -59,9 +59,9 @@ final class SplashViewController: UIViewController {
         self.universityImage.hidden = !self.universityImage.hidden
         self.activityIndicator.hidden = !self.activityIndicator.hidden
         self.activityIndicator.isAnimating() ? self.activityIndicator.stopAnimating() : self.activityIndicator.startAnimating()
-        self.userProfilPicture.image = Member.sharedInstance().profilPicture
+        self.userProfilPicture.image = Member.sharedInstance.profilPicture
         self.userProfilPicture.hidden = !self.userProfilPicture.hidden
-        self.userName.text = Member.sharedInstance().fullName()
+        self.userName.text = Member.sharedInstance.fullName()
         self.userName.hidden = !self.userName.hidden
     }
     
@@ -69,20 +69,20 @@ final class SplashViewController: UIViewController {
         
         self.toggleView()
         
-        Facade.sharedInstance().fetchUserProfile(Member.sharedInstance().email!.encodeBase64(), completionHandler: { (jsonProfil, error) -> Void in
+        Facade.sharedInstance.fetchUserProfile(Member.sharedInstance.email!.encodeBase64(), completionHandler: { (jsonProfil, error) -> Void in
             
             if error == nil && jsonProfil != nil && jsonProfil!.isOk() {
                 
                 let userProfil = jsonProfil!["response"]["profil"]
-                let pictureUrl = "http://www.aymenworks.fr/assets/beacon/\(Member.sharedInstance().email!.md5())/picture.jpg"
+                let pictureUrl = "http://www.aymenworks.fr/assets/beacon/\(Member.sharedInstance.email!.md5())/picture.jpg"
                 
-                Member.sharedInstance().fillMemberProfilWithJSON(userProfil)
-                Facade.sharedInstance().serverProfilPictureWithURL(pictureUrl) { (image) -> Void in
+                Member.sharedInstance.fillMemberProfilWithJSON(userProfil)
+                Facade.sharedInstance.serverProfilPictureWithURL(pictureUrl) { (image) -> Void in
                     
-                    Member.sharedInstance().profilPicture = image
-                    Facade.sharedInstance().saveMemberProfil()
+                    Member.sharedInstance.profilPicture = image
+                    Facade.sharedInstance.saveMemberProfil()
                     
-                    Facade.sharedInstance().roomsBySchoolId(Member.sharedInstance().schoolId!.encodeBase64(),
+                    Facade.sharedInstance.roomsBySchoolId(Member.sharedInstance.schoolId!.encodeBase64(),
                         completionHandler: { (jsonSchoolRooms, error) -> Void in
                             
                             if error == nil, let jsonSchoolRooms = jsonSchoolRooms where jsonSchoolRooms.isOk() {
@@ -90,8 +90,8 @@ final class SplashViewController: UIViewController {
                                 let schoolRooms = jsonSchoolRooms["response"]["rooms"]
                                 let beaconsSchool = jsonSchoolRooms["response"]["beacons"]
                                 
-                                Facade.sharedInstance().addRoomsFromJSON(schoolRooms)
-                                Facade.sharedInstance().fetchPersonsProfilPictureInsideRoom()
+                                Facade.sharedInstance.addRoomsFromJSON(schoolRooms)
+                                Facade.sharedInstance.fetchPersonsProfilPictureInsideRoom()
                                 self.activityIndicator.stopAnimating()
                             }
                             

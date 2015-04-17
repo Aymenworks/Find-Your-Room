@@ -276,21 +276,21 @@ final class NetworkManager {
         var numberOfImagesToDownload = 0
         var numberOfImagesDownloaded = 0
         
-        Facade.sharedInstance().rooms().map({ numberOfImagesToDownload += $0.persons.count })
+        Facade.sharedInstance.rooms().map({ numberOfImagesToDownload += $0.persons.count })
         
-        for room in Facade.sharedInstance().rooms() {
+        for room in Facade.sharedInstance.rooms() {
             for person in room.persons {
                 
                 let pictureUrl = "http://www.aymenworks.fr/assets/beacon/\(person.email!.md5())/picture.jpg"
                 
-                Facade.sharedInstance().serverProfilPictureWithURL(pictureUrl) { image -> Void in
+                Facade.sharedInstance.serverProfilPictureWithURL(pictureUrl) { image -> Void in
                     NSNotificationCenter.defaultCenter().postNotificationName("DownloadImageNotification", object: nil)
                     person.profilPicture = image
                     numberOfImagesDownloaded++
                     
                     // If we have downloaded all the pictures, we save it.
                     if numberOfImagesDownloaded == numberOfImagesToDownload {
-                        Facade.sharedInstance().saveRooms()
+                        Facade.sharedInstance.saveRooms()
                     }
                 }
             }
@@ -328,7 +328,6 @@ final class NetworkManager {
     :param: completionHandler <#completionHandler description#>
     */
     func addMyPresenceInRoom(roomId: Int, userEmail: String, completionHandler: (JSON?, NSError?) -> Void) {
-        println("j'envoie room = \(roomId) et email = \(userEmail)")
         request(.POST, "http://www.aymenworks.fr/beacon/addMyPresenceInRoom", parameters:["roomId": roomId,
             "userEmail": userEmail])
             .validate()
@@ -344,11 +343,11 @@ final class NetworkManager {
     :param: userEmail         <#userEmail description#>
     :param: completionHandler <#completionHandler description#>
     */
-    func deleteMyPresenceFromRoom(userEmail: String, completionHandler: (JSON?, NSError?) -> Void) {
+    func deleteMyPresenceFromRoomWithEmail(userEmail: String, completionHandler: ((JSON?, NSError?) -> Void)? = nil) {
         request(.POST, "http://www.aymenworks.fr/beacon/deleteMyPresenceFromRoom", parameters:["userEmail": userEmail])
             .validate()
             .responseSwiftyJSON({ (_, _, jsonResponse, error) in
-                completionHandler(jsonResponse, error)
+                completionHandler?(jsonResponse, error)
             })
     }
     

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="42o-3U-Mdd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="42o-3U-Mdd">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -639,10 +639,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ipu-Iu-9bM">
-                                <rect key="frame" x="0.0" y="44" width="320" height="344"/>
+                                <rect key="frame" x="0.0" y="135" width="320" height="253"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fV9-Gw-Le5" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="91" width="320" height="253"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="253"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="password" translatesAutoresizingMaskIntoConstraints="NO" id="13H-AA-66B">
                                                 <rect key="frame" x="8" y="109" width="20" height="20"/>
@@ -851,7 +851,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="fV9-Gw-Le5" secondAttribute="trailing" id="GqE-YA-Thn"/>
                                     <constraint firstAttribute="bottom" secondItem="fV9-Gw-Le5" secondAttribute="bottom" id="pW0-Pc-39T"/>
-                                    <constraint firstItem="fV9-Gw-Le5" firstAttribute="top" secondItem="ipu-Iu-9bM" secondAttribute="top" constant="91" id="q7R-1z-1XH"/>
+                                    <constraint firstItem="fV9-Gw-Le5" firstAttribute="top" secondItem="ipu-Iu-9bM" secondAttribute="top" id="q7R-1z-1XH"/>
                                     <constraint firstItem="fV9-Gw-Le5" firstAttribute="leading" secondItem="ipu-Iu-9bM" secondAttribute="leading" id="vEx-QA-nGx"/>
                                 </constraints>
                             </scrollView>
@@ -860,7 +860,7 @@
                         <constraints>
                             <constraint firstItem="0RD-qh-wua" firstAttribute="top" secondItem="ipu-Iu-9bM" secondAttribute="bottom" constant="46" id="2b0-DU-1ZV"/>
                             <constraint firstItem="ipu-Iu-9bM" firstAttribute="leading" secondItem="OKs-e3-3AF" secondAttribute="leading" id="56X-jp-qpZ"/>
-                            <constraint firstItem="ipu-Iu-9bM" firstAttribute="top" secondItem="MyX-0k-7Hp" secondAttribute="bottom" constant="44" id="Cbc-MH-fSY"/>
+                            <constraint firstItem="ipu-Iu-9bM" firstAttribute="top" secondItem="MyX-0k-7Hp" secondAttribute="bottom" constant="135" id="Cbc-MH-fSY"/>
                             <constraint firstItem="N49-bR-pVl" firstAttribute="top" secondItem="MyX-0k-7Hp" secondAttribute="bottom" constant="10" id="HpY-kF-xjg"/>
                             <constraint firstAttribute="trailing" secondItem="0RD-qh-wua" secondAttribute="trailing" constant="36" id="beE-dG-8u3"/>
                             <constraint firstAttribute="centerX" secondItem="N49-bR-pVl" secondAttribute="centerX" id="cq4-72-oxY"/>
@@ -1149,7 +1149,7 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="ZIW-1v-Daf" secondAttribute="bottom" constant="-305" id="25J-2s-bUD"/>
+                                                <constraint firstAttribute="bottom" secondItem="ZIW-1v-Daf" secondAttribute="bottom" constant="-306" id="25J-2s-bUD"/>
                                                 <constraint firstItem="ZIW-1v-Daf" firstAttribute="leading" secondItem="Foy-Ji-hay" secondAttribute="leading" id="2Hh-M5-z9Y"/>
                                                 <constraint firstItem="ZIW-1v-Daf" firstAttribute="top" secondItem="Foy-Ji-hay" secondAttribute="top" constant="-137" id="FTD-ia-uVp"/>
                                                 <constraint firstAttribute="trailing" secondItem="ZIW-1v-Daf" secondAttribute="trailing" id="O8m-Rc-v1U"/>
@@ -1187,7 +1187,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1600" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="56.5" translatesAutoresizingMaskIntoConstraints="NO" id="QIf-oz-as7">
-                                        <rect key="frame" x="8" y="67" width="56.5" height="25"/>
+                                        <rect key="frame" x="8" y="67" width="57" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="MbR-Un-sHO"/>
                                         </constraints>
@@ -1206,7 +1206,7 @@
                                         <size key="shadowOffset" width="0.0" height="0.0"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="student" translatesAutoresizingMaskIntoConstraints="NO" id="r6B-Ho-WJL">
-                                        <rect key="frame" x="72" y="60" width="25" height="32"/>
+                                        <rect key="frame" x="73" y="60" width="25" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="UaV-P2-ShD"/>
                                             <constraint firstAttribute="width" constant="25" id="Zx9-Ja-iIG"/>
@@ -1918,6 +1918,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="igP-L0-6Gc"/>
+        <segue reference="MuS-uZ-nvj"/>
     </inferredMetricsTieBreakers>
 </document>

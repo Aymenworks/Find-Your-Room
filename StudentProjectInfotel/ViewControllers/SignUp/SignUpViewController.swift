@@ -65,7 +65,7 @@ final class SignUpViewController: UIViewController {
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.view.endEditing(true)
         
-        if DeviceInformation.isIphone5() {
+        if DeviceInformation.isIphone5OrLess() {
             self.formScrollView.setContentOffset(CGPointZero, animated: true)
         }
     }
@@ -89,11 +89,10 @@ final class SignUpViewController: UIViewController {
         let schoolId  = self.schoolIdTextField.text.encodeBase64()
         let password  = self.passwordTextField.text.md5()
         
-        Facade.sharedInstance().signUpUserWithPassword( email, password: password, lastName: lastName,
+        Facade.sharedInstance.signUpUserWithPassword( email, password: password, lastName: lastName,
             firstName: firstName, formation:formation, schoolId: schoolId)
             { (jsonResponse, error) -> Void in
                 
-                println("response = \(jsonResponse)")
                 // If everything is fine..
                 if error == nil, let jsonResponse = jsonResponse where jsonResponse.isOk() {
                     
@@ -103,16 +102,16 @@ final class SignUpViewController: UIViewController {
                         let userProfil = jsonResponse["response"]["profil"]
                         let schoolRooms = jsonResponse["response"]["rooms"]
                         
-                        Member.sharedInstance().fillMemberProfilWithJSON(userProfil)
-                        Facade.sharedInstance().addRoomsFromJSON(schoolRooms)
-                        Facade.sharedInstance().fetchPersonsProfilPictureInsideRoom()
+                        Member.sharedInstance.fillMemberProfilWithJSON(userProfil)
+                        Facade.sharedInstance.addRoomsFromJSON(schoolRooms)
+                        Facade.sharedInstance.fetchPersonsProfilPictureInsideRoom()
                         
                         if let imageUserProfil = self.profilPictureButton.backgroundImageForState(.Normal) {
                             
-                            Facade.sharedInstance().uploadUserProfilPicture(imageUserProfil, withEmail: email,
+                            Facade.sharedInstance.uploadUserProfilPicture(imageUserProfil, withEmail: email,
                                 completionHandler: { () -> Void in
-                                    Member.sharedInstance().profilPicture = imageUserProfil
-                                    Facade.sharedInstance().saveMemberProfil()
+                                    Member.sharedInstance.profilPicture = imageUserProfil
+                                    Facade.sharedInstance.saveMemberProfil()
                                     
                                     self.userHasSignedUp()
                             })
@@ -156,7 +155,7 @@ final class SignUpViewController: UIViewController {
     
     private func userHasSignedUp() {
         BFRadialWaveHUD.sharedInstance().showSuccessWithMessage(NSLocalizedString("signedUp", comment: ""))
-        Facade.sharedInstance().saveMemberProfil()
+        Facade.sharedInstance.saveMemberProfil()
         
         // And we redirect him on the home view ( x second for sample user experience after the signed up loading )
         doInMainQueueAfter(seconds: 1.2) {
@@ -237,6 +236,10 @@ extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationCon
             self.dismissViewControllerAnimated(true, completion: nil)
             self.profilPictureButton.setBackgroundImage(image, forState: .Normal)
     }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        println("cancel")
+    }
 }
 
 // MARK: - UITextField Delegate -
@@ -258,18 +261,6 @@ extension SignUpViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(textField: UITextField) {
         self.errorLabel.text = " "
-        
-        if DeviceInformation.isIphone5() {
-            
-            if textField == self.passwordTextField {
-                self.formScrollView.setContentOffset(CGPointMake(0.0, 40.0), animated: true)
-                
-            } else if textField == self.firstNameTextField || textField == self.lastNameTextField
-                || textField == self.emailTextField {
-                    
-                    self.formScrollView.setContentOffset(CGPointZero, animated: true)
-            }
-        }
     }
     
     func textFieldShouldClear(textField: UITextField) -> Bool {
@@ -279,31 +270,52 @@ extension SignUpViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
-        
         /* If the user tap the Next keyboard button, we redirect him to the next text field.
         Else if he tap the Join keyboard button after entering its password, we call
         the signUp method, if all the inputs are valid.
         */
         switch(textField) {
             
+            case self.firstNameTextField:
+                self.lastNameTextField.becomeFirstResponder()
+                
+            case self.lastNameTextField:
+                self.emailTextField.becomeFirstResponder()
+                if DeviceInformation.isIphone5OrLess() {
+                    self.formScrollView.setContentOffset(CGPointMake(0.0, 40.0), animated: true)
+                }
+
+            case self.emailTextField:
+                self.passwordTextField.becomeFirstResponder()
+                if DeviceInformation.isIphone5OrLess() {
+                    self.formScrollView.setContentOffset(CGPointMake(0.0, 80.0), animated: true)
+                }
             
-        case self.firstNameTextField:   self.lastNameTextField.becomeFirstResponder()
-        case self.lastNameTextField:    self.emailTextField.becomeFirstResponder()
-        case self.emailTextField:       self.passwordTextField.becomeFirstResponder()
-        case self.passwordTextField:    self.formationTextField.becomeFirstResponder()
-        case self.formationTextField:    self.schoolIdTextField.becomeFirstResponder()
-            
-            
-        case self.schoolIdTextField:
-            if self.canSignUpButtonBeEnabled() {
-                self.signUp()
-            } else {
-                textField.resignFirstResponder()
-                let alertView = JSSAlertView().show(self, title: self.navigationItem.title!, text: NSLocalizedString("signUp.fillAllFields", comment: ""))
-                alertView.setTextTheme(.Dark)
-            }
-        default: break
+            case self.passwordTextField:
+                self.formationTextField.becomeFirstResponder()
+                if DeviceInformation.isIphone5OrLess() {
+                    self.formScrollView.setContentOffset(CGPointMake(0.0, 126.0), animated: true)
+                }
+
+            case self.formationTextField:
+                self.schoolIdTextField.becomeFirstResponder()
+                
+            case self.schoolIdTextField:
+               
+                if self.canSignUpButtonBeEnabled() {
+                    self.signUp()
+                    
+                } else {
+                    textField.resignFirstResponder()
+                    let alertView = JSSAlertView().show(self, title: self.navigationItem.title!,
+                        text: NSLocalizedString("signUp.fillAllFields", comment: ""))
+                    alertView.setTextTheme(.Dark)
+                }
+                
+            default:
+                break
         }
+        
         return true
     }
 }

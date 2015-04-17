@@ -14,10 +14,10 @@ class Person: NSObject {
     final var firstName: String?
     final var lastName: String?
     final var email: String?
-    final var formation: String?
-    final var schoolId: String?
-    final var isAdmin: Bool? = false
     final var schoolName: String?
+    final var schoolId: String?
+    final var formation: String?
+    final var isAdmin = false
     
     final var profilPicture: UIImage? {
         didSet {
@@ -30,16 +30,19 @@ class Person: NSObject {
     // MARK: - Lifecycle -
     
     init (jsonPerson: JSON) {
-        self.lastName = jsonPerson["LASTNAME"].string
-        self.firstName = jsonPerson["FIRSTNAME"].string
-        self.email = jsonPerson["USER_EMAIL"].string
+        self.lastName = jsonPerson["LASTNAME"].string!
+        self.firstName = jsonPerson["FIRSTNAME"].string!
+        self.email = jsonPerson["USER_EMAIL"].string!
+        self.schoolId = jsonPerson["SCHOOL_ID"].string!
+        self.schoolName = jsonPerson["SCHOOL_NAME"].string!
         self.formation = jsonPerson["FORMATION"].string
         
         super.init()
     }
     
     required init(firstName: String?, lastName: String?, email: String?,  formation: String?,
-        schoolId: String?, schoolName: String?, isAdmin: Bool?, profilPicture: UIImage?) {
+                    schoolId: String?, schoolName: String?, isAdmin: Bool, profilPicture: UIImage?) {
+            
             self.firstName = firstName
             self.lastName = lastName
             self.email = email
@@ -73,34 +76,15 @@ extension Person: NSCoding {
     
     final func encodeWithCoder(aCoder: NSCoder) {
         
-        // TODO: Not logical to check all properties ..
-        
-        if let firstName = self.firstName {
-            aCoder.encodeObject(firstName, forKey: "firstName")
-        }
-        
-        if let lastName = self.lastName {
-            aCoder.encodeObject(lastName, forKey: "lastName")
-        }
-        
-        if let email = self.email {
-            aCoder.encodeObject(email, forKey: "email")
-        }
-        
+        aCoder.encodeObject(firstName, forKey: "firstName")
+        aCoder.encodeObject(lastName, forKey: "lastName")
+        aCoder.encodeObject(email, forKey: "email")
+        aCoder.encodeObject(schoolId, forKey: "schoolId")
+        aCoder.encodeObject(schoolName, forKey: "schoolName")
+        aCoder.encodeBool(isAdmin, forKey: "isAdmin")
+
         if let formation = self.formation {
             aCoder.encodeObject(formation, forKey: "formation")
-        }
-        
-        if let schoolId = self.schoolId {
-            aCoder.encodeObject(schoolId, forKey: "schoolId")
-        }
-        
-        if let schoolName = self.schoolName {
-            aCoder.encodeObject(schoolName, forKey: "schoolName")
-        }
-        
-        if let isAdmin = self.isAdmin {
-            aCoder.encodeBool(isAdmin, forKey: "isAdmin")
         }
         
         if let profilPicture = self.profilPicture {
@@ -115,7 +99,7 @@ extension Person: Printable {
     
     /// What will be printed when printing the member object.
     override final var description: String {
-        return "FirstName = \(self.firstName!), LastName = \(self.lastName!), email = \(self.email!)"
+        return "FirstName = \(self.firstName), LastName = \(self.lastName), email = \(self.email)"
     }
     
     final func fullName() -> String {

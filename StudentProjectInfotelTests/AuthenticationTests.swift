@@ -29,7 +29,7 @@ class AuthenticationTests: XCTestCase {
         let email = "aymenmse@gmail.com"
         let password = "000000"
                 
-        Facade.sharedInstance().authenticateUserWithEmail(email.encodeBase64(), password: password.md5()) { (jsonResponse, error) -> Void in
+        Facade.sharedInstance.authenticateUserWithEmail(email.encodeBase64(), password: password.md5()) { (jsonResponse, error) -> Void in
             
             // fulfill the exceptation
             expectation.fulfill()
@@ -53,7 +53,7 @@ class AuthenticationTests: XCTestCase {
         let password = "wrongPassword"
         
         
-        Facade.sharedInstance().authenticateUserWithEmail(email.encodeBase64(), password: password.md5()) { (jsonResponse, error) -> Void in
+        Facade.sharedInstance.authenticateUserWithEmail(email.encodeBase64(), password: password.md5()) { (jsonResponse, error) -> Void in
             
             // fulfill the exceptation
             expectation.fulfill()

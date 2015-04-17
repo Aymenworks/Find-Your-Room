@@ -16,22 +16,7 @@ final class WalkthroughViewController: UIViewController {
     @IBOutlet private weak var myScrollView: UIScrollView!
     @IBOutlet private weak var pageControl: UIPageControl!
     private let contentView = UIView()
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        println("initWithcoder walkthrough")
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        println("awakefromnib walkthrough")
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        super.prepareForSegue(segue, sender: sender)
-        println("prepareForSegue walkthrough")
-    }
-    
+
     private var oldPage: Int = 0 {
         didSet {
             self.pageControl.currentPage = self.oldPage

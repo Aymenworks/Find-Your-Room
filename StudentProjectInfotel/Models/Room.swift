@@ -13,17 +13,17 @@ The Room model
 */
 final public class Room: NSObject {
     
-    let identifier: Int!
-    let title: String!
+    let identifier: Int
+    let title: String
     let roomDescription: String?
     let capacity: Int?
-    let beacon: Beacon!
+    let beacon: Beacon
     lazy var persons: [Person] = [Person]()
     
     init(jsonRoom: JSON) {
         
         self.identifier = jsonRoom["ID"].string!.toInt()!
-        self.title  = jsonRoom["TITLE"].string
+        self.title  = jsonRoom["TITLE"].string!
         self.roomDescription = jsonRoom["DESCRIPTION"].string
         self.capacity = jsonRoom["CAPACITY"].string?.toInt()
         
@@ -33,7 +33,7 @@ final public class Room: NSObject {
         
         super.init()
         
-        Facade.sharedInstance().startMonitoringBeacon(self.beacon)
+        Facade.sharedInstance.startMonitoringBeacon(self.beacon)
         
         for person in jsonRoom["PERSONS"].arrayValue {
             self.persons.append(Person(jsonPerson: person))
@@ -42,7 +42,7 @@ final public class Room: NSObject {
     
     required public init(coder aDecoder: NSCoder) {
         self.identifier = aDecoder.decodeIntegerForKey("roomIdentifier")
-        self.title = aDecoder.decodeObjectForKey("roomTitle") as? String
+        self.title = aDecoder.decodeObjectForKey("roomTitle") as! String
         self.roomDescription = aDecoder.decodeObjectForKey("roomDescription") as? String
         self.capacity = aDecoder.decodeIntegerForKey("roomCapacity")
         self.beacon = aDecoder.decodeObjectForKey("beacon") as! Beacon

@@ -27,7 +27,6 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
         if self.locationManager.respondsToSelector("requestAlwaysAuthorization") {
             self.locationManager.requestAlwaysAuthorization()
         }
-        
     }
     
     // MARK: - Beacon Location -
@@ -53,7 +52,7 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
         for clBeacon in beacons as! [CLBeacon] {
             
             // For each beacon from our database
-            for room in Facade.sharedInstance().rooms() {
+            for room in Facade.sharedInstance.rooms() {
                 
                 // If that's our
                 if room.beacon == clBeacon {
@@ -68,8 +67,8 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
                     }
                     
                     room.beacon.lastSeenBeacon = clBeacon
-                    Facade.sharedInstance().addMyPresenceToRoom(room.identifier,
-                        userEmail: Member.sharedInstance().email!.encodeBase64(), completionHandler: { _ in })
+                    Facade.sharedInstance.addMyPresenceToRoom(room.identifier,
+                        userEmail: Member.sharedInstance.email!.encodeBase64(), completionHandler: { _ in })
                 }
             }
         }
@@ -90,7 +89,7 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
             println(".Inside")
         } else if state == .Outside {
             println("Not .Inside")
-            Facade.sharedInstance().deleteMyPresenceFromRoom(Member.sharedInstance().email!.encodeBase64(), completionHandler: { (json, error) -> Void in})
+            Facade.sharedInstance.deleteMyPresenceFromRoomWithEmail(Member.sharedInstance.email!.encodeBase64())
         }
     }
     
@@ -106,8 +105,7 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
     
     // If we exit the area, there's no need to continue monitoring/scaning
     func locationManager(manager: CLLocationManager!, didExitRegion region: CLRegion!) {
-        Facade.sharedInstance().deleteMyPresenceFromRoom(Member.sharedInstance().email!.encodeBase64(),
-            completionHandler: { _ in })
+        Facade.sharedInstance.deleteMyPresenceFromRoomWithEmail(Member.sharedInstance.email!.encodeBase64())
     }
     
     // MARK: - Location Authorization -

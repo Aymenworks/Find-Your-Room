@@ -12,7 +12,7 @@ typealias ColorTuple = (red: CGFloat, green: CGFloat, blue: CGFloat)
 
 extension UIColor {
     
-    class func randomFlatColor() -> UIColor {
+    static func randomFlatColor() -> UIColor {
         struct RandomColors {
             static let colors: [ColorTuple] = [
                 (red: 210/255, green: 77/255,  blue: 87/255),

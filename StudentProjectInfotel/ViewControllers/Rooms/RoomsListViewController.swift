@@ -29,7 +29,7 @@ final class RoomsListViewController: UIViewController {
         menu.backgroundColor = UIColor(red: 25.0/255, green: 26.0/255, blue: 37.0/255, alpha: 1.0)
         menu.delegate = self
         
-        let items = Facade.sharedInstance().memberMenu().map() {
+        let items = Facade.sharedInstance.memberMenu().map() {
             MenuItem(image: UIImage(data: $0["thumbnail"] as! NSData)!)
         }
         
@@ -50,7 +50,7 @@ final class RoomsListViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.roomsTableView.reloadData()
-        self.addRoomButton.hidden = !Facade.sharedInstance().isUserAdmin()
+        self.addRoomButton.hidden = !Facade.sharedInstance.isUserAdmin()
     }
     
     override func didReceiveMemoryWarning() {
@@ -67,17 +67,15 @@ final class RoomsListViewController: UIViewController {
         
         BFRadialWaveHUD.showInView(self.navigationController!.view, withMessage: NSLocalizedString("roomsUpdate", comment: ""))
         
-        Facade.sharedInstance().roomsBySchoolId(Member.sharedInstance().schoolId!.encodeBase64(),
+        Facade.sharedInstance.roomsBySchoolId(Member.sharedInstance.schoolId!.encodeBase64(),
             completionHandler: { (jsonSchoolRooms, error) -> Void in
                 
                 if error == nil, let jsonSchoolRooms = jsonSchoolRooms where jsonSchoolRooms.isOk() {
-                    
                     let schoolRooms = jsonSchoolRooms["response"]["rooms"]
-                    Facade.sharedInstance().addRoomsFromJSON(schoolRooms)
-                    Facade.sharedInstance().fetchPersonsProfilPictureInsideRoom()
+                    Facade.sharedInstance.addRoomsFromJSON(schoolRooms)
+                    Facade.sharedInstance.fetchPersonsProfilPictureInsideRoom()
                     self.roomsTableView.reloadData()
                     BFRadialWaveHUD.sharedInstance().dismiss()
-                    
                 }
                 
                 // TODO: Manage errors
@@ -89,7 +87,6 @@ final class RoomsListViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "goToRoomDetailViewFromRoomsListView" {
-            
             let detailViewController = segue.destinationViewController as! RoomDetailViewController
             let cellSelected = sender as! RoomCell
             detailViewController.room = cellSelected.room
@@ -103,7 +100,6 @@ extension RoomsListViewController: MenuViewDelegate {
     
     func menu(menu: MenuView, didSelectItemAtIndex index: Int) -> Void {
         
-        println("didSelectItemAtIndex")
         let menuAction = MenuAction(rawValue: index)
         
         switch(menuAction!) {
@@ -118,7 +114,7 @@ extension RoomsListViewController: MenuViewDelegate {
             
             alertView.setTextTheme(.Dark)
             alertView.addAction({
-                Facade.sharedInstance().logOut()
+                Facade.sharedInstance.logOut()
                 FBSession.activeSession().closeAndClearTokenInformation()
                 self.navigationController!.popToRootViewControllerAnimated(true)
             })
@@ -140,13 +136,13 @@ extension RoomsListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.cellReuseIdenifier, forIndexPath: indexPath) as! RoomCell
-        cell.room = Facade.sharedInstance().rooms()[indexPath.row]
+        cell.room = Facade.sharedInstance.rooms()[indexPath.row]
         cell.themeColor = UIColor.randomFlatColor()
         return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Facade.sharedInstance().rooms().count
+        return Facade.sharedInstance.rooms().count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

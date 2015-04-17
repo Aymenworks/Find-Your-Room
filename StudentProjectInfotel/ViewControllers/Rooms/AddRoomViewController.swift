@@ -45,7 +45,7 @@ final class AddRoomViewController: UIViewController {
         BFRadialWaveHUD.showInView(self.navigationController!.view, withMessage: NSLocalizedString("addingRoom", comment: ""))
         self.view.endEditing(true)
         
-        var schoolId     =  Member.sharedInstance().schoolId!
+        var schoolId     =  Member.sharedInstance.schoolId
         var roomTitle = self.roomTitleTextField.text
         var roomDescription  = self.roomDescriptionTextView.text
         let roomCapacity  = self.roomCapacityTextField.text.toInt()!
@@ -53,7 +53,7 @@ final class AddRoomViewController: UIViewController {
         let beaconMajor = self.beaconMajorTextField.text.toInt()!
         let beaconMinor = self.beaconMinorValueTextField.text.toInt()!
         
-        Facade.sharedInstance().addRoom(schoolId, roomTitle: roomTitle.encodeBase64(),
+        Facade.sharedInstance.addRoom(schoolId!, roomTitle: roomTitle.encodeBase64(),
             roomDescription: roomDescription.encodeBase64(),
             roomCapacity: roomCapacity, beaconUUID: beaconUUID,
             beaconMajor: beaconMajor, beaconMinor: beaconMinor) { (jsonResponse, error) -> Void in
@@ -61,7 +61,7 @@ final class AddRoomViewController: UIViewController {
                 if error == nil, let jsonResponse = jsonResponse where jsonResponse.isOk() {
                     
                     let schoolRooms = jsonResponse["response"]["rooms"]
-                    Facade.sharedInstance().addRoomsFromJSON(schoolRooms)
+                    Facade.sharedInstance.addRoomsFromJSON(schoolRooms)
                     BFRadialWaveHUD.sharedInstance().dismiss()
                     self.navigationController!.popViewControllerAnimated(true)
                     
@@ -78,7 +78,7 @@ final class AddRoomViewController: UIViewController {
         self.addRoomButton.enabled = self.canAddRoomButtonBeEnabled()
         self.view.endEditing(true)
         
-        if DeviceInformation.isIphone5() {
+        if DeviceInformation.isIphone5OrLess() {
             self.formScrollView.setContentOffset(CGPointZero, animated: true)
         }
     }
@@ -134,7 +134,7 @@ extension AddRoomViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(textField: UITextField)  {
         
-        if DeviceInformation.isIphone5() {
+        if DeviceInformation.isIphone5OrLess() {
             
             if textField == self.roomCapacityTextField {
                 self.formScrollView.setContentOffset(CGPointMake(0.0, 90.0), animated: true)
@@ -193,7 +193,7 @@ extension AddRoomViewController: UITextFieldDelegate {
 extension AddRoomViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(textView: UITextView) {
-        if DeviceInformation.isIphone5() {
+        if DeviceInformation.isIphone5OrLess() {
             self.formScrollView.setContentOffset(CGPointZero, animated: true)
         }
     }

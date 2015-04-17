@@ -10,13 +10,13 @@ import UIKit
 
 final class PersonCell: UITableViewCell {
     
-    @IBOutlet private final weak var profilPicture: UIImageView!
-    @IBOutlet private final weak var name: UILabel!
-    @IBOutlet private final weak var formation: UILabel!
+    @IBOutlet private weak var profilPicture: UIImageView!
+    @IBOutlet private weak var name: UILabel!
+    @IBOutlet private weak var formation: UILabel!
     
     final var person: Person! {
         didSet {
-            self.name.text = "\(person.firstName!) \(person.lastName!)"
+            self.name.text = "\(person.firstName) \(person.lastName)"
             self.formation.text = person.formation!
             self.profilPicture.image = person.profilPicture
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "imageDownloaded:", name: "DownloadImageNotification", object: nil)

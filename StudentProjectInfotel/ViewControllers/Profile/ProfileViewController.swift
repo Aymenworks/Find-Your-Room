@@ -31,12 +31,12 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.profilPictureButton.setBackgroundImage(Member.sharedInstance().profilPicture, forState: .Normal)
+        self.profilPictureButton.setBackgroundImage(Member.sharedInstance.profilPicture, forState: .Normal)
         self.profilPictureButton.layer.borderColor = UIColor.whiteColor().CGColor
-        self.firstNameTextField.text = Member.sharedInstance().firstName!
-        self.lastNameTextField.text = Member.sharedInstance().lastName!
-        self.formationTextField.text = Member.sharedInstance().formation!
-        self.schoolIdTextField.text = Member.sharedInstance().schoolId!
+        self.firstNameTextField.text = Member.sharedInstance.firstName
+        self.lastNameTextField.text = Member.sharedInstance.lastName
+        self.formationTextField.text = Member.sharedInstance.formation!
+        self.schoolIdTextField.text = Member.sharedInstance.schoolId
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,14 +65,14 @@ final class ProfileViewController: UIViewController {
         self.view.endEditing(true)
         
         // Let's do encode inputs and hash the password
-        var email     =  Member.sharedInstance().email!
+        var email     =  Member.sharedInstance.email
         var firstName = self.firstNameTextField.text
         var lastName  = self.lastNameTextField.text
         let formation  = self.formationTextField.text
         let schoolId  = self.schoolIdTextField.text
         let password = self.passwordTextField.text
         
-        Facade.sharedInstance().updateUserAccount( email.encodeBase64(), password: password.md5(),
+        Facade.sharedInstance.updateUserAccount( email!.encodeBase64(), password: password.md5(),
             lastName: lastName.encodeBase64(), firstName: firstName.encodeBase64(),
             formation:formation.encodeBase64(), schoolId: schoolId.encodeBase64()) { (jsonResponse, error) -> Void in
                 
@@ -82,22 +82,22 @@ final class ProfileViewController: UIViewController {
                     // If the user profile has been updated
                     if jsonResponse["response"]["profilUpdateSuccess"].boolValue {
                         
-                        Member.sharedInstance().firstName = firstName
-                        Member.sharedInstance().lastName = lastName
-                        Member.sharedInstance().email = email
-                        Member.sharedInstance().formation = formation
-                        Member.sharedInstance().schoolId = schoolId
-                        Facade.sharedInstance().saveMemberProfil()
+                        Member.sharedInstance.firstName = firstName
+                        Member.sharedInstance.lastName = lastName
+                        Member.sharedInstance.email = email
+                        Member.sharedInstance.formation = formation
+                        Member.sharedInstance.schoolId = schoolId
+                        Facade.sharedInstance.saveMemberProfil()
                         
                         let schoolRooms = jsonResponse["response"]["rooms"]
-                        Facade.sharedInstance().addRoomsFromJSON(schoolRooms)
-                        Facade.sharedInstance().fetchPersonsProfilPictureInsideRoom()
+                        Facade.sharedInstance.addRoomsFromJSON(schoolRooms)
+                        Facade.sharedInstance.fetchPersonsProfilPictureInsideRoom()
                         
                         if let imageUserProfil = self.profilPictureButton.backgroundImageForState(.Normal) {
-                            Facade.sharedInstance().uploadUserProfilPicture(imageUserProfil, withEmail: Member.sharedInstance().email!.encodeBase64(),
+                            Facade.sharedInstance.uploadUserProfilPicture(imageUserProfil, withEmail: Member.sharedInstance.email!.encodeBase64(),
                                 completionHandler: { () -> Void in
-                                    Member.sharedInstance().profilPicture = imageUserProfil
-                                    Facade.sharedInstance().saveMemberProfil()
+                                    Member.sharedInstance.profilPicture = imageUserProfil
+                                    Facade.sharedInstance.saveMemberProfil()
                                     self.userHasUpdatedProfil()
                             })
                             
@@ -126,7 +126,7 @@ final class ProfileViewController: UIViewController {
         self.view.endEditing(true)
         self.updateProfilButton.enabled = self.canUpdateButtonBeEnabled()
         
-        if DeviceInformation.isIphone5() {
+        if DeviceInformation.isIphone5OrLess() {
             self.formScrollView.setContentOffset(CGPointZero, animated: true)
         }
     }
@@ -254,7 +254,7 @@ extension ProfileViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(textField: UITextField) {
         
         // If that's an iPhone 5/5s/5c
-        if DeviceInformation.isIphone5() {
+        if DeviceInformation.isIphone5OrLess() {
             
             if textField == self.passwordTextField {
                 self.formScrollView.setContentOffset(CGPointMake(0.0, 40.0), animated: true)

@@ -79,7 +79,7 @@ final class PersistencyManager: NSCoding {
     func addRoomsFromJSON(schoolRooms: JSON) {
         
         for room in self.rooms {
-            Facade.sharedInstance().stopMonitoringBeacon(room.beacon)
+            Facade.sharedInstance.stopMonitoringBeacon(room.beacon)
         }
         
         self.rooms = []
@@ -98,18 +98,30 @@ final class PersistencyManager: NSCoding {
     */
     func saveMemberProfilOnSession() {
         
-        session.setObject(Member.sharedInstance().lastName, forKey: "lastName")
-        session.setObject(Member.sharedInstance().firstName, forKey: "firstName")
-        session.setObject(Member.sharedInstance().email, forKey: "email")
-        session.setObject(Member.sharedInstance().formation, forKey: "formation")
-        session.setObject(Member.sharedInstance().schoolId!, forKey: "schoolId")
-        session.setObject(Member.sharedInstance().schoolName!, forKey: "schoolName")
-        session.setBool(Member.sharedInstance().isAdmin!, forKey: "isAdmin")
+        session.setObject(Member.sharedInstance.lastName, forKey: "lastName")
+        session.setObject(Member.sharedInstance.firstName, forKey: "firstName")
+        session.setObject(Member.sharedInstance.email, forKey: "email")
+        session.setObject(Member.sharedInstance.formation, forKey: "formation")
+        session.setObject(Member.sharedInstance.schoolId, forKey: "schoolId")
+        session.setObject(Member.sharedInstance.schoolName, forKey: "schoolName")
+        session.setBool(Member.sharedInstance.isAdmin, forKey: "isAdmin")
         
-        if let image = Member.sharedInstance().profilPicture {
+        if let image = Member.sharedInstance.profilPicture {
             session.setObject(UIImageJPEGRepresentation(image, 80.0), forKey: "profilPicture")
         }
         
+        session.synchronize()
+    }
+    
+    func saveJSONMemberProfilOnSession(memberProfil: JSON) {
+        
+        let firstName = memberProfil["FIRSTNAME"].string!
+        let lastName = memberProfil["LASTNAME"].string!
+        let email = memberProfil["EMAIL"].string!
+        let formation = memberProfil["FORMATION"].string
+        let schoolId = memberProfil["SCHOOL_ID"].string!
+        let schoolName = memberProfil["SCHOOL_NAME"].string!
+        let isAdmin = memberProfil["ADMIN"].string == "1" ? true : false
         session.synchronize()
     }
     
@@ -126,13 +138,13 @@ final class PersistencyManager: NSCoding {
         session.removeObjectForKey("schoolId")
         session.removeObjectForKey("schoolName")
         
-        Member.sharedInstance().lastName = nil
-        Member.sharedInstance().firstName = nil
-        Member.sharedInstance().email = nil
-        Member.sharedInstance().formation = nil
-        Member.sharedInstance().profilPicture = nil
-        Member.sharedInstance().schoolId = nil
-        Member.sharedInstance().schoolName = nil
+        Member.sharedInstance.lastName = ""
+        Member.sharedInstance.firstName = ""
+        Member.sharedInstance.email = ""
+        Member.sharedInstance.formation = nil
+        Member.sharedInstance.profilPicture = nil
+        Member.sharedInstance.schoolId = ""
+        Member.sharedInstance.schoolName = ""
     }
     
     // MARK: - Plist Persistency -

@@ -8,7 +8,11 @@
 
 public class DeviceInformation {
     
-    public class func isIphone5() -> Bool {
-        return UIScreen.mainScreen().bounds.size.height == 568.0
+    public static func isIphone() -> Bool {
+        return UI_USER_INTERFACE_IDIOM() == .Phone
+    }
+    
+    public static func isIphone5OrLess() -> Bool {
+        return DeviceInformation.isIphone() && UIScreen.mainScreen().bounds.size.height <= 568.0
     }
 }

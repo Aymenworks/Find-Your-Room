@@ -480,8 +480,8 @@
 			children = (
 				A5951A2A1A95206F00E6DB3B /* Room.swift */,
 				A5F336A41A6DD00A00DDF59B /* Beacon.swift */,
-				A523B2371A96A4A400D38277 /* Member.swift */,
 				A546A9CC1AB0D98E00B28B4F /* Person.swift */,
+				A523B2371A96A4A400D38277 /* Member.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
