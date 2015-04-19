@@ -66,8 +66,7 @@ final public class Facade {
     Get all rooms by a school and also the students present in the rooms
     
     :param: schoolId          The school ID
-    :param: completionHandler The callback containing the json server/error response that'll be executed
-    after the request has finished
+    :param: completionHandler The callback containing the json server/error response that'll be executed  after the request has finished
     */
     public func roomsBySchoolId(schoolId: String, completionHandler: (JSON?, NSError?) -> Void) {
         self.networkManager.roomsBySchoolId(schoolId, completionHandler: completionHandler)
@@ -327,5 +326,4 @@ final public class Facade {
     public func memberMenu() -> [NSDictionary] {
         return self.persistencyManager.memberMenu()
     }
-    
 }

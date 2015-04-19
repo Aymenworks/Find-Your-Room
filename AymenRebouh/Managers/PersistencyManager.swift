@@ -8,6 +8,14 @@
 
 import Foundation.NSCoder
 
+/**
+  Contains the list of the files names we use/interact with
+*/
+private struct FilesName {
+    static let Room = "rooms.bin"
+}
+
+/// No setted private because we use it too on the Member singleton
 let session = NSUserDefaults.standardUserDefaults()
 
 /**
@@ -27,14 +35,11 @@ final class PersistencyManager: NSCoding {
         let documentDirectory = fileManager.URLForDirectory(.DocumentDirectory, inDomain:.UserDomainMask,
             appropriateForURL: nil, create: false, error: nil)
         
-        let saveRoomFileUrl = documentDirectory!.URLByAppendingPathComponent("rooms.bin")
+        let saveRoomFileUrl = documentDirectory!.URLByAppendingPathComponent(FilesName.Room)
         
-        // TODO: - Make it on the background thread ( if a lot of rooms ) because NSData contentsOfURL blocks the main thread
-        
-        if let roomsData = NSData(contentsOfURL: saveRoomFileUrl, options:.DataReadingMappedIfSafe, error: nil) {
-            if let unarchivedRooms = NSKeyedUnarchiver.unarchiveObjectWithData(roomsData) as? [Room] {
+        if let roomsData = NSData(contentsOfURL: saveRoomFileUrl, options:.DataReadingMappedIfSafe, error: nil),
+            unarchivedRooms = NSKeyedUnarchiver.unarchiveObjectWithData(roomsData) as? [Room] {
                 self.rooms = unarchivedRooms
-            }
         }
     }
     
@@ -56,7 +61,7 @@ final class PersistencyManager: NSCoding {
     :param: room -
     */
     func addRoom(room: Room) {
-        self.rooms += [room]
+        self.rooms.append(room)
     }
     
     /**
@@ -70,7 +75,7 @@ final class PersistencyManager: NSCoding {
         let documentDirectory = fileManager.URLForDirectory(.DocumentDirectory, inDomain:.UserDomainMask,
             appropriateForURL: nil, create: false, error: nil)
         
-        let saveFileUrl = documentDirectory!.URLByAppendingPathComponent("rooms.bin")
+        let saveFileUrl = documentDirectory!.URLByAppendingPathComponent(FilesName.Room)
         let roomsData = NSKeyedArchiver.archivedDataWithRootObject(self.rooms)
         
         roomsData.writeToURL(saveFileUrl, options:.AtomicWrite, error: nil)
@@ -85,7 +90,7 @@ final class PersistencyManager: NSCoding {
         self.rooms = []
         
         for (_, jsonRoom) in schoolRooms {
-            self.addRoom(Room(jsonRoom: jsonRoom))
+            self.rooms.append(Room(jsonRoom: jsonRoom))
         }
         
         self.saveRooms()

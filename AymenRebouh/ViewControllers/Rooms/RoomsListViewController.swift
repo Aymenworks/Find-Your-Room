@@ -8,6 +8,12 @@
 
 import UIKit
 
+/**
+<#Description#>
+
+- Profile: <#Profile description#>
+- Logout:  <#Logout description#>
+*/
 enum MenuAction: Int {
     case Profile = 0
     case Logout
