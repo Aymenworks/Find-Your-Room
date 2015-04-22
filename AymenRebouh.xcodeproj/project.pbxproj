@@ -214,10 +214,10 @@
 				A57F3F061AE221B4000935CF /* AppDelegate.swift */,
 				A54264EC1AE83679006588DA /* Utils.swift */,
 				A5FF89CB1A6A9D3E00564555 /* Facade */,
+				A5FF89C71A6A9D0A00564555 /* Managers */,
 				A5FF89CA1A6A9D1C00564555 /* ViewControllers */,
 				A5FF89C91A6A9D1700564555 /* Models */,
 				A5FF89C81A6A9D1100564555 /* Views */,
-				A5FF89C71A6A9D0A00564555 /* Managers */,
 				A5FF89CD1A6A9D5500564555 /* Assets */,
 				A5FF89CC1A6A9D4300564555 /* Librairies */,
 				A57F3EBE1AE21EE1000935CF /* Utils */,
@@ -437,8 +437,8 @@
 		A5FF89C71A6A9D0A00564555 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				A57F3F131AE223E1000935CF /* LocationManager.swift */,
 				A57F3F141AE223E1000935CF /* NetworkManager.swift */,
+				A57F3F131AE223E1000935CF /* LocationManager.swift */,
 				A57F3F151AE223E1000935CF /* PersistencyManager.swift */,
 			);
 			name = Managers;
