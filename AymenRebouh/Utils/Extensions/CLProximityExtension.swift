@@ -9,18 +9,18 @@
 import CoreLocation.CLLocation
 
 extension CLProximity {
+  
+  func toString() -> String {
     
-    func toString() -> String {
-        
-        var name = ""
-        
-        switch self {
-            case .Immediate: name = "Close to me"
-            case .Near: name = "Near"
-            case .Far: name = "Far"
-            default: name = "Unknown"
-        }
-        
-        return name
+    var name = ""
+    
+    switch self {
+    case .Immediate: name = "Close to me"
+    case .Near: name = "Near"
+    case .Far: name = "Far"
+    default: name = "Unknown"
     }
+    
+    return name
+  }
 }

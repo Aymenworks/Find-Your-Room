@@ -901,6 +901,7 @@
                         <outlet property="profilPictureButton" destination="N49-bR-pVl" id="Rmd-1e-fmL"/>
                         <outlet property="schoolIdTextField" destination="2ZW-hU-kZ5" id="I8x-GP-T94"/>
                         <outlet property="signUpBarButtonItem" destination="hOE-GA-sa9" id="KsW-Jc-bMy"/>
+                        <outlet property="test" destination="N49-bR-pVl" id="B80-zJ-eyL"/>
                         <segue destination="XUj-7O-xgT" kind="push" identifier="segueGoToHomeViewFromSignUpView" id="MuS-uZ-nvj"/>
                     </connections>
                 </viewController>

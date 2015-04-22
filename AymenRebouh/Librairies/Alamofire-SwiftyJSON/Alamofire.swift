@@ -667,7 +667,7 @@ public class Request {
     
     :returns: A data response serializer.
     */
-    public static func responseDataSerializer() -> Serializer {
+    public class func responseDataSerializer() -> Serializer {
         return { (request, response, data) in
             return (data, nil)
         }
@@ -1244,7 +1244,7 @@ extension Request {
     
     :returns: A download file destination closure.
     */
-    public static func suggestedDownloadDestination(directory: NSSearchPathDirectory = .DocumentDirectory, domain: NSSearchPathDomainMask = .UserDomainMask) -> DownloadFileDestination {
+    public class func suggestedDownloadDestination(directory: NSSearchPathDirectory = .DocumentDirectory, domain: NSSearchPathDomainMask = .UserDomainMask) -> DownloadFileDestination {
         
         return { (temporaryURL, response) -> (NSURL) in
             if let directoryURL = NSFileManager.defaultManager().URLsForDirectory(directory, inDomains: domain)[0] as? NSURL {
@@ -1404,7 +1404,7 @@ extension Request {
     
     :returns: A string response serializer.
     */
-    public static func stringResponseSerializer(var encoding: NSStringEncoding? = nil) -> Serializer {
+    public class func stringResponseSerializer(var encoding: NSStringEncoding? = nil) -> Serializer {
         return { (_, response, data) in
             if data == nil || data?.length == 0 {
                 return (nil, nil)
@@ -1447,7 +1447,7 @@ extension Request {
     
     :returns: A JSON object response serializer.
     */
-    public static func JSONResponseSerializer(options: NSJSONReadingOptions = .AllowFragments) -> Serializer {
+    public class func JSONResponseSerializer(options: NSJSONReadingOptions = .AllowFragments) -> Serializer {
         return { (request, response, data) in
             if data == nil || data?.length == 0 {
                 return (nil, nil)
@@ -1485,7 +1485,7 @@ extension Request {
     
     :returns: A property list object response serializer.
     */
-    public static func propertyListResponseSerializer(options: NSPropertyListReadOptions = 0) -> Serializer {
+    public class func propertyListResponseSerializer(options: NSPropertyListReadOptions = 0) -> Serializer {
         return { (request, response, data) in
             if data == nil || data?.length == 0 {
                 return (nil, nil)
