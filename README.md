@@ -5,7 +5,7 @@ Aymen Rebouh - WWDC 2015
 <img src="./AymenRebouh/Assets/screenshots/addRoom.png" title="Add room view" height="380px" alt="Add room view">
 <img src="./AymenRebouh/Assets/screenshots/roomDetail.png" title="Authentication view" height="380px" alt="Authentication view">
 
-[![Platform](https://img.shields.io/badge/iOS-7.0%2B-lightgrey.svg?style=flat)](https://developer.apple.com/iphone/index.action)
+[![Platform](https://img.shields.io/badge/iOS-8.0%2B-lightgrey.svg?style=flat)](https://developer.apple.com/iphone/index.action)
 [![Language](https://img.shields.io/badge/language-swift 1.2-orange.svg?style=flat)](https://developer.apple.com/swift)
 [![Technology](https://img.shields.io/badge/technology-ibeacon-blue.svg?style=flat)](https://developer.apple.com/swift)
 
