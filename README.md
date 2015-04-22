@@ -17,12 +17,7 @@ For this project, I remembered that. Beeing able to find easely a room to work, 
 
 ## Issues
 
-- Navigation menu doesn't work on iOS 7
-
-- After some activity indicators, it seems it's displaying the wrong informations
-
 - Layout not adapted for iPhone 4/4S ( need scrollView )
-
 
 ## Credits
 
@@ -36,7 +31,7 @@ For this project, I remembered that. Beeing able to find easely a room to work, 
 
 - Navigation Menu : <https://github.com/Yalantis/Persei>
 
-- Activity Indicator : <https://github.com/bfeher/BFRadialWaveHUD>
+- Activity Indicator : <https://github.com/icanzilb/SwiftSpinner>
     
 ##Contact
 Twitter [@aymenworks](http://twitter.com/aymenworks)
