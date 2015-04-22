@@ -9,17 +9,6 @@
 import UIKit
 
 /**
-<#Description#>
-
-- Profile: <#Profile description#>
-- Logout:  <#Logout description#>
-*/
-private enum MenuAction: Int {
-  case Profile = 0
-  case Logout
-}
-
-/**
 The home view controller for the authenticated users.
 It take care of displaying the list of revisions rooms availables and some others informations
 like the number of students present on theses rooms, rooms descrption, etc ..
@@ -30,19 +19,26 @@ final class RoomsListViewController: UIViewController {
   @IBOutlet private weak var addRoomButton: UIButton!
   
   lazy private var menu: MenuView = {
-    
     let menu = MenuView(frame: nil)
     menu.backgroundColor = UIColor(red: 25.0/255, green: 26.0/255, blue: 37.0/255, alpha: 1.0)
     menu.delegate = self
-    
-    let items = Facade.sharedInstance.memberMenu().map() {
+    menu.items = Facade.sharedInstance.memberMenu().map() {
       MenuItem(image: UIImage(data: $0["thumbnail"] as! NSData)!)
     }
     
-    menu.items = items
-    
     return menu
     }()
+  
+  /**
+  The different actions of our menu
+  
+  - Profile: The user profil when he has the possibility to update its profil
+  - Logout:  To log out the user from the app. It'll stop ranging beacon also.
+  */
+  private enum MenuAction: Int {
+    case Profile = 0
+    case Logout
+  }
   
   // MARK: - Lifecycle -
   
@@ -71,7 +67,7 @@ final class RoomsListViewController: UIViewController {
   
   @IBAction private func refreshRooms(sender: UIBarButtonItem) {
     
-    BFRadialWaveHUD.showInView(self.navigationController!.view, withMessage: NSLocalizedString("roomsUpdate", comment: ""))
+    SwiftSpinner.show(NSLocalizedString("roomsUpdate", comment: ""), animated: true)
     
     Facade.sharedInstance.roomsBySchoolId(Member.sharedInstance.schoolId!.encodeBase64(),
       completionHandler: { (jsonSchoolRooms, error) -> Void in
@@ -81,10 +77,10 @@ final class RoomsListViewController: UIViewController {
           Facade.sharedInstance.addRoomsFromJSON(schoolRooms)
           Facade.sharedInstance.fetchPersonsProfilPictureInsideRoom()
           self.roomsTableView.reloadData()
-          BFRadialWaveHUD.sharedInstance().dismiss()
+          SwiftSpinner.hide()
           
         } else {
-          BFRadialWaveHUD.sharedInstance().dismiss()
+          SwiftSpinner.hide()
           JSSAlertView().danger(self, title: self.navigationItem.title!,
             text: NSLocalizedString("genericError", comment: ""))
         }
@@ -94,7 +90,6 @@ final class RoomsListViewController: UIViewController {
   // MARK: - Storyboard Segues -
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    
     if segue.identifier == "goToRoomDetailViewFromRoomsListView" {
       let detailViewController = segue.destinationViewController as! RoomDetailViewController
       let cellSelected = sender as! RoomCell
@@ -131,7 +126,7 @@ extension RoomsListViewController: MenuViewDelegate {
   }
 }
 
-// MARK: - UITableView Delegate -
+// MARK: - UITableView Delegate, Datasource -
 
 extension RoomsListViewController: UITableViewDelegate, UITableViewDataSource {
   

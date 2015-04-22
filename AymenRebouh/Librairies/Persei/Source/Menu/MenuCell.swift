@@ -93,7 +93,6 @@ class MenuCell: UICollectionViewCell {
     
     override var selected: Bool {
         didSet {
-            println("selected = \(selected)")
             updateSelectionVisibility()
         }
     }

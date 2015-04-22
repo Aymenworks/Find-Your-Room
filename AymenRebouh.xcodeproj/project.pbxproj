@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A5391FAF1ADA5F6100870FE8 /* AuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5391FAE1ADA5F6100870FE8 /* AuthenticationTests.swift */; };
+		A54264EB1AE82A74006588DA /* SwiftSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54264EA1AE82A74006588DA /* SwiftSpinner.swift */; };
+		A54264ED1AE83679006588DA /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54264EC1AE83679006588DA /* Utils.swift */; };
 		A57F3EBD1AE21EAC000935CF /* JSSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F3EBC1AE21EAC000935CF /* JSSAlertView.swift */; };
 		A57F3EC51AE21EE1000935CF /* DeviceInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F3EBF1AE21EE1000935CF /* DeviceInformation.swift */; };
 		A57F3EC61AE21EE1000935CF /* CLProximityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F3EC11AE21EE1000935CF /* CLProximityExtension.swift */; };
@@ -43,13 +45,6 @@
 		A57F3F1C1AE223EA000935CF /* RoomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F3F1A1AE223EA000935CF /* RoomCell.swift */; };
 		A57F3F1F1AE22412000935CF /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F3F1D1AE22412000935CF /* Alamofire.swift */; };
 		A57F3F201AE22412000935CF /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F3F1E1AE22412000935CF /* SwiftyJSON.swift */; };
-		A57F3F2E1AE2254D000935CF /* BFGradientCALayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A57F3F221AE2254D000935CF /* BFGradientCALayer.m */; };
-		A57F3F2F1AE2254D000935CF /* BFRadialWaveHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A57F3F241AE2254D000935CF /* BFRadialWaveHUD.m */; };
-		A57F3F301AE2254D000935CF /* BFRadialWaveHUD.xib in Resources */ = {isa = PBXBuildFile; fileRef = A57F3F251AE2254D000935CF /* BFRadialWaveHUD.xib */; };
-		A57F3F311AE2254D000935CF /* BFRadialWaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = A57F3F271AE2254D000935CF /* BFRadialWaveView.m */; };
-		A57F3F321AE2254D000935CF /* UIColor+BFPaperColors.m in Sources */ = {isa = PBXBuildFile; fileRef = A57F3F291AE2254D000935CF /* UIColor+BFPaperColors.m */; };
-		A57F3F331AE2254D000935CF /* UIImage+KVNEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = A57F3F2B1AE2254D000935CF /* UIImage+KVNEmpty.m */; };
-		A57F3F341AE2254D000935CF /* UIImage+KVNImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = A57F3F2D1AE2254D000935CF /* UIImage+KVNImageEffects.m */; };
 		A57F3F361AE22695000935CF /* Menu.plist in Resources */ = {isa = PBXBuildFile; fileRef = A57F3F351AE22695000935CF /* Menu.plist */; };
 		A57F3F3D1AE226C9000935CF /* beaconSchool.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A57F3F371AE226C9000935CF /* beaconSchool.jpg */; };
 		A57F3F3E1AE226C9000935CF /* beaconSchool@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A57F3F381AE226C9000935CF /* beaconSchool@2x.jpg */; };
@@ -93,6 +88,8 @@
 		A525DB041A6A88600024580A /* AymenRebouhTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AymenRebouhTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A525DB091A6A88600024580A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5391FAE1ADA5F6100870FE8 /* AuthenticationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationTests.swift; sourceTree = "<group>"; };
+		A54264EA1AE82A74006588DA /* SwiftSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftSpinner.swift; path = AymenRebouh/Librairies/SwiftSpinner.swift; sourceTree = SOURCE_ROOT; };
+		A54264EC1AE83679006588DA /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = AymenRebouh/Utils/Utils.swift; sourceTree = SOURCE_ROOT; };
 		A570190D1A82C30200C8F516 /* AymenRebouh-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AymenRebouh-Bridging-Header.h"; sourceTree = "<group>"; };
 		A57F3EBC1AE21EAC000935CF /* JSSAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSSAlertView.swift; path = AymenRebouh/Librairies/JSSAlertView/JSSAlertView.swift; sourceTree = SOURCE_ROOT; };
 		A57F3EBF1AE21EE1000935CF /* DeviceInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInformation.swift; sourceTree = "<group>"; };
@@ -129,19 +126,6 @@
 		A57F3F1A1AE223EA000935CF /* RoomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoomCell.swift; path = AymenRebouh/Views/RoomCell.swift; sourceTree = SOURCE_ROOT; };
 		A57F3F1D1AE22412000935CF /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = "AymenRebouh/Librairies/Alamofire-SwiftyJSON/Alamofire.swift"; sourceTree = SOURCE_ROOT; };
 		A57F3F1E1AE22412000935CF /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = "AymenRebouh/Librairies/Alamofire-SwiftyJSON/SwiftyJSON.swift"; sourceTree = SOURCE_ROOT; };
-		A57F3F211AE2254D000935CF /* BFGradientCALayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BFGradientCALayer.h; path = AymenRebouh/Librairies/BFRadialWaveHUD/BFGradientCALayer.h; sourceTree = SOURCE_ROOT; };
-		A57F3F221AE2254D000935CF /* BFGradientCALayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BFGradientCALayer.m; path = AymenRebouh/Librairies/BFRadialWaveHUD/BFGradientCALayer.m; sourceTree = SOURCE_ROOT; };
-		A57F3F231AE2254D000935CF /* BFRadialWaveHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BFRadialWaveHUD.h; path = AymenRebouh/Librairies/BFRadialWaveHUD/BFRadialWaveHUD.h; sourceTree = SOURCE_ROOT; };
-		A57F3F241AE2254D000935CF /* BFRadialWaveHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BFRadialWaveHUD.m; path = AymenRebouh/Librairies/BFRadialWaveHUD/BFRadialWaveHUD.m; sourceTree = SOURCE_ROOT; };
-		A57F3F251AE2254D000935CF /* BFRadialWaveHUD.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BFRadialWaveHUD.xib; path = AymenRebouh/Librairies/BFRadialWaveHUD/BFRadialWaveHUD.xib; sourceTree = SOURCE_ROOT; };
-		A57F3F261AE2254D000935CF /* BFRadialWaveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BFRadialWaveView.h; path = AymenRebouh/Librairies/BFRadialWaveHUD/BFRadialWaveView.h; sourceTree = SOURCE_ROOT; };
-		A57F3F271AE2254D000935CF /* BFRadialWaveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BFRadialWaveView.m; path = AymenRebouh/Librairies/BFRadialWaveHUD/BFRadialWaveView.m; sourceTree = SOURCE_ROOT; };
-		A57F3F281AE2254D000935CF /* UIColor+BFPaperColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+BFPaperColors.h"; path = "AymenRebouh/Librairies/BFRadialWaveHUD/UIColor+BFPaperColors.h"; sourceTree = SOURCE_ROOT; };
-		A57F3F291AE2254D000935CF /* UIColor+BFPaperColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+BFPaperColors.m"; path = "AymenRebouh/Librairies/BFRadialWaveHUD/UIColor+BFPaperColors.m"; sourceTree = SOURCE_ROOT; };
-		A57F3F2A1AE2254D000935CF /* UIImage+KVNEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+KVNEmpty.h"; path = "AymenRebouh/Librairies/BFRadialWaveHUD/UIImage+KVNEmpty.h"; sourceTree = SOURCE_ROOT; };
-		A57F3F2B1AE2254D000935CF /* UIImage+KVNEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+KVNEmpty.m"; path = "AymenRebouh/Librairies/BFRadialWaveHUD/UIImage+KVNEmpty.m"; sourceTree = SOURCE_ROOT; };
-		A57F3F2C1AE2254D000935CF /* UIImage+KVNImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+KVNImageEffects.h"; path = "AymenRebouh/Librairies/BFRadialWaveHUD/UIImage+KVNImageEffects.h"; sourceTree = SOURCE_ROOT; };
-		A57F3F2D1AE2254D000935CF /* UIImage+KVNImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+KVNImageEffects.m"; path = "AymenRebouh/Librairies/BFRadialWaveHUD/UIImage+KVNImageEffects.m"; sourceTree = SOURCE_ROOT; };
 		A57F3F351AE22695000935CF /* Menu.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Menu.plist; path = "AymenRebouh/Supporting Files/Menu.plist"; sourceTree = SOURCE_ROOT; };
 		A57F3F371AE226C9000935CF /* beaconSchool.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = beaconSchool.jpg; path = AymenRebouh/Assets/beaconSchool.jpg; sourceTree = SOURCE_ROOT; };
 		A57F3F381AE226C9000935CF /* beaconSchool@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "beaconSchool@2x.jpg"; path = "AymenRebouh/Assets/beaconSchool@2x.jpg"; sourceTree = SOURCE_ROOT; };
@@ -228,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				A57F3F061AE221B4000935CF /* AppDelegate.swift */,
+				A54264EC1AE83679006588DA /* Utils.swift */,
 				A5FF89CB1A6A9D3E00564555 /* Facade */,
 				A5FF89CA1A6A9D1C00564555 /* ViewControllers */,
 				A5FF89C91A6A9D1700564555 /* Models */,
@@ -280,24 +265,12 @@
 			path = JSSAlertView;
 			sourceTree = "<group>";
 		};
-		A56874E71AA1BB09006FFD40 /* BFRadialWaveHUD */ = {
+		A54264E91AE82A5D006588DA /* SwiftSpinner */ = {
 			isa = PBXGroup;
 			children = (
-				A57F3F211AE2254D000935CF /* BFGradientCALayer.h */,
-				A57F3F221AE2254D000935CF /* BFGradientCALayer.m */,
-				A57F3F231AE2254D000935CF /* BFRadialWaveHUD.h */,
-				A57F3F241AE2254D000935CF /* BFRadialWaveHUD.m */,
-				A57F3F251AE2254D000935CF /* BFRadialWaveHUD.xib */,
-				A57F3F261AE2254D000935CF /* BFRadialWaveView.h */,
-				A57F3F271AE2254D000935CF /* BFRadialWaveView.m */,
-				A57F3F281AE2254D000935CF /* UIColor+BFPaperColors.h */,
-				A57F3F291AE2254D000935CF /* UIColor+BFPaperColors.m */,
-				A57F3F2A1AE2254D000935CF /* UIImage+KVNEmpty.h */,
-				A57F3F2B1AE2254D000935CF /* UIImage+KVNEmpty.m */,
-				A57F3F2C1AE2254D000935CF /* UIImage+KVNImageEffects.h */,
-				A57F3F2D1AE2254D000935CF /* UIImage+KVNImageEffects.m */,
+				A54264EA1AE82A74006588DA /* SwiftSpinner.swift */,
 			);
-			path = BFRadialWaveHUD;
+			name = SwiftSpinner;
 			sourceTree = "<group>";
 		};
 		A57F3EBE1AE21EE1000935CF /* Utils */ = {
@@ -519,8 +492,8 @@
 		A5FF89CC1A6A9D4300564555 /* Librairies */ = {
 			isa = PBXGroup;
 			children = (
+				A54264E91AE82A5D006588DA /* SwiftSpinner */,
 				A57F3ECA1AE21F5C000935CF /* Persei */,
-				A56874E71AA1BB09006FFD40 /* BFRadialWaveHUD */,
 				A594F8E21A862BF700C1B583 /* Alamofire-SwiftyJSON */,
 				A52F0F101A70B5C800206DE7 /* JSSAlertView */,
 			);
@@ -627,7 +600,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A57F3F301AE2254D000935CF /* BFRadialWaveHUD.xib in Resources */,
 				A57F3F4B1AE22806000935CF /* Localizable.strings in Resources */,
 				A57F3F401AE226C9000935CF /* mySky.jpg in Resources */,
 				A57F3F531AE2296D000935CF /* Main.storyboard in Resources */,
@@ -674,22 +646,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				A57F3F171AE223E1000935CF /* NetworkManager.swift in Sources */,
-				A57F3F2E1AE2254D000935CF /* BFGradientCALayer.m in Sources */,
-				A57F3F2F1AE2254D000935CF /* BFRadialWaveHUD.m in Sources */,
 				A57F3F1C1AE223EA000935CF /* RoomCell.swift in Sources */,
 				A57F3F1B1AE223EA000935CF /* PersonCell.swift in Sources */,
 				A57F3EF51AE220C8000935CF /* Facade.swift in Sources */,
-				A57F3F321AE2254D000935CF /* UIColor+BFPaperColors.m in Sources */,
-				A57F3F331AE2254D000935CF /* UIImage+KVNEmpty.m in Sources */,
 				A57F3F031AE2214D000935CF /* Room.swift in Sources */,
 				A57F3F001AE2214D000935CF /* Beacon.swift in Sources */,
 				A57F3EF71AE2210B000935CF /* WalkthroughViewController.swift in Sources */,
 				A57F3F071AE221B4000935CF /* AppDelegate.swift in Sources */,
-				A57F3F311AE2254D000935CF /* BFRadialWaveView.m in Sources */,
 				A57F3EF91AE22114000935CF /* ProfileViewController.swift in Sources */,
 				A57F3EBD1AE21EAC000935CF /* JSSAlertView.swift in Sources */,
 				A57F3EDE1AE21F5C000935CF /* MenuViewDelegate.swift in Sources */,
 				A57F3EF31AE220C1000935CF /* RoomsListViewController.swift in Sources */,
+				A54264EB1AE82A74006588DA /* SwiftSpinner.swift in Sources */,
+				A54264ED1AE83679006588DA /* Utils.swift in Sources */,
 				A57F3ED91AE21F5C000935CF /* UIEdgeInsets+Equatable.swift in Sources */,
 				A57F3F011AE2214D000935CF /* Member.swift in Sources */,
 				A57F3F161AE223E1000935CF /* LocationManager.swift in Sources */,
@@ -705,7 +674,6 @@
 				A57F3EC71AE21EE1000935CF /* StringExtension.swift in Sources */,
 				A57F3EC61AE21EE1000935CF /* CLProximityExtension.swift in Sources */,
 				A57F3EF11AE220C1000935CF /* AddRoomViewController.swift in Sources */,
-				A57F3F341AE2254D000935CF /* UIImage+KVNImageEffects.m in Sources */,
 				A57F3EF21AE220C1000935CF /* RoomDetailViewController.swift in Sources */,
 				A57F3EFB1AE22120000935CF /* SignUpViewController.swift in Sources */,
 				A57F3ED71AE21F5C000935CF /* HeaderShadowView.swift in Sources */,

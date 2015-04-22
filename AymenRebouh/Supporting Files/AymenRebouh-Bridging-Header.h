@@ -9,6 +9,3 @@
 #import <GooglePlus/GooglePlus.h>
 #import <GoogleOpenSource/GoogleOpenSource.h>
 #import <CommonCrypto/CommonCrypto.h> // for MD5 hash
-
-// for well designed activity indicator
-#import "/Users/rebouhaymen/Documents/Projects/WWDC2015/AymenRebouh/Librairies/BFRadialWaveHUD/BFRadialWaveHUD.h"

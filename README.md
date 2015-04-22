@@ -1,7 +1,12 @@
-StudentBeaconProjectInfotel
+Aymen Rebouh - WWDC 2015
 ========
 
-Student project realizing an iOS app and using beacons technologies.
+Student project realizing an iOS app and using beacons technologies, organized by Infotel, a french company where the goal was to **revolutionize the student life**.
+
+A few months ago, my classmate and I where in teams (groups of 4-5 students) for a two years real project. So we were in a school, maybe of 300-400 students for a little university. Most of the time we needed a revision room to work together. But it was a little difficult. Sometimes the room was full, sometimes it was closed. 
+
+For this project, I remembered that. Beeing able to find easely a room to work, to study. Beeing able to know if your teammate are in a particular room and join them. Beeing able to find a room that suits you ( depending of the number of students presents for example ). An iOS project that interact with **beacons**. That was my challenge ! 
+
 
 [![Platform](https://img.shields.io/badge/iOS-7.0%2B-lightgrey.svg?style=flat)](https://developer.apple.com/iphone/index.action)
 [![Language](https://img.shields.io/badge/language-swift 1.2-orange.svg?style=flat)](https://developer.apple.com/swift)

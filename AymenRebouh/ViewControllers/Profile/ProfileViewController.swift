@@ -61,7 +61,7 @@ final class ProfileViewController: UIViewController {
   
   @IBAction private func updateUserAccount() {
     
-    BFRadialWaveHUD.showInView(self.navigationController!.view, withMessage: NSLocalizedString("profilUpdate", comment: ""))
+    SwiftSpinner.show(NSLocalizedString("profileUpdate", comment: ""), animated: true)
     self.view.endEditing(true)
     
     // Let's do encode inputs and hash the password
@@ -98,12 +98,13 @@ final class ProfileViewController: UIViewController {
               })
               
             } else {
+              Facade.sharedInstance.saveMemberProfil()
               self.userHasUpdatedProfil()
             }
             
           } else if !jsonResponse.schoolExist() {
             
-            BFRadialWaveHUD.sharedInstance().dismiss()
+            SwiftSpinner.hide()
             JSSAlertView().danger(self, title: NSLocalizedString("profile", comment: ""), text: NSLocalizedString("schoolIdError", comment: ""))
             
           } else {
@@ -130,16 +131,17 @@ final class ProfileViewController: UIViewController {
   // MARK: - User Interface -
   
   private func showPopupSomethingWrong() {
-    BFRadialWaveHUD.sharedInstance().dismiss()
+    SwiftSpinner.hide()
     JSSAlertView().danger(self, title: NSLocalizedString("profile", comment: ""), text: NSLocalizedString("genericError", comment: ""))
   }
   
   private func userHasUpdatedProfil() {
-    BFRadialWaveHUD.sharedInstance().showSuccessWithMessage(NSLocalizedString("profileUpdated", comment: ""))
+    
+    SwiftSpinner.show(NSLocalizedString("profileUpdated", comment: ""), animated: false)
     
     // And we redirect him on the home view ( x second for sample user experience after the update profil loading )
     doInMainQueueAfter(seconds: 1.2) {
-      BFRadialWaveHUD.sharedInstance().dismiss()
+      SwiftSpinner.hide()
       self.navigationController!.popViewControllerAnimated(true)
     }
   }

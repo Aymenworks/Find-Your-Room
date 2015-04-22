@@ -75,7 +75,7 @@ final class AuthenticationViewController: UIViewController {
   */
   @IBAction private func signIn() {
     
-    BFRadialWaveHUD.showInView(self.navigationController!.view, withMessage: self.navigationItem.title! + "...")
+    SwiftSpinner.show(self.navigationItem.title! + "...", animated: true)
     
     self.errorLabel.text = " "
     self.view.endEditing(true)
@@ -100,7 +100,7 @@ final class AuthenticationViewController: UIViewController {
           
           Facade.sharedInstance.serverProfilPictureWithURL(pictureUrl) { (image) -> Void in
             
-            BFRadialWaveHUD.sharedInstance().showSuccessWithMessage(NSLocalizedString("loggedIn", comment: "")) { _ in }
+            SwiftSpinner.show(NSLocalizedString("loggedIn", comment: ""), animated: false)
             
             // Error or not, the property is optional, so check if the image/error is nil or not is not necessary
             Member.sharedInstance.profilPicture = image
@@ -112,14 +112,14 @@ final class AuthenticationViewController: UIViewController {
             Facade.sharedInstance.fetchPersonsProfilPictureInsideRoom()
             
             doInMainQueueAfter(seconds: 1.6) {
-              BFRadialWaveHUD.sharedInstance().dismiss()
+              SwiftSpinner.hide()
               self.performSegueWithIdentifier("segueGoToHomeViewFromAuthenticationView", sender: self)
             }
           }
           
           // Else, if he's not registred in the database..
         } else {
-          BFRadialWaveHUD.sharedInstance().dismiss()
+          SwiftSpinner.hide()
           self.errorLabel.text = NSLocalizedString("wrongEmailOrPassword", comment: "")
           self.shakeForm()
         }
@@ -128,7 +128,7 @@ final class AuthenticationViewController: UIViewController {
       }  else {
         
         self.signInBarButtonItem.enabled = false
-        BFRadialWaveHUD.sharedInstance().dismiss()
+        SwiftSpinner.hide()
         
         let alertView = JSSAlertView().danger(self, title: self.navigationItem.title!,
           text: NSLocalizedString("genericError", comment: ""))
@@ -241,7 +241,7 @@ extension AuthenticationViewController: FBLoginViewDelegate {
     } else {
       
       self.view.endEditing(true)
-      BFRadialWaveHUD.showInView(self.navigationController!.view, withMessage: self.navigationItem.title! + "...")
+      SwiftSpinner.show(self.navigationItem.title! + "...", animated: true)
       let email = user.objectForKey("email") as! String
       
       Facade.sharedInstance.authenticateUserWithFacebookOrGooglePlus(email.encodeBase64(),
@@ -264,11 +264,11 @@ extension AuthenticationViewController: FBLoginViewDelegate {
                 let pictureUrl = "http://www.aymenworks.fr/assets/beacon/\(Member.sharedInstance.email!.md5())/picture.jpg"
                 
                 Facade.sharedInstance.serverProfilPictureWithURL(pictureUrl) { (image) -> Void in
-                  BFRadialWaveHUD.sharedInstance().showSuccessWithMessage(NSLocalizedString("loggedIn", comment: ""))
+                  SwiftSpinner.show(NSLocalizedString("loggedIn", comment: ""), animated: false)
                   Member.sharedInstance.profilPicture = image
                   Facade.sharedInstance.saveMemberProfil()
                   doInMainQueueAfter(seconds: 1.2) {
-                    BFRadialWaveHUD.sharedInstance().dismiss()
+                    SwiftSpinner.hide()
                     self.performSegueWithIdentifier("segueGoToHomeViewFromAuthenticationView", sender: self)
                   }
                 }
@@ -278,11 +278,11 @@ extension AuthenticationViewController: FBLoginViewDelegate {
                   
                   Facade.sharedInstance.uploadUserProfilPicture(image!, withEmail: email.encodeBase64(),
                     completionHandler: { () -> Void in
-                      BFRadialWaveHUD.sharedInstance().showSuccessWithMessage(NSLocalizedString("loggedIn", comment: ""))
+                      SwiftSpinner.show(NSLocalizedString("loggedIn", comment: ""), animated: false)
                       Member.sharedInstance.profilPicture = image
                       Facade.sharedInstance.saveMemberProfil()
                       doInMainQueueAfter(seconds: 1.2) {
-                        BFRadialWaveHUD.sharedInstance().dismiss()
+                        SwiftSpinner.hide()
                         self.performSegueWithIdentifier("segueGoToHomeViewFromAuthenticationView", sender: self)
                       }
                     }
@@ -292,7 +292,7 @@ extension AuthenticationViewController: FBLoginViewDelegate {
               
           } else {
             FBSession.activeSession().closeAndClearTokenInformation()
-            BFRadialWaveHUD.sharedInstance().dismiss()
+            SwiftSpinner.hide()
             JSSAlertView().danger(self, title: self.navigationItem.title!, text: NSLocalizedString("genericError", comment: ""))
           }
       })
@@ -322,14 +322,13 @@ extension AuthenticationViewController: GPPSignInDelegate {
   
   func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
     
-    BFRadialWaveHUD.showInView(self.navigationController!.view, withMessage: self.navigationItem.title! + "...")
+    SwiftSpinner.show(self.navigationItem.title! + "...", animated: true)
     
     if error == nil {
       
       Facade.sharedInstance.googlePlusProfile(self.signInGooglePlus.userID, completionHandler: { (firstName, lastName, profilPicture, error) -> Void in
         
         if error == nil {
-          
           if Facade.sharedInstance.isUserLoggedIn() {
             self.performSegueWithIdentifier("segueGoToHomeViewFromAuthenticationView", sender: self)
             
@@ -347,7 +346,7 @@ extension AuthenticationViewController: GPPSignInDelegate {
                     Facade.sharedInstance.uploadUserProfilPicture(profilPicture!, withEmail: email.encodeBase64(),
                       completionHandler: { () -> Void in
                         
-                        BFRadialWaveHUD.sharedInstance().showSuccessWithMessage(NSLocalizedString("loggedIn", comment: ""))
+                        SwiftSpinner.show(NSLocalizedString("loggedIn", comment: ""), animated: false)
                         
                         let userProfil = jsonResponse!["response"]["profil"]
                         let schoolRooms = jsonResponse!["response"]["rooms"]
@@ -359,7 +358,7 @@ extension AuthenticationViewController: GPPSignInDelegate {
                         Facade.sharedInstance.fetchPersonsProfilPictureInsideRoom()
                         
                         doInMainQueueAfter(seconds: 1.2) {
-                          BFRadialWaveHUD.sharedInstance().dismiss()
+                          SwiftSpinner.hide()
                           self.performSegueWithIdentifier("segueGoToHomeViewFromAuthenticationView", sender: self)
                         }
                     })
@@ -368,13 +367,13 @@ extension AuthenticationViewController: GPPSignInDelegate {
           }
           
         } else {
-          BFRadialWaveHUD.sharedInstance().dismiss()
+          SwiftSpinner.hide()
           JSSAlertView().danger(self, title: self.navigationItem.title!, text: NSLocalizedString("genericError", comment: ""))
         }
       })
       
     } else {
-      BFRadialWaveHUD.sharedInstance().dismiss()
+      SwiftSpinner.hide()
       JSSAlertView().danger(self, title: self.navigationItem.title!, text:NSLocalizedString("genericError", comment: ""))
     }
   }

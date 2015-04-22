@@ -18,7 +18,7 @@ extension UIView {
   :param: direction Shake orientation
   :param: shakes    The numbers of shakes
   */
-  func shake(var direction : Float = 1.0, var shakes : Int = 0, duration: NSTimeInterval = 0.05) {
+  final func shake(var direction : Float = 1.0, var shakes : Int = 0, duration: NSTimeInterval = 0.05) {
     UIView.animateWithDuration(duration,
       animations: { self.transform =  CGAffineTransformMakeTranslation(CGFloat(8*direction),0) },
       completion: { (value: Bool) in

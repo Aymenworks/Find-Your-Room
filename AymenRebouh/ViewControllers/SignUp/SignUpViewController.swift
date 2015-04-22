@@ -77,7 +77,7 @@ final class SignUpViewController: UIViewController {
   */
   @IBAction private func signUp() {
     
-    BFRadialWaveHUD.showInView(self.navigationController!.view, withMessage: NSLocalizedString("signingUp", comment: ""))
+    SwiftSpinner.show(NSLocalizedString("signingUp", comment: ""), animated: true)
     self.errorLabel.text = " "
     self.view.endEditing(true)
     
@@ -123,7 +123,7 @@ final class SignUpViewController: UIViewController {
             // Else if he's already registered..
           } else if jsonResponse.userExist() {
             
-            BFRadialWaveHUD.sharedInstance().dismiss()
+            SwiftSpinner.hide()
             JSSAlertView().info(self,
               title: self.navigationItem.title!,
               text: NSLocalizedString("emailExistError", comment: ""),
@@ -131,7 +131,7 @@ final class SignUpViewController: UIViewController {
             
             // Else if the user hasn't been registered and doesn't exist on the database..
           } else  if !jsonResponse.schoolExist() {
-            BFRadialWaveHUD.sharedInstance().dismiss()
+            SwiftSpinner.hide()
             JSSAlertView().danger(self, title: self.navigationItem.title!, text: NSLocalizedString("schoolIdError", comment: ""))
             
           } else {
@@ -148,18 +148,17 @@ final class SignUpViewController: UIViewController {
   // MARK: - User Interface -
   
   private func showPopupSomethingWrong() {
-    BFRadialWaveHUD.sharedInstance().dismiss()
-    
+    SwiftSpinner.hide()
     JSSAlertView().danger(self, title: self.navigationItem.title!, text: NSLocalizedString("genericError", comment: ""))
   }
   
   private func userHasSignedUp() {
-    BFRadialWaveHUD.sharedInstance().showSuccessWithMessage(NSLocalizedString("signedUp", comment: ""))
+    SwiftSpinner.show(NSLocalizedString("signedUp", comment: ""), animated: false)
     Facade.sharedInstance.saveMemberProfil()
     
     // And we redirect him on the home view ( x second for sample user experience after the signed up loading )
     doInMainQueueAfter(seconds: 1.2) {
-      BFRadialWaveHUD.sharedInstance().dismiss()
+      SwiftSpinner.hide()
       self.performSegueWithIdentifier("segueGoToHomeViewFromSignUpView", sender: self)
     }
   }

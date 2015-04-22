@@ -15,10 +15,10 @@ extension CLProximity {
     var name = ""
     
     switch self {
-    case .Immediate: name = "Close to me"
-    case .Near: name = "Near"
-    case .Far: name = "Far"
-    default: name = "Unknown"
+      case .Immediate: name = "Close to me"
+      case .Near: name = "Near"
+      case .Far: name = "Far"
+      case .Unknown: name = "Unknown"
     }
     
     return name

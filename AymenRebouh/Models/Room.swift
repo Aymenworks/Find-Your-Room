@@ -26,6 +26,7 @@ final public class Room: NSObject {
     self.title  = jsonRoom["TITLE"].string!
     self.roomDescription = jsonRoom["DESCRIPTION"].string
     self.capacity = jsonRoom["CAPACITY"].string?.toInt()
+    
     self.beacon = Beacon(name: self.title, uuid: NSUUID(UUIDString: jsonRoom["IBEACON_UUID"].string!)!,
       major: jsonRoom["IBEACON_MAJOR"].uInt16Value,
       minor: jsonRoom["IBEACON_MINOR"].uInt16Value)
@@ -33,7 +34,6 @@ final public class Room: NSObject {
     super.init()
     
     Facade.sharedInstance.startMonitoringBeacon(self.beacon)
-    println("json persons[] = \(jsonRoom)")
     for person in jsonRoom["PERSONS"].arrayValue {
       self.persons.append(Person(jsonPerson: person))
     }
@@ -51,6 +51,8 @@ final public class Room: NSObject {
     self.persons = aDecoder.decodeObjectForKey("personsInsideRoom") as! [Person]
   }
 }
+
+// MARK: - NSCoding delegate -
 
 extension Room: NSCoding {
   
@@ -71,6 +73,8 @@ extension Room: NSCoding {
     
   }
 }
+
+// MARK: - Printable
 
 extension Room: Printable {
   override public var description: String {

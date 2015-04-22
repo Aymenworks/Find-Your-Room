@@ -17,7 +17,7 @@
 "oops" = "Oups !";
 "somethingWrong" = "Une erreur s'est produite";
 "roomsUpdate" = "Mise à jours des salles...";
-"profilUpdate" = "Mise à jour du profil...";
+"profileUpdate" = "Mise à jour du profil...";
 "studentPresent" = "Étudiant présent dans la salle";
 "noStudentPresent" = "Aucun étudiant n'est présent dans la salle.";
 "checkBeaconUUID" = "⚠️ Vérifier l'UUID du beacon.";

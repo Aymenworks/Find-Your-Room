@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Rebouh Aymen. All rights reserved.
 //
 
-public class DeviceInformation {
+public final class DeviceInformation {
   
   public static func isIphone() -> Bool {
     return UI_USER_INTERFACE_IDIOM() == .Phone

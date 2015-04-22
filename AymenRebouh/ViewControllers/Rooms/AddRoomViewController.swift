@@ -42,7 +42,7 @@ final class AddRoomViewController: UIViewController {
   
   @IBAction private func addRoom() {
     
-    BFRadialWaveHUD.showInView(self.navigationController!.view, withMessage: NSLocalizedString("addingRoom", comment: ""))
+    SwiftSpinner.show( NSLocalizedString("addingRoom", comment: ""), animated: true)
     self.view.endEditing(true)
     
     var schoolId     =  Member.sharedInstance.schoolId
@@ -62,7 +62,7 @@ final class AddRoomViewController: UIViewController {
           
           let schoolRooms = jsonResponse["response"]["rooms"]
           Facade.sharedInstance.addRoomsFromJSON(schoolRooms)
-          BFRadialWaveHUD.sharedInstance().dismiss()
+          SwiftSpinner.hide()
           self.navigationController!.popViewControllerAnimated(true)
           
         } else {
