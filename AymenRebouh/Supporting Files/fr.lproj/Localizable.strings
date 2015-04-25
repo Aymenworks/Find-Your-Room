@@ -22,7 +22,7 @@
 "noStudentPresent" = "Aucun étudiant n'est présent dans la salle.";
 "checkBeaconUUID" = "⚠️ Vérifier l'UUID du beacon.";
 "fillAllFields" = "Veuillez remplir tous les champs.";
-"signUp.fillAllFields" = "Veuillez remplir tous les champs et vérifier que votre adresse email est correct.";
+"signUp.fillAllFields" = "Veuillez remplir tous les champs et vérifier le format de votre adresse email.";
 "loggedIn" = "👍 Connexion réussi !";
 "signedUp" = "👍 Inscription réussi !";
 "facebookAuthenticationCanceled" = "Vous avez annulé l'authentification facebook.";

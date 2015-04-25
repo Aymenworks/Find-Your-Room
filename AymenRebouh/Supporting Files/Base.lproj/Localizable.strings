@@ -20,11 +20,12 @@
 "profileUpdate" = "Updating your profile...";
 "checkBeaconUUID" = "⚠️ Check the beacon UUID syntax and try it again.";
 "fillAllFields" = "Please fill in all the fields.";
-"signUp.fillAllFields" = "Please fill in all the fields et check your email address.";
+"signUp.fillAllFields" = "Please fill in all the fields et check your email address format.";
 
 "profile" = "Profile";
 "schoolIdError" = "The School ID doesn't exist. Please try again.";
 "loggedIn" = "👍 Logged in !";
+"signedUp" = "👍 Signed up !";
 "profileUpdated" = "👍 Profile updated !";
 "addingRoom" = "Adding room...";
 "errorFacebookSession" = "Error - Facebook";
