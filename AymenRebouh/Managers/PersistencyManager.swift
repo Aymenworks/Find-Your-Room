@@ -149,6 +149,12 @@ final class PersistencyManager: NSCoding {
     Member.sharedInstance.profilPicture = nil
     Member.sharedInstance.schoolId = ""
     Member.sharedInstance.schoolName = ""
+    
+    FBSession.activeSession().closeAndClearTokenInformation()
+    FBSession.activeSession().close()
+    FBSession.setActiveSession(nil)
+    
+    GPPSignIn.sharedInstance().signOut()
   }
   
   // MARK: - Plist Persistency -
