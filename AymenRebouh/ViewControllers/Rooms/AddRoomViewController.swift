@@ -67,7 +67,6 @@ final class AddRoomViewController: UIViewController {
       beaconMajor: beaconMajor, beaconMinor: beaconMinor) { jsonResponse, error in
         
         if error == nil, let jsonResponse = jsonResponse where jsonResponse.isOk() {
-          
           let schoolRooms = jsonResponse["response"]["rooms"]
           Facade.sharedInstance.addRoomsFromJSON(schoolRooms)
           SwiftSpinner.hide()
