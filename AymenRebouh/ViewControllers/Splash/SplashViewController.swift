@@ -41,7 +41,7 @@ final class SplashViewController: UIViewController {
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
     doInMainQueueAfter(seconds: 0.6) { self.beaconImage.shake() }
-    doInMainQueueAfter(seconds: 1.6) {
+    doInMainQueueAfter(seconds: 2.0) {
       
       if Facade.sharedInstance.isUserLoggedIn() {
         self.showUserLoggedInView()
@@ -69,36 +69,30 @@ final class SplashViewController: UIViewController {
     
     self.toggleView()
     
-    println("test = \(Member.sharedInstance.email!)")
-    Facade.sharedInstance.fetchUserProfile(Member.sharedInstance.email!.encodeBase64(), completionHandler: { (jsonProfil, error) -> Void in
+    Facade.sharedInstance.fetchUserProfile(Member.sharedInstance.email!.encodeBase64()) { jsonProfil, error -> Void in
       
-      println("error = \(error)")
-      if error == nil && jsonProfil != nil && jsonProfil!.isOk() {
+      if error == nil, let jsonProfil = jsonProfil where jsonProfil.isOk() {
         
-        let userProfil = jsonProfil!["response"]["profil"]
+        let userProfil = jsonProfil["response"]["profil"]
         let pictureUrl = "http://www.aymenworks.fr/assets/beacon/\(Member.sharedInstance.email!.md5())/picture.jpg"
         
         Member.sharedInstance.fillMemberProfilWithJSON(userProfil)
-        Facade.sharedInstance.serverProfilPictureWithURL(pictureUrl) { (image) -> Void in
+        Facade.sharedInstance.serverProfilPictureWithURL(pictureUrl) { image  in
           
           Member.sharedInstance.profilPicture = image
           Facade.sharedInstance.saveMemberProfil()
           
-          Facade.sharedInstance.roomsBySchoolId(Member.sharedInstance.schoolId!.encodeBase64(),
-            completionHandler: { (jsonSchoolRooms, error) -> Void in
+          Facade.sharedInstance.roomsBySchoolId(Member.sharedInstance.schoolId!.encodeBase64()) { jsonSchoolRooms, error  in
               
               if error == nil, let jsonSchoolRooms = jsonSchoolRooms where jsonSchoolRooms.isOk() {
-                
                 let schoolRooms = jsonSchoolRooms["response"]["rooms"]
                 let beaconsSchool = jsonSchoolRooms["response"]["beacons"]
-                
                 Facade.sharedInstance.addRoomsFromJSON(schoolRooms)
                 Facade.sharedInstance.fetchPersonsProfilPictureInsideRoom()
-                self.activityIndicator.stopAnimating()
               }
               
               self.performSegueWithIdentifier("goToRoomsListViewFromSplashView", sender: self)
-          })
+          }
         }
         
       } else {
@@ -110,7 +104,7 @@ final class SplashViewController: UIViewController {
           self.toggleView()
         }
       }
-    })
+    }
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

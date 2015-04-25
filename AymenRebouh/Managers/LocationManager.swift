@@ -18,7 +18,6 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
   // MARK: - Lifecycle -
   
   override init() {
-    
     super.init()
     
     self.locationManager.delegate = self

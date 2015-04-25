@@ -14,20 +14,32 @@ AuthenticationViewController controller. It take care to authenticate the user,
 final class AuthenticationViewController: UIViewController {
   
   /// The Facebook login view given by Facebook SDK.
-  @IBOutlet private weak var facebookLoginView: FBLoginView!
-  
-  /// The Google Plus login view given by Google Plus SDK.
-  @IBOutlet private weak var googlePlusLoginButton: GPPSignInButton!
-  
-  /// The bar button item that'll send a sign up request on click. Disabled by default.
-  /// Enabled when the email/password are filtered and OK.
-  @IBOutlet private weak var signInBarButtonItem: UIBarButtonItem!
-  
-  @IBOutlet private weak var menuBarButtonItem: UIBarButtonItem!
+  @IBOutlet private weak var facebookLoginView: FBLoginView! {
+    didSet {
+      FBLoginView.self
+      self.facebookLoginView.readPermissions = ["public_profile", "email"]
+    }
+  }
   
   /// This class signs the user in with Google.
   private var signInGooglePlus: GPPSignIn!
   
+  /// The Google Plus login view given by Google Plus SDK.
+  @IBOutlet private weak var googlePlusLoginButton: GPPSignInButton! {
+    didSet {
+      self.signInGooglePlus = GPPSignIn.sharedInstance()
+      self.signInGooglePlus.clientID = kClientId
+      self.signInGooglePlus.scopes = [kGTLAuthScopePlusLogin]
+      self.signInGooglePlus.delegate = self
+      self.signInGooglePlus.shouldFetchGoogleUserEmail = true
+      self.signInGooglePlus.shouldFetchGooglePlusUser = true
+      self.signInGooglePlus.shouldFetchGoogleUserID = true
+    }
+  }
+  
+  /// The bar button item that'll send a sign up request on click. Disabled by default.
+  /// Enabled when the email/password are filtered and OK.
+  @IBOutlet private weak var signInBarButtonItem: UIBarButtonItem!
   @IBOutlet private weak var emailTextField: UITextField!
   @IBOutlet private weak var passwordTextField: UITextField!
   @IBOutlet private weak var errorLabel: UILabel!
@@ -39,21 +51,7 @@ final class AuthenticationViewController: UIViewController {
   // MARK: - Lifecycle -
   
   override func viewDidLoad() {
-    
     super.viewDidLoad()
-    
-    // Google+ settings
-    self.signInGooglePlus = GPPSignIn.sharedInstance()
-    self.signInGooglePlus.clientID = kClientId
-    self.signInGooglePlus.scopes = [kGTLAuthScopePlusLogin]
-    self.signInGooglePlus.delegate = self
-    self.signInGooglePlus.shouldFetchGoogleUserEmail = true
-    self.signInGooglePlus.shouldFetchGooglePlusUser = true
-    self.signInGooglePlus.shouldFetchGoogleUserID = true
-    
-    // Facebook settings
-    FBLoginView.self
-    self.facebookLoginView.readPermissions = ["public_profile", "email"]
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -85,7 +83,7 @@ final class AuthenticationViewController: UIViewController {
     
     // Let's authenticate the user
     Facade.sharedInstance.authenticateUserWithEmail(email.encodeBase64(), password: password.md5()) {
-      (jsonResponse, error) -> Void in
+      jsonResponse, error in
       
       // If everything is fine..
       if error == nil, let jsonResponse = jsonResponse where jsonResponse.isOk() {
@@ -97,17 +95,14 @@ final class AuthenticationViewController: UIViewController {
           let pictureUrl = "http://www.aymenworks.fr/assets/beacon/\(email.md5())/picture.jpg"
           
           Member.sharedInstance.fillMemberProfilWithJSON(userProfil)
-          
-          Facade.sharedInstance.serverProfilPictureWithURL(pictureUrl) { (image) -> Void in
+          Facade.sharedInstance.serverProfilPictureWithURL(pictureUrl) { image  in
             
             SwiftSpinner.show(NSLocalizedString("loggedIn", comment: ""), animated: false)
             
             // Error or not, the property is optional, so check if the image/error is nil or not is not necessary
             Member.sharedInstance.profilPicture = image
             Facade.sharedInstance.saveMemberProfil()
-            
             let schoolRooms = jsonResponse["response"]["rooms"]
-            
             Facade.sharedInstance.addRoomsFromJSON(schoolRooms)
             Facade.sharedInstance.fetchPersonsProfilPictureInsideRoom()
             
@@ -133,9 +128,9 @@ final class AuthenticationViewController: UIViewController {
         let alertView = JSSAlertView().danger(self, title: self.navigationItem.title!,
           text: NSLocalizedString("genericError", comment: ""))
         
-        alertView.addAction({ () -> Void in
+        alertView.addAction() {
           self.signInBarButtonItem.enabled = true
-        })
+        }
       }
     }
   }
@@ -320,13 +315,27 @@ extension AuthenticationViewController: FBLoginViewDelegate {
 
 extension AuthenticationViewController: GPPSignInDelegate {
   
+  private func signedInWithGoogle(jsonResponse: JSON) {
+    let userProfil = jsonResponse["response"]["profil"]
+    let schoolRooms = jsonResponse["response"]["rooms"]
+    Member.sharedInstance.fillMemberProfilWithJSON(userProfil)
+    Facade.sharedInstance.saveMemberProfil()
+    Facade.sharedInstance.addRoomsFromJSON(schoolRooms)
+    Facade.sharedInstance.fetchPersonsProfilPictureInsideRoom()
+    
+    doInMainQueueAfter(seconds: 1.2) {
+      SwiftSpinner.hide()
+      self.performSegueWithIdentifier("segueGoToHomeViewFromAuthenticationView", sender: self)
+    }
+  }
+  
   func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
     
     SwiftSpinner.show(self.navigationItem.title! + "...", animated: true)
     
     if error == nil {
       
-      Facade.sharedInstance.googlePlusProfile(self.signInGooglePlus.userID, completionHandler: { (firstName, lastName, profilPicture, error) -> Void in
+      Facade.sharedInstance.googlePlusProfile(self.signInGooglePlus.userID) { firstName, lastName, profilPicture, error in
         
         if error == nil {
           if Facade.sharedInstance.isUserLoggedIn() {
@@ -337,40 +346,30 @@ extension AuthenticationViewController: GPPSignInDelegate {
             let email = self.signInGooglePlus.authentication.userEmail as String
             
             Facade.sharedInstance.authenticateUserWithFacebookOrGooglePlus(email.encodeBase64(),
-              lastName: lastName!.encodeBase64(), firstName: firstName!.encodeBase64(),
-              completionHandler: { (jsonResponse, error) -> Void in
+              lastName: lastName!.encodeBase64(), firstName: firstName!.encodeBase64()) { jsonResponse, error in
                 
-                if error == nil && jsonResponse != nil && jsonResponse!.isOk()
-                  && (jsonResponse!.userExist() || jsonResponse!.userHasBeenRegistered()) {
+                if error == nil, let jsonResponse = jsonResponse where jsonResponse.isOk()
+                  && (jsonResponse.userExist() || jsonResponse.userHasBeenRegistered()) {
                     
-                    Facade.sharedInstance.uploadUserProfilPicture(profilPicture!, withEmail: email.encodeBase64(),
-                      completionHandler: { () -> Void in
-                        
+                    if let profilPicture = profilPicture {
+                      Facade.sharedInstance.uploadUserProfilPicture(profilPicture, withEmail: email.encodeBase64()) {
                         SwiftSpinner.show(NSLocalizedString("loggedIn", comment: ""), animated: false)
-                        
-                        let userProfil = jsonResponse!["response"]["profil"]
-                        let schoolRooms = jsonResponse!["response"]["rooms"]
-                        
-                        Member.sharedInstance.fillMemberProfilWithJSON(userProfil)
                         Member.sharedInstance.profilPicture = profilPicture
-                        Facade.sharedInstance.saveMemberProfil()
-                        Facade.sharedInstance.addRoomsFromJSON(schoolRooms)
-                        Facade.sharedInstance.fetchPersonsProfilPictureInsideRoom()
-                        
-                        doInMainQueueAfter(seconds: 1.2) {
-                          SwiftSpinner.hide()
-                          self.performSegueWithIdentifier("segueGoToHomeViewFromAuthenticationView", sender: self)
-                        }
-                    })
+                        self.signedInWithGoogle(jsonResponse)
+                      }
+                    
+                    } else {
+                      self.signedInWithGoogle(jsonResponse)
+                    }
                 }
-            })
+            }
           }
           
         } else {
           SwiftSpinner.hide()
           JSSAlertView().danger(self, title: self.navigationItem.title!, text: NSLocalizedString("genericError", comment: ""))
         }
-      })
+      }
       
     } else {
       SwiftSpinner.hide()

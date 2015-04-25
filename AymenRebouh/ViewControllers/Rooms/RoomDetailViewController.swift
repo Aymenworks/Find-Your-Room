@@ -28,12 +28,9 @@ final class RoomDetailViewController: UIViewController {
   // MARK: - Lifecycle -
   
   override func viewDidLoad() {
-    
     super.viewDidLoad()
-    
     self.title = self.room.title
     
-    println("room = \(room), rooms count = \(room.persons.count)")
     // The room property has been setted on the prepare for segue. See `RoomsListViewController`
     self.roomTitleLabel.text = self.room.title
     self.roomDescriptionLabel.text = self.room.roomDescription

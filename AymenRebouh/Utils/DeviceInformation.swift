@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Rebouh Aymen. All rights reserved.
 //
 
+
 public final class DeviceInformation {
   
   public static func isIphone() -> Bool {
@@ -13,6 +14,10 @@ public final class DeviceInformation {
   }
   
   public static func isIphone5OrLess() -> Bool {
-    return DeviceInformation.isIphone() && UIScreen.mainScreen().bounds.size.height <= 568.0
+    return DeviceInformation.isIphone() && CGRectGetHeight(UIScreen.mainScreen().bounds) <= 568.0
+  }
+  
+  public static func isIphone4SOrLess() -> Bool {
+    return DeviceInformation.isIphone() && CGRectGetHeight(UIScreen.mainScreen().bounds) < 568.0
   }
 }

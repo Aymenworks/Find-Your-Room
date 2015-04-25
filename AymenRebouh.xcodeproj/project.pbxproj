@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A5391FAF1ADA5F6100870FE8 /* AuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5391FAE1ADA5F6100870FE8 /* AuthenticationTests.swift */; };
 		A54264EB1AE82A74006588DA /* SwiftSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54264EA1AE82A74006588DA /* SwiftSpinner.swift */; };
 		A54264ED1AE83679006588DA /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54264EC1AE83679006588DA /* Utils.swift */; };
 		A57F3EBD1AE21EAC000935CF /* JSSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F3EBC1AE21EAC000935CF /* JSSAlertView.swift */; };
@@ -87,7 +86,6 @@
 		A525DAF31A6A88600024580A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A525DB041A6A88600024580A /* AymenRebouhTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AymenRebouhTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A525DB091A6A88600024580A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A5391FAE1ADA5F6100870FE8 /* AuthenticationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationTests.swift; sourceTree = "<group>"; };
 		A54264EA1AE82A74006588DA /* SwiftSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftSpinner.swift; path = AymenRebouh/Librairies/SwiftSpinner.swift; sourceTree = SOURCE_ROOT; };
 		A54264EC1AE83679006588DA /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = AymenRebouh/Utils/Utils.swift; sourceTree = SOURCE_ROOT; };
 		A570190D1A82C30200C8F516 /* AymenRebouh-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AymenRebouh-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -212,7 +210,6 @@
 			isa = PBXGroup;
 			children = (
 				A57F3F061AE221B4000935CF /* AppDelegate.swift */,
-				A54264EC1AE83679006588DA /* Utils.swift */,
 				A5FF89CB1A6A9D3E00564555 /* Facade */,
 				A5FF89C71A6A9D0A00564555 /* Managers */,
 				A5FF89CA1A6A9D1C00564555 /* ViewControllers */,
@@ -243,7 +240,6 @@
 		A525DB071A6A88600024580A /* AymenRebouhTests */ = {
 			isa = PBXGroup;
 			children = (
-				A5391FAE1ADA5F6100870FE8 /* AuthenticationTests.swift */,
 				A525DB081A6A88600024580A /* Supporting Files */,
 			);
 			path = AymenRebouhTests;
@@ -276,6 +272,7 @@
 		A57F3EBE1AE21EE1000935CF /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A54264EC1AE83679006588DA /* Utils.swift */,
 				A57F3EBF1AE21EE1000935CF /* DeviceInformation.swift */,
 				A57F3EC01AE21EE1000935CF /* Extensions */,
 			);
@@ -689,7 +686,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5391FAF1ADA5F6100870FE8 /* AuthenticationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -744,6 +740,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -761,7 +758,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
@@ -789,6 +786,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -800,7 +798,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
@@ -816,8 +814,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Rebouh Aymen (XDGP34APB9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rebouh Aymen (XDGP34APB9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AymenRebouh/Librairies/FacebookSDK",
@@ -856,8 +854,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Rebouh Aymen (XDGP34APB9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rebouh Aymen (XDGP34APB9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AymenRebouh/Librairies/FacebookSDK",

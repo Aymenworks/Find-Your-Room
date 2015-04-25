@@ -24,7 +24,7 @@ final class SignUpViewController: UIViewController {
   @IBOutlet private weak var signUpBarButtonItem: UIBarButtonItem!
   @IBOutlet private weak var errorLabel: UILabel!
   @IBOutlet private weak var formScrollView: UIScrollView!
-  
+
   /// Setted lazy because the user can choose to not send a picture
   lazy private var imagePickerController: UIImagePickerController = {
     let imagePicker = UIImagePickerController()
@@ -82,9 +82,9 @@ final class SignUpViewController: UIViewController {
     self.view.endEditing(true)
     
     // Let's do encode inputs and hash the password
-    var email     = self.emailTextField.text.encodeBase64()
-    var firstName = self.firstNameTextField.text.encodeBase64()
-    var lastName  = self.lastNameTextField.text.encodeBase64()
+    let email     = self.emailTextField.text.encodeBase64()
+    let firstName = self.firstNameTextField.text.encodeBase64()
+    let lastName  = self.lastNameTextField.text.encodeBase64()
     let formation  = self.formationTextField.text.encodeBase64()
     let schoolId  = self.schoolIdTextField.text.encodeBase64()
     let password  = self.passwordTextField.text.md5()
@@ -106,15 +106,14 @@ final class SignUpViewController: UIViewController {
             Facade.sharedInstance.addRoomsFromJSON(schoolRooms)
             Facade.sharedInstance.fetchPersonsProfilPictureInsideRoom()
             
+            // If the user has a picture to upload
             if let imageUserProfil = self.profilPictureButton.backgroundImageForState(.Normal) {
               
-              Facade.sharedInstance.uploadUserProfilPicture(imageUserProfil, withEmail: email,
-                completionHandler: { () -> Void in
-                  Member.sharedInstance.profilPicture = imageUserProfil
-                  Facade.sharedInstance.saveMemberProfil()
-                  
-                  self.userHasSignedUp()
-              })
+              Facade.sharedInstance.uploadUserProfilPicture(imageUserProfil, withEmail: email) {
+                Member.sharedInstance.profilPicture = imageUserProfil
+                Facade.sharedInstance.saveMemberProfil()
+                self.userHasSignedUp()
+              }
               
             } else {
               self.userHasSignedUp()
@@ -123,14 +122,19 @@ final class SignUpViewController: UIViewController {
             // Else if he's already registered..
           } else if jsonResponse.userExist() {
             
+            self.formScrollView.setContentOffset(CGPointZero, animated: false)
             SwiftSpinner.hide()
             JSSAlertView().info(self,
               title: self.navigationItem.title!,
               text: NSLocalizedString("emailExistError", comment: ""),
-              buttonText: NSLocalizedString("login", comment: ""), cancelButtonText: NSLocalizedString("cancel", comment: "")).addAction({ self.didClickOnBackButton()})
+              buttonText: NSLocalizedString("login", comment: ""),
+              cancelButtonText: NSLocalizedString("cancel", comment: "")).addAction() {
+                self.didClickOnBackButton()
+            }
             
             // Else if the user hasn't been registered and doesn't exist on the database..
           } else  if !jsonResponse.schoolExist() {
+            self.formScrollView.setContentOffset(CGPointZero, animated: false)
             SwiftSpinner.hide()
             JSSAlertView().danger(self, title: self.navigationItem.title!, text: NSLocalizedString("schoolIdError", comment: ""))
             
@@ -238,6 +242,7 @@ extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationCon
   
   func imagePickerControllerDidCancel(picker: UIImagePickerController) {
     println("cancel")
+    picker.dismissViewControllerAnimated(true, completion: nil)
   }
 }
 
@@ -254,12 +259,15 @@ extension SignUpViewController: UITextFieldDelegate {
       
       textField.text = (textField.text as NSString).stringByReplacingCharactersInRange(range, withString: string)
       self.signUpBarButtonItem.enabled = self.canSignUpButtonBeEnabled()
-      
       return false
   }
   
   func textFieldDidBeginEditing(textField: UITextField) {
     self.errorLabel.text = " "
+    
+    if DeviceInformation.isIphone5OrLess() {
+      self.formScrollView.setContentOffset(CGPoint(x: 0.0, y: 40.0), animated: true)
+    }
   }
   
   func textFieldShouldClear(textField: UITextField) -> Bool {
@@ -280,20 +288,20 @@ extension SignUpViewController: UITextFieldDelegate {
       
     case self.lastNameTextField:
       self.emailTextField.becomeFirstResponder()
-      if DeviceInformation.isIphone5OrLess() {
-        self.formScrollView.setContentOffset(CGPointMake(0.0, 40.0), animated: true)
+      if DeviceInformation.isIphone4SOrLess() {
+        self.formScrollView.setContentOffset(CGPoint(x: 0.0, y: 40.0), animated: true)
       }
       
     case self.emailTextField:
       self.passwordTextField.becomeFirstResponder()
-      if DeviceInformation.isIphone5OrLess() {
-        self.formScrollView.setContentOffset(CGPointMake(0.0, 80.0), animated: true)
+      if DeviceInformation.isIphone4SOrLess() {
+        self.formScrollView.setContentOffset(CGPoint(x: 0.0, y: 80.0), animated: true)
       }
       
     case self.passwordTextField:
       self.formationTextField.becomeFirstResponder()
-      if DeviceInformation.isIphone5OrLess() {
-        self.formScrollView.setContentOffset(CGPointMake(0.0, 126.0), animated: true)
+      if DeviceInformation.isIphone4SOrLess() {
+        self.formScrollView.setContentOffset(CGPoint(x: 0.0, y: 126.0), animated: true)
       }
       
     case self.formationTextField:
@@ -306,6 +314,7 @@ extension SignUpViewController: UITextFieldDelegate {
         
       } else {
         textField.resignFirstResponder()
+        self.formScrollView.setContentOffset(CGPointZero, animated: false)
         let alertView = JSSAlertView().show(self, title: self.navigationItem.title!,
           text: NSLocalizedString("signUp.fillAllFields", comment: ""))
         alertView.setTextTheme(.Dark)

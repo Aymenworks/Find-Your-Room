@@ -10,12 +10,38 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
   
-  @IBOutlet private weak var profilPictureButton: UIButton!
-  @IBOutlet private weak var firstNameTextField: UITextField!
-  @IBOutlet private weak var lastNameTextField: UITextField!
+  @IBOutlet private weak var profilPictureButton: UIButton! {
+    didSet {
+      self.profilPictureButton.setBackgroundImage(Member.sharedInstance.profilPicture, forState: .Normal)
+      self.profilPictureButton.layer.borderColor = UIColor.whiteColor().CGColor
+    }
+  }
+  
+  @IBOutlet private weak var firstNameTextField: UITextField! {
+    didSet {
+      self.firstNameTextField.text = Member.sharedInstance.firstName
+    }
+  }
+  
+  @IBOutlet private weak var lastNameTextField: UITextField! {
+    didSet {
+      self.lastNameTextField.text = Member.sharedInstance.lastName
+    }
+  }
+  
+  @IBOutlet private weak var formationTextField: UITextField! {
+    didSet {
+      self.formationTextField.text = Member.sharedInstance.formation!
+    }
+  }
+  
+  @IBOutlet private weak var schoolIdTextField: UITextField! {
+    didSet {
+      self.schoolIdTextField.text = Member.sharedInstance.schoolId
+    }
+  }
+  
   @IBOutlet private weak var passwordTextField: UITextField!
-  @IBOutlet private weak var formationTextField: UITextField!
-  @IBOutlet private weak var schoolIdTextField: UITextField!
   @IBOutlet private weak var updateProfilButton: UIButton!
   @IBOutlet private weak var formScrollView: UIScrollView!
   
@@ -31,12 +57,6 @@ final class ProfileViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.profilPictureButton.setBackgroundImage(Member.sharedInstance.profilPicture, forState: .Normal)
-    self.profilPictureButton.layer.borderColor = UIColor.whiteColor().CGColor
-    self.firstNameTextField.text = Member.sharedInstance.firstName
-    self.lastNameTextField.text = Member.sharedInstance.lastName
-    self.formationTextField.text = Member.sharedInstance.formation!
-    self.schoolIdTextField.text = Member.sharedInstance.schoolId
   }
   
   override func didReceiveMemoryWarning() {
@@ -57,6 +77,11 @@ final class ProfileViewController: UIViewController {
   
   @IBAction private func didClickOnBackButton(sender: UIBarButtonItem) {
     self.navigationController!.popViewControllerAnimated(true)
+  }
+  
+  @IBAction func didClickOnHideKeyboard(sender: UIBarButtonItem) {
+    self.view.endEditing(true)
+    self.formScrollView.setContentOffset(CGPointZero, animated: true)
   }
   
   @IBAction private func updateUserAccount() {
@@ -90,12 +115,11 @@ final class ProfileViewController: UIViewController {
             Facade.sharedInstance.fetchPersonsProfilPictureInsideRoom()
             
             if let imageUserProfil = self.profilPictureButton.backgroundImageForState(.Normal) {
-              Facade.sharedInstance.uploadUserProfilPicture(imageUserProfil, withEmail: Member.sharedInstance.email!.encodeBase64(),
-                completionHandler: { () -> Void in
-                  Member.sharedInstance.profilPicture = imageUserProfil
-                  Facade.sharedInstance.saveMemberProfil()
-                  self.userHasUpdatedProfil()
-              })
+              Facade.sharedInstance.uploadUserProfilPicture(imageUserProfil, withEmail: Member.sharedInstance.email!.encodeBase64()) {
+                Member.sharedInstance.profilPicture = imageUserProfil
+                Facade.sharedInstance.saveMemberProfil()
+                self.userHasUpdatedProfil()
+              }
               
             } else {
               Facade.sharedInstance.saveMemberProfil()
@@ -228,10 +252,17 @@ extension ProfileViewController: UITextFieldDelegate {
     */
     switch(textField) {
       
-    case self.firstNameTextField:   self.lastNameTextField.becomeFirstResponder()
-    case self.lastNameTextField:    self.passwordTextField.becomeFirstResponder()
-    case self.passwordTextField:    self.formationTextField.becomeFirstResponder()
-    case self.formationTextField:    self.schoolIdTextField.becomeFirstResponder()
+    case self.firstNameTextField:
+      self.lastNameTextField.becomeFirstResponder()
+      
+    case self.lastNameTextField:
+      self.passwordTextField.becomeFirstResponder()
+      
+    case self.passwordTextField:
+      self.formationTextField.becomeFirstResponder()
+      
+    case self.formationTextField:
+      self.schoolIdTextField.becomeFirstResponder()
       
     case self.schoolIdTextField:
       if self.canUpdateButtonBeEnabled() {
@@ -239,27 +270,22 @@ extension ProfileViewController: UITextFieldDelegate {
         
       } else {
         textField.resignFirstResponder()
-        let alertView = JSSAlertView().show(self, title: NSLocalizedString("profile", comment: ""), text: "Please fill in all the fields.")
+        let alertView = JSSAlertView().show(self, title: NSLocalizedString("profile", comment: ""),
+          text: NSLocalizedString("fillAllFields", comment: ""))
         alertView.setTextTheme(.Dark)
       }
       
-    default: break
+    default:
+      break
     }
     
     return true
   }
   
   func textFieldDidBeginEditing(textField: UITextField) {
-    
     // If that's an iPhone 5/5s/5c
     if DeviceInformation.isIphone5OrLess() {
-      
-      if textField == self.passwordTextField {
-        self.formScrollView.setContentOffset(CGPointMake(0.0, 40.0), animated: true)
-        
-      } else if textField == self.firstNameTextField || textField == self.lastNameTextField {
-        self.formScrollView.setContentOffset(CGPointZero, animated: true)
-      }
+      self.formScrollView.setContentOffset(CGPoint(x: 0.0, y: 40.0), animated: true)
     }
   }
 }

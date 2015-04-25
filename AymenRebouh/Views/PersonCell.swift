@@ -14,7 +14,7 @@ final class PersonCell: UITableViewCell {
   @IBOutlet private weak var name: UILabel!
   @IBOutlet private weak var formation: UILabel!
   
-  final var person: Person! {
+  var person: Person! {
     didSet {
       self.name.text = "\(person.firstName) \(person.lastName)"
       self.formation.text = person.formation!
@@ -31,7 +31,7 @@ final class PersonCell: UITableViewCell {
   
   // MARK: - NSNotification Image Downloaded -
   
-  final func imageDownloaded(notification: NSNotification) {
+  func imageDownloaded(notification: NSNotification) {
     self.profilPicture.image = self.person.profilPicture
   }
 }

@@ -15,7 +15,13 @@ like the number of students present on theses rooms, rooms descrption, etc ..
 */
 final class RoomsListViewController: UIViewController {
   
-  @IBOutlet private weak var roomsTableView: UITableView!
+  @IBOutlet private weak var roomsTableView: UITableView! {
+    didSet {
+      self.roomsTableView.tableFooterView = UIView()
+      self.roomsTableView.addSubview(menu)
+    }
+  }
+  
   @IBOutlet private weak var addRoomButton: UIButton!
   
   lazy private var menu: MenuView = {
@@ -45,8 +51,6 @@ final class RoomsListViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.navigationController!.navigationBarHidden = false
-    self.roomsTableView.tableFooterView = UIView()
-    self.roomsTableView.addSubview(menu)
   }
   
   override func viewWillAppear(animated: Bool) {

@@ -40,23 +40,31 @@ final class AddRoomViewController: UIViewController {
     self.navigationController!.popViewControllerAnimated(true)
   }
   
+  @IBAction func didClickOnHideKeyboard(sender: UIBarButtonItem) {
+    if self.beaconUUIDTextField.isFirstResponder() {
+      self.errorLabel.text = self.hasCorrectBeaconUUID() ? " " : NSLocalizedString("checkBeaconUUID", comment: "")
+    }
+    self.view.endEditing(true)
+    self.formScrollView.setContentOffset(CGPointZero, animated: true)
+  }
+  
   @IBAction private func addRoom() {
     
     SwiftSpinner.show( NSLocalizedString("addingRoom", comment: ""), animated: true)
     self.view.endEditing(true)
     
-    var schoolId     =  Member.sharedInstance.schoolId
-    var roomTitle = self.roomTitleTextField.text
-    var roomDescription  = self.roomDescriptionTextView.text
-    let roomCapacity  = self.roomCapacityTextField.text.toInt()!
-    let beaconUUID  = self.beaconUUIDTextField.text
-    let beaconMajor = self.beaconMajorTextField.text.toInt()!
-    let beaconMinor = self.beaconMinorValueTextField.text.toInt()!
+    let schoolId        =  Member.sharedInstance.schoolId
+    let roomTitle       = self.roomTitleTextField.text
+    let roomDescription = self.roomDescriptionTextView.text
+    let roomCapacity    = self.roomCapacityTextField.text.toInt()!
+    let beaconUUID      = self.beaconUUIDTextField.text
+    let beaconMajor     = self.beaconMajorTextField.text.toInt()!
+    let beaconMinor     = self.beaconMinorValueTextField.text.toInt()!
     
     Facade.sharedInstance.addRoom(schoolId!, roomTitle: roomTitle.encodeBase64(),
       roomDescription: roomDescription.encodeBase64(),
       roomCapacity: roomCapacity, beaconUUID: beaconUUID,
-      beaconMajor: beaconMajor, beaconMinor: beaconMinor) { (jsonResponse, error) -> Void in
+      beaconMajor: beaconMajor, beaconMinor: beaconMinor) { jsonResponse, error in
         
         if error == nil, let jsonResponse = jsonResponse where jsonResponse.isOk() {
           
@@ -66,7 +74,6 @@ final class AddRoomViewController: UIViewController {
           self.navigationController!.popViewControllerAnimated(true)
           
         } else {
-          
           JSSAlertView().warning(self, title: NSLocalizedString("oops", comment: ""),
             text: NSLocalizedString("genericError", comment: ""))
         }
@@ -118,10 +125,28 @@ final class AddRoomViewController: UIViewController {
 
 extension AddRoomViewController: UITextFieldDelegate {
   
+  private struct TextFieldRules {
+    static let MaxUUIDCharacter = 36
+    static let MaxMajorMinorCharacter = 5
+  }
+  
   func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange,
     replacementString string: String) -> Bool {
       
+      if textField == self.beaconUUIDTextField && count(textField.text) == TextFieldRules.MaxUUIDCharacter
+        && string != "" {
+          return false
+      }
+      
       textField.text = (textField.text as NSString).stringByReplacingCharactersInRange(range, withString: string)
+      
+      if textField == self.beaconMinorValueTextField && count(textField.text) == TextFieldRules.MaxMajorMinorCharacter {
+        textField.resignFirstResponder()
+        
+      } else if textField == self.beaconMajorTextField &&  count(textField.text) == TextFieldRules.MaxMajorMinorCharacter {
+        self.beaconMinorValueTextField.becomeFirstResponder()
+      }
+      
       self.addRoomButton.enabled = self.canAddRoomButtonBeEnabled()
       
       return false
@@ -133,15 +158,8 @@ extension AddRoomViewController: UITextFieldDelegate {
   }
   
   func textFieldDidBeginEditing(textField: UITextField)  {
-    
     if DeviceInformation.isIphone5OrLess() {
-      
-      if textField == self.roomCapacityTextField {
-        self.formScrollView.setContentOffset(CGPointMake(0.0, 90.0), animated: true)
-        
-      } else if textField == self.roomTitleTextField {
-        self.formScrollView.setContentOffset(CGPointZero, animated: true)
-      }
+      self.formScrollView.setContentOffset(CGPoint(x: 0.0, y: 72.0), animated: true)
     }
   }
   
@@ -149,7 +167,7 @@ extension AddRoomViewController: UITextFieldDelegate {
     
     /* If the user tap the Next keyboard button, we redirect him to the next text field.
     Else if he tap the Join keyboard button after entering its password, we call
-    the signUp method, if all the inputs are valid.
+    the signUp method if all the inputs are valid.
     */
     switch(textField) {
       
@@ -163,7 +181,7 @@ extension AddRoomViewController: UITextFieldDelegate {
       self.beaconUUIDTextField.becomeFirstResponder()
       
     case self.beaconUUIDTextField:
-      self.errorLabel.text = self.hasCorrectBeaconUUID() ? "" : NSLocalizedString("checkBeaconUUID", comment: "")
+      self.errorLabel.text = self.hasCorrectBeaconUUID() ? " " : NSLocalizedString("checkBeaconUUID", comment: "")
       self.beaconMajorTextField.becomeFirstResponder()
       
     case self.beaconMajorTextField:
@@ -175,13 +193,14 @@ extension AddRoomViewController: UITextFieldDelegate {
         self.addRoom()
         
       } else {
-        
         textField.resignFirstResponder()
-        let alertView = JSSAlertView().show(self, title: NSLocalizedString("addRoom", comment: ""), text: NSLocalizedString("fillAllFields", comment: ""))
+        let alertView = JSSAlertView().show(self,
+          title: NSLocalizedString("addRoom", comment: ""), text: NSLocalizedString("fillAllFields", comment: ""))
         alertView.setTextTheme(.Dark)
       }
       
-    default: break
+    default:
+      break
     }
     
     return true
@@ -193,8 +212,8 @@ extension AddRoomViewController: UITextFieldDelegate {
 extension AddRoomViewController: UITextViewDelegate {
   
   func textViewDidBeginEditing(textView: UITextView) {
-    if DeviceInformation.isIphone5OrLess() {
-      self.formScrollView.setContentOffset(CGPointZero, animated: true)
+    if DeviceInformation.isIphone5OrLess() && self.formScrollView.contentOffset == CGPointZero {
+      self.formScrollView.setContentOffset(CGPoint(x: 0.0, y: 71.0), animated: true)
     }
   }
 }

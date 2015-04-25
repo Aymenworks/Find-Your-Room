@@ -35,7 +35,6 @@ final class WalkthroughViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.navigationController!.navigationBarHidden = true
-    self.pageControl.numberOfPages = self.listPages.count
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -62,17 +61,17 @@ final class WalkthroughViewController: UIViewController {
     var i = CGFloat(self.listPages.count-1)
     
     // We add the views on the inverse order, like a stack
-    self.listPages.reverse().map { currentController -> Void in
+    for currentController in self.listPages.reverse() {
       self.contentView.addSubview(currentController.view)
-      var currentFrame       = currentController.view.frame
-      currentFrame.origin.x  = i-- * currentFrame.width // ex : 6 * 320
+      var currentFrame = currentController.view.frame
+      currentFrame.origin.x = i-- * CGRectGetWidth(currentFrame) // ex : 6 * 320
       currentController.view.frame = currentFrame
     }
     
     self.myScrollView.addSubview(self.contentView)
-    let scrollWidth  = CGFloat(self.listPages.count) * self.view.frame.width
-    let scrollHeight = self.myScrollView.frame.height
-    self.myScrollView.contentSize = CGSize(width: scrollWidth, height: self.contentView.frame.height)
+    let scrollWidth  = CGFloat(self.listPages.count) * CGRectGetWidth(self.view.bounds)
+    let scrollHeight = CGRectGetHeight(self.myScrollView.bounds)
+    self.myScrollView.contentSize = CGSize(width: scrollWidth, height: CGRectGetHeight(self.contentView.bounds))
   }
 }
 
@@ -86,9 +85,9 @@ extension WalkthroughViewController: UIScrollViewDelegate {
   :param: scrollView The walkthrough scroll view. See `myScrollView`
   */
   func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-    let pageWidth      = self.myScrollView.frame.size.width
-    let currentPage = lroundf( Float(self.myScrollView.contentOffset.x / pageWidth) )
-    if self.oldPage != currentPage && self.oldPage != NSNotFound {
+    let pageWidth      = CGRectGetWidth(self.myScrollView.bounds)
+    let currentPage = lroundf(Float(self.myScrollView.contentOffset.x / pageWidth))
+    if self.oldPage != currentPage {
       self.oldPage = currentPage;
     }
   }
