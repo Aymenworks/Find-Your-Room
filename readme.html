@@ -1,0 +1,226 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<style>
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    color: #737373;
+    background-color: white;
+    margin: 10px 13px 10px 13px;
+}
+table {
+	margin: 10px 0 15px 0;
+	border-collapse: collapse;
+}
+td,th {	
+	border: 1px solid #ddd;
+	padding: 3px 10px;
+}
+th {
+	padding: 5px 10px;	
+}
+
+a {
+    color: #0069d6;
+}
+a:hover {
+    color: #0050a3;
+    text-decoration: none;
+}
+a img {
+    border: none;
+}
+p {
+    margin-bottom: 9px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #404040;
+    line-height: 36px;
+}
+h1 {
+    margin-bottom: 18px;
+    font-size: 30px;
+}
+h2 {
+    font-size: 24px;
+}
+h3 {
+    font-size: 18px;
+}
+h4 {
+    font-size: 16px;
+}
+h5 {
+    font-size: 14px;
+}
+h6 {
+    font-size: 13px;
+}
+hr {
+    margin: 0 0 19px;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+}
+blockquote {
+    padding: 13px 13px 21px 15px;
+    margin-bottom: 18px;
+    font-family:georgia,serif;
+    font-style: italic;
+}
+blockquote:before {
+    content:"\201C";
+    font-size:40px;
+    margin-left:-10px;
+    font-family:georgia,serif;
+    color:#eee;
+}
+blockquote p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 18px;
+    margin-bottom: 0;
+    font-style: italic;
+}
+code, pre {
+    font-family: Monaco, Andale Mono, Courier New, monospace;
+}
+code {
+    background-color: #fee9cc;
+    color: rgba(0, 0, 0, 0.75);
+    padding: 1px 3px;
+    font-size: 12px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+pre {
+    display: block;
+    padding: 14px;
+    margin: 0 0 18px;
+    line-height: 16px;
+    font-size: 11px;
+    border: 1px solid #d9d9d9;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+pre code {
+    background-color: #fff;
+    color:#737373;
+    font-size: 11px;
+    padding: 0;
+}
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:10px auto;
+    }
+}
+@media print {
+	body,code,pre code,h1,h2,h3,h4,h5,h6 {
+		color: black;
+	}
+	table, pre {
+		page-break-inside: avoid;
+	}
+}
+</style>
+<title>Requirement</title>
+
+</head>
+<body>
+<h1>Aymen Rebouh - WWDC 2015</h1>
+
+<p><img src="./AymenRebouh/Assets/screenshots/roomsList.png" title="Room list view" height="380px" alt="Room list view">
+<img src="./AymenRebouh/Assets/screenshots/addRoom.png" title="Add room view" height="380px" alt="Add room view">
+<img src="./AymenRebouh/Assets/screenshots/roomDetail.png" title="Authentication view" height="380px" alt="Authentication view"></p>
+
+<p><a href="https://developer.apple.com/iphone/index.action"><img src="https://img.shields.io/badge/iOS-8.0%2B-lightgrey.svg?style=flat" alt="Platform" /></a>
+<a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/language-swift%201.2-orange.svg?style=flat" alt="Language" /></a>
+<a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/technology-ibeacon-blue.svg?style=flat" alt="Technology" /></a></p>
+
+<p>Student project realizing an iOS app and using beacons technologies, organized by Infotel, a french company where the goal was to <strong>revolutionize the student life</strong>.</p>
+
+<p>A few months ago, my classmate and I where in teams (groups of 4-5 students) for a two years real project. So we were in a school, maybe of 300-400 students for a little university. Most of the time we needed a revision room to work together. But it was a little difficult. Sometimes the room was full, sometimes it was closed.</p>
+
+<p>For this project, I remembered that. Beeing able to find easely a room to work, to study. Beeing able to know if your teammate are in a particular room and join them. Beeing able to find a room that suits you ( depending of the number of students presents for example ). An iOS project that interact with <strong>beacons</strong>. That was my challenge !</p>
+
+<h2>Requirement</h2>
+
+<ul>
+<li>iPhone 5+ with Bluetooth LE 4.0</li>
+<li>Geolocalisation service activated</li>
+<li>Bluetooth activated</li>
+<li>A beacon with its identifiers ( UUID, Major, Minor values )</li>
+</ul>
+
+
+<h2>Installation / Demo</h2>
+
+<ul>
+<li>No externes dependencies ( like cocoapods or something )</li>
+<li>All you need to do in to open the .xcodeproj and run the project</li>
+<li>Don't forget to active geolocalisation</li>
+<li>You can create an account using the <strong>School ID : aaaaaa</strong></li>
+<li>Hope you have beacons to enjoy it :]</li>
+</ul>
+
+
+<h2>Issues</h2>
+
+<ul>
+<li>UI not adapted for iPhone 4S ( need some works with scrollview )</li>
+<li>The project is big, that's because I'm importing Facebook/Google framework sources to make the project portable.</li>
+</ul>
+
+
+<h2>Credits</h2>
+
+<ul>
+<li>The author of the app : Aymen Rebouh <a href="http://twitter.com/aymenworks">@aymenworks</a></li>
+<li>The icons thumbnails : <a href="http://www.flaticon.com/most-downloaded/">http://www.flaticon.com/most-downloaded/</a></li>
+<li>Network/JSON librairies : <a href="https://github.com/Alamofire/Alamofire">https://github.com/Alamofire/Alamofire</a> and <a href="https://github.com/SwiftyJSON/SwiftyJSON">https://github.com/SwiftyJSON/SwiftyJSON</a></li>
+<li>Popups : <a href="https://github.com/stakes/JSSAlertView">https://github.com/stakes/JSSAlertView</a></li>
+<li>Navigation Menu animation : <a href="https://github.com/Yalantis/Persei">https://github.com/Yalantis/Persei</a></li>
+<li>Activity Indicator animation : <a href="https://github.com/icanzilb/SwiftSpinner">https://github.com/icanzilb/SwiftSpinner</a></li>
+</ul>
+
+
+<h2>Contact</h2>
+
+<ul>
+<li>Twitter <a href="http://twitter.com/aymenworks">@aymenworks</a></li>
+<li>Email : <a href="&#109;&#97;&#x69;&#x6c;&#116;&#111;&#58;&#x61;&#x79;&#x6d;&#101;&#x6e;&#x6d;&#115;&#x65;&#x40;&#103;&#109;&#x61;&#105;&#108;&#46;&#x63;&#111;&#109;">&#x61;&#121;&#109;&#x65;&#x6e;&#109;&#x73;&#x65;&#64;&#103;&#x6d;&#97;&#105;&#x6c;&#x2e;&#x63;&#x6f;&#109;</a></li>
+<li>Linkedin : <a href="http://fr.linkedin.com/in/rebouhaymen/fr">http://fr.linkedin.com/in/rebouhaymen/fr</a></li>
+<li>Number : +33623185407</li>
+</ul>
+
+</body>
+</html>

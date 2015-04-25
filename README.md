@@ -33,7 +33,7 @@ For this project, I remembered that. Beeing able to find easely a room to work, 
 ## Issues
 
 - UI not adapted for iPhone 4S ( need some works with scrollview )
-- The project is big, that's because I'm importing Facebook/Google framework sources
+- The project is big, that's because I'm importing Facebook/Google framework sources to make the project portable.
 
 ## Credits
 
