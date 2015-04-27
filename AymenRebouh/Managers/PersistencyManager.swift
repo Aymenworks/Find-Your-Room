@@ -131,7 +131,8 @@ final class PersistencyManager: NSCoding {
   }
   
   /**
-  Delete the current user profil from session
+  Delete the current user profil from session by removing any data in user defaults,
+  Facebook/Google+ session.
   */
   func logOut() {
     session.removeObjectForKey("lastName")

@@ -17,7 +17,7 @@ For this project, I remembered that. Beeing able to find easely a room to work, 
 
 ## Requirement
 
-- iPhone 5+ with Bluetooth LE 4.0
+- iPhone 5+ with Bluetooth LE 4.0 and iOS 8.0+
 - Geolocalisation service activated
 - Bluetooth activated
 - A beacon with its identifiers ( UUID, Major, Minor values )

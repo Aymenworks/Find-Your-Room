@@ -102,6 +102,7 @@ final class AuthenticationViewController: UIViewController {
             // Error or not, the property is optional, so check if the image/error is nil or not is not necessary
             Member.sharedInstance.profilPicture = image
             Facade.sharedInstance.saveMemberProfil()
+            
             let schoolRooms = jsonResponse["response"]["rooms"]
             Facade.sharedInstance.addRoomsFromJSON(schoolRooms)
             Facade.sharedInstance.fetchPersonsProfilPictureInsideRoom()
@@ -119,7 +120,7 @@ final class AuthenticationViewController: UIViewController {
           self.shakeForm()
         }
         
-        // If a problem occured ( the serveur not received the parameters even crash )
+        // If a problem occured ( the serveur not received the parameters for example )
       }  else {
         
         self.signInBarButtonItem.enabled = false
@@ -207,9 +208,7 @@ extension AuthenticationViewController: UITextFieldDelegate {
         self.signIn()
         
       } else {
-        
         textField.resignFirstResponder()
-        
         let alertView = JSSAlertView().show(self, title: self.navigationItem.title!, text: NSLocalizedString("emailForgotError", comment: ""))
         
         alertView.setTextTheme(.Dark)

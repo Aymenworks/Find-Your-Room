@@ -35,17 +35,6 @@ final class RoomsListViewController: UIViewController {
     return menu
     }()
   
-  /**
-  The different actions of our menu
-  
-  - Profile: The user profil when he has the possibility to update its profil
-  - Logout:  To log out the user from the app. It'll stop ranging beacon also.
-  */
-  private enum MenuAction: Int {
-    case Profile = 0
-    case Logout
-  }
-  
   // MARK: - Lifecycle -
   
   override func viewDidLoad() {
@@ -106,6 +95,17 @@ final class RoomsListViewController: UIViewController {
 
 extension RoomsListViewController: MenuViewDelegate {
   
+  /**
+  The different actions of our menu
+  
+  - Profile: The user profil when he has the possibility to update its profil
+  - Logout:  To log out the user from the app. It'll stop ranging beacon also.
+  */
+  private enum MenuAction: Int {
+    case Profile = 0
+    case Logout
+  }
+  
   func menu(menu: MenuView, didSelectItemAtIndex index: Int) -> Void {
     
     let menuAction = MenuAction(rawValue: index)
@@ -123,7 +123,6 @@ extension RoomsListViewController: MenuViewDelegate {
       alertView.setTextTheme(.Dark)
       alertView.addAction({
         Facade.sharedInstance.logOut()
-        FBSession.activeSession().closeAndClearTokenInformation()
         self.navigationController!.popToRootViewControllerAnimated(true)
       })
     }

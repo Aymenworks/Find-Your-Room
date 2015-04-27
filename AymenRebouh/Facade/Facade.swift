@@ -9,6 +9,8 @@
 import CoreLocation
 import UIKit.UIImage
 
+public typealias JSONResponseClosure = (JSON?, NSError?) -> Void
+
 /**
 The Facade pattern. So we can use more easily the complex submodules
 that are Location, Network, Data persistency with a sample and reusable API.
@@ -21,9 +23,10 @@ public final class Facade {
   /// The location manager that'll manage the user, beacon, and rooms location ( geolocalisation )
   private var locationManager: LocationManager? = LocationManager()
   
+  /// The network manager that'll manage the user, beacon, and rooms location ( geolocalisation )
   lazy private var networkManager = NetworkManager()
   
-  /// To manage persistency ( session, plist, file.. )
+  ///The persistence manager that'll manage persistency ( session, plist, file, storing data, .. )
   lazy private var persistencyManager = PersistencyManager()
   
   // MARK: - Lifecycle -
@@ -42,7 +45,7 @@ public final class Facade {
   
   Base 64 is used for the email input to encode non-http compatible characters.
   */
-  public func authenticateUserWithEmail(email: String, password: String, completionHandler: (JSON?, NSError?) -> Void) {
+  public func authenticateUserWithEmail(email: String, password: String, completionHandler: JSONResponseClosure) {
     self.networkManager.authenticateUserWithEmail(email, password: password, completionHandler: completionHandler)
   }
   
@@ -56,7 +59,7 @@ public final class Facade {
   :param: completionHandler The callback that'll be executed after the request has finished.
   */
   public func authenticateUserWithFacebookOrGooglePlus(email: String, lastName: String, firstName: String,
-    completionHandler: (JSON?, NSError?) -> Void) {
+    completionHandler: JSONResponseClosure) {
       self.networkManager.authenticateUserWithFacebookOrGooglePlus(email, lastName: lastName, firstName: firstName, completionHandler: completionHandler)
   }
   
@@ -68,7 +71,7 @@ public final class Facade {
   :param: schoolId          The school ID
   :param: completionHandler The callback containing the json server/error response that'll be executed  after the request has finished
   */
-  public func roomsBySchoolId(schoolId: String, completionHandler: (JSON?, NSError?) -> Void) {
+  public func roomsBySchoolId(schoolId: String, completionHandler: JSONResponseClosure) {
     self.networkManager.roomsBySchoolId(schoolId, completionHandler: completionHandler)
   }
   
@@ -93,7 +96,8 @@ public final class Facade {
   after the request has finished
   */
   public func addRoom(schoolId: String, roomTitle: String, roomDescription: String,
-    roomCapacity: Int, beaconUUID: String, beaconMajor: Int, beaconMinor: Int, completionHandler: (JSON?, NSError?) -> Void) {
+    roomCapacity: Int, beaconUUID: String, beaconMajor: Int, beaconMinor: Int, completionHandler: JSONResponseClosure) {
+      
       self.networkManager.addRoom(schoolId, roomTitle: roomTitle, roomDescription: roomDescription,
         roomCapacity: roomCapacity, beaconUUID: beaconUUID, beaconMajor: beaconMajor, beaconMinor: beaconMinor, completionHandler: completionHandler)
   }
@@ -106,7 +110,7 @@ public final class Facade {
   :param: completionHandler The callback containing the json server/error response that'll be executed
   after the request has finished
   */
-  public func addMyPresenceToRoom(roomId: Int, userEmail: String, completionHandler: (JSON?, NSError?) -> Void) {
+  public func addMyPresenceToRoom(roomId: Int, userEmail: String, completionHandler: JSONResponseClosure) {
     self.networkManager.addMyPresenceInRoom(roomId, userEmail: userEmail, completionHandler: completionHandler)
   }
   
@@ -117,7 +121,7 @@ public final class Facade {
   :param: completionHandler The callback containing the json server/error response that'll be executed
   after the request has finished
   */
-  public func deleteMyPresenceFromRoomWithEmail(userEmail: String, completionHandler: ((JSON?, NSError?) -> Void)? = nil) {
+  public func deleteMyPresenceFromRoomWithEmail(userEmail: String, completionHandler: (JSONResponseClosure)? = nil) {
     self.networkManager.deleteMyPresenceFromRoomWithEmail(userEmail, completionHandler: completionHandler)
   }
   
@@ -135,7 +139,7 @@ public final class Facade {
   */
   public func signUpUserWithPassword(email: String, password: String, lastName: String,
     firstName: String, formation:String, schoolId: String,
-    completionHandler: (JSON?, NSError?) -> Void) {
+    completionHandler: JSONResponseClosure) {
       
       self.networkManager.signUpUserWithPassword(email, password: password, lastName: lastName, firstName: firstName,
         formation:formation, schoolId: schoolId, completionHandler: completionHandler)
@@ -155,7 +159,7 @@ public final class Facade {
   */
   public func updateUserAccount(email: String, password: String, lastName: String,
     firstName: String, formation:String, schoolId: String,
-    completionHandler: (JSON?, NSError?) -> Void) {
+    completionHandler: JSONResponseClosure) {
       
       self.networkManager.updateUserAccount(email, password: password, lastName: lastName, firstName: firstName,
         formation:formation, schoolId: schoolId, completionHandler: completionHandler)
@@ -168,7 +172,7 @@ public final class Facade {
   :param: completionHandler The callback containing the json server/error response that'll be executed
   after the request has finished
   */
-  public func fetchUserProfile(email: String, completionHandler: (JSON?, NSError?) -> Void) {
+  public func fetchUserProfile(email: String, completionHandler: JSONResponseClosure) {
     self.networkManager.fetchUserProfile(email, completionHandler: completionHandler)
   }
   
@@ -268,7 +272,8 @@ public final class Facade {
   }
   
   /**
-  Delete the current user profil from session
+  Delete the current user profil from session by removing any data in user defaults,
+  Facebook/Google+ session.
   */
   public func logOut() {
     self.persistencyManager.logOut()

@@ -15,8 +15,6 @@ private let kPublicKey = "AIzaSyCO_HPYCsvBm2Qwvszsa6pW7qjiDZ5Cwho"
 // The google user id
 let kClientId = "630039187091-4unm8bftk7etj24a4budbhb6d8okr2ad.apps.googleusercontent.com"
 
-typealias JSONResponseClosure = (JSON?, NSError?) -> Void
-
 /**
 The authentication network manager. It take care of the http request to authenticate, signin/up the user,
 fetching its profil informations, uploading informations, etc ..
