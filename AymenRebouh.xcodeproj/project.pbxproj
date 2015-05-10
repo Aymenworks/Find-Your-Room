@@ -55,6 +55,7 @@
 		A57F3F501AE22838000935CF /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A57F3F4F1AE22838000935CF /* GooglePlus.bundle */; };
 		A57F3F531AE2296D000935CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A57F3F551AE2296D000935CF /* Main.storyboard */; };
 		A57F3F581AE22A30000935CF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A57F3F571AE22A30000935CF /* Images.xcassets */; };
+		A58E612D1AFE16D80015F164 /* AuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58E612C1AFE16D80015F164 /* AuthenticationTests.swift */; };
 		A59B85F91A83FD2E00468096 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A59B85F81A83FD2E00468096 /* AssetsLibrary.framework */; };
 		A59B85FB1A83FD3300468096 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A59B85FA1A83FD3300468096 /* Foundation.framework */; };
 		A59B85FD1A83FD3D00468096 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A59B85FC1A83FD3D00468096 /* CoreMotion.framework */; };
@@ -140,6 +141,7 @@
 		A57F3F561AE22970000935CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A57F3F571AE22A30000935CF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = AymenRebouh/Assets/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		A57F3F591AE22CEE000935CF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		A58E612C1AFE16D80015F164 /* AuthenticationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationTests.swift; sourceTree = "<group>"; };
 		A59B85F61A83FD2800468096 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		A59B85F81A83FD2E00468096 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		A59B85FA1A83FD3300468096 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -240,6 +242,7 @@
 		A525DB071A6A88600024580A /* AymenRebouhTests */ = {
 			isa = PBXGroup;
 			children = (
+				A58E612C1AFE16D80015F164 /* AuthenticationTests.swift */,
 				A525DB081A6A88600024580A /* Supporting Files */,
 			);
 			path = AymenRebouhTests;
@@ -686,6 +689,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A58E612D1AFE16D80015F164 /* AuthenticationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,222 @@
+Room.swift
+	required public init(coder aDecoder: NSCoder)
+	public func encodeWithCoder(aCoder: NSCoder)
+	override public var description: String
+Beacon.swift
+	required public init(coder aDecoder: NSCoder)
+	public func encodeWithCoder(aCoder: NSCoder)
+	override public var description: String
+ProfileViewController.swift
+	final class ProfileViewController : UIViewController
+	final class ProfileViewController : UIViewController
+MenuViewDelegate.swift
+	public protocol MenuViewDelegate
+	func menu(menu: MenuView, didSelectItemAtIndex index: Int) -> Void
+SwiftSpinner.swift
+	public class SwiftSpinner: UIView
+	public class var sharedInstance: SwiftSpinner
+	public override init(frame: CGRect)
+	public class func show(title: String, animated: Bool = true)
+	public class func show(title: String, withFont font: UIFont, animated: Bool = true)
+	public class func hide()
+	public class func setDefaultTitleFont(font: UIFont?)
+	public var title: String = ""
+	public override var frame: CGRect
+	public var animating: Bool = false
+	required public init(coder aDecoder: NSCoder)
+	override public func layoutSubviews()
+Utils.swift
+	public func doInMainQueueAfter(#seconds: Float, completionHandler: () -> Void)
+UIEdgeInsets+Equatable.swift
+	public func == (lhs: UIEdgeInsets, rhs: UIEdgeInsets) -> Bool
+	public func + (lhs: UIEdgeInsets, rhs: UIEdgeInsets) -> UIEdgeInsets
+	public func - (lhs: UIEdgeInsets, rhs: UIEdgeInsets) -> UIEdgeInsets
+SwiftyJSON.swift
+	public let ErrorIndexOutOfBounds: Int! = 900
+	public let ErrorWrongType: Int! = 901
+	public let ErrorNotExist: Int! = 500
+	public struct JSON
+	public struct JSON
+	public struct JSON
+	public struct JSON
+	public func userExist() -> Bool
+	public func emailExist() -> Bool
+	public func userHasBeenRegistered() -> Bool
+	public func schoolExist() -> Bool
+	public struct JSON
+	public init(stringLiteral value: StringLiteralType)
+	public init(extendedGraphemeClusterLiteral value: StringLiteralType)
+	public init(unicodeScalarLiteral value: StringLiteralType)
+	public struct JSON
+	public init(integerLiteral value: IntegerLiteralType)
+	public struct JSON
+	public init(booleanLiteral value: BooleanLiteralType)
+	public struct JSON
+	public init(floatLiteral value: FloatLiteralType)
+	public struct JSON
+	public init(dictionaryLiteral elements: (String, AnyObject)...)
+	public struct JSON
+	public init(arrayLiteral elements: AnyObject...)
+	public struct JSON
+	public init(nilLiteral: ())
+	public struct JSON
+	public init?(rawValue: AnyObject)
+	public var rawValue: AnyObject
+	public func rawData(options opt: NSJSONWritingOptions = NSJSONWritingOptions(0), error: NSErrorPointer = nil) -> NSData?
+	public func rawString(encoding: UInt = NSUTF8StringEncoding, options opt: NSJSONWritingOptions = .PrettyPrinted) -> String?
+	public struct JSON
+	public var description: String
+	public var debugDescription: String
+	public struct JSON
+	public var array: [JSON]?
+	public var arrayValue: [JSON]
+	public var arrayObject: [AnyObject]?
+	public struct JSON
+	public var dictionary: [String : JSON]?
+	public var dictionaryValue: [String : JSON]
+	public var dictionaryObject: [String : AnyObject]?
+	public struct JSON
+	public var bool: Bool?
+	public var boolValue: Bool
+	public struct JSON
+	public var string: String?
+	public var stringValue: String
+	public struct JSON
+	public var number: NSNumber?
+	public var numberValue: NSNumber
+	public struct JSON
+	public var null: NSNull?
+	public struct JSON
+	public var URL: NSURL?
+	public struct JSON
+	public var double: Double?
+	public var doubleValue: Double
+	public var float: Float?
+	public var floatValue: Float
+	public var int: Int?
+	public var intValue: Int
+	public var uInt: UInt?
+	public var uIntValue: UInt
+	public var int8: Int8?
+	public var int8Value: Int8
+	public var uInt8: UInt8?
+	public var uInt8Value: UInt8
+	public var int16: Int16?
+	public var int16Value: Int16
+	public var uInt16: UInt16?
+	public var uInt16Value: UInt16
+	public var int32: Int32?
+	public var int32Value: Int32
+	public var uInt32: UInt32?
+	public var uInt32Value: UInt32
+	public var int64: Int64?
+	public var int64Value: Int64
+	public var uInt64: UInt64?
+	public var uInt64Value: UInt64
+	public struct JSON
+	public func ==(lhs: JSON, rhs: JSON) -> Bool
+	public func <=(lhs: JSON, rhs: JSON) -> Bool
+	public func >=(lhs: JSON, rhs: JSON) -> Bool
+	public func >(lhs: JSON, rhs: JSON) -> Bool
+	public func <(lhs: JSON, rhs: JSON) -> Bool
+	public func ==(lhs: NSNumber, rhs: NSNumber) -> Bool
+	public func !=(lhs: NSNumber, rhs: NSNumber) -> Bool
+	public func <(lhs: NSNumber, rhs: NSNumber) -> Bool
+	public func >(lhs: NSNumber, rhs: NSNumber) -> Bool
+	public func <=(lhs: NSNumber, rhs: NSNumber) -> Bool
+	public func >=(lhs: NSNumber, rhs: NSNumber) -> Bool
+	public struct JSON
+	public init(object: AnyObject)
+	public var dictionaryObjects: [String : AnyObject]?
+	public var arrayObjects: [AnyObject]?
+	public var char: Int8?
+	public var charValue: Int8
+	public var unsignedChar: UInt8?
+	public var unsignedCharValue: UInt8
+	public var short: Int16?
+	public var shortValue: Int16
+	public var unsignedShort: UInt16?
+	public var unsignedShortValue: UInt16
+	public var long: Int?
+	public var longValue: Int
+	public var unsignedLong: UInt?
+	public var unsignedLongValue: UInt
+	public var longLong: Int64?
+	public var longLongValue: Int64
+	public var unsignedLongLong: UInt64?
+	public var unsignedLongLongValue: UInt64
+	public var integer: Int?
+	public var integerValue: Int
+	public var unsignedInteger: Int?
+	public var unsignedIntegerValue: Int
+MenuItem.swift
+	public struct MenuItem
+	public var image: UIImage
+	public var highlightedImage: UIImage?
+	public var backgroundColor = UIColor.whiteColor()
+	public var highlightedBackgroundColor =  UIColor.whiteColor()
+	public var shadowColor = UIColor(white: 0.1, alpha: 0.3)
+	public init(image: UIImage, highlightedImage: UIImage? = nil)
+Alamofire.swift
+	public var URLString: String
+	public var URLString: String
+	public var URLString: String
+	public var URLString: String
+	public var URLRequest: NSURLRequest
+	public func URLSession(session: NSURLSession, didBecomeInvalidWithError error: NSError?)
+	public func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: ((NSURLSessionAuthChallengeDisposition, NSURLCredential!) -> Void))
+	public func URLSessionDidFinishEventsForBackgroundURLSession(session: NSURLSession)
+	public func URLSession(session: NSURLSession, task: NSURLSessionTask, willPerformHTTPRedirection response: NSHTTPURLResponse, newRequest request: NSURLRequest, completionHandler: ((NSURLRequest!) -> Void))
+	public func URLSession(session: NSURLSession, task: NSURLSessionTask, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: ((NSURLSessionAuthChallengeDisposition, NSURLCredential!) -> Void))
+	public func URLSession(session: NSURLSession, task: NSURLSessionTask, needNewBodyStream completionHandler: ((NSInputStream!) -> Void))
+	public func URLSession(session: NSURLSession, task: NSURLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64)
+	public func URLSession(session: NSURLSession, task: NSURLSessionTask, didCompleteWithError error: NSError?)
+	public func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveResponse response: NSURLResponse, completionHandler: ((NSURLSessionResponseDisposition) -> Void))
+	public func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didBecomeDownloadTask downloadTask: NSURLSessionDownloadTask)
+	public func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData data: NSData)
+	public func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, willCacheResponse proposedResponse: NSCachedURLResponse, completionHandler: ((NSCachedURLResponse!) -> Void))
+	public func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL)
+	public func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64)
+	public func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64)
+	public override func respondsToSelector(selector: Selector) -> Bool
+Person.swift
+	class Person : NSObject
+	class Person : NSObject
+AddRoomViewController.swift
+	final class AddRoomViewController : UIViewController
+	final class AddRoomViewController : UIViewController
+StickyHeaderView.swift
+	public class StickyHeaderView: UIView
+	public override init(frame: CGRect = CGRect(x: 0, y: 0, width: 320, height: DefaultContentHeight))
+	required public init(coder aDecoder: NSCoder)
+	public override func willMoveToSuperview(newSuperview: UIView?)
+	public override func didMoveToSuperview()
+	public var contentView: UIView?
+	public var backgroundImage: UIImage?
+	public override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>)
+	public var revealed: Bool = false
+	public func setRevealed(revealed: Bool, animated: Bool)
+	public var contentHeight: CGFloat = DefaultContentHeight
+	public var threshold: CGFloat = 0.3
+	public override func layoutSubviews()
+	public override func sizeThatFits(_: CGSize) -> CGSize
+DeviceInformation.swift
+	public final class DeviceInformation
+	public static func isIphone() -> Bool
+	public static func isIphone5OrLess() -> Bool
+	public static func isIphone4SOrLess() -> Bool
+MenuView.swift
+	public class MenuView: StickyHeaderView
+	public override init(frame: CGRect?)
+	required public init(coder aDecoder: NSCoder)
+	public weak var delegate: MenuViewDelegate?
+	public var items: [MenuItem] = []
+	public var selectedIndex: Int? = 0
+	public override var contentHeight: CGFloat
+	public class MenuView : StickyHeaderView
+	public func frameOfItemAtIndex(index: Int) -> CGRect
+	public class MenuView : StickyHeaderView
+	public func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+	public func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
+	public class MenuView : StickyHeaderView
+	public func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)

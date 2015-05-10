@@ -8,13 +8,6 @@
 
 import Foundation.NSCoder
 
-/**
-Contains the list of the files names we use/interact with
-*/
-private struct FilesName {
-  static let Room = "rooms.bin"
-}
-
 /// No setted private because we use it too on the Member singleton
 let session = NSUserDefaults.standardUserDefaults()
 
@@ -25,6 +18,13 @@ final class PersistencyManager: NSCoding {
   
   /// The list of the school rooms.
   lazy private(set) var rooms = [Room]()
+  
+  /**
+  Contains the list of the files names we use/interact with
+  */
+  private struct FilesName {
+    static let Room = "rooms.bin"
+  }
   
   // MARK: - Lifecycle -
   

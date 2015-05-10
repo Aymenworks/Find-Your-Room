@@ -175,7 +175,7 @@ final class SignUpViewController: UIViewController {
   :returns: true if the name/lastname textfield aren't empty, false if not
   */
   private func hasName() -> Bool {
-    return (!self.firstNameTextField.text.isEmpty && !self.lastNameTextField.text.isEmpty)
+    return !self.firstNameTextField.text.isEmpty && !self.lastNameTextField.text.isEmpty
   }
   
   /**
@@ -195,7 +195,7 @@ final class SignUpViewController: UIViewController {
   :returns: true if the email school Id textfield isn't empty, false if not
   */
   private func hasSchoolId() -> Bool {
-    return (!self.schoolIdTextField.text.isEmpty)
+    return !self.schoolIdTextField.text.isEmpty
   }
   
   /**
@@ -204,7 +204,7 @@ final class SignUpViewController: UIViewController {
   :returns: true if the formation textfield isn't empty, false if not
   */
   private func hasFormation() -> Bool {
-    return (!self.formationTextField.text.isEmpty)
+    return !self.formationTextField.text.isEmpty
   }
   
   /**
@@ -214,7 +214,7 @@ final class SignUpViewController: UIViewController {
   */
   private func hasValidPassword() -> Bool {
     let password = self.passwordTextField.text.stringByReplacingOccurrencesOfString(" ", withString: "")
-    return (count(password) >= 4)
+    return count(password) >= 4
   }
   
   /**
