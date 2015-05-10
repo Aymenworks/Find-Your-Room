@@ -1,6 +1,7 @@
 Aymen Rebouh - WWDC 2015
 ========
 
+<img src="./AymenRebouh/Assets/screenshots/home.png" title="Room list view" height="380px" alt="Room list view">
 <img src="./AymenRebouh/Assets/screenshots/roomsList.png" title="Room list view" height="380px" alt="Room list view">
 <img src="./AymenRebouh/Assets/screenshots/addRoom.png" title="Add room view" height="380px" alt="Add room view">
 <img src="./AymenRebouh/Assets/screenshots/roomDetail.png" title="Authentication view" height="380px" alt="Authentication view">
