@@ -14,7 +14,13 @@ Student project realizing an iOS app and using beacons technologies, organized b
 
 A few months ago, my classmate and I where in teams (groups of 4-5 students) for a two years real project. So we were in a school, maybe of 300-400 students for a little university. Most of the time we needed a revision room to work together. But it was a little difficult. Sometimes the room was full, sometimes it was closed. 
 
-For this project, I remembered that. Beeing able to find easely a room to work, to study. Beeing able to know if your teammate are in a particular room and join them. Beeing able to find a room that suits you ( depending of the number of students presents for example ). An iOS project that interact with **beacons**. That was my challenge ! 
+For this project, I remembered that and I made these features : 
+- Beeing able to find easely a room to work, to study. 
+- Beeing able to know if your teammate are in a particular room and join them. 
+- Beeing able to find a room that suits you ( depending of the number of students presents for example ). 
+- An iOS project that interact with **beacons**.
+ 
+That was my challenge ! 
 
 ## Requirement
 

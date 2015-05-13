@@ -30,10 +30,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>aymenworks.AymenRebouh</string>
+			<string>aymenworks.Find Your Room</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>aymenworks.AymenRebouh</string>
+				<string>aymenworks.Find Your Room</string>
 			</array>
 		</dict>
 	</array>
@@ -42,7 +42,7 @@
 	<key>FacebookAppID</key>
 	<string>500335186773691</string>
 	<key>FacebookDisplayName</key>
-	<string>AymenRebouh</string>
+	<string>Find Your Room</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
