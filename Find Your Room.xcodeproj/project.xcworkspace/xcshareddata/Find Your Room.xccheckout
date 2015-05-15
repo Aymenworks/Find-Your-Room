@@ -11,7 +11,7 @@
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>2A11E4F3D5A71125092F8ADDDDCCAD1A6BEF4F40</key>
-		<string>https://github.com/Aymenworks/WWDC2015.git</string>
+		<string>https://github.com/Aymenworks/Find-Your-Room.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Find Your Room.xcodeproj</string>
@@ -21,7 +21,7 @@
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/Aymenworks/WWDC2015.git</string>
+	<string>https://github.com/Aymenworks/Find-Your-Room.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>

@@ -61,14 +61,14 @@ final class AddRoomViewController: UIViewController {
     let beaconMajor     = self.beaconMajorTextField.text.toInt()!
     let beaconMinor     = self.beaconMinorValueTextField.text.toInt()!
     
-    Facade.sharedInstance.addRoom(schoolId!, roomTitle: roomTitle.encodeBase64(),
+    API.sharedInstance.addRoom(schoolId!, roomTitle: roomTitle.encodeBase64(),
       roomDescription: roomDescription.encodeBase64(),
       roomCapacity: roomCapacity, beaconUUID: beaconUUID,
       beaconMajor: beaconMajor, beaconMinor: beaconMinor) { jsonResponse, error in
         
         if error == nil, let jsonResponse = jsonResponse where jsonResponse.isOk() {
           let schoolRooms = jsonResponse["response"]["rooms"]
-          Facade.sharedInstance.addRoomsFromJSON(schoolRooms)
+          API.sharedInstance.addRoomsFromJSON(schoolRooms)
           SwiftSpinner.hide()
           self.navigationController!.popViewControllerAnimated(true)
           

@@ -13,13 +13,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   // Not running to inactive state
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    Facade.sharedInstance
+    API.sharedInstance
     UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Medium", size: 18)! ]
     return true
   }
   
   func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-    return FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication)
+    return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url,
+      sourceApplication: sourceApplication, annotation: annotation)
       ||  GPPURLHandler.handleURL(url, sourceApplication: sourceApplication, annotation: annotation)
   }
 }

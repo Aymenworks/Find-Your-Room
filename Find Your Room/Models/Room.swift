@@ -33,7 +33,7 @@ final public class Room: NSObject {
     
     super.init()
     
-    Facade.sharedInstance.startMonitoringBeacon(self.beacon)
+    API.sharedInstance.startMonitoringBeacon(self.beacon)
     for person in jsonRoom["PERSONS"].arrayValue {
       self.persons.append(Person(jsonPerson: person))
     }

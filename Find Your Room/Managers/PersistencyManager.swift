@@ -84,7 +84,7 @@ final class PersistencyManager: NSCoding {
   func addRoomsFromJSON(schoolRooms: JSON) {
     
     for room in self.rooms {
-      Facade.sharedInstance.stopMonitoringBeacon(room.beacon)
+      API.sharedInstance.stopMonitoringBeacon(room.beacon)
     }
     
     self.rooms = []
@@ -151,9 +151,7 @@ final class PersistencyManager: NSCoding {
     Member.sharedInstance.schoolId = ""
     Member.sharedInstance.schoolName = ""
     
-    FBSession.activeSession().closeAndClearTokenInformation()
-    FBSession.activeSession().close()
-    FBSession.setActiveSession(nil)
+    // MARK: - Log out facebook -
     
     GPPSignIn.sharedInstance().signOut()
   }

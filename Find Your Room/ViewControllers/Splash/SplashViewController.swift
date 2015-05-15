@@ -46,7 +46,7 @@ final class SplashViewController: UIViewController {
     }
     
     doInMainQueueAfter(seconds: 2.0) {
-      if Facade.sharedInstance.isUserLoggedIn() {
+      if API.sharedInstance.isUserLoggedIn() {
         self.showUserLoggedInView()
         
       } else {
@@ -72,7 +72,7 @@ final class SplashViewController: UIViewController {
     
     self.toggleView()
     
-    Facade.sharedInstance.fetchUserProfile(Member.sharedInstance.email!.encodeBase64()) { jsonProfil, error -> Void in
+    API.sharedInstance.fetchUserProfile(Member.sharedInstance.email!.encodeBase64()) { jsonProfil, error -> Void in
       
       if error == nil, let jsonProfil = jsonProfil where jsonProfil.isOk() {
         
@@ -80,18 +80,18 @@ final class SplashViewController: UIViewController {
         let pictureUrl = "http://www.aymenworks.fr/assets/beacon/\(Member.sharedInstance.email!.md5())/picture.jpg"
         
         Member.sharedInstance.fillMemberProfilWithJSON(userProfil)
-        Facade.sharedInstance.serverProfilPictureWithURL(pictureUrl) { image  in
+        API.sharedInstance.serverProfilPictureWithURL(pictureUrl) { image  in
           
           Member.sharedInstance.profilPicture = image
-          Facade.sharedInstance.saveMemberProfil()
+          API.sharedInstance.saveMemberProfil()
           
-          Facade.sharedInstance.roomsBySchoolId(Member.sharedInstance.schoolId!.encodeBase64()) { jsonSchoolRooms, error  in
+          API.sharedInstance.roomsBySchoolId(Member.sharedInstance.schoolId!.encodeBase64()) { jsonSchoolRooms, error  in
               
               if error == nil, let jsonSchoolRooms = jsonSchoolRooms where jsonSchoolRooms.isOk() {
                 let schoolRooms = jsonSchoolRooms["response"]["rooms"]
                 let beaconsSchool = jsonSchoolRooms["response"]["beacons"]
-                Facade.sharedInstance.addRoomsFromJSON(schoolRooms)
-                Facade.sharedInstance.fetchPersonsProfilPictureInsideRoom()
+                API.sharedInstance.addRoomsFromJSON(schoolRooms)
+                API.sharedInstance.fetchPersonsProfilPictureInsideRoom()
               }
               
               self.performSegueWithIdentifier("goToRoomsListViewFromSplashView", sender: self)

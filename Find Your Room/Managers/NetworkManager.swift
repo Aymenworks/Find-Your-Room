@@ -276,21 +276,21 @@ final class NetworkManager {
     var numberOfImagesToDownload = 0
     var numberOfImagesDownloaded = 0
     
-    Facade.sharedInstance.rooms().map({ numberOfImagesToDownload += $0.persons.count })
+    API.sharedInstance.rooms().map({ numberOfImagesToDownload += $0.persons.count })
     
-    for room in Facade.sharedInstance.rooms() {
+    for room in API.sharedInstance.rooms() {
       for person in room.persons {
         
         let pictureUrl = "http://www.aymenworks.fr/assets/beacon/\(person.email!.md5())/picture.jpg"
         
-        Facade.sharedInstance.serverProfilPictureWithURL(pictureUrl) { image in
+        API.sharedInstance.serverProfilPictureWithURL(pictureUrl) { image in
           NSNotificationCenter.defaultCenter().postNotificationName("DownloadImageNotification", object: nil)
           person.profilPicture = image
           numberOfImagesDownloaded++
           
           // If we have downloaded all the pictures, we save it.
           if numberOfImagesDownloaded == numberOfImagesToDownload {
-            Facade.sharedInstance.saveRooms()
+            API.sharedInstance.saveRooms()
           }
         }
       }

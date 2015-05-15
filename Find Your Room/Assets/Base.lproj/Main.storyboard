@@ -13,7 +13,7 @@
         <!--Splash View Controller-->
         <scene sceneID="rQN-Zo-GDo">
             <objects>
-                <viewController id="fwq-5m-IxD" customClass="SplashViewController" customModule="AymenRebouh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fwq-5m-IxD" customClass="SplashViewController" customModule="Find_Your_Room" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cGo-qS-fFg"/>
                         <viewControllerLayoutGuide type="bottom" id="Etv-oM-Khs"/>
@@ -59,13 +59,6 @@
                                     <constraint firstAttribute="height" constant="20" id="aLY-Dw-fsk"/>
                                 </constraints>
                             </activityIndicatorView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="beacon" translatesAutoresizingMaskIntoConstraints="NO" id="qj9-cp-MXc">
-                                <rect key="frame" x="226" y="230" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="DJ9-L5-ZdI"/>
-                                    <constraint firstAttribute="width" constant="40" id="In7-fJ-AeN"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="v1.0" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="68" translatesAutoresizingMaskIntoConstraints="NO" id="ZhP-j0-4CQ">
                                 <rect key="frame" x="131" y="532" width="68" height="28"/>
                                 <constraints>
@@ -89,11 +82,18 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="beacon" translatesAutoresizingMaskIntoConstraints="NO" id="qj9-cp-MXc">
+                                <rect key="frame" x="230" y="214" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="DJ9-L5-ZdI"/>
+                                    <constraint firstAttribute="width" constant="50" id="In7-fJ-AeN"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="uTE-QV-sGb" firstAttribute="centerX" secondItem="F60-xR-Ly2" secondAttribute="centerX" id="1Rg-WG-8QS"/>
-                            <constraint firstItem="qj9-cp-MXc" firstAttribute="leading" secondItem="GfA-1m-6K9" secondAttribute="trailing" constant="-78" id="2KI-pM-GSm"/>
+                            <constraint firstItem="qj9-cp-MXc" firstAttribute="leading" secondItem="GfA-1m-6K9" secondAttribute="trailing" constant="-74" id="2KI-pM-GSm"/>
                             <constraint firstAttribute="centerY" secondItem="GfA-1m-6K9" secondAttribute="centerY" constant="16.5" id="PjS-GV-NE8"/>
                             <constraint firstItem="uTE-QV-sGb" firstAttribute="leading" secondItem="j0n-Ah-z7v" secondAttribute="leading" constant="16" id="Svp-NC-bQ0"/>
                             <constraint firstItem="Etv-oM-Khs" firstAttribute="top" secondItem="ZhP-j0-4CQ" secondAttribute="bottom" constant="8" id="Yl7-YP-Hyr"/>
@@ -109,7 +109,7 @@
                             <constraint firstAttribute="centerX" secondItem="GfA-1m-6K9" secondAttribute="centerX" constant="2.5" id="jXt-Ya-OF5"/>
                             <constraint firstAttribute="trailing" secondItem="WPw-Ze-SBV" secondAttribute="trailing" constant="-39" id="jhN-iv-2hK"/>
                             <constraint firstAttribute="centerY" secondItem="nF1-Hc-X7O" secondAttribute="centerY" constant="28" id="oCf-IO-y8A"/>
-                            <constraint firstItem="GfA-1m-6K9" firstAttribute="top" secondItem="qj9-cp-MXc" secondAttribute="bottom" constant="-35" id="v4s-Cf-zmy"/>
+                            <constraint firstItem="GfA-1m-6K9" firstAttribute="top" secondItem="qj9-cp-MXc" secondAttribute="bottom" constant="-29" id="v4s-Cf-zmy"/>
                             <constraint firstAttribute="trailing" secondItem="ZhP-j0-4CQ" secondAttribute="trailing" constant="121" id="zSA-bL-vpr"/>
                         </constraints>
                     </view>
@@ -134,7 +134,7 @@
         <!--Walkthrough View Controller-->
         <scene sceneID="fpn-lO-TGu">
             <objects>
-                <viewController storyboardIdentifier="WalkthroughViewController" id="Jec-cx-hOz" customClass="WalkthroughViewController" customModule="AymenRebouh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WalkthroughViewController" id="Jec-cx-hOz" customClass="WalkthroughViewController" customModule="Find_Your_Room" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cN2-pu-jUq"/>
                         <viewControllerLayoutGuide type="bottom" id="AV4-K2-AEt"/>
@@ -263,7 +263,7 @@
         <!--Authentication-->
         <scene sceneID="bjF-QB-BdD">
             <objects>
-                <viewController id="hJp-oi-LYh" customClass="AuthenticationViewController" customModule="AymenRebouh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="hJp-oi-LYh" customClass="AuthenticationViewController" customModule="Find_Your_Room" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aGw-jp-Uhm"/>
                         <viewControllerLayoutGuide type="bottom" id="8L2-W5-Tlt"/>
@@ -279,7 +279,7 @@
                                     <constraint firstAttribute="height" constant="1" id="Ff2-tu-Ltz"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Chy-qU-Zqd" customClass="FBLoginView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Chy-qU-Zqd" customClass="FBSDKLoginButton">
                                 <rect key="frame" x="40" y="242" width="240" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -447,7 +447,7 @@
                         <outlet property="emailImageView" destination="b9z-cG-R5w" id="YWC-Cl-5Zs"/>
                         <outlet property="emailTextField" destination="LAe-Ad-B7B" id="luj-Bt-eW9"/>
                         <outlet property="errorLabel" destination="COT-V6-ZVd" id="9jC-67-Omh"/>
-                        <outlet property="facebookLoginView" destination="Chy-qU-Zqd" id="MeJ-j1-EG6"/>
+                        <outlet property="facebookLoginButton" destination="Chy-qU-Zqd" id="UYN-6S-5ai"/>
                         <outlet property="googlePlusLoginButton" destination="VS7-8Y-RZI" id="8mR-fp-O8s"/>
                         <outlet property="passwordImageView" destination="yaD-Ou-Mg6" id="NnU-by-V6h"/>
                         <outlet property="passwordTextField" destination="p3E-ZX-HdE" id="E1v-u4-Riv"/>
@@ -538,7 +538,7 @@
         <!--Sign Up-->
         <scene sceneID="R1Y-6f-zGL">
             <objects>
-                <viewController id="cJE-Hf-fdb" customClass="SignUpViewController" customModule="AymenRebouh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="cJE-Hf-fdb" customClass="SignUpViewController" customModule="Find_Your_Room" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MyX-0k-7Hp"/>
                         <viewControllerLayoutGuide type="bottom" id="ve4-EP-Lyd"/>
@@ -964,7 +964,7 @@
         <!--Let's find a room-->
         <scene sceneID="aNN-Zn-tMd">
             <objects>
-                <viewController id="XUj-7O-xgT" customClass="RoomsListViewController" customModule="AymenRebouh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XUj-7O-xgT" customClass="RoomsListViewController" customModule="Find_Your_Room" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4dD-Am-Xif"/>
                         <viewControllerLayoutGuide type="bottom" id="X2V-3P-p7z"/>
@@ -981,7 +981,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="446"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RoomCell" rowHeight="71" id="MCy-1i-jhz" userLabel="RoomCell" customClass="RoomCell" customModule="AymenRebouh" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RoomCell" rowHeight="71" id="MCy-1i-jhz" userLabel="RoomCell" customClass="RoomCell" customModule="Find_Your_Room" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MCy-1i-jhz" id="gKW-ub-aRC">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1087,7 +1087,7 @@
         <!--Details-->
         <scene sceneID="fx5-nt-ub2">
             <objects>
-                <viewController id="amC-3Q-HmW" customClass="RoomDetailViewController" customModule="AymenRebouh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="amC-3Q-HmW" customClass="RoomDetailViewController" customModule="Find_Your_Room" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ujJ-3V-gqi"/>
                         <viewControllerLayoutGuide type="bottom" id="TXG-OG-BZH"/>
@@ -1100,7 +1100,7 @@
                                 <rect key="frame" x="0.0" y="108" width="320" height="395"/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PersonCell" rowHeight="62" id="5fp-wp-mcg" userLabel="StudentCell" customClass="PersonCell" customModule="AymenRebouh" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PersonCell" rowHeight="62" id="5fp-wp-mcg" userLabel="StudentCell" customClass="PersonCell" customModule="Find_Your_Room" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5fp-wp-mcg" id="Foy-Ji-hay">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1291,7 +1291,7 @@
         <!--Profile-->
         <scene sceneID="leP-RQ-ou7">
             <objects>
-                <viewController id="xh2-b9-JYf" customClass="ProfileViewController" customModule="AymenRebouh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="xh2-b9-JYf" customClass="ProfileViewController" customModule="Find_Your_Room" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vA0-gx-qK8"/>
                         <viewControllerLayoutGuide type="bottom" id="ISA-c6-9qK"/>
@@ -1602,7 +1602,7 @@
         <!--Add a room -->
         <scene sceneID="sUv-V6-XKu">
             <objects>
-                <viewController id="4Q8-S1-Vqk" customClass="AddRoomViewController" customModule="AymenRebouh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="4Q8-S1-Vqk" customClass="AddRoomViewController" customModule="Find_Your_Room" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1IA-iH-F0O"/>
                         <viewControllerLayoutGuide type="bottom" id="ZxF-PI-F1A"/>
@@ -1905,7 +1905,7 @@
     </scenes>
     <resources>
         <image name="add" width="40" height="41"/>
-        <image name="beacon" width="85" height="85"/>
+        <image name="beacon" width="80" height="80"/>
         <image name="bluetooth" width="23" height="34"/>
         <image name="buildings" width="440" height="98"/>
         <image name="estimote" width="1542" height="990"/>
@@ -1930,6 +1930,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="MuS-uZ-nvj"/>
+        <segue reference="TCW-fR-RCL"/>
     </inferredMetricsTieBreakers>
 </document>
