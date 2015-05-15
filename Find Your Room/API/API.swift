@@ -20,6 +20,7 @@ public final class API {
   /// A singleton object as the entry point to manage the application
   public static let sharedInstance = API()
   
+  
   /// The location manager that'll manage the user, beacon, and rooms location ( geolocalisation )
   private var locationManager: LocationManager? = LocationManager()
   
