@@ -1,10 +1,10 @@
 Aymen Rebouh - WWDC 2015
 ========
 
-<img src="./AymenRebouh/Assets/screenshots/home.png" title="Room list view" height="380px" alt="Room list view">
-<img src="./AymenRebouh/Assets/screenshots/roomsList.png" title="Room list view" height="380px" alt="Room list view">
-<img src="./AymenRebouh/Assets/screenshots/addRoom.png" title="Add room view" height="380px" alt="Add room view">
-<img src="./AymenRebouh/Assets/screenshots/roomDetail.png" title="Authentication view" height="380px" alt="Authentication view">
+<img src="./Find Your Room/Assets/screenshots/home.png" title="Room list view" height="380px" alt="Room list view">
+<img src="./Find Your Room/Assets/screenshots/roomsList.png" title="Room list view" height="380px" alt="Room list view">
+<img src="./Find Your Room/Assets/screenshots/addRoom.png" title="Add room view" height="380px" alt="Add room view">
+<img src="./Find Your Room/Assets/screenshots/roomDetail.png" title="Authentication view" height="380px" alt="Authentication view">
 
 [![Platform](https://img.shields.io/badge/iOS-8.0%2B-lightgrey.svg?style=flat)](https://developer.apple.com/iphone/index.action)
 [![Language](https://img.shields.io/badge/language-swift 1.2-orange.svg?style=flat)](https://developer.apple.com/swift)
