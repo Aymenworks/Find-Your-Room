@@ -84,7 +84,7 @@ final class PersistencyManager: NSCoding {
   func addRoomsFromJSON(schoolRooms: JSON) {
     
     for room in self.rooms {
-      Facade.sharedInstance.stopMonitoringBeacon(room.beacon)
+      API.sharedInstance.stopMonitoringBeacon(room.beacon)
     }
     
     self.rooms = []

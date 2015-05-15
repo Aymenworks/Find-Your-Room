@@ -89,7 +89,7 @@ final class SignUpViewController: UIViewController {
     let schoolId  = self.schoolIdTextField.text.encodeBase64()
     let password  = self.passwordTextField.text.md5()
     
-    Facade.sharedInstance.signUpUserWithPassword( email, password: password, lastName: lastName,
+    API.sharedInstance.signUpUserWithPassword( email, password: password, lastName: lastName,
       firstName: firstName, formation:formation, schoolId: schoolId)
       { (jsonResponse, error) -> Void in
         
@@ -103,15 +103,15 @@ final class SignUpViewController: UIViewController {
             let schoolRooms = jsonResponse["response"]["rooms"]
             
             Member.sharedInstance.fillMemberProfilWithJSON(userProfil)
-            Facade.sharedInstance.addRoomsFromJSON(schoolRooms)
-            Facade.sharedInstance.fetchPersonsProfilPictureInsideRoom()
+            API.sharedInstance.addRoomsFromJSON(schoolRooms)
+            API.sharedInstance.fetchPersonsProfilPictureInsideRoom()
             
             // If the user has a picture to upload
             if let imageUserProfil = self.profilPictureButton.backgroundImageForState(.Normal) {
               
-              Facade.sharedInstance.uploadUserProfilPicture(imageUserProfil, withEmail: email) {
+              API.sharedInstance.uploadUserProfilPicture(imageUserProfil, withEmail: email) {
                 Member.sharedInstance.profilPicture = imageUserProfil
-                Facade.sharedInstance.saveMemberProfil()
+                API.sharedInstance.saveMemberProfil()
                 self.userHasSignedUp()
               }
               
@@ -158,7 +158,7 @@ final class SignUpViewController: UIViewController {
   
   private func userHasSignedUp() {
     SwiftSpinner.show(NSLocalizedString("signedUp", comment: ""), animated: false)
-    Facade.sharedInstance.saveMemberProfil()
+    API.sharedInstance.saveMemberProfil()
     
     // And we redirect him on the home view ( x second for sample user experience after the signed up loading )
     doInMainQueueAfter(seconds: 1.2) {

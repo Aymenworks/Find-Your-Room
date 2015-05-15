@@ -97,7 +97,7 @@ final class ProfileViewController: UIViewController {
     let schoolId  = self.schoolIdTextField.text
     let password = self.passwordTextField.text
     
-    Facade.sharedInstance.updateUserAccount( email!.encodeBase64(), password: password.md5(),
+    API.sharedInstance.updateUserAccount( email!.encodeBase64(), password: password.md5(),
       lastName: lastName.encodeBase64(), firstName: firstName.encodeBase64(),
       formation:formation.encodeBase64(), schoolId: schoolId.encodeBase64()) { (jsonResponse, error) -> Void in
         
@@ -111,18 +111,18 @@ final class ProfileViewController: UIViewController {
               formation: formation, schoolId: schoolId)
             
             let schoolRooms = jsonResponse["response"]["rooms"]
-            Facade.sharedInstance.addRoomsFromJSON(schoolRooms)
-            Facade.sharedInstance.fetchPersonsProfilPictureInsideRoom()
+            API.sharedInstance.addRoomsFromJSON(schoolRooms)
+            API.sharedInstance.fetchPersonsProfilPictureInsideRoom()
             
             if let imageUserProfil = self.profilPictureButton.backgroundImageForState(.Normal) {
-              Facade.sharedInstance.uploadUserProfilPicture(imageUserProfil, withEmail: Member.sharedInstance.email!.encodeBase64()) {
+              API.sharedInstance.uploadUserProfilPicture(imageUserProfil, withEmail: Member.sharedInstance.email!.encodeBase64()) {
                 Member.sharedInstance.profilPicture = imageUserProfil
-                Facade.sharedInstance.saveMemberProfil()
+                API.sharedInstance.saveMemberProfil()
                 self.userHasUpdatedProfil()
               }
               
             } else {
-              Facade.sharedInstance.saveMemberProfil()
+              API.sharedInstance.saveMemberProfil()
               self.userHasUpdatedProfil()
             }
             

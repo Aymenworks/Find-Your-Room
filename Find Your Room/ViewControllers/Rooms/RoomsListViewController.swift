@@ -28,7 +28,7 @@ final class RoomsListViewController: UIViewController {
     let menu = MenuView(frame: nil)
     menu.backgroundColor = UIColor(red: 25.0/255, green: 26.0/255, blue: 37.0/255, alpha: 1.0)
     menu.delegate = self
-    menu.items = Facade.sharedInstance.memberMenu().map() {
+    menu.items = API.sharedInstance.memberMenu().map() {
       MenuItem(image: UIImage(data: $0["thumbnail"] as! NSData)!)
     }
     
@@ -45,7 +45,7 @@ final class RoomsListViewController: UIViewController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     self.roomsTableView.reloadData()
-    self.addRoomButton.hidden = !Facade.sharedInstance.isUserAdmin()
+    self.addRoomButton.hidden = !API.sharedInstance.isUserAdmin()
   }
   
   override func didReceiveMemoryWarning() {
@@ -62,13 +62,13 @@ final class RoomsListViewController: UIViewController {
     
     SwiftSpinner.show(NSLocalizedString("roomsUpdate", comment: ""), animated: true)
     
-    Facade.sharedInstance.roomsBySchoolId(Member.sharedInstance.schoolId!.encodeBase64(),
+    API.sharedInstance.roomsBySchoolId(Member.sharedInstance.schoolId!.encodeBase64(),
       completionHandler: { (jsonSchoolRooms, error) -> Void in
         
         if error == nil, let jsonSchoolRooms = jsonSchoolRooms where jsonSchoolRooms.isOk() {
           let schoolRooms = jsonSchoolRooms["response"]["rooms"]
-          Facade.sharedInstance.addRoomsFromJSON(schoolRooms)
-          Facade.sharedInstance.fetchPersonsProfilPictureInsideRoom()
+          API.sharedInstance.addRoomsFromJSON(schoolRooms)
+          API.sharedInstance.fetchPersonsProfilPictureInsideRoom()
           self.roomsTableView.reloadData()
           SwiftSpinner.hide()
           
@@ -122,7 +122,7 @@ extension RoomsListViewController: MenuViewDelegate {
       
       alertView.setTextTheme(.Dark)
       alertView.addAction({
-        Facade.sharedInstance.logOut()
+        API.sharedInstance.logOut()
         self.navigationController!.popToRootViewControllerAnimated(true)
       })
     }
@@ -143,13 +143,13 @@ extension RoomsListViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.cellReuseIdenifier, forIndexPath: indexPath) as! RoomCell
-    cell.room = Facade.sharedInstance.rooms()[indexPath.row]
+    cell.room = API.sharedInstance.rooms()[indexPath.row]
     cell.themeColor = UIColor.randomFlatColor()
     return cell
   }
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return Facade.sharedInstance.rooms().count
+    return API.sharedInstance.rooms().count
   }
   
   func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

@@ -1,5 +1,5 @@
 //
-//  BeaconFacade.swift
+//  BeaconAPI.swift
 //  AymenRebouh
 //
 //  Created by Rebouh Aymen on 22/01/2015.
@@ -12,13 +12,13 @@ import UIKit.UIImage
 public typealias JSONResponseClosure = (JSON?, NSError?) -> Void
 
 /**
-The Facade pattern. So we can use more easily the complex submodules
+The API pattern. So we can use more easily the complex submodules
 that are Location, Network, Data persistency with a sample and reusable API.
 */
-public final class Facade {
+public final class API {
   
   /// A singleton object as the entry point to manage the application
-  public static let sharedInstance = Facade()
+  public static let sharedInstance = API()
   
   /// The location manager that'll manage the user, beacon, and rooms location ( geolocalisation )
   private var locationManager: LocationManager? = LocationManager()
