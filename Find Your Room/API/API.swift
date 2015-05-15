@@ -1,5 +1,5 @@
 //
-//  BeaconAPI.swift
+//  API.swift
 //  AymenRebouh
 //
 //  Created by Rebouh Aymen on 22/01/2015.
@@ -298,7 +298,7 @@ public final class API {
   }
   
   // MARK: - Beacon Location -
-
+  
   /**
   <#Description#>
   

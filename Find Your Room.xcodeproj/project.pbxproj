@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A54264EB1AE82A74006588DA /* SwiftSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54264EA1AE82A74006588DA /* SwiftSpinner.swift */; };
 		A54264ED1AE83679006588DA /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54264EC1AE83679006588DA /* Utils.swift */; };
+		A57070241B0616490085441A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57070231B0616490085441A /* API.swift */; };
 		A57F3EBD1AE21EAC000935CF /* JSSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F3EBC1AE21EAC000935CF /* JSSAlertView.swift */; };
 		A57F3EC51AE21EE1000935CF /* DeviceInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F3EBF1AE21EE1000935CF /* DeviceInformation.swift */; };
 		A57F3EC61AE21EE1000935CF /* CLProximityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F3EC11AE21EE1000935CF /* CLProximityExtension.swift */; };
@@ -27,7 +28,6 @@
 		A57F3EF11AE220C1000935CF /* AddRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F3EEE1AE220C1000935CF /* AddRoomViewController.swift */; };
 		A57F3EF21AE220C1000935CF /* RoomDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F3EEF1AE220C1000935CF /* RoomDetailViewController.swift */; };
 		A57F3EF31AE220C1000935CF /* RoomsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F3EF01AE220C1000935CF /* RoomsListViewController.swift */; };
-		A57F3EF51AE220C8000935CF /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F3EF41AE220C8000935CF /* API.swift */; };
 		A57F3EF71AE2210B000935CF /* WalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F3EF61AE2210B000935CF /* WalkthroughViewController.swift */; };
 		A57F3EF91AE22114000935CF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F3EF81AE22114000935CF /* ProfileViewController.swift */; };
 		A57F3EFB1AE22120000935CF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F3EFA1AE22120000935CF /* SignUpViewController.swift */; };
@@ -60,9 +60,9 @@
 		A59B86071A83FD6000468096 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A59B86061A83FD6000468096 /* SystemConfiguration.framework */; };
 		A59B86091A83FD6500468096 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A59B86081A83FD6500468096 /* UIKit.framework */; };
 		A5BFFF261AAF8658000AD1AC /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A59B85F61A83FD2800468096 /* AddressBook.framework */; };
-		A5C54BF61AC342E0006F7686 /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C54BF51AC342E0006F7686 /* GoogleOpenSource.framework */; };
-		A5C54BF81AC342ED006F7686 /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C54BF71AC342ED006F7686 /* GooglePlus.framework */; };
-		A5C54BFA1AC34332006F7686 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C54BF91AC34332006F7686 /* FacebookSDK.framework */; };
+		A5CABE5B1B0612720049DF79 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5CABE5A1B0612720049DF79 /* FacebookSDK.framework */; };
+		A5CABE5E1B0612970049DF79 /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5CABE5C1B0612970049DF79 /* GoogleOpenSource.framework */; };
+		A5CABE5F1B0612970049DF79 /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5CABE5D1B0612970049DF79 /* GooglePlus.framework */; };
 		A5F336A71A6DD1CF00DDF59B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F336A61A6DD1CF00DDF59B /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +84,7 @@
 		A54264EA1AE82A74006588DA /* SwiftSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftSpinner.swift; sourceTree = "<group>"; };
 		A54264EC1AE83679006588DA /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		A570190D1A82C30200C8F516 /* Find Your Room-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Find Your Room-Bridging-Header.h"; sourceTree = "<group>"; };
+		A57070231B0616490085441A /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = API.swift; path = "Find Your Room/API/API.swift"; sourceTree = SOURCE_ROOT; };
 		A57F3EBC1AE21EAC000935CF /* JSSAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSSAlertView.swift; sourceTree = "<group>"; };
 		A57F3EBF1AE21EE1000935CF /* DeviceInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInformation.swift; sourceTree = "<group>"; };
 		A57F3EC11AE21EE1000935CF /* CLProximityExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLProximityExtension.swift; sourceTree = "<group>"; };
@@ -102,7 +103,6 @@
 		A57F3EEE1AE220C1000935CF /* AddRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRoomViewController.swift; sourceTree = "<group>"; };
 		A57F3EEF1AE220C1000935CF /* RoomDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomDetailViewController.swift; sourceTree = "<group>"; };
 		A57F3EF01AE220C1000935CF /* RoomsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomsListViewController.swift; sourceTree = "<group>"; };
-		A57F3EF41AE220C8000935CF /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		A57F3EF61AE2210B000935CF /* WalkthroughViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkthroughViewController.swift; sourceTree = "<group>"; };
 		A57F3EF81AE22114000935CF /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A57F3EFA1AE22120000935CF /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -140,9 +140,9 @@
 		A59B86041A83FD5700468096 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A59B86061A83FD6000468096 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A59B86081A83FD6500468096 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		A5C54BF51AC342E0006F7686 /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleOpenSource.framework; sourceTree = "<group>"; };
-		A5C54BF71AC342ED006F7686 /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
-		A5C54BF91AC34332006F7686 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		A5CABE5A1B0612720049DF79 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		A5CABE5C1B0612970049DF79 /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleOpenSource.framework; sourceTree = "<group>"; };
+		A5CABE5D1B0612970049DF79 /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
 		A5F336A61A6DD1CF00DDF59B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -153,18 +153,18 @@
 			files = (
 				A5BFFF261AAF8658000AD1AC /* AddressBook.framework in Frameworks */,
 				A59B86091A83FD6500468096 /* UIKit.framework in Frameworks */,
+				A5CABE5E1B0612970049DF79 /* GoogleOpenSource.framework in Frameworks */,
 				A59B86071A83FD6000468096 /* SystemConfiguration.framework in Frameworks */,
 				A59B86051A83FD5700468096 /* Security.framework in Frameworks */,
 				A59B86031A83FD5100468096 /* CoreText.framework in Frameworks */,
-				A5C54BF81AC342ED006F7686 /* GooglePlus.framework in Frameworks */,
+				A5CABE5B1B0612720049DF79 /* FacebookSDK.framework in Frameworks */,
 				A59B86011A83FD4A00468096 /* MediaPlayer.framework in Frameworks */,
 				A59B85FF1A83FD4300468096 /* CoreGraphics.framework in Frameworks */,
+				A5CABE5F1B0612970049DF79 /* GooglePlus.framework in Frameworks */,
 				A59B85FD1A83FD3D00468096 /* CoreMotion.framework in Frameworks */,
 				A59B85FB1A83FD3300468096 /* Foundation.framework in Frameworks */,
 				A59B85F91A83FD2E00468096 /* AssetsLibrary.framework in Frameworks */,
-				A5C54BF61AC342E0006F7686 /* GoogleOpenSource.framework in Frameworks */,
 				A5F336A71A6DD1CF00DDF59B /* CoreLocation.framework in Frameworks */,
-				A5C54BFA1AC34332006F7686 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,7 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				A57F3F061AE221B4000935CF /* AppDelegate.swift */,
-				A5FF89CB1A6A9D3E00564555 /* Facade */,
+				A5FF89CB1A6A9D3E00564555 /* API */,
 				A5FF89C71A6A9D0A00564555 /* Managers */,
 				A5FF89CA1A6A9D1C00564555 /* ViewControllers */,
 				A5FF89C91A6A9D1700564555 /* Models */,
@@ -398,10 +398,10 @@
 		A5F336A81A6DD1D800DDF59B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A5CABE5C1B0612970049DF79 /* GoogleOpenSource.framework */,
+				A5CABE5D1B0612970049DF79 /* GooglePlus.framework */,
+				A5CABE5A1B0612720049DF79 /* FacebookSDK.framework */,
 				A57F3F4F1AE22838000935CF /* GooglePlus.bundle */,
-				A5C54BF91AC34332006F7686 /* FacebookSDK.framework */,
-				A5C54BF51AC342E0006F7686 /* GoogleOpenSource.framework */,
-				A5C54BF71AC342ED006F7686 /* GooglePlus.framework */,
 				A59B86081A83FD6500468096 /* UIKit.framework */,
 				A59B86061A83FD6000468096 /* SystemConfiguration.framework */,
 				A59B86041A83FD5700468096 /* Security.framework */,
@@ -460,11 +460,12 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		A5FF89CB1A6A9D3E00564555 /* Facade */ = {
+		A5FF89CB1A6A9D3E00564555 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				A57F3EF41AE220C8000935CF /* API.swift */,
+				A57070231B0616490085441A /* API.swift */,
 			);
+			name = API;
 			path = Facade;
 			sourceTree = "<group>";
 		};
@@ -613,12 +614,12 @@
 				A57F3F171AE223E1000935CF /* NetworkManager.swift in Sources */,
 				A57F3F1C1AE223EA000935CF /* RoomCell.swift in Sources */,
 				A57F3F1B1AE223EA000935CF /* PersonCell.swift in Sources */,
-				A57F3EF51AE220C8000935CF /* API.swift in Sources */,
 				A57F3F031AE2214D000935CF /* Room.swift in Sources */,
 				A57F3F001AE2214D000935CF /* Beacon.swift in Sources */,
 				A57F3EF71AE2210B000935CF /* WalkthroughViewController.swift in Sources */,
 				A57F3F071AE221B4000935CF /* AppDelegate.swift in Sources */,
 				A57F3EF91AE22114000935CF /* ProfileViewController.swift in Sources */,
+				A57070241B0616490085441A /* API.swift in Sources */,
 				A57F3EBD1AE21EAC000935CF /* JSSAlertView.swift in Sources */,
 				A57F3EDE1AE21F5C000935CF /* MenuViewDelegate.swift in Sources */,
 				A57F3EF31AE220C1000935CF /* RoomsListViewController.swift in Sources */,
@@ -787,16 +788,16 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/\"Find Your Room\"",
+					"$(PROJECT_DIR)/\"Find Your Room\"/Librairies",
+					"$(PROJECT_DIR)/\"Find Your Room\"/Librairies/GoogleSDK",
+					"$(PROJECT_DIR)/\"Find Your Room\"/Librairies/FacebookSDK",
 					"$(inherited)",
-					"$(PROJECT_DIR)/AymenRebouh/Librairies/FacebookSDK",
-					"$(PROJECT_DIR)/AymenRebouh/Librairies/GoogleSDK",
-					"$(PROJECT_DIR)/AymenRebouh",
-					"$(PROJECT_DIR)/AymenRebouh/Librairies",
 				);
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				INFOPLIST_FILE = "AymenRebouh/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Find Your Room/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-Wall",
@@ -811,7 +812,7 @@
 				PRODUCT_NAME = "Find Your Room";
 				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "AymenRebouh/Supporting Files/Find Your Room-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Find Your Room/Supporting Files/Find Your Room-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -828,16 +829,16 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/\"Find Your Room\"",
+					"$(PROJECT_DIR)/\"Find Your Room\"/Librairies",
+					"$(PROJECT_DIR)/\"Find Your Room\"/Librairies/GoogleSDK",
+					"$(PROJECT_DIR)/\"Find Your Room\"/Librairies/FacebookSDK",
 					"$(inherited)",
-					"$(PROJECT_DIR)/AymenRebouh/Librairies/FacebookSDK",
-					"$(PROJECT_DIR)/AymenRebouh/Librairies/GoogleSDK",
-					"$(PROJECT_DIR)/AymenRebouh",
-					"$(PROJECT_DIR)/AymenRebouh/Librairies",
 				);
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				INFOPLIST_FILE = "AymenRebouh/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Find Your Room/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-Wall",
@@ -852,7 +853,7 @@
 				PRODUCT_NAME = "Find Your Room";
 				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "AymenRebouh/Supporting Files/Find Your Room-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Find Your Room/Supporting Files/Find Your Room-Bridging-Header.h";
 				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
